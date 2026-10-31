@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
 
       - name: Validar registro
-        run: node scripts/validate.mjs
+        run: node scripts/validate-db.mjs
 
       - run: npm test
 
