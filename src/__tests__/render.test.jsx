@@ -34,7 +34,7 @@ describe('rendering', () => {
   it('renders the whole page', () => {
     globalThis.localStorage = { getItem: () => null, setItem: () => {} };
     const html = render(<App />);
-    expect(html).toContain('Custo Claro');
+    expect(html).toContain('Cálculo CLT');
     expect(html).toContain('Fontes oficiais');
   });
 

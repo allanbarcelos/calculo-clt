@@ -1,4 +1,4 @@
-# Custo Claro — CLT employee cost calculator
+# Cálculo CLT — CLT employee cost calculator
 
 Single-page React (Vite) app that walks a Brazilian business owner through the real monthly and yearly cost of a CLT employee. The UI is in Brazilian Portuguese because that is the target audience.
 
