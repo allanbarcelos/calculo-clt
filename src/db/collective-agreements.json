@@ -1,0 +1,105 @@
+{
+  "presetFields": {
+    "weeklyHours": { "format": "hours" },
+    "overtimeRate": { "format": "percentNumber" },
+    "insalubrity": { "format": "percentNumber" },
+    "insalubrityBase": { "format": "insalubrityBase" },
+    "hazard": { "format": "boolean" },
+    "mealValue": { "format": "money", "enables": "mealEnabled" },
+    "mealDiscountPct": { "format": "percentNumber", "enables": "mealEnabled" },
+    "healthPlan": { "format": "money" },
+    "dentalPlan": { "format": "money" },
+    "lifeInsurance": { "format": "money" },
+    "education": { "format": "money" },
+    "pension": { "format": "money" },
+    "otherBenefits": { "format": "money" },
+    "plrYearly": { "format": "money" }
+  },
+  "agreements": [
+    {
+      "id": "sc-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["SC"],
+      "name": "Asseio e Conservação — Santa Catarina 2026",
+      "category": "Empregados em empresas de asseio, conservação e serviços terceirizados",
+      "territory": "cerca de 200 municípios de SC, como Florianópolis, Joinville, Lages, Chapecó, Criciúma e Tubarão (Blumenau, Itajaí e São José não estão na lista; confira a cláusula 2ª)",
+      "registration": "SC000124/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SEAC-SC (empresas) e FEVASC com 7 sindicatos de trabalhadores",
+      "source": "cctAsseioSC2026",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 32ª, §7º" },
+        "mealValue": { "daily": 33.0, "clause": "cláusula 12ª, jornada acima de 180h mensais" },
+        "mealDiscountPct": { "value": 1, "clause": "cláusula 12ª, §2º" },
+        "otherBenefits": { "value": 11.0, "clause": "cláusula 16ª, contribuição para saúde e qualificação" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / auxiliar de serviços gerais", "floor": 1752.85, "clause": "cláusula 3ª, Q", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, Q, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        { "id": "copeira", "label": "Copeira", "floor": 1752.85, "clause": "cláusula 3ª, P" },
+        { "id": "administrativo", "label": "Pessoal administrativo", "floor": 1910.81, "clause": "cláusula 3ª, A" },
+        { "id": "recepcao", "label": "Telefonista, recepcionista, garçom, cozinheiro, agente de estacionamento", "floor": 1857.54, "clause": "cláusula 3ª, H" },
+        { "id": "porteiro", "label": "Porteiro de condomínio residencial", "floor": 2496.27, "clause": "cláusula 3ª, L" },
+        { "id": "jardineiro", "label": "Jardineiro de conservação", "floor": 2097.5, "clause": "cláusula 3ª, I", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, I, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        { "id": "lider", "label": "Líder de grupo (5 a 15 empregados)", "floor": 1958.75, "clause": "cláusula 3ª, B", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, B, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        { "id": "encarregado-1", "label": "Encarregado nível 1 (16 a 35 empregados)", "floor": 2397.34, "clause": "cláusula 3ª, C", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, C, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        { "id": "encarregado-2", "label": "Encarregado nível 2 (36 a 100 empregados)", "floor": 2996.44, "clause": "cláusula 3ª, D", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, D, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        { "id": "encarregado-3", "label": "Encarregado nível 3 (101 ou mais empregados)", "floor": 3745.54, "clause": "cláusula 3ª, E", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, E, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        { "id": "manutencao", "label": "Mecânico, pedreiro, manobrista, marceneiro, montador de móveis, carpinteiro, operador de varredeira", "floor": 1977.73, "clause": "cláusula 3ª, F" },
+        { "id": "eletricista", "label": "Eletricista", "floor": 1977.73, "clause": "cláusula 3ª, G", "presets": { "hazard": { "value": true, "clause": "cláusula 3ª, G (periculosidade de 30%)" } } },
+        { "id": "motoboy", "label": "Motoboy", "floor": 1752.85, "clause": "cláusula 3ª, O", "presets": { "hazard": { "value": true, "clause": "cláusula 3ª, O (periculosidade de 30%)" } } },
+        { "id": "digitador", "label": "Digitador", "floor": 1981.22, "clause": "cláusula 3ª, K" },
+        { "id": "lavadeiro", "label": "Lavadeiro", "floor": 1797.87, "clause": "cláusula 3ª, M" },
+        { "id": "dedetizacao", "label": "Agente de dedetização", "floor": 1849.97, "clause": "cláusula 3ª, R", "presets": { "insalubrity": { "value": 40, "clause": "cláusula 3ª, R (sobre o salário mínimo nacional)" } } }
+      ],
+      "notes": [
+        "Vale-alimentação por dia trabalhado: R$ 33,00 para jornada acima de 180h mensais ou 12x36, R$ 27,12 de 121h a 180h e R$ 20,63 até 120h (cláusula 12ª).",
+        "Prêmio assiduidade de 7% da remuneração nos meses sem faltas, de natureza indenizatória (cláusula 11ª). Não está incluído no cálculo.",
+        "Seguro de vida pago pela empresa, com cobertura de 15 salários por morte ou invalidez por acidente de trabalho (cláusula 14ª). A convenção não fixa o valor mensal: informe o custo no campo de seguro de vida.",
+        "Contribuição patronal ao sindicato das empresas de 1% sobre o piso mais insalubridade (cláusula 45ª). Não está incluída no cálculo.",
+        "Telefonista, digitador e ascensorista têm jornada de 6h diárias (cláusula 3ª, §§ 4º e 5º).",
+        "Dois uniformes completos por ano, sem custo para o empregado (cláusula 40ª)."
+      ]
+    },
+    {
+      "id": "es-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["ES"],
+      "name": "Asseio e Conservação — Espírito Santo 2026 (área geral)",
+      "category": "Empregados em empresas de asseio, conservação e serviços terceirizados",
+      "territory": "todo o estado do Espírito Santo",
+      "registration": "ES000026/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SEACES (empresas) e SINDILIMPE-ES (empregados)",
+      "source": "cctAsseioES2026",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 3ª, §4º" },
+        "overtimeRate": { "value": 60, "clause": "cláusula 8ª, 2 primeiras horas" },
+        "mealValue": { "daily": 23.87, "days": 22, "clause": "cláusula 12ª, jornada de 6h ou mais" },
+        "mealDiscountPct": { "value": 3.5, "clause": "cláusula 12ª, §2º" },
+        "healthPlan": { "value": 110.17, "clause": "cláusula 15ª, plano ambulatorial pago pela empresa" },
+        "dentalPlan": { "value": 11.03, "clause": "cláusula 20ª" },
+        "lifeInsurance": { "value": 5.0, "clause": "cláusula 17ª, mensalidade mínima" }
+      },
+      "roles": [
+        { "id": "asg", "label": "Auxiliar de serviços gerais (convencional)", "floor": 1682.7, "clause": "cláusula 64ª, tabela I" },
+        { "id": "asg-banheirista", "label": "Auxiliar de serviços gerais banheirista", "floor": 1682.7, "clause": "cláusula 64ª, tabela I", "presets": { "insalubrity": { "value": 40, "clause": "cláusula 10ª (sobre o salário mínimo)" } } },
+        { "id": "asg-predial", "label": "Auxiliar de serviços gerais de limpeza predial", "floor": 1682.7, "clause": "cláusula 64ª, tabela I", "presets": { "insalubrity": { "value": 20, "clause": "cláusula 10ª (sobre o salário mínimo)" } } },
+        { "id": "copeira", "label": "Copeira", "floor": 1682.7, "clause": "cláusula 64ª, tabela I" },
+        { "id": "encarregado", "label": "Encarregado", "floor": 2614.57, "clause": "cláusula 64ª, tabela I" },
+        { "id": "supervisor", "label": "Supervisor", "floor": 2607.45, "clause": "cláusula 64ª, tabela I" }
+      ],
+      "notes": [
+        "Horas extras: 60% nas 2 primeiras horas e 100% nas demais e em domingos e feriados (cláusula 8ª).",
+        "Ticket alimentação de R$ 23,87 por dia em jornadas de 6h ou mais (22 dias), R$ 28,41 na escala 12x36 (15,5 dias) e R$ 11,93 em jornadas menores (cláusula 12ª).",
+        "Auxílio-creche de R$ 336,53 por mês até o filho completar 10 meses (cláusula 16ª). Não está incluído no cálculo.",
+        "Insalubridade de 40% para banheiristas de banheiros de uso público ou coletivo com 40 ou mais usuários, e de 20% para limpeza predial, sobre o salário mínimo (cláusula 10ª).",
+        "Os valores são da área geral. A área industrial tem pisos e regras próprias (tabela II).",
+        "Dois uniformes por ano, sem custo para o empregado (cláusula 38ª)."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "regimes": [
+    {
+      "id": "mei",
+      "validFrom": "2026-01-01",
+      "label": "MEI (Microempreendedor Individual)",
+      "short": "MEI",
+      "description": "Até 1 empregado, ganhando o salário mínimo ou o piso da categoria. A empresa paga 3% de INSS + 8% de FGTS.",
+      "employerInssRate": 0.03,
+      "usesRatFap": false,
+      "usesThirdParties": false,
+      "allowsPayrollRelief": false,
+      "revenueLimit": 81000,
+      "maxEmployees": 1,
+      "salaryCappedAtFloor": true,
+      "callout": "meiRules",
+      "source": "simples"
+    },
+    {
+      "id": "simples",
+      "validFrom": "2026-01-01",
+      "label": "Simples Nacional — Anexos I, II, III ou V",
+      "short": "Simples (I, II, III, V)",
+      "description": "A contribuição patronal (CPP) já está dentro do DAS, que é pago sobre o faturamento. Sobre a folha, só o FGTS.",
+      "employerInssRate": 0,
+      "usesRatFap": false,
+      "usesThirdParties": false,
+      "allowsPayrollRelief": false,
+      "revenueLimit": 4800000,
+      "callout": "simplesCpp",
+      "source": "simples"
+    },
+    {
+      "id": "simplesIV",
+      "validFrom": "2026-01-01",
+      "label": "Simples Nacional — Anexo IV",
+      "short": "Simples (Anexo IV)",
+      "description": "Limpeza, vigilância, construção civil, advocacia etc. O INSS patronal de 20% + RAT é pago à parte, fora do DAS.",
+      "employerInssRate": 0.2,
+      "usesRatFap": true,
+      "usesThirdParties": false,
+      "allowsPayrollRelief": false,
+      "revenueLimit": 4800000,
+      "source": "simples"
+    },
+    {
+      "id": "presumido",
+      "validFrom": "2026-01-01",
+      "label": "Lucro Presumido",
+      "short": "Lucro Presumido",
+      "description": "Paga INSS patronal de 20%, RAT ajustado pelo FAP e contribuições a terceiros (Sistema S, salário-educação, INCRA).",
+      "employerInssRate": 0.2,
+      "usesRatFap": true,
+      "usesThirdParties": true,
+      "allowsPayrollRelief": true,
+      "revenueLimit": 78000000,
+      "source": "presumidoLaw"
+    },
+    {
+      "id": "real",
+      "validFrom": "2026-01-01",
+      "label": "Lucro Real",
+      "short": "Lucro Real",
+      "description": "Mesmos encargos sobre a folha do Lucro Presumido. A empresa pode deduzir os benefícios do IRPJ e aproveitar o incentivo do PAT.",
+      "employerInssRate": 0.2,
+      "usesRatFap": true,
+      "usesThirdParties": true,
+      "allowsPayrollRelief": true,
+      "source": "employerInss"
+    }
+  ],
+  "defaultRegime": "simples",
+  "rat": [
+    { "validFrom": "2026-01-01", "options": [1, 2, 3], "default": 2, "fap": { "min": 0.5, "max": 2.0, "default": 1.0 }, "source": "rat" }
+  ],
+  "thirdParties": [
+    { "validFrom": "2026-01-01", "default": 5.8, "max": 10, "source": "thirdParties" }
+  ],
+  "payrollRelief": [
+    { "validFrom": "2025-01-01", "validTo": "2025-12-31", "payrollRate": 0.05, "cprbShare": 0.8, "inssOnThirteenth": false, "source": "payrollRelief" },
+    { "validFrom": "2026-01-01", "validTo": "2026-12-31", "payrollRate": 0.1, "cprbShare": 0.6, "inssOnThirteenth": false, "source": "payrollRelief" },
+    { "validFrom": "2027-01-01", "validTo": "2027-12-31", "payrollRate": 0.15, "cprbShare": 0.4, "inssOnThirteenth": false, "source": "payrollRelief" }
+  ],
+  "simplesRules": [
+    { "validFrom": "2026-01-01", "fatorRThreshold": 0.28, "source": "simples" }
+  ]
+}

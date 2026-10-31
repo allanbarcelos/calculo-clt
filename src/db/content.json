@@ -1,0 +1,491 @@
+{
+  "explainers": [
+    {
+      "id": "collectiveAgreements",
+      "validFrom": "2026-01-01",
+      "title": "Como funcionam as convenções e acordos coletivos",
+      "kind": "steps",
+      "items": [
+        { "title": "Convenção ou acordo.", "text": "A convenção coletiva (CCT) é negociada entre o sindicato dos empregados e o sindicato das empresas e vale para toda a categoria na sua base territorial. O acordo coletivo (ACT) é negociado entre o sindicato dos empregados e uma ou mais empresas específicas." },
+        { "title": "Qual se aplica.", "text": "Em regra, a da atividade principal da empresa e do município onde o empregado trabalha. Algumas profissões são categorias diferenciadas (motoristas, secretárias, técnicos de segurança, entre outras) e seguem convenção própria." },
+        { "title": "O acordo prevalece sobre a convenção.", "text": "Quando a empresa tem acordo coletivo, ele vale no lugar da convenção (CLT, art. 620)." },
+        { "title": "O que a convenção pode mudar.", "text": "Jornada, banco de horas, intervalo, PLR, plano de cargos e outros pontos podem ser negociados e prevalecem sobre a lei (CLT, art. 611-A). Direitos mínimos como salário mínimo, FGTS, 13º, férias com 1/3 e adicional de hora extra de 50% não podem ser reduzidos (CLT, art. 611-B)." },
+        { "title": "Vigência de até 2 anos.", "text": "A convenção vale no máximo 2 anos e não continua valendo depois de vencida (CLT, art. 614, §3º). O reajuste acontece na data-base da categoria." },
+        { "title": "Onde consultar.", "text": "Toda convenção e todo acordo devem ser registrados no Ministério do Trabalho. Consulte pelo [Sistema Mediador](source:mediador), filtrando pelo estado, município e categoria." }
+      ],
+      "sources": [
+        { "id": "clt", "label": "CLT, arts. 611 a 625" },
+        { "id": "mediador" }
+      ]
+    },
+    {
+      "id": "regimes",
+      "validFrom": "2026-01-01",
+      "title": "Como cada regime tributário trata a folha",
+      "kind": "terms",
+      "items": [
+        { "title": "MEI", "text": "Faturamento de até {{meiLimit|money}} por ano, só atividades permitidas ao MEI e no máximo 1 empregado, com salário mínimo ou piso da categoria. Sobre o salário do empregado, a empresa paga 3% de INSS e 8% de FGTS, numa guia gerada no eSocial." },
+        { "title": "Simples Nacional, Anexos I, II, III e V", "text": "Faturamento de até {{simplesLimit|money}} por ano. O anexo depende da atividade: I comércio, II indústria, III e V serviços. O INSS patronal está dentro do DAS, que é pago sobre o faturamento. Sobre a folha, só o FGTS. A empresa também não paga terceiros (Sistema S)." },
+        { "title": "Fator R (Anexo V ou III)", "text": "Serviços intelectuais, como engenharia, tecnologia, publicidade e consultoria, ficam no Anexo III, que é mais barato, quando a folha dos últimos 12 meses é de ao menos {{fatorR|percent}} do faturamento. Abaixo disso, vão para o Anexo V. A folha inclui salários, 13º, férias, FGTS e pró-labore." },
+        { "title": "Fator R deste funcionário", "requires": ["fatorRRevenue"], "text": "Só este funcionário soma cerca de **{{yearlyPayroll|money}}** de folha por ano, o suficiente para manter o Fator R com faturamento de até **{{fatorRRevenue|money}}** por ano." },
+        { "title": "Simples Nacional, Anexo IV", "text": "Construção de imóveis e obras de engenharia, vigilância, limpeza e conservação, e serviços advocatícios. A empresa continua no Simples, mas paga à parte, sobre a folha, 20% de INSS patronal mais RAT. Não paga terceiros." },
+        { "title": "Lucro Presumido", "text": "Faturamento de até {{presumidoLimit|money}} por ano. Sobre a folha: 20% de INSS patronal, RAT ajustado pelo FAP e cerca de 5,8% de terceiros, além do FGTS." },
+        { "title": "Lucro Real", "text": "Obrigatório acima de {{presumidoLimit|money}} por ano e para algumas atividades, como bancos. Os encargos sobre a folha são os mesmos do Presumido. A diferença é que salários e benefícios são despesas dedutíveis do IRPJ e da CSLL, e o PAT dá incentivo adicional." }
+      ],
+      "footnote": "Este cálculo mostra só o custo da folha. O DAS e os impostos sobre o faturamento e o lucro dependem da receita da empresa: compare os regimes com seu contador antes de decidir.",
+      "sources": [
+        { "id": "simples", "label": "LC 123/2006" },
+        { "id": "presumidoLaw", "label": "Lei 9.718/1998" },
+        { "id": "employerInss", "label": "Lei 8.212/1991, art. 22" }
+      ]
+    },
+    {
+      "id": "ratFap",
+      "validFrom": "2026-01-01",
+      "title": "O que são o RAT e o FAP e como descobrir os seus",
+      "kind": "steps",
+      "items": [
+        { "title": "RAT (Risco Ambiental do Trabalho).", "text": "Contribuição que financia os benefícios por acidente de trabalho e aposentadoria especial. A alíquota é 1%, 2% ou 3%, conforme o grau de risco da atividade principal da empresa (CNAE preponderante), definido no Anexo V do Decreto 3.048/1999." },
+        { "title": "Atividade preponderante.", "text": "É a que ocupa o maior número de empregados no estabelecimento, não necessariamente a de maior faturamento." },
+        { "title": "FAP (Fator Acidentário de Prevenção).", "text": "Multiplicador de {{fapMin|number}} a {{fapMax|number}} calculado todo ano pela Previdência para cada estabelecimento, com base nos acidentes e afastamentos dos dois anos anteriores. Menos acidentes reduzem a alíquota até pela metade, e mais acidentes podem dobrá-la." },
+        { "title": "Onde consultar.", "text": "O FAP é publicado no fim de setembro, para valer no ano seguinte, no sistema FAPWeb, com login gov.br. A empresa pode contestar em novembro." },
+        { "title": "Empresa nova.", "text": "Sem histórico, use FAP 1,0. Confirme com seu contador." }
+      ],
+      "sources": [
+        { "id": "rat", "label": "Decreto 3.048/1999, Anexo V" },
+        { "id": "fap", "label": "Consultar o FAP (gov.br)" },
+        { "id": "employerInss", "label": "Lei 8.212/1991, art. 22, II" }
+      ]
+    },
+    {
+      "id": "thirdParties",
+      "validFrom": "2026-01-01",
+      "title": "O que são as contribuições a terceiros",
+      "kind": "steps",
+      "items": [
+        { "title": "O que são.", "text": "Contribuições sobre a folha recolhidas pela Receita Federal junto com o INSS e repassadas a outras entidades: educação básica, reforma agrária e o Sistema S (formação profissional e serviço social)." },
+        { "title": "Código FPAS.", "text": "A combinação de entidades e o total dependem do código FPAS da atividade da empresa, informado no eSocial." },
+        { "title": "Quem não paga.", "text": "Empresas do Simples Nacional, inclusive no Anexo IV, e o MEI estão dispensadas (LC 123/2006, art. 13, §3º)." },
+        { "title": "Outros casos.", "text": "Atividades rurais, cooperativas e alguns outros setores têm composição diferente. Bancos e instituições financeiras pagam ainda 2,5% a mais de INSS patronal (Lei 8.212/1991, art. 22, §1º), o que este cálculo não inclui." }
+      ],
+      "table": {
+        "caption": "Composição comum de 5,8% (comércio, serviços, indústria e transporte)",
+        "columns": [
+          { "key": "name", "label": "Entidade", "rowHeader": true },
+          { "key": "rate", "label": "Alíquota", "numeric": true }
+        ],
+        "rows": [
+          { "name": "Salário-educação (FNDE)", "rate": "2,5%" },
+          { "name": "INCRA", "rate": "0,2%" },
+          { "name": "Serviço de aprendizagem: SENAC (comércio e serviços), SENAI (indústria) ou SENAT (transporte)", "rate": "1,0%" },
+          { "name": "Serviço social: SESC, SESI ou SEST", "rate": "1,5%" },
+          { "name": "SEBRAE", "rate": "0,6%" }
+        ],
+        "footer": { "name": "Total", "rate": "5,8%" }
+      },
+      "sources": [
+        { "id": "thirdParties", "label": "IN RFB 2.110/2022" },
+        { "id": "simples", "label": "LC 123/2006, art. 13, §3º" }
+      ]
+    },
+    {
+      "id": "payrollRelief",
+      "validFrom": "2025-01-01",
+      "validTo": "2027-12-31",
+      "title": "Como funciona a desoneração da folha",
+      "kind": "steps",
+      "items": [
+        { "title": "Quem pode.", "text": "Empresas de 17 setores definidos em lei, como tecnologia da informação, call center, construção civil, comunicação, transporte rodoviário, têxtil e calçados. O enquadramento é pelo CNAE ou pelo produto fabricado." },
+        { "title": "Como era.", "text": "No lugar do INSS patronal de 20% sobre a folha, essas empresas pagavam a CPRB, um percentual de 1% a 4,5% sobre a receita bruta." },
+        {
+          "title": "Reoneração gradual.",
+          "text": "A Lei 14.973/2024 faz a volta aos poucos. Neste ano, a alíquota sobre a folha é de **{{reliefRate|percent}}** e a CPRB é de {{cprbShare|percent}} da alíquota original:",
+          "items": [
+            { "text": "2025: 5% sobre a folha e 80% da CPRB;" },
+            { "text": "2026: 10% sobre a folha e 60% da CPRB;" },
+            { "text": "2027: 15% sobre a folha e 40% da CPRB;" },
+            { "text": "2028 em diante: 20% sobre a folha, sem CPRB." }
+          ]
+        },
+        { "title": "13º salário.", "text": "Para as atividades desoneradas, não há INSS patronal sobre o 13º durante a transição. RAT, terceiros e FGTS continuam normais." },
+        { "title": "Vale a pena?", "text": "Depende da relação entre folha e faturamento. Como a CPRB é sobre a receita, simule as duas partes com seu contador." }
+      ],
+      "sources": [
+        { "id": "payrollRelief", "label": "Lei 14.973/2024" },
+        { "id": "payrollReliefGuide", "label": "Orientações sobre a reoneração gradual (gov.br)" }
+      ]
+    },
+    {
+      "id": "insalubrity",
+      "validFrom": "2026-01-01",
+      "title": "Como o grau de insalubridade é definido",
+      "kind": "steps",
+      "items": [
+        { "title": "Laudo técnico obrigatório.", "text": "Um médico do trabalho ou engenheiro de segurança do trabalho avalia o ambiente (CLT, art. 195). Esse laudo é que diz se há insalubridade e em que grau." },
+        { "title": "Agente e anexo da NR-15.", "text": "Cada agente nocivo está em um anexo da NR-15, e o anexo fixa o grau. Alguns agentes exigem medição acima de um limite de tolerância. Outros bastam a atividade (veja a tabela)." },
+        { "title": "Vários agentes não se somam.", "text": "Paga-se só o de maior grau (NR-15, item 15.3)." },
+        { "title": "O EPI pode eliminar o adicional.", "text": "Se o equipamento fornecido neutraliza o agente, deixa de existir insalubridade (CLT, art. 191, e NR-15, item 15.4)." },
+        { "title": "Convenção coletiva.", "text": "Algumas convenções usam o piso da categoria como base no lugar do salário mínimo. Confira a sua." }
+      ],
+      "table": {
+        "caption": "Anexos da NR-15 e grau de cada agente",
+        "columns": [
+          { "key": "annex", "label": "Anexo" },
+          { "key": "agent", "label": "Agente", "rowHeader": true },
+          { "key": "assessment", "label": "Como é avaliado" },
+          { "key": "grade", "label": "Grau" }
+        ],
+        "rows": [
+          { "annex": "1 e 2", "agent": "Ruído contínuo, intermitente ou de impacto", "assessment": "Medição (dosimetria) acima do limite de tolerância", "grade": "Médio (20%)" },
+          { "annex": "3", "agent": "Calor", "assessment": "Medição do IBUTG acima do limite", "grade": "Médio (20%)" },
+          { "annex": "5", "agent": "Radiações ionizantes", "assessment": "Exposição acima dos limites da CNEN", "grade": "Máximo (40%)" },
+          { "annex": "6", "agent": "Condições hiperbáricas (ar comprimido, mergulho)", "assessment": "Atividade em si", "grade": "Máximo (40%)" },
+          { "annex": "7", "agent": "Radiações não ionizantes (micro-ondas, ultravioleta, laser)", "assessment": "Inspeção no local de trabalho", "grade": "Médio (20%)" },
+          { "annex": "8", "agent": "Vibrações (mãos/braços ou corpo inteiro)", "assessment": "Medição acima do limite", "grade": "Médio (20%)" },
+          { "annex": "9", "agent": "Frio (câmaras frigoríficas e similares)", "assessment": "Inspeção, sem proteção adequada", "grade": "Médio (20%)" },
+          { "annex": "10", "agent": "Umidade excessiva (locais alagados ou encharcados)", "assessment": "Inspeção no local de trabalho", "grade": "Médio (20%)" },
+          { "annex": "11", "agent": "Agentes químicos com limite de tolerância", "assessment": "Medição da concentração no ar", "grade": "Mínimo, médio ou máximo, conforme a substância" },
+          { "annex": "12", "agent": "Poeiras minerais (asbesto, manganês, sílica)", "assessment": "Medição acima do limite", "grade": "Máximo (40%)" },
+          { "annex": "13", "agent": "Agentes químicos por atividade (ex.: arsênico, chumbo, cromo, hidrocarbonetos)", "assessment": "Inspeção da atividade", "grade": "Mínimo, médio ou máximo, conforme a atividade" },
+          { "annex": "14", "agent": "Agentes biológicos", "assessment": "Inspeção da atividade", "grade": "Médio (hospitais, laboratórios, cemitérios) ou máximo (esgoto, lixo urbano, isolamento)" }
+        ]
+      },
+      "sources": [
+        { "id": "nr15", "label": "NR-15 (Ministério do Trabalho e Emprego)" },
+        { "id": "clt", "label": "CLT, arts. 189 a 197" }
+      ]
+    },
+    {
+      "id": "hazard",
+      "validFrom": "2026-01-01",
+      "title": "Quando a periculosidade se aplica",
+      "kind": "steps",
+      "items": [
+        { "title": "Só nas atividades da NR-16.", "text": "A lista é fechada (CLT, art. 193). Se a função não está em nenhum anexo da tabela abaixo, não há adicional, mesmo que a atividade pareça arriscada." },
+        { "title": "Laudo técnico obrigatório.", "text": "A caracterização é feita por médico do trabalho ou engenheiro de segurança do trabalho (CLT, art. 195, e NR-16, item 16.3)." },
+        { "title": "Exposição permanente ou intermitente.", "text": "Contato só eventual, fortuito ou por tempo extremamente reduzido não dá direito ao adicional, conforme a jurisprudência do TST (Súmula 364)." },
+        { "title": "Base de cálculo.", "text": "{{hazardRate|percent}} sobre o salário base, sem acréscimos de gratificações, prêmios ou participação nos lucros (CLT, art. 193, §1º)." },
+        { "title": "Não acumula com insalubridade.", "text": "Se as duas existirem, o funcionário escolhe a que for melhor para ele (CLT, art. 193, §2º)." },
+        { "title": "EPI não elimina a periculosidade.", "text": "Diferente da insalubridade, o risco é de acidente, e o equipamento não o neutraliza." }
+      ],
+      "table": {
+        "caption": "Anexos da NR-16 e exemplos de atividades",
+        "columns": [
+          { "key": "annex", "label": "Anexo" },
+          { "key": "agent", "label": "Risco", "rowHeader": true },
+          { "key": "examples", "label": "Exemplos de atividades" }
+        ],
+        "rows": [
+          { "annex": "1", "agent": "Explosivos", "examples": "Fabricação, transporte, armazenamento e manuseio de explosivos; detonação em pedreiras e obras." },
+          { "annex": "2", "agent": "Inflamáveis", "examples": "Frentistas e abastecimento de veículos, aeronaves e embarcações; carga e descarga de combustíveis; tanques e depósitos de inflamáveis." },
+          { "annex": "3", "agent": "Roubos ou outras violências físicas", "examples": "Vigilantes e profissionais de segurança pessoal ou patrimonial, inclusive transporte de valores." },
+          { "annex": "4", "agent": "Energia elétrica", "examples": "Trabalho em instalações ou equipamentos energizados e no sistema elétrico de potência (eletricistas, redes de distribuição, subestações)." },
+          { "annex": "5", "agent": "Motocicleta", "examples": "Trabalho com deslocamento de motocicleta em vias públicas (motoboys, mototaxistas, entregadores, técnicos que visitam clientes de moto). Não vale para o trajeto casa–trabalho nem para áreas privadas. Novo texto em vigor desde 03/04/2026." },
+          { "annex": "6", "agent": "Agentes de trânsito", "examples": "Agentes das autoridades de trânsito expostos a colisões, atropelamentos ou violências (Lei 14.684/2023, regulamentada em 2025)." },
+          { "annex": "Radiações", "agent": "Radiações ionizantes ou substâncias radioativas", "examples": "Operação de equipamentos de raios X fixos, radioterapia, medicina nuclear, uso industrial de fontes radioativas. Não se aplica a áreas onde só se usa raio X móvel." }
+        ]
+      },
+      "sources": [
+        { "id": "nr16", "label": "NR-16 (Ministério do Trabalho e Emprego)" },
+        { "id": "nr16Motorcycle", "label": "Portaria MTE 2.021/2025 (motocicletas)" },
+        { "id": "trafficAgentsLaw", "label": "Lei 14.684/2023" },
+        { "id": "clt", "label": "CLT, arts. 193 a 197" }
+      ]
+    },
+    {
+      "id": "overtime",
+      "validFrom": "2026-01-01",
+      "title": "Quando há hora extra e como ela é paga",
+      "kind": "steps",
+      "items": [
+        { "title": "O que é hora extra.", "text": "Todo tempo trabalhado além da jornada contratada (8h por dia e 44h por semana no padrão CLT) ou além da jornada da convenção coletiva." },
+        { "title": "Limite.", "text": "No máximo {{maxDailyHours|number}} horas extras por dia, por acordo individual ou coletivo (CLT, art. 59). Acima disso, só em força maior ou serviço inadiável (art. 61)." },
+        { "title": "Valor.", "text": "Hora normal = salário ÷ divisor (220 para 44h semanais). Em dia útil, a hora extra vale ao menos {{minRate|number}}% a mais. Em domingo ou feriado sem folga compensatória, {{restDayRate|number}}% a mais." },
+        { "title": "Banco de horas evita o adicional.", "text": "Se a hora extra for compensada com folga, não há pagamento: no mesmo mês por acordo individual, em até 6 meses por acordo individual escrito, ou em até 1 ano por acordo ou convenção coletiva (CLT, art. 59, §§ 2º, 5º e 6º)." },
+        { "title": "Reflexos.", "text": "Horas extras habituais aumentam o DSR, o 13º, as férias, o FGTS e o aviso prévio. Por isso o cálculo inclui o reflexo no DSR (estimado em 1/6) e as provisões." },
+        { "title": "Quem não tem hora extra.", "text": "Gerentes com cargo de confiança e gratificação de ao menos 40%, trabalho externo sem controle de horário e teletrabalho por produção ou tarefa (CLT, art. 62)." },
+        { "title": "Controle de ponto.", "text": "Obrigatório para empresas com mais de 20 empregados (CLT, art. 74, §2º). Ele é a prova das horas trabalhadas." },
+        { "title": "Intervalo de almoço não concedido.", "text": "O tempo suprimido é pago com acréscimo de 50% (CLT, art. 71, §4º)." }
+      ],
+      "sources": [
+        { "id": "clt", "label": "CLT, arts. 58 a 75" },
+        { "id": "constitution", "label": "Constituição Federal, art. 7º, XIII e XVI" },
+        { "id": "dsr", "label": "Lei 605/1949" }
+      ]
+    },
+    {
+      "id": "nightWork",
+      "validFrom": "2026-01-01",
+      "title": "Quando há adicional noturno e como ele é pago",
+      "kind": "steps",
+      "items": [
+        { "title": "Horário noturno urbano.", "text": "Das 22h às 5h. Adicional mínimo de 20% sobre a hora normal (CLT, art. 73), que a convenção pode aumentar." },
+        { "title": "Hora noturna reduzida.", "text": "No trabalho urbano, cada hora noturna tem 52 minutos e 30 segundos. Das 22h às 5h são 7 horas de relógio, mas pagas como 8 horas noturnas." },
+        { "title": "Trabalho rural.", "text": "Na lavoura, das 21h às 5h. Na pecuária, das 20h às 4h. Adicional de 25%, com hora de 60 minutos (Lei 5.889/1973, art. 7º)." },
+        { "title": "Prorrogação após as 5h.", "text": "Se o funcionário cumpriu toda a jornada no período noturno e continua trabalhando depois das 5h, essas horas também recebem o adicional (TST, Súmula 60, II)." },
+        { "title": "Hora extra à noite.", "text": "Os adicionais se somam: a hora extra noturna é calculada sobre a hora já acrescida do adicional noturno (TST, OJ 97 da SDI-1). Exemplo urbano com hora de R$ 10,00: R$ 10,00 × 1,2 × 1,5 = R$ 18,00 por hora noturna." },
+        { "title": "Reflexos.", "text": "Pago com habitualidade, o adicional noturno integra o salário para todos os efeitos: DSR, 13º, férias e FGTS (TST, Súmula 60, I)." },
+        { "title": "Menores de 18 anos.", "text": "É proibido o trabalho noturno (Constituição, art. 7º, XXXIII)." },
+        { "title": "Escala 12x36.", "text": "Permitida por acordo ou convenção (CLT, art. 59-A). O adicional noturno continua devido nas horas noturnas." }
+      ],
+      "sources": [
+        { "id": "clt", "label": "CLT, art. 73" },
+        { "id": "ruralLaw", "label": "Lei 5.889/1973" },
+        { "id": "constitution", "label": "Constituição Federal, art. 7º, IX e XXXIII" }
+      ]
+    },
+    {
+      "id": "transport",
+      "validFrom": "2026-01-01",
+      "title": "Quando o vale-transporte é obrigatório e como funciona",
+      "kind": "steps",
+      "items": [
+        { "title": "Obrigatório se o funcionário pedir.", "text": "A empresa deve fornecer o vale para o trajeto casa–trabalho–casa quando o funcionário solicitar por escrito, informando o endereço e as linhas que usa. Ele pode recusar assinando uma declaração de que não quer o benefício." },
+        { "title": "Só transporte público coletivo.", "text": "Ônibus, metrô, trem e barcas urbanos ou intermunicipais. Táxi, aplicativo e transporte seletivo ou especial não entram." },
+        { "title": "Desconto de até {{employeeShare|percent}} do salário base.", "text": "O desconto incide sobre o salário base, sem adicionais (aqui, {{transportCap|money}}). Se a passagem custa menos que isso, o desconto é só o custo real. A empresa paga o que passar desse limite." },
+        { "title": "Só pelos dias trabalhados.", "text": "Em férias, faltas, afastamentos e home office não há vale nesses dias." },
+        { "title": "Em vale ou cartão, com antecedência.", "text": "O vale deve ser entregue antes do uso, em cartão ou bilhete. Pagar em dinheiro só é permitido em situações excepcionais previstas no decreto." },
+        { "title": "Sem encargos.", "text": "O vale-transporte não tem natureza salarial: não paga INSS nem FGTS, não entra no 13º nem nas férias e não é tributado no IR do funcionário (Lei 7.418/1985, art. 2º)." },
+        { "title": "Transporte próprio dispensa o vale.", "text": "Se a empresa oferece transporte fretado que cobre todo o trajeto, não precisa fornecer vale-transporte." },
+        { "title": "Declaração falsa é falta grave.", "text": "Informar endereço falso ou usar o vale para outro fim pode levar à demissão por justa causa." }
+      ],
+      "sources": [
+        { "id": "transport", "label": "Lei 7.418/1985" },
+        { "id": "patDecree", "label": "Decreto 10.854/2021 (regulamento do vale-transporte)" }
+      ]
+    },
+    {
+      "id": "meal",
+      "validFrom": "2026-01-01",
+      "title": "Quando o vale-refeição ou alimentação é obrigatório e como funciona",
+      "kind": "steps",
+      "items": [
+        { "title": "A lei não obriga, mas a convenção pode obrigar.", "text": "Nenhuma lei federal obriga a empresa a dar vale-refeição ou alimentação. Muitas convenções coletivas obrigam e fixam valor mínimo, número de dias e desconto máximo. Confira a sua no [Sistema Mediador](source:mediador)." },
+        { "title": "Refeição ou alimentação.", "text": "O vale-refeição é para refeições prontas em restaurantes e lanchonetes. O vale-alimentação é para compras em supermercados. A empresa pode oferecer um, outro ou os dois." },
+        { "title": "Nunca em dinheiro.", "text": "Em cartão, ticket ou cesta básica, não tem natureza salarial: não paga INSS nem FGTS e não entra no 13º e nas férias. Pago em dinheiro na conta, vira salário e paga todos os encargos (CLT, art. 457, §2º)." },
+        { "title": "PAT: vantagem tributária.", "text": "A empresa inscrita no Programa de Alimentação do Trabalhador pode descontar do funcionário até {{maxShare|number}}% do valor. Se for do Lucro Real, ainda deduz o benefício do Imposto de Renda. No Simples e no Presumido, a vantagem é só a ausência de encargos." },
+        { "title": "Uso exclusivo para alimentação.", "text": "O cartão só pode ser usado para refeição ou compra de alimentos. A operadora não pode dar desconto ou cashback para a empresa (deságio), e é proibido trocar o vale por dinheiro (Lei 14.442/2022)." },
+        { "title": "Dias pagos.", "text": "Em geral o vale é calculado por dia trabalhado. Pagamento nas férias e afastamentos depende da convenção ou da política da empresa." },
+        { "title": "Mesma regra para todos.", "text": "Para não virar benefício salarial disfarçado, ofereça o vale pelos mesmos critérios a todos os empregados da mesma função." }
+      ],
+      "sources": [
+        { "id": "pat", "label": "Lei 6.321/1976 (PAT)" },
+        { "id": "patDecree", "label": "Decreto 10.854/2021" },
+        { "id": "mealCardLaw", "label": "Lei 14.442/2022" },
+        { "id": "clt", "label": "CLT, art. 457" }
+      ]
+    },
+    {
+      "id": "otherBenefits",
+      "validFrom": "2026-01-01",
+      "title": "Quando cada benefício fica livre de encargos",
+      "kind": "terms",
+      "items": [
+        { "title": "Plano de saúde e odontológico", "text": "Não é salário, seja plano conveniado, serviço próprio ou reembolso de despesas médicas, remédios e óculos (CLT, art. 458, §2º, IV). A empresa pode dividir a mensalidade com o funcionário ou cobrar coparticipação. Se o funcionário paga parte da mensalidade, ao ser demitido sem justa causa ele pode continuar no plano por um tempo, pagando o valor integral (Lei 9.656/1998, art. 30)." },
+        { "title": "Seguro de vida", "text": "Seguro de vida e de acidentes pessoais não é salário (CLT, art. 458, §2º, V). Muitas convenções coletivas o tornam obrigatório e fixam a cobertura mínima. Para evitar questionamento da Receita, ofereça a todos os empregados." },
+        { "title": "Auxílio-educação", "text": "Mensalidades, matrícula, livros e material didático não são salário (CLT, art. 458, §2º, II). Para ficar também livre de INSS, deve ser para educação básica do funcionário ou dos dependentes, ou curso profissional ligado à atividade da empresa. Não pode substituir parte do salário e tem limite mensal: aqui, {{educationLimit|money}}. Graduação e pós-graduação têm tratamento discutido: confirme com seu contador." },
+        { "title": "Previdência privada", "text": "O que a empresa paga a um plano de previdência complementar, aberto ou fechado, não é salário, desde que o plano esteja disponível a todos os empregados e dirigentes (Lei 8.212/1991, art. 28, §9º, “p”). No Lucro Real, a empresa deduz até 20% da folha de salários." },
+        { "title": "Auxílio-creche", "text": "O reembolso de despesas com creche ou pré-escola de filhos de até 6 anos, comprovadas, não é salário (Lei 8.212/1991, art. 28, §9º, “s”). Empresas com 30 ou mais empregadas acima de 16 anos devem ter local para a guarda dos filhos na fase de amamentação ou oferecer o reembolso (CLT, art. 389, §1º)." },
+        { "title": "Ajuda de custo e home office", "text": "Ajuda de custo para cobrir despesas de trabalho, como internet e energia no home office, não é salário mesmo se paga todo mês (CLT, art. 457, §2º). Deve corresponder a gastos reais. Se for só um complemento de salário, a Justiça pode considerá-la salário." }
+      ],
+      "sources": [
+        { "id": "clt", "label": "CLT, arts. 389, 457 e 458" },
+        { "id": "employerInss", "label": "Lei 8.212/1991, art. 28, §9º" },
+        { "id": "healthPlansLaw", "label": "Lei 9.656/1998" }
+      ]
+    },
+    {
+      "id": "plr",
+      "validFrom": "2026-01-01",
+      "title": "Como a PLR funciona e quando fica livre de encargos",
+      "kind": "steps",
+      "items": [
+        { "title": "Precisa ser negociada.", "text": "As regras são definidas com os empregados de uma destas formas: comissão escolhida pelas partes, com um representante do sindicato, ou convenção ou acordo coletivo (Lei 10.101/2000, art. 2º)." },
+        { "title": "Regras claras e objetivas.", "text": "O acordo deve dizer como o valor é calculado e como será medido: metas, índices de produtividade, qualidade ou lucratividade. Um valor fixo prometido sem metas pode ser tratado como salário." },
+        { "title": "No máximo 2 pagamentos por ano.", "text": "Com intervalo de pelo menos um trimestre civil entre eles (art. 3º, §2º)." },
+        { "title": "Não substitui salário.", "text": "A PLR não pode ser usada para reduzir ou trocar a remuneração (art. 3º)." },
+        { "title": "Sem encargos para a empresa.", "text": "Não paga INSS nem FGTS e não entra no 13º e nas férias. No Lucro Real, a empresa ainda deduz o valor do Imposto de Renda." },
+        { "title": "IR do funcionário.", "text": "A PLR tem tabela de IR própria, separada do salário, com faixa de isenção anual. O imposto é retido na fonte no pagamento." },
+        { "title": "Acordo registrado.", "text": "O instrumento deve ser arquivado no sindicato. Sem cumprir os requisitos, a PLR vira salário e paga todos os encargos, inclusive retroativos." }
+      ],
+      "sources": [
+        { "id": "plr", "label": "Lei 10.101/2000" },
+        { "id": "clt", "label": "CLT, art. 457" }
+      ]
+    },
+    {
+      "id": "termination",
+      "validFrom": "2026-01-01",
+      "title": "Quando a empresa paga a multa do FGTS e outros custos de demissão",
+      "kind": "steps",
+      "items": [
+        { "title": "Demissão sem justa causa: 40%.", "text": "A empresa paga ao funcionário 40% de todo o FGTS depositado durante o contrato, corrigido (Lei 8.036/1990, art. 18, §1º)." },
+        { "title": "Acordo entre as partes: 20%.", "text": "Na demissão por acordo, a multa cai pela metade e o aviso prévio indenizado também (CLT, art. 484-A). O funcionário saca 80% do FGTS e não recebe seguro-desemprego." },
+        { "title": "Culpa recíproca ou força maior: 20%", "text": "(Lei 8.036/1990, art. 18, §2º)." },
+        { "title": "Pedido de demissão ou justa causa: sem multa.", "text": "" },
+        { "title": "Aviso prévio.", "text": "São {{baseDays|number}} dias, mais {{daysPerYear|number}} dias por ano completo de trabalho, até {{maxDays|number}} dias (Lei 12.506/2011). Se a empresa dispensa o funcionário de trabalhar o aviso, paga esse período como indenização. O período indenizado conta como tempo de serviço e gera 13º e férias proporcionais. O aviso indenizado tem FGTS, mas não INSS. O 13º do aviso tem FGTS e INSS. As férias indenizadas não têm nenhum dos dois (Lei 8.212/1991, art. 28, §9º). Na demissão por acordo, o aviso indenizado cai pela metade. Se o funcionário trabalha o aviso, não há custo extra além do salário normal." },
+        { "title": "O que já está provisionado.", "text": "13º e férias proporcionais já são reservados todo mês nas provisões. Na rescisão entram ainda o saldo de salário e o FGTS do mês." },
+        { "title": "Prazo.", "text": "As verbas da rescisão devem ser pagas em até 10 dias após o fim do contrato (CLT, art. 477, §6º). Atrasar gera multa de um salário." }
+      ],
+      "sources": [
+        { "id": "fgts", "label": "Lei 8.036/1990, art. 18" },
+        { "id": "noticeLaw", "label": "Lei 12.506/2011" },
+        { "id": "clt", "label": "CLT, arts. 477, 484-A e 487" }
+      ]
+    },
+    {
+      "id": "sst",
+      "validFrom": "2026-01-01",
+      "title": "O que é obrigatório em saúde e segurança do trabalho (SST)",
+      "kind": "steps",
+      "items": [
+        { "title": "PGR: Programa de Gerenciamento de Riscos (NR-1).", "text": "Documento que identifica os riscos de cada função e as medidas de prevenção. Microempresas e empresas de pequeno porte de grau de risco 1 ou 2, sem exposição a agentes físicos, químicos ou biológicos, podem ficar dispensadas de elaborá-lo, mas precisam declarar essa situação." },
+        { "title": "PCMSO: Programa de Controle Médico de Saúde Ocupacional (NR-7).", "text": "Define os exames de cada função, com base nos riscos do PGR, e é coordenado por um médico do trabalho." },
+        {
+          "title": "Exames ocupacionais.",
+          "text": "Cada exame gera um Atestado de Saúde Ocupacional (ASO):",
+          "items": [
+            { "text": "admissional, antes de o funcionário começar a trabalhar;" },
+            { "text": "periódico, em geral a cada 1 ou 2 anos, conforme o risco e a idade;" },
+            { "text": "de retorno ao trabalho, após afastamento de 30 dias ou mais;" },
+            { "text": "de mudança de risco, quando o funcionário muda de função;" },
+            { "text": "demissional." }
+          ]
+        },
+        { "title": "Envio ao eSocial.", "text": "Os exames (evento S-2220) e as condições do ambiente de trabalho (S-2240) devem ser informados ao governo." },
+        { "title": "Treinamentos.", "text": "Algumas funções exigem treinamento obrigatório antes de começar: eletricidade (NR-10), altura (NR-35), máquinas (NR-12), entre outras." }
+      ],
+      "sources": [
+        { "id": "nrList", "label": "Normas Regulamentadoras vigentes (NR-1 e outras)" },
+        { "id": "nr7", "label": "NR-7 (PCMSO)" }
+      ]
+    },
+    {
+      "id": "payrollOps",
+      "validFrom": "2026-01-01",
+      "title": "O que o contador faz pela folha todo mês",
+      "kind": "steps",
+      "items": [
+        { "title": "Admissão no eSocial.", "text": "O funcionário deve ser registrado no eSocial antes de começar a trabalhar. Esse registro substitui a anotação na carteira de trabalho, que agora é digital." },
+        { "title": "Folha mensal.", "text": "Cálculo de salário, adicionais, faltas, descontos de INSS e IR, holerite e envio dos eventos de remuneração ao eSocial." },
+        { "title": "Guias.", "text": "O INSS e o IRRF são pagos por DARF gerado na DCTFWeb. O FGTS é pago por guia gerada no FGTS Digital, que desde março de 2024 é o único canal da maioria dos empregadores. O MEI paga o FGTS pela guia do eSocial." },
+        { "title": "Férias, 13º e rescisões.", "text": "Cálculo, recibos, prazos e envio dos eventos." },
+        { "title": "Prazos.", "text": "O salário deve ser pago até o 5º dia útil do mês seguinte (CLT, art. 459, §1º). O FGTS e o INSS vencem no dia 20 do mês seguinte, antecipado se não for dia útil." }
+      ],
+      "sources": [
+        { "id": "esocial", "label": "eSocial" },
+        { "id": "fgtsDigital", "label": "FGTS Digital (perguntas frequentes)" },
+        { "id": "clt", "label": "CLT, art. 459" }
+      ]
+    },
+    {
+      "id": "ppe",
+      "validFrom": "2026-01-01",
+      "title": "Quando a empresa paga uniforme e EPI",
+      "kind": "steps",
+      "items": [
+        { "title": "EPI é sempre de graça.", "text": "A empresa deve fornecer o equipamento de proteção adequado ao risco, em perfeito estado, sem cobrar nada (CLT, art. 166, e NR-6)." },
+        { "title": "Com Certificado de Aprovação (CA).", "text": "Só vale EPI com CA emitido pelo Ministério do Trabalho." },
+        { "title": "Treinar, registrar e fiscalizar.", "text": "A empresa deve orientar sobre o uso, registrar a entrega (ficha de EPI) e exigir que o funcionário use. Recusar o uso sem justificativa é falta grave." },
+        { "title": "Uniforme exigido pela empresa é custo dela.", "text": "A empresa pode definir o padrão de vestimenta (CLT, art. 456-A). A lavagem é do funcionário, salvo quando exige processo especial." },
+        { "title": "Não é salário.", "text": "Uniformes e equipamentos fornecidos para o trabalho não são salário e não geram encargos (CLT, art. 458, §2º, I)." }
+      ],
+      "sources": [
+        { "id": "nr6", "label": "NR-6 (EPI)" },
+        { "id": "clt", "label": "CLT, arts. 166, 456-A e 458" }
+      ]
+    },
+    {
+      "id": "hiring",
+      "validFrom": "2026-01-01",
+      "title": "O que entra no custo de contratação",
+      "kind": "steps",
+      "items": [
+        { "title": "Recrutamento.", "text": "Anúncios, plataformas de vagas, agência ou tempo da equipe em entrevistas." },
+        { "title": "Exame admissional.", "text": "Obrigatório antes do início (NR-7). Se já estiver no valor anual de SST acima, não repita aqui." },
+        { "title": "Treinamento inicial.", "text": "Integração e os treinamentos de NR obrigatórios para a função." },
+        { "title": "Equipamentos.", "text": "Computador, ferramentas, EPIs e uniformes iniciais." },
+        { "title": "Contrato de experiência.", "text": "Pode durar até 90 dias, com uma prorrogação dentro desse prazo (CLT, art. 445). Se terminar no prazo, não há aviso prévio nem multa do FGTS." }
+      ],
+      "sources": [
+        { "id": "clt", "label": "CLT, arts. 443 e 445" },
+        { "id": "nr7", "label": "NR-7" }
+      ]
+    }
+  ],
+  "callouts": [
+    { "id": "meiRules", "tone": "warning", "title": "Regras do MEI", "text": "O MEI pode ter apenas **1 empregado**, que deve receber o salário mínimo ou o piso da categoria. O faturamento anual é limitado a {{meiLimit|money}}. Base legal: [LC nº 123/2006, art. 18-C](source:simples)." },
+    { "id": "simplesCpp", "tone": "info", "title": "Por que o INSS patronal não aparece?", "text": "Nos Anexos I, II, III e V, a Contribuição Patronal Previdenciária já é paga dentro do DAS, que incide sobre o faturamento. Aqui calculamos apenas o custo que nasce da folha. Base legal: [LC nº 123/2006, art. 13](source:simples)." },
+    { "id": "stateFloor", "tone": "info", "title": "Piso estadual: {{law}}", "text": "{{effective}}. Fonte: [{{sourceTitle}}](source:{{source}})" },
+    { "id": "stateFloorOutdated", "tone": "warning", "title": "Piso estadual: {{law}}", "text": "{{effective}}. Fonte: [{{sourceTitle}}](source:{{source}}). Algumas faixas estão abaixo do salário mínimo nacional ({{minimumWage|money}}). Nesses casos vale o mínimo nacional." },
+    { "id": "noStateFloor", "tone": "info", "title": "Sem piso estadual", "text": "Este estado não tem lei de piso regional. O mínimo é o salário mínimo nacional de {{minimumWage|money}} ([Decreto 12.797/2025](source:minWage)), a menos que a convenção coletiva da categoria defina um valor maior." },
+    { "id": "meiSalaryCap", "tone": "warning", "title": "Atenção, MEI", "text": "O empregado do MEI deve receber no máximo o salário mínimo ou o piso da categoria ({{meiCap|money}})." },
+    { "id": "insalubrityHazardOverlap", "tone": "warning", "text": "Insalubridade e periculosidade não se acumulam (CLT, art. 193, §2º). Mantenha apenas a que for paga." },
+    { "id": "benefitsNoCharges", "tone": "success", "title": "Benefícios não pagam encargos", "text": "Estes benefícios **não têm natureza salarial**: não pagam INSS nem FGTS e não entram no 13º nem nas férias. Para valorizar o funcionário, cada R$ 1,00 dado como benefício custa R$ 1,00. Dado como salário, custa {{costPerReal|money}}." },
+    { "id": "educationOverLimit", "tone": "warning", "title": "Auxílio-educação acima do limite", "text": "Para ficar livre de INSS, o auxílio-educação deve ser de no máximo {{educationLimit|money}} por mês para este funcionário: o maior valor entre 5% da remuneração e 1,5 salário mínimo (Lei 8.212/1991, art. 28, §9º, “t”). O que passar disso pode sofrer encargos." },
+    { "id": "benefitsSavings", "tone": "success", "title": "Economia com benefícios", "text": "Os benefícios custam {{benefitsTotal|money}} por mês. O mesmo valor pago como salário custaria {{benefitsAsSalary|money}}, por causa dos encargos e das provisões. São **{{savings|money}} a menos por mês** ({{savingsYear|money}} por ano)." },
+    {
+      "id": "beforeHiring",
+      "tone": "warning",
+      "title": "Antes de contratar",
+      "items": [
+        { "text": "Confira a **convenção coletiva** da categoria. Ela pode fixar piso, vale-refeição, seguro de vida e reajustes acima do que está aqui ([Sistema Mediador](source:mediador))." },
+        { "text": "Confirme com seu contador o CNAE, a alíquota RAT/FAP e o código FPAS da empresa." },
+        { "text": "Esta é uma estimativa educativa e não substitui o cálculo oficial da folha no eSocial." }
+      ]
+    }
+  ],
+  "breakdown": {
+    "groups": {
+      "pay": "Remuneração",
+      "charges": "Encargos mensais",
+      "accruals": "Provisões (13º, férias e rescisão)",
+      "benefits": "Benefícios (sem encargos)",
+      "other": "Outros custos"
+    },
+    "items": {
+      "base": "Salário base",
+      "insalubrity": "Adicional de insalubridade ({{grade}}% do salário mínimo)",
+      "insalubritySalaryBase": "Adicional de insalubridade ({{grade}}% do piso salarial, conforme a convenção)",
+      "hazard": "Adicional de periculosidade ({{rate|percent}})",
+      "overtime": "Horas extras em dias úteis ({{hours|number}}h com {{rate|number}}%)",
+      "restDay": "Horas extras em domingos e feriados ({{hours|number}}h com {{rate|number}}%)",
+      "night": "Adicional noturno ({{clockHours|number}}h de relógio = {{paidHours|number}}h noturnas com {{rate|percent}})",
+      "nightOvertime": "Horas extras noturnas ({{clockHours|number}}h de relógio = {{paidHours|number}}h noturnas com {{nightRate|percent}} + {{overtimeRate|number}}%)",
+      "dsr": "Reflexo no descanso semanal remunerado (DSR)",
+      "fgts": "FGTS ({{rate|percent}})",
+      "inss": "INSS patronal ({{rate|percent}})",
+      "rat": "RAT × FAP ({{rate|percent}})",
+      "third": "Terceiros / Sistema S ({{rate|percent}})",
+      "thirteenth": "13º salário (1/12 por mês)",
+      "vacation": "Férias (1/12 por mês)",
+      "vacationBonus": "1/3 constitucional de férias",
+      "accrualFgts": "FGTS sobre 13º e férias",
+      "accrualCharges": "Encargos patronais sobre 13º e férias",
+      "terminationFine": "Reserva para multa de {{rate|percent}} do FGTS",
+      "notice": "Reserva para aviso prévio indenizado ({{days}} dias, com reflexos, FGTS e INSS sobre o 13º)",
+      "transport": "Vale-transporte (parte da empresa)",
+      "meal": "Vale-refeição / alimentação (parte da empresa)",
+      "healthPlan": "Plano de saúde",
+      "dentalPlan": "Plano odontológico",
+      "lifeInsurance": "Seguro de vida",
+      "education": "Auxílio-educação",
+      "pension": "Previdência privada",
+      "plr": "PLR (valor anual ÷ 12)",
+      "otherBenefits": "Outros benefícios",
+      "sst": "Exames ocupacionais e programas de SST (÷ 12)",
+      "accounting": "Contabilidade / folha por funcionário",
+      "ppe": "Uniformes e EPIs"
+    }
+  },
+  "labels": {
+    "irrfZeroedByReduction": "(zerado pela redução da Lei 15.270/2025)"
+  },
+  "method": [
+    { "title": "Remuneração", "text": "Salário base, mais insalubridade (sobre o salário mínimo), periculosidade (30% do salário), horas extras e adicional noturno. Extras e adicional noturno habituais geram reflexo no DSR." },
+    { "title": "Encargos", "text": "FGTS de 8% em todos os regimes. Com INSS patronal, RAT × FAP e terceiros, conforme o regime: 3% no MEI, dentro do DAS no Simples (Anexos I, II, III e V), 20% + RAT no Anexo IV, e 20% + RAT + terceiros no Lucro Presumido e no Real." },
+    { "title": "Provisões", "text": "Todo mês a empresa reserva 1/12 de 13º, 1/12 de férias e 1/3 de férias, mais os encargos sobre esses valores. Opcionalmente, reserva também a multa de 40% do FGTS e o aviso prévio indenizado." },
+    { "title": "Benefícios", "text": "Vale-transporte (acima de 6% do salário), alimentação pelo PAT, planos de saúde, seguro, educação e PLR não têm natureza salarial. Não geram encargos nem reflexos." }
+  ],
+  "footer": "Custo Claro é uma ferramenta educativa e não substitui a orientação de um contador ou o cálculo oficial no eSocial. Pisos de convenção coletiva variam por sindicato e município."
+}

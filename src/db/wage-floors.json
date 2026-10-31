@@ -1,0 +1,92 @@
+{
+  "states": [
+    { "uf": "AC", "name": "Acre" }, { "uf": "AL", "name": "Alagoas" }, { "uf": "AP", "name": "Amapá" },
+    { "uf": "AM", "name": "Amazonas" }, { "uf": "BA", "name": "Bahia" }, { "uf": "CE", "name": "Ceará" },
+    { "uf": "DF", "name": "Distrito Federal" }, { "uf": "ES", "name": "Espírito Santo" }, { "uf": "GO", "name": "Goiás" },
+    { "uf": "MA", "name": "Maranhão" }, { "uf": "MT", "name": "Mato Grosso" }, { "uf": "MS", "name": "Mato Grosso do Sul" },
+    { "uf": "MG", "name": "Minas Gerais" }, { "uf": "PA", "name": "Pará" }, { "uf": "PB", "name": "Paraíba" },
+    { "uf": "PR", "name": "Paraná" }, { "uf": "PE", "name": "Pernambuco" }, { "uf": "PI", "name": "Piauí" },
+    { "uf": "RJ", "name": "Rio de Janeiro" }, { "uf": "RN", "name": "Rio Grande do Norte" }, { "uf": "RS", "name": "Rio Grande do Sul" },
+    { "uf": "RO", "name": "Rondônia" }, { "uf": "RR", "name": "Roraima" }, { "uf": "SC", "name": "Santa Catarina" },
+    { "uf": "SP", "name": "São Paulo" }, { "uf": "SE", "name": "Sergipe" }, { "uf": "TO", "name": "Tocantins" }
+  ],
+  "defaultState": "SP",
+  "stateFloors": [
+    {
+      "uf": "SP",
+      "validFrom": "2026-06-01",
+      "law": "Lei nº 18.471/2026",
+      "effective": "Em vigor desde o 1º dia do mês seguinte à publicação (maio/2026)",
+      "source": "pisoSP",
+      "bands": [
+        { "id": "sp-1", "label": "Inciso I", "value": 1874.36, "categories": "Domésticos, cuidadores, faxineiros, trabalhadores agrícolas e florestais, pescadores, contínuos, vendedores, motoboys, cozinheiros, costureiros, pedreiros, pintores, garçons, operadores de telemarketing, trabalhadores de turismo e hotelaria, mecânicos e outros ofícios não especializados ou semiqualificados." },
+        { "id": "sp-2", "label": "Inciso II", "value": 1874.36, "categories": "Administradores agropecuários e florestais, trabalhadores de higiene e saúde, chefes de serviços de transporte e comunicações, supervisores de compras e vendas, agentes de vendas e representantes comerciais, operadores de rádio, TV, som e projeção." }
+      ]
+    },
+    {
+      "uf": "PR",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "law": "Resolução CETER nº 632/2026 e Decreto nº 13.182/2026",
+      "effective": "01/01/2026 a 31/12/2026",
+      "source": "pisoPR",
+      "bands": [
+        { "id": "pr-1", "label": "Grupo I", "value": 2105.34, "categories": "Trabalhadores agropecuários, florestais e da pesca." },
+        { "id": "pr-2", "label": "Grupo II", "value": 2181.63, "categories": "Serviços administrativos, serviços em geral, vendedores do comércio em lojas e mercados, reparação e manutenção." },
+        { "id": "pr-3", "label": "Grupo III", "value": 2250.04, "categories": "Produção de bens e serviços industriais (CBO grandes grupos 7 e 8)." },
+        { "id": "pr-4", "label": "Grupo IV", "value": 2407.9, "categories": "Técnicos de nível médio (CBO grande grupo 3)." }
+      ]
+    },
+    {
+      "uf": "SC",
+      "validFrom": "2026-01-01",
+      "law": "Lei Complementar nº 895/2026",
+      "effective": "Efeitos a partir de 01/01/2026",
+      "source": "pisoSC",
+      "bands": [
+        { "id": "sc-1", "label": "Faixa 1", "value": 1842.0, "categories": "Agricultura e pecuária, indústrias extrativas, pesca, domésticos, turismo e hospitalidade, construção civil, instrumentos musicais e brinquedos, motoboys, entre outras (resumo; confira a lei)." },
+        { "id": "sc-2", "label": "Faixa 2", "value": 1908.0, "categories": "Vestuário e calçados, fiação e tecelagem, artefatos de couro, papel e papelão, distribuição de jornais e revistas, comunicações e telemarketing, entre outras (resumo; confira a lei)." },
+        { "id": "sc-3", "label": "Faixa 3", "value": 2022.0, "categories": "Mobiliário, química e farmacêutica, alimentação, comércio em geral, agentes autônomos do comércio, entre outras (resumo; confira a lei)." },
+        { "id": "sc-4", "label": "Faixa 4", "value": 2106.0, "categories": "Metalúrgicas, mecânicas e material elétrico, gráficas, vidros e cerâmica, borracha, seguros, condomínios, ensino e saúde, entre outras (resumo; confira a lei)." }
+      ]
+    },
+    {
+      "uf": "RS",
+      "validFrom": "2026-05-21",
+      "law": "Lei nº 16.514/2026",
+      "effective": "Desde a publicação no DOE em 21/05/2026 (data-base 1º de maio)",
+      "source": "pisoRS",
+      "bands": [
+        { "id": "rs-1", "label": "Faixa 1", "value": 1884.75, "categories": "Agricultura e pecuária, indústrias extrativas, pesca, domésticos, turismo e hospitalidade, construção civil, instrumentos musicais e brinquedos, estabelecimentos hípicos, motoboys, garagens e estacionamentos." },
+        { "id": "rs-2", "label": "Faixa 2", "value": 1928.15, "categories": "Vestuário e calçados, fiação e tecelagem, couro, papel e papelão, distribuição de jornais e revistas, estabelecimentos de saúde, limpeza e conservação, telecomunicações e call centers, hotéis, restaurantes e bares." },
+        { "id": "rs-3", "label": "Faixa 3", "value": 1971.89, "categories": "Mobiliário, química e farmacêutica, cinematográfica, alimentação, comércio em geral, agentes autônomos do comércio, movimentadores de mercadorias, armazéns." },
+        { "id": "rs-4", "label": "Faixa 4", "value": 2049.76, "categories": "Metalúrgicas, mecânicas e material elétrico, gráficas, vidros e cerâmica, borracha, seguros, edifícios e condomínios, joalherias, administração escolar, entidades culturais e assistenciais, portuários, vigilantes." },
+        { "id": "rs-5", "label": "Faixa 5", "value": 2388.5, "categories": "Técnicos de nível médio (cursos integrados, subsequentes ou concomitantes)." }
+      ]
+    },
+    {
+      "uf": "RJ",
+      "validFrom": "2019-01-01",
+      "law": "Lei nº 8.315/2019",
+      "effective": "Último reajuste publicado (2019). Não encontramos lei mais recente em fonte oficial",
+      "outdated": true,
+      "source": "pisoRJ",
+      "bands": [
+        { "id": "rj-1", "label": "Faixa I", "value": 1238.11, "categories": "Trabalhadores agropecuários, domésticos, conservação e manutenção, auxiliar de escritório, guardadores de carro, catadores de recicláveis." },
+        { "id": "rj-2", "label": "Faixa II", "value": 1283.73, "categories": "Construção civil, carteiros, cozinheiros, caixas, cabeleireiros e manicures, motoboys, comerciários, pintores, pedreiros, garçons." },
+        { "id": "rj-3", "label": "Faixa III", "value": 1375.01, "categories": "Baristas, agentes de trânsito, operadores de telemarketing, motoristas, porteiros, eletricistas, frentistas, bombeiros civis, auxiliares de enfermagem." },
+        { "id": "rj-4", "label": "Faixa IV", "value": 1665.93, "categories": "Entrevistadores sociais, técnicos de enfermagem, técnicos de nível médio registrados, técnicos de farmácia e laboratório." },
+        { "id": "rj-5", "label": "Faixa V", "value": 2512.59, "categories": "Técnicos de radiologia, fotógrafos, técnicos em eletrônica, motoristas de ambulância, intérpretes de Libras, técnicos de segurança do trabalho, técnicos industriais de nível médio." },
+        { "id": "rj-6", "label": "Faixa VI", "value": 3158.96, "categories": "Professores do 1º ao 5º ano (40h), economistas, pedagogos, jornalistas, contadores, psicólogos, fisioterapeutas, assistentes sociais, nutricionistas, enfermeiros." }
+      ]
+    }
+  ],
+  "federalFloors": [
+    { "id": "fed-eng-6h", "validFrom": "2026-01-01", "label": "Engenheiro, arquiteto, agrônomo, químico ou veterinário — 6h/dia", "minimumWageMultiple": 6, "note": "6 salários mínimos.", "source": "engineersLaw" },
+    { "id": "fed-eng-8h", "validFrom": "2026-01-01", "label": "Engenheiro, arquiteto, agrônomo, químico ou veterinário — 8h/dia", "minimumWageMultiple": 8.5, "note": "6 salários mínimos + 2 horas a mais com acréscimo de 25% (8,5 SM).", "source": "engineersLaw" },
+    { "id": "fed-radiology", "validFrom": "2026-01-01", "label": "Técnico em radiologia", "minimumWageMultiple": 2, "note": "2 salários mínimos, mais 40% de adicional de risco de vida e insalubridade.", "source": "radiologyLaw" },
+    { "id": "fed-nurse", "validFrom": "2026-01-01", "label": "Enfermeiro(a)", "value": 4750, "note": "No setor privado, o STF (ADI 7222) condicionou o piso à negociação coletiva regional. Confira a convenção da sua região.", "source": "nursingLaw" },
+    { "id": "fed-nurse-tech", "validFrom": "2026-01-01", "label": "Técnico(a) de enfermagem", "value": 3325, "note": "70% do piso do enfermeiro. Vale a mesma ressalva do STF.", "source": "nursingLaw" },
+    { "id": "fed-nurse-aux", "validFrom": "2026-01-01", "label": "Auxiliar de enfermagem ou parteira", "value": 2375, "note": "50% do piso do enfermeiro. Vale a mesma ressalva do STF.", "source": "nursingLaw" }
+  ]
+}

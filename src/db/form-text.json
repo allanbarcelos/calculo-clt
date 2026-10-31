@@ -1,0 +1,227 @@
+{
+  "steps": {
+    "company": { "title": "Empresa", "heading": "Sua empresa", "intro": "O regime tributário muda os encargos sobre a folha." },
+    "floor": { "title": "Local e piso", "heading": "Onde e em que função", "intro": "Descubra o menor salário que a lei permite pagar." },
+    "pay": { "title": "Salário", "heading": "Salário e jornada", "intro": "Remuneração, adicionais e horas extras habituais." },
+    "benefits": { "title": "Benefícios", "heading": "Benefícios", "intro": "Valorize o funcionário sem pagar encargos." },
+    "other": { "title": "Outros custos", "heading": "Provisões e outros custos", "intro": "Custos que costumam ficar de fora da conta." },
+    "result": { "title": "Resultado", "heading": "Resultado", "intro": "Quanto você vai investir neste funcionário." }
+  },
+  "sections": {
+    "allowances": "Adicionais legais",
+    "overtimeNight": "Horas extras e trabalho noturno (média mensal)",
+    "employeeData": "Dados do funcionário (para o salário líquido)",
+    "transport": "Vale-transporte (obrigatório quando o funcionário pede)",
+    "meal": "Vale-refeição ou vale-alimentação",
+    "otherBenefits": "Outros benefícios sem encargos (valor mensal pago pela empresa)",
+    "operationalCosts": "Custos operacionais por funcionário"
+  },
+  "fields": {
+    "regime": {
+      "label": "Qual é o regime tributário da empresa?",
+      "hint": "Ele define quanto a empresa paga de INSS sobre a folha. Se ainda não abriu a empresa, compare os regimes no resultado final."
+    },
+    "chargesSummary": {
+      "note": "Encargos patronais sobre a folha neste regime: **{{total|percent}}** (INSS {{inss|percent}} + RAT × FAP {{ratFap|percent}}), além do FGTS.",
+      "noteWithThirdParties": "Encargos patronais sobre a folha neste regime: **{{total|percent}}** (INSS {{inss|percent}} + RAT × FAP {{ratFap|percent}} + terceiros {{thirdParties|percent}}), além do FGTS."
+    },
+    "rat": {
+      "label": "Alíquota RAT da atividade (CNAE)",
+      "hint": "1% risco leve, 2% médio, 3% grave. Está no Anexo V do Decreto 3.048/1999.",
+      "note": "RAT efetivo: {{rat}}% × {{fap|number}} = **{{effective|percent}}** sobre a folha."
+    },
+    "fap": {
+      "label": "FAP (Fator Acidentário de Prevenção)",
+      "hint": "Entre {{min|number}} e {{max|number}}. Empresa nova usa {{default|number}}."
+    },
+    "thirdParties": {
+      "label": "Contribuições a terceiros (Sistema S, salário-educação, INCRA)",
+      "hint": "Para comércio, serviços, indústria e transporte, o total costuma ser 5,8%. Confira o código FPAS com seu contador.",
+      "suffix": "%"
+    },
+    "payrollRelief": {
+      "label": "A empresa está em um dos 17 setores da desoneração da folha",
+      "hint": "Neste ano, a contribuição patronal sobre a folha é de {{rate|percent}} (transição da Lei 14.973/2024){{thirteenth}}. A CPRB sobre a receita não entra neste cálculo.",
+      "thirteenthNote": ", sem INSS patronal sobre o 13º"
+    },
+    "state": {
+      "label": "Em qual estado o funcionário vai trabalhar?",
+      "optionWithFloor": "{{name}} ({{uf}}) — tem piso estadual",
+      "option": "{{name}} ({{uf}})"
+    },
+    "band": {
+      "label": "Em qual faixa ou profissão o funcionário se encaixa?",
+      "hint": "Faixas do piso estadual e profissões com piso em lei federal.",
+      "emptyOption": "Nenhuma destas / não sei",
+      "option": "{{label}} — {{value|money}}"
+    },
+    "agreement": {
+      "label": "A categoria tem convenção ou acordo coletivo?",
+      "hint": "Convenções cadastradas para este estado e as de abrangência nacional. Ao escolher a convenção e a função, o formulário é preenchido com os valores dela. Você pode alterar qualquer campo.",
+      "emptyOption": "Nenhuma / minha convenção não está na lista",
+      "option": "{{name}} — {{territory}}",
+      "noneForState": "Ainda não há convenções cadastradas para este estado. Informe o piso da sua convenção abaixo, se houver."
+    },
+    "agreementRole": {
+      "label": "Função do funcionário na convenção",
+      "hint": "O piso da função vira o salário do cálculo.",
+      "emptyOption": "Escolha a função",
+      "option": "{{label}} — {{floor|money}}"
+    },
+    "agreementDetail": {
+      "registration": "Registro no MTE: {{registration}}",
+      "validity": "Vigência: {{validFrom}} a {{validTo}}",
+      "territory": "Abrangência: {{territory}}",
+      "parties": "Partes: {{parties}}",
+      "appliedNote": "Os campos preenchidos pela convenção mostram o aviso “previsto na convenção” e continuam editáveis."
+    },
+    "agreementNotice": {
+      "match": "Previsto na {{kind}} ({{clause}}): {{value}}.",
+      "differs": "A {{kind}} prevê {{value}} ({{clause}}). Você informou outro valor.",
+      "dailyValue": "{{daily|money}} por dia ({{monthly|money}} no mês)",
+      "hoursValue": "{{hours}} horas semanais",
+      "yes": "sim",
+      "no": "não",
+      "baseSalary": "calculado sobre o piso salarial",
+      "baseMinimumWage": "calculado sobre o salário mínimo"
+    },
+    "hasAgreementFloor": {
+      "label": "Informar manualmente o piso de uma convenção que não está na lista",
+      "hint": "A convenção coletiva prevalece sobre o piso estadual (LC 103/2000, art. 1º). A maioria das categorias tem convenção, então vale consultar."
+    },
+    "agreementFloor": {
+      "label": "Piso da convenção coletiva",
+      "hint": "Procure a convenção do sindicato da sua atividade no Sistema Mediador, do Ministério do Trabalho.",
+      "prefix": "R$",
+      "sourcesPrefix": "Consulte convenções registradas:"
+    },
+    "floorSummary": {
+      "title": "Salário mínimo legal para este funcionário",
+      "adjusted": "O salário do cálculo foi ajustado para este valor.",
+      "originAgreement": "Origem: convenção coletiva informada.",
+      "originAgreementRole": "Origem: {{agreement}} — {{role}}.",
+      "originBand": "Origem: {{band}}.",
+      "originNational": "Origem: salário mínimo nacional."
+    },
+    "salary": {
+      "label": "Salário base mensal (em carteira)",
+      "hint": "O mínimo legal para este funcionário é {{floor|money}}.",
+      "prefix": "R$",
+      "useFloorButton": "Usar o piso de {{floor|money}}",
+      "error": "O salário não pode ser menor que {{floor|money}}, o mínimo legal para este caso."
+    },
+    "weeklyHours": {
+      "label": "Jornada semanal contratada",
+      "hint": "Define o valor da hora usado no cálculo de horas extras e adicional noturno."
+    },
+    "insalubrity": {
+      "label": "Atividade insalubre?",
+      "hint": "O grau não é escolha da empresa. Ele vem do agente nocivo e do anexo da NR-15 que o classifica, e é calculado sobre o salário mínimo ({{minimumWage|money}}), conforme a CLT, art. 192.",
+      "option": "{{label}} ({{amount|money}})",
+      "salaryBaseNote": "Nesta convenção, o adicional de insalubridade é calculado sobre o piso salarial ({{salary|money}}), e não sobre o salário mínimo."
+    },
+    "hazard": {
+      "label": "Atividade perigosa?",
+      "hint": "A periculosidade não tem graus: é sempre {{rate|percent}} do salário base, sem somar gratificações, prêmios ou PLR (CLT, art. 193, §1º). Só se aplica às atividades listadas na NR-16.",
+      "option": "{{label}} ({{amount|money}})"
+    },
+    "hourly": {
+      "note": "Valor da hora normal deste funcionário: **{{hourly|money}}** ({{basis}} ÷ {{divisor}}).",
+      "basisSalary": "salário",
+      "basisWithAllowances": "salário + adicionais"
+    },
+    "overtimeHours": {
+      "label": "Horas extras em dias úteis (por mês)",
+      "hint": "No máximo {{maxDailyHours}}h por dia (CLT, art. 59). Não conte as horas compensadas em banco de horas.",
+      "suffix": "h"
+    },
+    "overtimeRate": {
+      "label": "Adicional da hora extra",
+      "hint": "Mínimo de {{minRate}}% (CF, art. 7º, XVI): {{hourValue|money}} por hora. A convenção pode exigir mais.",
+      "suffix": "%"
+    },
+    "restDayOvertimeHours": {
+      "label": "Horas trabalhadas em domingos e feriados sem folga compensatória (por mês)",
+      "hint": "Pagas com {{rate}}% a mais: {{hourValue|money}} por hora (Lei 605/1949, art. 9º).",
+      "suffix": "h"
+    },
+    "nightType": {
+      "label": "Tipo de trabalho noturno"
+    },
+    "nightHours": {
+      "label": "Horas de relógio trabalhadas no período noturno (por mês)",
+      "suffix": "h",
+      "hintReduced": "Informe as horas do relógio. A hora noturna tem {{minutes|number}} minutos, então cada hora de relógio vale {{factor|number}} hora noturna. Adicional: {{premium|money}} por hora de relógio. Só as horas da jornada normal. As horas extras feitas à noite vão no campo abaixo.",
+      "hintRegular": "Neste tipo de trabalho a hora noturna tem 60 minutos. Adicional: {{premium|money}} por hora. Só as horas da jornada normal. As horas extras feitas à noite vão no campo abaixo."
+    },
+    "nightOvertimeHours": {
+      "label": "Horas extras feitas no período noturno (horas de relógio por mês)",
+      "hint": "Os dois adicionais se somam: hora normal + {{nightRate|percent}} noturno, e sobre esse valor + {{overtimeRate}}% de hora extra. Isso dá {{hourValue|money}} por hora de relógio. Não repita essas horas no campo de horas extras em dias úteis.",
+      "suffix": "h"
+    },
+    "dependents": {
+      "label": "Dependentes para Imposto de Renda"
+    },
+    "childrenUnder14": {
+      "label": "Filhos com menos de 14 anos",
+      "hint": "Para o salário-família, que a empresa paga e depois compensa no INSS."
+    },
+    "transportEnabled": {
+      "label": "O funcionário vai usar vale-transporte"
+    },
+    "transportDays": {
+      "label": "Dias de trabalho no mês"
+    },
+    "transportDailyFare": {
+      "label": "Custo diário de ida e volta",
+      "prefix": "R$",
+      "note": "Custo total de {{cost|money}}. O funcionário paga até {{share|percent}} do salário base ({{employee|money}}) e a empresa paga {{company|money}}."
+    },
+    "mealEnabled": {
+      "label": "Oferecer vale-refeição / alimentação"
+    },
+    "mealValue": {
+      "label": "Valor mensal do benefício",
+      "hint": "Muitas convenções coletivas fixam um valor mínimo.",
+      "prefix": "R$",
+      "cashNote": "Deve ser pago em cartão ou ticket. Pago em dinheiro, passa a integrar o salário (CLT, art. 457, §2º).",
+      "costNote": "Custo para a empresa: {{companyCost|money}} por mês. Os mesmos {{value|money}} pagos como salário custariam {{asSalary|money}}."
+    },
+    "mealDiscountPct": {
+      "label": "Desconto do funcionário",
+      "hint": "No PAT, o desconto é de até {{max}}%.",
+      "suffix": "%"
+    },
+    "healthPlan": { "label": "Plano de saúde", "hint": "CLT, art. 458, §2º, IV", "prefix": "R$" },
+    "dentalPlan": { "label": "Plano odontológico", "prefix": "R$" },
+    "lifeInsurance": { "label": "Seguro de vida", "hint": "Algumas convenções tornam obrigatório.", "prefix": "R$" },
+    "education": { "label": "Auxílio-educação", "hint": "CLT, art. 458, §2º, II", "prefix": "R$" },
+    "pension": { "label": "Previdência privada", "hint": "Precisa ser oferecida a todos os empregados.", "prefix": "R$" },
+    "otherBenefits": { "label": "Outros (home office, auxílio-creche etc.)", "prefix": "R$" },
+    "plrYearly": {
+      "label": "PLR — Participação nos Lucros ou Resultados (valor anual)",
+      "hint": "Sem INSS e FGTS. Exige acordo com o sindicato ou com uma comissão de empregados, e no máximo 2 pagamentos por ano.",
+      "prefix": "R$",
+      "costNote": "Custo para a empresa: {{monthly|money}} por mês na média. O mesmo valor pago como salário custaria {{asSalary|money}} por mês."
+    },
+    "includeTerminationReserve": {
+      "label": "Reservar todo mês para a multa de {{fine|percent}} do FGTS",
+      "hint": "Em uma demissão sem justa causa, a empresa paga {{fine|percent}} de todo o FGTS depositado. Reservar aos poucos evita surpresas.",
+      "note": "Para esta remuneração, depois de 1 ano de contrato a multa seria de cerca de **{{amount|money}}**."
+    },
+    "includeNoticeReserve": {
+      "label": "Reservar todo mês para o aviso prévio indenizado",
+      "hint": "Se a empresa demite sem justa causa e dispensa o funcionário de trabalhar o aviso, paga esse período como indenização, com reflexo no 13º, nas férias e no FGTS."
+    },
+    "expectedTenureYears": {
+      "label": "Por quanto tempo você espera manter este funcionário?",
+      "suffix": "anos",
+      "hintWithValue": "O aviso seria de {{days}} dias ({{baseDays}} + {{daysPerYear}} por ano completo, até {{maxDays}}). Valor estimado de {{total|money}}: salário do aviso e 13º com FGTS, INSS patronal sobre o 13º e férias indenizadas (sem encargos). Distribuído pelo tempo de contrato, a reserva é de {{monthly|money}} por mês.",
+      "hintPending": "O aviso seria de {{days}} dias ({{baseDays}} + {{daysPerYear}} por ano completo, até {{maxDays}}). O valor aparece quando o salário for definido."
+    },
+    "sstYearly": { "label": "Exames ocupacionais e programas de SST (por ano)", "hint": "Exames admissional, periódico e demissional, PCMSO e PGR (NR-7 e NR-1).", "prefix": "R$" },
+    "accountingMonthly": { "label": "Contabilidade / processamento da folha (por mês)", "hint": "Valor que o contador cobra a mais por funcionário.", "prefix": "R$" },
+    "ppeMonthly": { "label": "Uniformes e EPIs (por mês)", "hint": "A empresa deve fornecer EPIs de graça (CLT, art. 166).", "prefix": "R$" },
+    "hiringOneTime": { "label": "Custo único de contratação", "hint": "Anúncio, recrutamento, treinamento inicial. Aparece separado do custo mensal.", "prefix": "R$" }
+  }
+}

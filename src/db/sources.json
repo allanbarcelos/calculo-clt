@@ -1,0 +1,418 @@
+{
+  "sources": [
+    {
+      "id": "minWage",
+      "title": "Decreto nº 12.797/2025 — salário mínimo de R$ 1.621,00 a partir de 1º/01/2026",
+      "short": "Decreto 12.797/2025",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm"
+    },
+    {
+      "id": "inssTable",
+      "title": "Tabela de contribuição mensal do INSS 2026 (Portaria Interministerial MPS/MF nº 13/2026)",
+      "short": "Tabela INSS",
+      "org": "INSS",
+      "url": "https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal"
+    },
+    {
+      "id": "familyAllowance",
+      "title": "Valor limite para direito ao salário-família",
+      "short": "Salário-família (INSS)",
+      "org": "INSS",
+      "url": "https://www.gov.br/inss/pt-br/direitos-e-deveres/salario-familia/valor-limite-para-direito-ao-salario-familia"
+    },
+    {
+      "id": "irrfTable",
+      "title": "Tributação de 2026 — tabela progressiva mensal do IRPF",
+      "short": "Tabela IRRF",
+      "org": "Receita Federal",
+      "url": "https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026"
+    },
+    {
+      "id": "irrfReduction",
+      "title": "Redução do imposto de renda a partir de 1º/01/2026 (Lei nº 15.270/2025)",
+      "short": "Redução do IR (Lei 15.270/2025)",
+      "org": "Receita Federal",
+      "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2025/dezembro/receita-federal-orienta-fontes-pagadoras-e-contribuintes-a-calcular-a-reducao-do-imposto-de-renda-a-partir-de-1o-de-janeiro-de-2026"
+    },
+    {
+      "id": "clt",
+      "title": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+      "short": "CLT",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm"
+    },
+    {
+      "id": "nr15",
+      "title": "Norma Regulamentadora nº 15 (NR-15) — atividades e operações insalubres",
+      "short": "NR-15",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/norma-regulamentadora-no-15-nr-15"
+    },
+    {
+      "id": "nr16",
+      "title": "Norma Regulamentadora nº 16 (NR-16) — atividades e operações perigosas",
+      "short": "NR-16",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-16-atualizada-2025-ii.pdf"
+    },
+    {
+      "id": "nr16Motorcycle",
+      "title": "Portaria MTE nº 2.021/2025 — novo Anexo V da NR-16 (motocicletas)",
+      "short": "Portaria MTE 2.021/2025",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2025/dezembro/mte-atualiza-nr-16-e-fortalece-protecao-para-trabalhadores-que-utilizam-motocicletas/PortariaMTEn2.021AprovaoAnexoVAtividadescomMotocicletasdaNR16.pdf"
+    },
+    {
+      "id": "trafficAgentsLaw",
+      "title": "Lei nº 14.684/2023 — periculosidade dos agentes de trânsito",
+      "short": "Lei 14.684/2023",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14684.htm"
+    },
+    {
+      "id": "constitution",
+      "title": "Constituição Federal, art. 7º — direitos dos trabalhadores (hora extra de no mínimo 50%, adicional noturno)",
+      "short": "Constituição Federal",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    },
+    {
+      "id": "ruralLaw",
+      "title": "Lei nº 5.889/1973 — trabalho rural (adicional noturno de 25%)",
+      "short": "Lei 5.889/1973",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l5889.htm"
+    },
+    {
+      "id": "nrList",
+      "title": "Normas Regulamentadoras vigentes (NR-1 — gerenciamento de riscos, e demais NRs)",
+      "short": "Normas Regulamentadoras",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes"
+    },
+    {
+      "id": "nr6",
+      "title": "Norma Regulamentadora nº 6 (NR-6) — equipamentos de proteção individual",
+      "short": "NR-6",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/norma-regulamentadora-no-6-nr-6"
+    },
+    {
+      "id": "nr7",
+      "title": "Norma Regulamentadora nº 7 (NR-7) — PCMSO e exames ocupacionais",
+      "short": "NR-7",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/norma-regulamentadora-no-7-nr-7"
+    },
+    {
+      "id": "esocial",
+      "title": "eSocial — escrituração digital das obrigações trabalhistas",
+      "short": "eSocial",
+      "org": "Governo Federal",
+      "url": "https://www.gov.br/esocial/pt-br"
+    },
+    {
+      "id": "fgtsDigital",
+      "title": "FGTS Digital — perguntas frequentes do empregador",
+      "short": "FGTS Digital",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/fgtsdigital/perguntas-frequentes"
+    },
+    {
+      "id": "noticeLaw",
+      "title": "Lei nº 12.506/2011 — aviso prévio proporcional ao tempo de serviço",
+      "short": "Lei 12.506/2011",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12506.htm"
+    },
+    {
+      "id": "fgts",
+      "title": "Lei nº 8.036/1990 — FGTS (8% mensal e multa de 40%)",
+      "short": "Lei 8.036/1990",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8036consol.htm"
+    },
+    {
+      "id": "thirteenth",
+      "title": "Lei nº 4.090/1962 — gratificação de Natal (13º salário)",
+      "short": "Lei 4.090/1962",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l4090.htm"
+    },
+    {
+      "id": "employerInss",
+      "title": "Lei nº 8.212/1991, art. 22 — contribuição patronal de 20% e RAT",
+      "short": "Lei 8.212/1991",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm"
+    },
+    {
+      "id": "rat",
+      "title": "Decreto nº 3.048/1999, Anexo V — alíquota RAT por CNAE e FAP",
+      "short": "Decreto 3.048/1999",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm"
+    },
+    {
+      "id": "thirdParties",
+      "title": "IN RFB nº 2.110/2022 — contribuições destinadas a outras entidades (terceiros)",
+      "short": "IN RFB 2.110/2022",
+      "org": "Receita Federal",
+      "url": "http://normas.receita.fazenda.gov.br/sijut2consulta/link.action?idAto=126687"
+    },
+    {
+      "id": "payrollRelief",
+      "title": "Lei nº 14.973/2024 — transição da desoneração da folha (10% em 2026)",
+      "short": "Lei 14.973/2024",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14973.htm"
+    },
+    {
+      "id": "fap",
+      "title": "Consultar o Fator Acidentário de Prevenção (FAP)",
+      "short": "Consulta do FAP",
+      "org": "Governo Federal",
+      "url": "https://www.gov.br/pt-br/servicos/conhecer-ou-acessar-o-fator-acidentario-de-prevencao"
+    },
+    {
+      "id": "payrollReliefGuide",
+      "title": "Orientações sobre a reoneração gradual da folha de pagamento",
+      "short": "Orientações sobre a reoneração",
+      "org": "Ministério da Gestão e da Inovação (Compras.gov.br)",
+      "url": "https://www.gov.br/compras/pt-br/agente-publico/orientacoes-e-procedimentos/Orientaesreoneraogradual.pdf"
+    },
+    {
+      "id": "presumidoLaw",
+      "title": "Lei nº 9.718/1998, art. 13 — limite de receita do Lucro Presumido",
+      "short": "Lei 9.718/1998",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9718compilada.htm"
+    },
+    {
+      "id": "simples",
+      "title": "Lei Complementar nº 123/2006 — Simples Nacional e MEI",
+      "short": "LC 123/2006",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm"
+    },
+    {
+      "id": "transport",
+      "title": "Lei nº 7.418/1985 — vale-transporte",
+      "short": "Lei 7.418/1985",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l7418.htm"
+    },
+    {
+      "id": "pat",
+      "title": "Lei nº 6.321/1976 — Programa de Alimentação do Trabalhador (PAT)",
+      "short": "Lei 6.321/1976 (PAT)",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l6321.htm"
+    },
+    {
+      "id": "patDecree",
+      "title": "Decreto nº 10.854/2021 — regulamenta o PAT e o vale-transporte",
+      "short": "Decreto 10.854/2021",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10854.htm"
+    },
+    {
+      "id": "mealCardLaw",
+      "title": "Lei nº 14.442/2022 — regras do auxílio-alimentação (uso exclusivo, proibição de deságio)",
+      "short": "Lei 14.442/2022",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14442.htm"
+    },
+    {
+      "id": "healthPlansLaw",
+      "title": "Lei nº 9.656/1998 — planos de saúde (manutenção do plano após demissão)",
+      "short": "Lei 9.656/1998",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9656.htm"
+    },
+    {
+      "id": "plr",
+      "title": "Lei nº 10.101/2000 — participação nos lucros ou resultados (PLR)",
+      "short": "Lei 10.101/2000",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l10101.htm"
+    },
+    {
+      "id": "dsr",
+      "title": "Lei nº 605/1949 — repouso semanal remunerado",
+      "short": "Lei 605/1949",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l0605.htm"
+    },
+    {
+      "id": "statePisosLaw",
+      "title": "Lei Complementar nº 103/2000 — autoriza os estados a instituir piso salarial",
+      "short": "LC 103/2000",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp103.htm"
+    },
+    {
+      "id": "mediador",
+      "title": "Sistema Mediador — consulta de convenções e acordos coletivos registrados",
+      "short": "Sistema Mediador (MTE)",
+      "org": "Ministério do Trabalho e Emprego",
+      "url": "https://www3.mte.gov.br/sistemas/mediador/ConsultarInstColetivo"
+    },
+    {
+      "id": "engineersLaw",
+      "title": "Lei nº 4.950-A/1966 — piso de engenheiros, químicos, arquitetos, agrônomos e veterinários",
+      "short": "Lei 4.950-A/1966",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l4950a.htm"
+    },
+    {
+      "id": "radiologyLaw",
+      "title": "Lei nº 7.394/1985 — técnico em radiologia",
+      "short": "Lei 7.394/1985",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l7394.htm"
+    },
+    {
+      "id": "nursingLaw",
+      "title": "Lei nº 14.434/2022 — piso salarial da enfermagem",
+      "short": "Lei 14.434/2022",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14434.htm"
+    },
+    {
+      "id": "pisoSP",
+      "title": "Lei nº 18.471/2026 — salário mínimo paulista de R$ 1.874,36",
+      "short": "Lei SP 18.471/2026",
+      "org": "Assembleia Legislativa de São Paulo",
+      "url": "https://www.al.sp.gov.br/repositorio/legislacao/lei/2026/lei-18471-27.05.2026.html"
+    },
+    {
+      "id": "pisoPR",
+      "title": "Paraná aprova novos valores para o Piso Regional em 2026 (Resolução CETER 632 e Decreto 13.182)",
+      "short": "Resolução CETER 632/2026 (PR)",
+      "org": "Secretaria do Trabalho do Paraná",
+      "url": "https://www.trabalho.pr.gov.br/Noticia/De-R-21-mil-R-24-mil-Parana-aprova-novos-valores-para-o-Piso-Regional-em-2026"
+    },
+    {
+      "id": "pisoSC",
+      "title": "Lei Complementar nº 895/2026 — piso salarial estadual de Santa Catarina",
+      "short": "LC SC 895/2026",
+      "org": "Assembleia Legislativa de Santa Catarina",
+      "url": "https://leis.alesc.sc.gov.br/ato-normativo/53941"
+    },
+    {
+      "id": "pisoRS",
+      "title": "Lei nº 16.514/2026 — reajuste de 5,35% do piso regional do RS",
+      "short": "Lei RS 16.514/2026",
+      "org": "Casa Civil do Rio Grande do Sul",
+      "url": "https://casacivil.rs.gov.br/publicado-no-diario-oficial-reajuste-do-piso-salarial-ja-esta-em-vigor"
+    },
+    {
+      "id": "pisoRJ",
+      "title": "Lei nº 8.315/2019 — piso regional do Rio de Janeiro (último reajuste publicado)",
+      "short": "Lei RJ 8.315/2019",
+      "org": "Assembleia Legislativa do Rio de Janeiro",
+      "url": "http://www.alerj.rj.gov.br/Visualizar/Noticia/45252"
+    },
+    {
+      "id": "cctAsseioSC2026",
+      "title": "Convenção Coletiva de Asseio e Conservação de Santa Catarina 2026 (registro MTE SC000124/2026) — cópia anexada a licitação pública",
+      "short": "CCT Asseio e Conservação SC 2026",
+      "org": "Prefeitura de Lages (SC)",
+      "url": "https://licitacoes.lages.sc.gov.br/assets/licitacao/cct-asseio-2026-pdf-1777572313488.pdf"
+    },
+    {
+      "id": "cctAsseioES2026",
+      "title": "Termo Aditivo 2026 à Convenção Coletiva de Asseio e Conservação do Espírito Santo (registro MTE ES000026/2026) — Portal de Contratos",
+      "short": "CCT Asseio e Conservação ES 2026",
+      "org": "Governo do Estado do Espírito Santo",
+      "url": "https://contratos.es.gov.br/Media/PortalContratos/MGS/Termo%20Aditivo%20de%20Conven%C3%A7%C3%A3o%20Coletiva%202025_2026..pdf"
+    }
+  ],
+  "groups": [
+    {
+      "title": "Salário mínimo, INSS e Imposto de Renda",
+      "ids": [
+        "minWage",
+        "inssTable",
+        "familyAllowance",
+        "irrfTable",
+        "irrfReduction"
+      ]
+    },
+    {
+      "title": "Encargos sobre a folha",
+      "ids": [
+        "fgts",
+        "employerInss",
+        "rat",
+        "fap",
+        "thirdParties",
+        "payrollRelief",
+        "payrollReliefGuide",
+        "simples",
+        "presumidoLaw"
+      ]
+    },
+    {
+      "title": "Direitos trabalhistas",
+      "ids": [
+        "constitution",
+        "clt",
+        "thirteenth",
+        "dsr",
+        "ruralLaw",
+        "nr15",
+        "nr16",
+        "nr16Motorcycle",
+        "trafficAgentsLaw"
+      ]
+    },
+    {
+      "title": "Rescisão, SST e obrigações da folha",
+      "ids": [
+        "noticeLaw",
+        "nrList",
+        "nr6",
+        "nr7",
+        "esocial",
+        "fgtsDigital"
+      ]
+    },
+    {
+      "title": "Benefícios sem encargos",
+      "ids": [
+        "transport",
+        "pat",
+        "patDecree",
+        "mealCardLaw",
+        "healthPlansLaw",
+        "plr"
+      ]
+    },
+    {
+      "title": "Pisos salariais",
+      "ids": [
+        "statePisosLaw",
+        "pisoSP",
+        "pisoPR",
+        "pisoSC",
+        "pisoRS",
+        "pisoRJ",
+        "engineersLaw",
+        "radiologyLaw",
+        "nursingLaw",
+        "mediador"
+      ]
+    },
+    {
+      "title": "Convenções coletivas",
+      "ids": [
+        "mediador",
+        "cctAsseioSC2026",
+        "cctAsseioES2026"
+      ]
+    }
+  ]
+}

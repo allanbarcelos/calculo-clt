@@ -1,0 +1,27 @@
+﻿{
+  "name": "clt-cost-calculator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "npm run db:validate && npm test",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "oxlint",
+    "test": "vitest run",
+    "db:validate": "node scripts/validate-db.mjs"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxlint": "^1.89.0",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "insalubrity": [
+    {
+      "validFrom": "2026-01-01",
+      "base": "minimumWage",
+      "grades": [
+        { "value": 0, "label": "Não há insalubridade", "description": "Nenhum agente nocivo acima do limite da NR-15, ou o EPI fornecido neutraliza o agente." },
+        { "value": 10, "label": "Grau mínimo — 10% do salário mínimo", "description": "Alguns agentes químicos dos Anexos 11 e 13, conforme a substância e a concentração indicadas na tabela de cada uma." },
+        { "value": 20, "label": "Grau médio — 20% do salário mínimo", "description": "Ruído, calor, frio, umidade, vibrações e radiação não ionizante acima do limite. Contato com pacientes em hospitais e clínicas, laboratórios de análises, cemitérios (exumação), estábulos. Parte dos agentes químicos." },
+        { "value": 40, "label": "Grau máximo — 40% do salário mínimo", "description": "Radiação ionizante, ar comprimido ou mergulho, poeiras minerais (sílica, asbesto, manganês). Esgoto, coleta e industrialização de lixo urbano, pacientes em isolamento por doença infectocontagiosa. Parte dos agentes químicos." }
+      ],
+      "source": "nr15"
+    }
+  ],
+  "hazardPay": [
+    {
+      "validFrom": "2026-01-01",
+      "rate": 0.3,
+      "options": {
+        "no": { "label": "Não", "description": "A função não está entre as atividades da NR-16, ou a exposição é só eventual." },
+        "yes": { "label": "Sim — 30% do salário base", "description": "Explosivos, inflamáveis, energia elétrica, segurança pessoal ou patrimonial, motocicleta em vias públicas, radiações ionizantes ou agente de trânsito." }
+      },
+      "source": "nr16"
+    }
+  ]
+}
