@@ -280,6 +280,14 @@ legend { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; padding: 0;
 .sources-list__org { font-size: .8rem; color: var(--muted); }
 
 .site-footer { border-top: 1px solid var(--border); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: .9rem; }
+.site-footer__disclaimer { margin: 0 0 1rem; max-width: 70ch; }
+.site-footer__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: .85rem; }
+.site-footer__credits { display: inline-flex; align-items: center; gap: .4rem; }
+.site-footer a { color: var(--text); font-weight: 600; text-decoration: none; }
+.site-footer a:hover { color: var(--brand); text-decoration: underline; }
+.site-footer__icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin-left: .35rem; border-radius: 50%; border: 1px solid var(--border); color: var(--text); }
+.site-footer__icon:hover { color: var(--brand); border-color: var(--brand); }
+.site-footer__icon:focus-visible { outline: 3px solid color-mix(in srgb, var(--focus) 35%, transparent); outline-offset: 2px; }
 
 /* Responsive */
 @media (max-width: 900px) {

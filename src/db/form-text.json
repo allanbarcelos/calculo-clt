@@ -36,7 +36,7 @@
     },
     "rat": {
       "label": "Alíquota RAT da atividade (CNAE)",
-      "hint": "1% risco leve, 2% médio, 3% grave. Está no Anexo V do Decreto 3.048/1999.",
+      "hint": "1% risco leve, 2% médio, 3% grave. Está no [Anexo V do Decreto 3.048/1999](source:rat).",
       "note": "RAT efetivo: {{rat}}% × {{fap|number}} = **{{effective|percent}}** sobre a folha."
     },
     "fap": {
@@ -71,7 +71,7 @@
     },
     "payrollRelief": {
       "label": "A empresa está em um dos 17 setores da desoneração da folha",
-      "hint": "Neste ano, a contribuição patronal sobre a folha é de {{rate|percent}} (transição da Lei 14.973/2024){{thirteenth}}. A CPRB sobre a receita não entra neste cálculo.",
+      "hint": "Neste ano, a contribuição patronal sobre a folha é de {{rate|percent}} (transição da [Lei 14.973/2024](source:payrollRelief)){{thirteenth}}. A CPRB sobre a receita não entra neste cálculo.",
       "thirteenthNote": ", sem INSS patronal sobre o 13º"
     },
     "state": {
@@ -129,7 +129,7 @@
     },
     "hasAgreementFloor": {
       "label": "Informar manualmente o piso de uma convenção que não está na lista",
-      "hint": "A convenção coletiva prevalece sobre o piso estadual (LC 103/2000, art. 1º), mas não pode ficar abaixo de piso fixado em lei federal. A maioria das categorias tem convenção, então vale consultar."
+      "hint": "A convenção coletiva prevalece sobre o piso estadual ([LC 103/2000, art. 1º](source:statePisosLaw)), mas não pode ficar abaixo de piso fixado em lei federal. A maioria das categorias tem convenção, então vale consultar."
     },
     "agreementFloor": {
       "label": "Piso da convenção coletiva",
@@ -159,13 +159,13 @@
     },
     "insalubrity": {
       "label": "Atividade insalubre?",
-      "hint": "O grau não é escolha da empresa: ele vem do agente nocivo e do anexo da NR-15 que o classifica (a convenção coletiva pode definir o enquadramento, CLT, art. 611-A, XII), e é calculado sobre o salário mínimo ({{minimumWage|money}}), conforme a CLT, art. 192.",
+      "hint": "O grau não é escolha da empresa: ele vem do agente nocivo e do anexo da [NR-15](source:nr15) que o classifica (a convenção coletiva pode definir o enquadramento, [CLT, art. 611-A, XII](source:clt)), e é calculado sobre o salário mínimo ({{minimumWage|money}}), conforme a [CLT, art. 192](source:clt).",
       "option": "{{label}} ({{amount|money}})",
       "salaryBaseNote": "Nesta convenção, o adicional de insalubridade é calculado sobre o piso salarial ({{salary|money}}), e não sobre o salário mínimo."
     },
     "hazard": {
       "label": "Atividade perigosa?",
-      "hint": "A periculosidade não tem graus: é sempre {{rate|percent}} do salário base, sem somar gratificações, prêmios ou PLR (CLT, art. 193, §1º). Só se aplica às atividades listadas na NR-16.",
+      "hint": "A periculosidade não tem graus: é sempre {{rate|percent}} do salário base, sem somar gratificações, prêmios ou PLR ([CLT, art. 193, §1º](source:clt)). Só se aplica às atividades listadas na [NR-16](source:nr16).",
       "option": "{{label}} ({{amount|money}})"
     },
     "hourly": {
@@ -175,18 +175,18 @@
     },
     "overtimeHours": {
       "label": "Horas extras em dias úteis (por mês)",
-      "hint": "No máximo {{maxDailyHours}}h por dia (CLT, art. 59). Não conte as horas compensadas em banco de horas.",
+      "hint": "No máximo {{maxDailyHours}}h por dia ([CLT, art. 59](source:clt)). Não conte as horas compensadas em banco de horas.",
       "suffix": "h",
       "overLimit": "Acima do limite legal de cerca de {{max|number}}h por mês ({{maxDailyHours}}h por dia × {{days|number}} dias úteis), somando as extras diurnas e noturnas. Confira o número ou a compensação em banco de horas."
     },
     "overtimeRate": {
       "label": "Adicional da hora extra",
-      "hint": "Mínimo de {{minRate}}% (CF, art. 7º, XVI): {{hourValue|money}} por hora. A convenção pode exigir mais.",
+      "hint": "Mínimo de {{minRate}}% ([Constituição, art. 7º, XVI](source:constitution)): {{hourValue|money}} por hora. A convenção pode exigir mais.",
       "suffix": "%"
     },
     "restDayOvertimeHours": {
       "label": "Horas trabalhadas em domingos e feriados sem folga compensatória (por mês)",
-      "hint": "Pagas com {{rate}}% a mais: {{hourValue|money}} por hora (Lei 605/1949, art. 9º, e TST, Súmula 146).",
+      "hint": "Pagas com {{rate}}% a mais: {{hourValue|money}} por hora ([Lei 605/1949, art. 9º](source:dsr), e [TST, Súmula 146](source:tstSumulas)).",
       "suffix": "h",
       "overLimit": "O mês tem em média {{days|number}} domingos e feriados. Mais de {{max|number}}h por mês significa trabalhar quase todos eles além do limite diário. Confira o número."
     },
@@ -230,7 +230,7 @@
       "label": "Valor mensal do benefício",
       "hint": "Muitas convenções coletivas fixam um valor mínimo.",
       "prefix": "R$",
-      "cashNote": "Deve ser pago em cartão ou ticket. Pago em dinheiro, passa a integrar o salário (CLT, art. 457, §2º).",
+      "cashNote": "Deve ser pago em cartão ou ticket. Pago em dinheiro, passa a integrar o salário ([CLT, art. 457, §2º](source:clt)).",
       "costNote": "Custo para a empresa: {{companyCost|money}} por mês. Os mesmos {{value|money}} pagos como salário custariam {{asSalary|money}}."
     },
     "mealDiscountPct": {
@@ -238,7 +238,7 @@
       "hint": "No PAT, o desconto é de até {{max}}%.",
       "suffix": "%"
     },
-    "healthPlan": { "label": "Plano de saúde", "hint": "CLT, art. 458, §2º, IV", "prefix": "R$" },
+    "healthPlan": { "label": "Plano de saúde", "hint": "Não é salário nem paga encargos: [CLT, art. 458, §2º, IV](source:clt).", "prefix": "R$" },
     "employeeAgeBand": {
       "label": "Faixa etária do funcionário",
       "hint": "Usada só para mostrar a referência de preço do plano de saúde.",
@@ -264,8 +264,8 @@
     },
     "dentalPlan": { "label": "Plano odontológico", "prefix": "R$" },
     "lifeInsurance": { "label": "Seguro de vida", "hint": "Algumas convenções tornam obrigatório.", "prefix": "R$" },
-    "education": { "label": "Auxílio-educação", "hint": "CLT, art. 458, §2º, II", "prefix": "R$" },
-    "childcare": { "label": "Auxílio-creche (reembolso)", "hint": "Reembolso comprovado de creche ou pré-escola de filhos de até 5 anos e 11 meses, previsto em acordo individual ou coletivo e oferecido sem discriminação. Não paga INSS nem FGTS e não é renda tributável do empregado (Lei 14.457/2022).", "prefix": "R$" },
+    "education": { "label": "Auxílio-educação", "hint": "Não é salário nem paga encargos dentro do limite: [CLT, art. 458, §2º, II](source:clt), e [Lei 8.212/1991, art. 28, §9º, “t”](source:employerInss).", "prefix": "R$" },
+    "childcare": { "label": "Auxílio-creche (reembolso)", "hint": "Reembolso comprovado de creche ou pré-escola de filhos de até 5 anos e 11 meses, previsto em acordo individual ou coletivo e oferecido sem discriminação. Não paga INSS nem FGTS e não é renda tributável do empregado ([Lei 14.457/2022](source:childcareLaw)).", "prefix": "R$" },
     "pension": { "label": "Previdência privada", "hint": "Precisa ser oferecida a todos os empregados.", "prefix": "R$" },
     "otherBenefits": { "label": "Outros (home office, ajuda de custo etc.)", "prefix": "R$" },
     "plrYearly": {
@@ -294,9 +294,9 @@
       "hintWithValue": "O aviso seria de {{days}} dias ({{baseDays}} + {{daysPerYear}} por ano completo, até {{maxDays}}). Valor estimado de {{total|money}}: salário do aviso e 13º com FGTS, INSS patronal sobre o 13º e férias indenizadas (sem encargos). Distribuído pelo tempo de contrato, a reserva é de {{monthly|money}} por mês.",
       "hintPending": "O aviso seria de {{days}} dias ({{baseDays}} + {{daysPerYear}} por ano completo, até {{maxDays}}). O valor aparece quando o salário for definido."
     },
-    "sstYearly": { "label": "Exames ocupacionais e programas de SST (por ano)", "hint": "Exames admissional, periódico e demissional, PCMSO e PGR (NR-7 e NR-1).", "prefix": "R$" },
+    "sstYearly": { "label": "Exames ocupacionais e programas de SST (por ano)", "hint": "Exames admissional, periódico e demissional, PCMSO e PGR ([NR-7](source:nr7) e [NR-1](source:nrList)).", "prefix": "R$" },
     "accountingMonthly": { "label": "Contabilidade / processamento da folha (por mês)", "hint": "Valor que o contador cobra a mais por funcionário.", "prefix": "R$" },
-    "ppeMonthly": { "label": "Uniformes e EPIs (por mês)", "hint": "A empresa deve fornecer EPIs de graça (CLT, art. 166).", "prefix": "R$" },
+    "ppeMonthly": { "label": "Uniformes e EPIs (por mês)", "hint": "A empresa deve fornecer EPIs de graça ([CLT, art. 166](source:clt), e [NR-6](source:nr6)).", "prefix": "R$" },
     "hiringOneTime": { "label": "Custo único de contratação", "hint": "Anúncio, recrutamento, treinamento inicial. Aparece separado do custo mensal.", "prefix": "R$" },
     "leaveReserveEnabled": {
       "label": "Incluir reserva para licenças e afastamentos",
@@ -312,7 +312,7 @@
     },
     "leaveHealthReserve": {
       "label": "Incluir afastamentos por doença ({{rate|percent}} do salário)",
-      "hint": "A empresa paga os primeiros {{days}} dias de cada afastamento (Lei 8.213/1991, art. 60)."
+      "hint": "A empresa paga os primeiros {{days}} dias de cada afastamento ([Lei 8.213/1991, art. 60](source:sicknessLaw))."
     },
     "leaveReplacementMode": {
       "label": "Como será feita a cobertura das atividades?",

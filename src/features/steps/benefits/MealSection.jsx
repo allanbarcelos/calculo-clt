@@ -1,4 +1,4 @@
-import { Explainer, NumberField, Toggle } from '../../../components/ui';
+import { Explainer, NumberField, RichText, Toggle } from '../../../components/ui';
 import { useAgreementNotice } from '../../../hooks/useAgreementNotice.js';
 import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
@@ -24,7 +24,7 @@ export default function MealSection({ data, set, result }) {
           />
         </div>
       )}
-      <p className="hint">{t.text('mealValue', 'cashNote')}</p>
+      <p className="hint"><RichText text={t.text('mealValue', 'cashNote')} /></p>
       {data.mealEnabled && data.mealValue > 0 && (
         <p className="hint" aria-live="polite">
           {t.text('mealValue', 'costNote', {

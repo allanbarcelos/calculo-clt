@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 import FieldNotice from './FieldNotice.jsx';
+import RichText from './RichText.jsx';
 
 function formatInput(n) {
   if (!n) return '0';
@@ -31,7 +32,7 @@ export default function NumberField({ label, value, onChange, hint, error, notic
   return (
     <div className={`field${error ? ' field--error' : ''}`}>
       <label htmlFor={inputId}>{label}</label>
-      {hint && <p id={`${inputId}-hint`} className="hint">{hint}</p>}
+      {hint && <p id={`${inputId}-hint`} className="hint"><RichText text={hint} /></p>}
       <div className="input-affix">
         {prefix && <span aria-hidden="true">{prefix}</span>}
         <input

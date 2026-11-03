@@ -860,6 +860,13 @@
       "short": "Lei 14.457/2022",
       "org": "Câmara dos Deputados",
       "url": "https://www2.camara.leg.br/legin/fed/lei/2022/lei-14457-21-setembro-2022-793235-publicacaooriginal-166100-pl.html"
+    },
+    {
+      "id": "tstSumulas",
+      "title": "Súmulas do Tribunal Superior do Trabalho (TST)",
+      "short": "Súmulas do TST",
+      "org": "Tribunal Superior do Trabalho",
+      "url": "https://www.tst.jus.br/sumulas"
     }
   ],
   "groups": [
@@ -915,7 +922,8 @@
         "aepsContributors",
         "apprenticeLaw",
         "apprenticeDecree",
-        "apprenticeManual"
+        "apprenticeManual",
+        "tstSumulas"
       ]
     },
     {

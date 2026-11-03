@@ -119,6 +119,25 @@ for (const ref of health.references) {
   }
 }
 
+// Field texts (hints, notes, option descriptions) must link every legal citation to its source:
+// "[CLT, art. 458](source:clt)". Labels of <select> options cannot hold links and are skipped.
+const CITATION = /\b(art\.|arts\.|Lei n?º? ?\d|Lei Complementar|LC \d|Decreto|NR-\d|Súmula|ADPF|ADI \d|Portaria|Instrução Normativa|IN RFB)/;
+const LINK = /\[[^\]]+\]\(source:[\w-]+\)/g;
+function checkCitations(node, path) {
+  if (Array.isArray(node)) return node.forEach((n, i) => checkCitations(n, `${path}[${i}]`));
+  if (node && typeof node === 'object') {
+    return Object.entries(node).forEach(([k, v]) => {
+      if (['label', 'law', 'effective', 'title', 'short', 'name', 'source'].includes(k) || /^option/.test(k)) return;
+      checkCitations(v, `${path}.${k}`);
+    });
+  }
+  if (typeof node === 'string' && CITATION.test(node.replace(LINK, ''))) errors.push(`${path}: legal citation without a source link: "${node.slice(0, 90)}"`);
+}
+checkCitations(db['form-text.json'].fields, 'form-text.json fields');
+checkCitations(db['occupational-hazards.json'], 'occupational-hazards.json');
+checkCitations(db['wage-floors.json'].federalFloors, 'wage-floors.json federalFloors');
+checkCitations(db['tax-regimes.json'].regimes, 'tax-regimes.json regimes');
+
 const REQUIRED = {
   'federal-rates.json': ['minimumWage', 'fgts', 'inssEmployee', 'familyAllowance', 'irrf', 'workweek', 'overtime', 'nightWork', 'transportVoucher', 'mealVoucher', 'educationAid', 'notice', 'nationalHolidays', 'leaveStatistics', 'maternityLeave', 'paternityLeave', 'sicknessLeave'],
   'tax-regimes.json': ['regimes', 'rat', 'thirdParties', 'simplesRules', 'fpas'],

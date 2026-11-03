@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "siteName": "Cálculo CLT",
-  "lastReview": "2026-11-02",
+  "lastReview": "2026-11-03",
+  "developer": { "name": "Barcelos.Dev", "url": "https://barcelos.dev" },
+  "repository": "https://github.com/allanbarcelos/calculo-clt",
   "notes": "Every list item may carry validFrom/validTo (YYYY-MM-DD). The site picks the version in force on the reference date. Add a new item with a later validFrom to publish a new rule; set validTo to retire one."
 }

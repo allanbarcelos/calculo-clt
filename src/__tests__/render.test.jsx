@@ -38,6 +38,10 @@ describe('rendering', () => {
     const html = render(<App />);
     expect(html).toContain('Cálculo CLT');
     expect(html).toContain('Fontes oficiais');
+    expect(html).toContain('Developed by');
+    expect(html).toContain('href="https://barcelos.dev"');
+    expect(html).toContain('href="https://github.com/allanbarcelos/calculo-clt"');
+    expect(html).toContain('aria-label="Código-fonte no GitHub"');
     // A blank form has nothing to reset.
     expect(html).not.toContain('Nova simulação');
   });
@@ -92,6 +96,7 @@ describe('rendering', () => {
     const html = render(<Component data={input} set={() => {}} result={services.calculator.calculate(input)} errors={{ salary: 'erro' }} />);
     expect(html.length).toBeGreaterThan(300);
     expect(html).not.toContain('{{');
+    expect(html).not.toContain('](source:');
     expect(html).not.toContain('—</');
   });
 
@@ -162,6 +167,16 @@ describe('rendering', () => {
     const presumido = { ...input, regime: 'presumido' };
     expect(render(createElement(step('result'), { data: presumido, result: services.calculator.calculate(presumido) })))
       .toContain('E as vantagens tributárias no Lucro Presumido?');
+  });
+
+  it('links legal citations in field hints to their sources', () => {
+    const Company = STEPS.find((s) => s.id === 'company').Component;
+    const input = { ...data, regime: 'presumido' };
+    const html = render(<Company data={input} set={() => {}} result={services.calculator.calculate(input)} errors={{}} />);
+    const rat = services.repositories.sources.get('rat').url;
+    expect(html).toContain(`3% grave. Está no <a class="source-link" href="${rat}"`);
+    expect(html).toContain('>Anexo V do Decreto 3.048/1999<');
+    expect(html).not.toContain('](source:');
   });
 
   it('shows the ANS health plan reference once the age band is chosen', () => {
