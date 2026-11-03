@@ -60,6 +60,7 @@ export class FormDefaultsService {
       plrYearly: 0,
       includeTerminationReserve: true,
       includeNoticeReserve: false,
+      includeVacationCover: false,
       expectedTenureYears: 1,
       sstYearly: 0,
       accountingMonthly: 0,

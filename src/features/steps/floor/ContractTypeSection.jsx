@@ -4,12 +4,11 @@ import { useServices } from '../../../hooks/useServices.js';
 
 // Standard CLT contract or apprentice. Switching updates the workweek and the floor.
 export default function ContractTypeSection({ data, set }) {
-  const { contract, wageFloors, repositories } = useServices();
+  const { contract, wageFloors } = useServices();
   const t = useFormText();
   const rules = contract.apprentice();
   const field = t.field('contractType');
   const apprentice = contract.isApprentice(data);
-  const hours = repositories.rates.workweekDivisor(data.weeklyHours);
 
   return (
     <>
@@ -29,8 +28,8 @@ export default function ContractTypeSection({ data, set }) {
           id="apprenticeFloor"
           vars={{
             floor: contract.apprenticeFloor(data.weeklyHours),
-            hourly: repositories.rates.minimumWage() / rules.minimumWageDivisor,
-            hours,
+            hourly: contract.apprenticeHourly(),
+            hours: contract.apprenticeMonthlyHours(data.weeklyHours),
             weeklyHours: data.weeklyHours,
           }}
         />

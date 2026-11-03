@@ -27,6 +27,7 @@ export class RatesRepository extends VersionedRepository {
 
   workweekDivisor(hours) {
     const { options } = this.workweek();
-    return (options.find((o) => o.hours === hours) ?? options[0]).divisor;
+    // Hours outside the list: monthly hours = weekly hours ÷ 6 days × 30 days.
+    return options.find((o) => o.hours === hours)?.divisor ?? hours * 5;
   }
 }

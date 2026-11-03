@@ -122,7 +122,7 @@
       "maternityAwards": 707471,
       "averageContributors": 46956583,
       "femaleContributors": 20833965,
-      "sicknessAwards": 3582035,
+      "sicknessAwards": 3310176,
       "daysPerYear": 365.25,
       "source": "aepsMaternity"
     }
@@ -144,8 +144,10 @@
       "validFrom": "2026-01-01",
       "fgtsRate": 0.02,
       "minimumWageDivisor": 220,
+      "monthDays": 31,
       "defaultWeeklyHours": 30,
       "maxWeeklyHours": 36,
+      "maxWeeklyHoursWithSchooling": 40,
       "minAge": 14,
       "maxAge": 24,
       "maxYears": 2,
@@ -154,7 +156,7 @@
       "noticeOnTerm": false,
       "quotaMin": 0.05,
       "quotaMax": 0.15,
-      "source": "apprenticeLaw"
+      "source": "apprenticeManual"
     }
   ]
 }

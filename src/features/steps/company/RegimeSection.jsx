@@ -15,8 +15,8 @@ export default function RegimeSection({ data, set, result }) {
     simplesLimit: limitOf('simples'),
     presumidoLimit: limitOf('presumido'),
     fatorR: fatorR.threshold(),
-    yearlyPayroll: result.gross > 0 ? fatorR.yearlyPayroll(result.gross) : 0,
-    fatorRRevenue: result.gross > 0 ? fatorR.maxRevenueSupported(result.gross) : 0,
+    yearlyPayroll: result.gross > 0 ? fatorR.yearlyPayroll(result.gross, data) : 0,
+    fatorRRevenue: result.gross > 0 ? fatorR.maxRevenueSupported(result.gross, data) : 0,
   };
 
   return (

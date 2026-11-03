@@ -11,7 +11,8 @@ export default function PayStep(props) {
   const t = useFormText();
   const { contract } = useServices();
   const issues = contract.apprenticeIssues(props.data);
-  const issueVars = { weeklyHours: props.data.weeklyHours, maxWeeklyHours: contract.apprentice().maxWeeklyHours, hours: issues.includes('hours'), overtime: issues.includes('overtime'), risk: issues.includes('risk') };
+  const rules = contract.apprentice();
+  const issueVars = { weeklyHours: props.data.weeklyHours, maxWeeklyHours: rules.maxWeeklyHours, maxWithSchooling: rules.maxWeeklyHoursWithSchooling, hours: issues.includes('hours'), schooling: issues.includes('schooling'), overtime: issues.includes('overtime'), risk: issues.includes('risk') };
   return (
     <>
       <SalarySection {...props} />

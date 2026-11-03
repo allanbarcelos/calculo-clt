@@ -1,8 +1,10 @@
+import { RichText } from '../../../components/ui';
 import { useServices } from '../../../hooks/useServices.js';
 import { formatMoney } from '../../../lib/format.js';
 
 export default function RegimeComparisonTable({ data }) {
-  const comparison = useServices().comparison.compare(data);
+  const { comparison: comparisonService, repositories } = useServices();
+  const comparison = comparisonService.compare(data);
   const cheapest = Math.min(...comparison.map((c) => c.monthlyTotal));
 
   return (
@@ -28,6 +30,7 @@ export default function RegimeComparisonTable({ data }) {
           ))}
         </tbody>
       </table>
+      <p className="hint"><RichText text={repositories.content.label('regimeComparisonNote')} /></p>
     </section>
   );
 }

@@ -7,8 +7,8 @@
       "kind": "steps",
       "items": [
         { "title": "Convenção ou acordo.", "text": "A convenção coletiva (CCT) é negociada entre o sindicato dos empregados e o sindicato das empresas e vale para toda a categoria na sua base territorial. O acordo coletivo (ACT) é negociado entre o sindicato dos empregados e uma ou mais empresas específicas." },
-        { "title": "Qual se aplica.", "text": "Em regra, a da atividade principal da empresa e do município onde o empregado trabalha. Algumas profissões são categorias diferenciadas (motoristas, secretárias, técnicos de segurança, entre outras) e seguem convenção própria." },
-        { "title": "O acordo prevalece sobre a convenção.", "text": "Quando a empresa tem acordo coletivo, ele vale no lugar da convenção (CLT, art. 620)." },
+        { "title": "Qual se aplica.", "text": "Em regra, a da atividade principal da empresa e do município onde o empregado trabalha. Algumas profissões são categorias diferenciadas (motoristas, secretárias, técnicos de segurança, entre outras) e seguem a convenção própria da categoria, desde que o sindicato patronal da empresa a tenha assinado (TST, Súmula 374)." },
+        { "title": "O acordo prevalece sobre a convenção.", "text": "Quando a empresa tem acordo coletivo, as condições dele prevalecem sobre as da convenção (CLT, art. 620)." },
         { "title": "O que a convenção pode mudar.", "text": "Jornada, banco de horas, intervalo, PLR, plano de cargos e outros pontos podem ser negociados e prevalecem sobre a lei (CLT, art. 611-A). Direitos mínimos como salário mínimo, FGTS, 13º, férias com 1/3 e adicional de hora extra de 50% não podem ser reduzidos (CLT, art. 611-B)." },
         { "title": "Vigência de até 2 anos.", "text": "A convenção vale no máximo 2 anos e não continua valendo depois de vencida (CLT, art. 614, §3º). O reajuste acontece na data-base da categoria." },
         { "title": "Onde consultar.", "text": "Toda convenção e todo acordo devem ser registrados no Ministério do Trabalho. Consulte pelo [Sistema Mediador](source:mediador), filtrando pelo estado, município e categoria." }
@@ -108,7 +108,7 @@
           ]
         },
         { "title": "13º salário.", "text": "Para as atividades desoneradas, não há INSS patronal sobre o 13º durante a transição. RAT, terceiros e FGTS continuam normais." },
-        { "title": "Vale a pena?", "text": "Depende da relação entre folha e faturamento. Como a CPRB é sobre a receita, simule as duas partes com seu contador." }
+        { "title": "Vale a pena?", "text": "Depende da relação entre folha e faturamento. Como a CPRB é sobre a receita, simule as duas partes com seu contador. Atenção: a empresa precisa manter, em média, pelo menos 75% do número de empregados do ano anterior (Lei 14.973/2024, art. 4º), e quem tem atividades desoneradas e não desoneradas aplica a redução de forma proporcional." }
       ],
       "sources": [
         { "id": "payrollRelief", "label": "Lei 14.973/2024" },
@@ -125,7 +125,7 @@
         { "title": "Agente e anexo da NR-15.", "text": "Cada agente nocivo está em um anexo da NR-15, e o anexo fixa o grau. Alguns agentes exigem medição acima de um limite de tolerância. Outros bastam a atividade (veja a tabela)." },
         { "title": "Vários agentes não se somam.", "text": "Paga-se só o de maior grau (NR-15, item 15.3)." },
         { "title": "O EPI pode eliminar o adicional.", "text": "Se o equipamento fornecido neutraliza o agente, deixa de existir insalubridade (CLT, art. 191, e NR-15, item 15.4)." },
-        { "title": "Convenção coletiva.", "text": "Algumas convenções usam o piso da categoria como base no lugar do salário mínimo. Confira a sua." }
+        { "title": "Convenção coletiva.", "text": "Algumas convenções definem o grau de insalubridade (CLT, art. 611-A, XII) ou usam o piso da categoria como base no lugar do salário mínimo. Confira a sua." }
       ],
       "table": {
         "caption": "Anexos da NR-15 e grau de cada agente",
@@ -180,8 +180,8 @@
           { "annex": "2", "agent": "Inflamáveis", "examples": "Frentistas e abastecimento de veículos, aeronaves e embarcações; carga e descarga de combustíveis; tanques e depósitos de inflamáveis." },
           { "annex": "3", "agent": "Roubos ou outras violências físicas", "examples": "Vigilantes e profissionais de segurança pessoal ou patrimonial, inclusive transporte de valores." },
           { "annex": "4", "agent": "Energia elétrica", "examples": "Trabalho em instalações ou equipamentos energizados e no sistema elétrico de potência (eletricistas, redes de distribuição, subestações)." },
-          { "annex": "5", "agent": "Motocicleta", "examples": "Trabalho com deslocamento de motocicleta em vias públicas (motoboys, mototaxistas, entregadores, técnicos que visitam clientes de moto). Não vale para o trajeto casa–trabalho nem para áreas privadas. Novo texto em vigor desde 03/04/2026." },
-          { "annex": "6", "agent": "Agentes de trânsito", "examples": "Agentes das autoridades de trânsito expostos a colisões, atropelamentos ou violências (Lei 14.684/2023, regulamentada em 2025)." },
+          { "annex": "5", "agent": "Motocicleta", "examples": "Trabalho com deslocamento de motocicleta em vias públicas (motoboys, mototaxistas, entregadores, técnicos que visitam clientes de moto). Não vale para o trajeto casa–trabalho nem para áreas privadas. Novo texto em vigor desde 03/04/2026; há questionamentos judiciais em curso." },
+          { "annex": "6", "agent": "Agentes de trânsito", "examples": "Agentes das autoridades de trânsito expostos a colisões, atropelamentos ou violências (Lei 14.684/2023 e Anexo VI da NR-16, Portaria MTE 1.411/2025)." },
           { "annex": "Radiações", "agent": "Radiações ionizantes ou substâncias radioativas", "examples": "Operação de equipamentos de raios X fixos, radioterapia, medicina nuclear, uso industrial de fontes radioativas. Não se aplica a áreas onde só se usa raio X móvel." }
         ]
       },
@@ -202,10 +202,10 @@
         { "title": "Limite.", "text": "No máximo {{maxDailyHours|number}} horas extras por dia, por acordo individual ou coletivo (CLT, art. 59). Acima disso, só em força maior ou serviço inadiável (art. 61)." },
         { "title": "Valor.", "text": "Hora normal = salário ÷ divisor (220 para 44h semanais). Em dia útil, a hora extra vale ao menos {{minRate|number}}% a mais. Em domingo ou feriado sem folga compensatória, {{restDayRate|number}}% a mais." },
         { "title": "Banco de horas evita o adicional.", "text": "Se a hora extra for compensada com folga, não há pagamento: no mesmo mês por acordo individual, em até 6 meses por acordo individual escrito, ou em até 1 ano por acordo ou convenção coletiva (CLT, art. 59, §§ 2º, 5º e 6º)." },
-        { "title": "Reflexos.", "text": "Horas extras habituais aumentam o DSR, o 13º, as férias, o FGTS e o aviso prévio. Por isso o cálculo inclui o reflexo no DSR e as provisões. O DSR usa a média do ano: em {{year}}, {{restDays}} dias de descanso remunerado (domingos e feriados nacionais; feriados estaduais e municipais não entram) ÷ {{workingDays}} dias úteis = **{{dsrFactor|percent}}** sobre extras e adicional noturno." },
-        { "title": "Quem não tem hora extra.", "text": "Gerentes com cargo de confiança e gratificação de ao menos 40%, trabalho externo sem controle de horário e teletrabalho por produção ou tarefa (CLT, art. 62)." },
-        { "title": "Controle de ponto.", "text": "Obrigatório para empresas com mais de 20 empregados (CLT, art. 74, §2º). Ele é a prova das horas trabalhadas." },
-        { "title": "Intervalo de almoço não concedido.", "text": "O tempo suprimido é pago com acréscimo de 50% (CLT, art. 71, §4º)." }
+        { "title": "Reflexos.", "text": "Horas extras habituais aumentam o DSR, o 13º, as férias, o FGTS e o aviso prévio. Por isso o cálculo inclui o reflexo no DSR e as provisões. O DSR usa a média do ano: em {{year}}, {{restDays}} dias de descanso remunerado (domingos e feriados nacionais; feriados estaduais e municipais também são descanso remunerado, mas não entram nesta média) ÷ {{workingDays}} dias úteis = **{{dsrFactor|percent}}** sobre extras e adicional noturno. Na folha, o DSR é calculado mês a mês; a média do ano serve para estimar o custo." },
+        { "title": "Quem não tem hora extra.", "text": "Gerentes com cargo de confiança e gratificação de ao menos 40%, trabalho externo incompatível com controle de horário (com essa condição anotada na carteira e no registro de empregados) e teletrabalho por produção ou tarefa (CLT, art. 62)." },
+        { "title": "Controle de ponto.", "text": "Obrigatório em cada estabelecimento com mais de 20 empregados (CLT, art. 74, §2º). Ele é a prova das horas trabalhadas." },
+        { "title": "Intervalo de almoço não concedido.", "text": "O tempo suprimido é pago com acréscimo de 50%, como indenização, sem reflexos (CLT, art. 71, §4º)." }
       ],
       "sources": [
         { "id": "clt", "label": "CLT, arts. 58 a 75" },
@@ -226,7 +226,7 @@
         { "title": "Hora extra à noite.", "text": "Os adicionais se somam: a hora extra noturna é calculada sobre a hora já acrescida do adicional noturno (TST, OJ 97 da SDI-1). Exemplo urbano com hora de R$ 10,00: R$ 10,00 × 1,2 × 1,5 = R$ 18,00 por hora noturna." },
         { "title": "Reflexos.", "text": "Pago com habitualidade, o adicional noturno integra o salário para todos os efeitos: DSR, 13º, férias e FGTS (TST, Súmula 60, I)." },
         { "title": "Menores de 18 anos.", "text": "É proibido o trabalho noturno (Constituição, art. 7º, XXXIII)." },
-        { "title": "Escala 12x36.", "text": "Permitida por acordo ou convenção (CLT, art. 59-A). O adicional noturno continua devido nas horas noturnas." }
+        { "title": "Escala 12x36.", "text": "Permitida por acordo individual escrito, acordo ou convenção coletiva (CLT, art. 59-A). O adicional noturno é devido das 22h às 5h, mas a lei considera compensados os feriados e a prorrogação após as 5h (art. 59-A, parágrafo único), salvo regra mais favorável na convenção." }
       ],
       "sources": [
         { "id": "clt", "label": "CLT, art. 73" },
@@ -281,11 +281,11 @@
       "title": "Quando cada benefício fica livre de encargos",
       "kind": "terms",
       "items": [
-        { "title": "Plano de saúde e odontológico", "text": "Não é salário, seja plano conveniado, serviço próprio ou reembolso de despesas médicas, remédios e óculos (CLT, art. 458, §2º, IV). A empresa pode dividir a mensalidade com o funcionário ou cobrar coparticipação. Se o funcionário paga parte da mensalidade, ao ser demitido sem justa causa ele pode continuar no plano por um tempo, pagando o valor integral (Lei 9.656/1998, art. 30)." },
-        { "title": "Seguro de vida", "text": "Seguro de vida e de acidentes pessoais não é salário (CLT, art. 458, §2º, V). Muitas convenções coletivas o tornam obrigatório e fixam a cobertura mínima. Para evitar questionamento da Receita, ofereça a todos os empregados." },
+        { "title": "Plano de saúde e odontológico", "text": "Não é salário, seja plano conveniado, serviço próprio ou reembolso de despesas médicas, remédios e óculos (CLT, art. 458, §2º, IV e §5º; Lei 8.212/1991, art. 28, §9º, “q”). A empresa pode dividir a mensalidade com o funcionário ou cobrar coparticipação. Se o funcionário paga parte da mensalidade, ao ser demitido sem justa causa ele pode continuar no plano por um tempo, pagando o valor integral (Lei 9.656/1998, art. 30)." },
+        { "title": "Seguro de vida", "text": "Seguro de vida e de acidentes pessoais não é salário (CLT, art. 458, §2º, V). Muitas convenções coletivas o tornam obrigatório e fixam a cobertura mínima. Para não pagar INSS, deve estar previsto em acordo ou convenção coletiva e disponível a todos os empregados (Decreto 3.048/1999, art. 214, §9º, XXV)." },
         { "title": "Auxílio-educação", "text": "Mensalidades, matrícula, livros e material didático não são salário (CLT, art. 458, §2º, II). Para ficar também livre de INSS, deve ser para educação básica do funcionário ou dos dependentes, ou curso profissional ligado à atividade da empresa. Não pode substituir parte do salário e tem limite mensal: aqui, {{educationLimit|money}}. Graduação e pós-graduação têm tratamento discutido: confirme com seu contador." },
         { "title": "Previdência privada", "text": "O que a empresa paga a um plano de previdência complementar, aberto ou fechado, não é salário, desde que o plano esteja disponível a todos os empregados e dirigentes (Lei 8.212/1991, art. 28, §9º, “p”). No Lucro Real, a empresa deduz até 20% da folha de salários." },
-        { "title": "Auxílio-creche", "text": "O reembolso de despesas comprovadas com creche, pré-escola ou babá de filhos de até 5 anos e 11 meses não é salário e não paga INSS nem FGTS (Lei 14.457/2022 e Lei 8.212/1991, art. 28, §9º, “s”). Empresas com 30 ou mais empregadas acima de 16 anos devem ter local para a guarda dos filhos na fase de amamentação ou oferecer o reembolso (CLT, art. 389, §1º)." },
+        { "title": "Auxílio-creche", "text": "O reembolso de despesas comprovadas com creche ou pré-escola (ou outra modalidade admitida em regulamento) de filhos de até 5 anos e 11 meses, previsto em acordo individual, acordo coletivo ou convenção e oferecido sem discriminação, não é salário e não paga INSS nem FGTS (Lei 14.457/2022 e Lei 8.212/1991, art. 28, §9º, “s”). Empresas com 30 ou mais empregadas acima de 16 anos devem ter local para a guarda dos filhos na fase de amamentação ou oferecer o reembolso (CLT, art. 389, §1º)." },
         { "title": "Ajuda de custo e home office", "text": "Ajuda de custo para cobrir despesas de trabalho, como internet e energia no home office, não é salário mesmo se paga todo mês (CLT, art. 457, §2º). Deve corresponder a gastos reais. Se for só um complemento de salário, a Justiça pode considerá-la salário." }
       ],
       "sources": [
@@ -320,13 +320,13 @@
       "title": "Quando a empresa paga a multa do FGTS e outros custos de demissão",
       "kind": "steps",
       "items": [
-        { "title": "Demissão sem justa causa: 40%.", "text": "A empresa paga ao funcionário 40% de todo o FGTS depositado durante o contrato, corrigido (Lei 8.036/1990, art. 18, §1º)." },
+        { "title": "Demissão sem justa causa: 40%.", "text": "A empresa deposita na conta do FGTS do funcionário 40% de todo o FGTS depositado durante o contrato, corrigido (Lei 8.036/1990, art. 18, §1º)." },
         { "title": "Acordo entre as partes: 20%.", "text": "Na demissão por acordo, a multa cai pela metade e o aviso prévio indenizado também (CLT, art. 484-A). O funcionário saca 80% do FGTS e não recebe seguro-desemprego." },
         { "title": "Culpa recíproca ou força maior: 20%", "text": "(Lei 8.036/1990, art. 18, §2º)." },
         { "title": "Pedido de demissão ou justa causa: sem multa.", "text": "" },
-        { "title": "Aviso prévio.", "text": "São {{baseDays|number}} dias, mais {{daysPerYear|number}} dias por ano completo de trabalho, até {{maxDays|number}} dias (Lei 12.506/2011). Se a empresa dispensa o funcionário de trabalhar o aviso, paga esse período como indenização. O período indenizado conta como tempo de serviço e gera 13º e férias proporcionais. O aviso indenizado tem FGTS, mas não INSS. O 13º do aviso tem FGTS e INSS. As férias indenizadas não têm nenhum dos dois (Lei 8.212/1991, art. 28, §9º). Na demissão por acordo, o aviso indenizado cai pela metade. Se o funcionário trabalha o aviso, não há custo extra além do salário normal." },
-        { "title": "O que já está provisionado.", "text": "13º e férias proporcionais já são reservados todo mês nas provisões. Na rescisão entram ainda o saldo de salário e o FGTS do mês." },
-        { "title": "Prazo.", "text": "As verbas da rescisão devem ser pagas em até 10 dias após o fim do contrato (CLT, art. 477, §6º). Atrasar gera multa de um salário." }
+        { "title": "Aviso prévio.", "text": "São {{baseDays|number}} dias, mais {{daysPerYear|number}} dias por ano completo de trabalho, até {{maxDays|number}} dias (Lei 12.506/2011). Se a empresa dispensa o funcionário de trabalhar o aviso, paga esse período como indenização. O período indenizado conta como tempo de serviço e gera 13º e férias proporcionais. O aviso indenizado tem FGTS (TST, Súmula 305), mas não INSS (STJ, Tema 478). O 13º do aviso tem FGTS e INSS. As férias indenizadas não têm nenhum dos dois (Lei 8.212/1991, art. 28, §9º). Na demissão por acordo, o aviso indenizado cai pela metade. Se o funcionário trabalha o aviso, não há custo extra além do salário normal." },
+        { "title": "O que já está provisionado.", "text": "13º e 1/3 de férias já são reservados todo mês nas provisões. As férias proporcionais pagas na rescisão entram na reserva de rescisão, se ela estiver marcada. Na rescisão entram ainda o saldo de salário e o FGTS do mês." },
+        { "title": "Prazo.", "text": "As verbas da rescisão devem ser pagas em até 10 dias após o fim do contrato (CLT, art. 477, §6º). Atrasar gera multa de um salário a favor do funcionário, além de multa administrativa (CLT, art. 477, §8º)." }
       ],
       "sources": [
         { "id": "fgts", "label": "Lei 8.036/1990, art. 18" },
@@ -340,16 +340,16 @@
       "title": "O que é obrigatório em saúde e segurança do trabalho (SST)",
       "kind": "steps",
       "items": [
-        { "title": "PGR: Programa de Gerenciamento de Riscos (NR-1).", "text": "Documento que identifica os riscos de cada função e as medidas de prevenção. Microempresas e empresas de pequeno porte de grau de risco 1 ou 2, sem exposição a agentes físicos, químicos ou biológicos, podem ficar dispensadas de elaborá-lo, mas precisam declarar essa situação." },
+        { "title": "PGR: Programa de Gerenciamento de Riscos (NR-1).", "text": "Documento que identifica os riscos de cada função, inclusive os psicossociais (exigidos desde 26/05/2026), e as medidas de prevenção. MEI, microempresas e empresas de pequeno porte de grau de risco 1 ou 2, sem exposição a agentes físicos, químicos ou biológicos, podem ficar dispensadas do PGR e do PCMSO se fizerem a declaração digital, mas continuam obrigadas aos exames e ao ASO (NR-1, item 1.8.6)." },
         { "title": "PCMSO: Programa de Controle Médico de Saúde Ocupacional (NR-7).", "text": "Define os exames de cada função, com base nos riscos do PGR, e é coordenado por um médico do trabalho." },
         {
           "title": "Exames ocupacionais.",
           "text": "Cada exame gera um Atestado de Saúde Ocupacional (ASO):",
           "items": [
             { "text": "admissional, antes de o funcionário começar a trabalhar;" },
-            { "text": "periódico, em geral a cada 1 ou 2 anos, conforme o risco e a idade;" },
-            { "text": "de retorno ao trabalho, após afastamento de 30 dias ou mais;" },
-            { "text": "de mudança de risco, quando o funcionário muda de função;" },
+            { "text": "periódico: anual (ou em prazo menor definido pelo médico) para quem está exposto a riscos do PGR ou tem doença crônica que aumente a suscetibilidade; a cada 2 anos para os demais (NR-7, item 7.5.8);" },
+            { "text": "de retorno ao trabalho, após afastamento de 30 dias ou mais por doença ou acidente;" },
+            { "text": "de mudança de risco, antes de o funcionário passar a ter exposição diferente (nova função ou novo ambiente);" },
             { "text": "demissional." }
           ]
         },
@@ -369,7 +369,7 @@
       "items": [
         { "title": "Admissão no eSocial.", "text": "O funcionário deve ser registrado no eSocial antes de começar a trabalhar. Esse registro substitui a anotação na carteira de trabalho, que agora é digital." },
         { "title": "Folha mensal.", "text": "Cálculo de salário, adicionais, faltas, descontos de INSS e IR, holerite e envio dos eventos de remuneração ao eSocial." },
-        { "title": "Guias.", "text": "O INSS e o IRRF são pagos por DARF gerado na DCTFWeb. O FGTS é pago por guia gerada no FGTS Digital, que desde março de 2024 é o único canal da maioria dos empregadores. O MEI paga o FGTS pela guia do eSocial." },
+        { "title": "Guias.", "text": "O INSS e o IRRF são pagos por DARF gerado na DCTFWeb. O FGTS é pago por guia gerada no FGTS Digital, que desde março de 2024 é o único canal da maioria dos empregadores. O MEI paga o FGTS mensal pela guia do eSocial (DAE); o FGTS da rescisão sai pela guia do FGTS Digital." },
         { "title": "Férias, 13º e rescisões.", "text": "Cálculo, recibos, prazos e envio dos eventos." },
         { "title": "Prazos.", "text": "O salário deve ser pago até o 5º dia útil do mês seguinte (CLT, art. 459, §1º). O FGTS e o INSS vencem no dia 20 do mês seguinte, antecipado se não for dia útil." }
       ],
@@ -387,7 +387,7 @@
       "items": [
         { "title": "EPI é sempre de graça.", "text": "A empresa deve fornecer o equipamento de proteção adequado ao risco, em perfeito estado, sem cobrar nada (CLT, art. 166, e NR-6)." },
         { "title": "Com Certificado de Aprovação (CA).", "text": "Só vale EPI com CA emitido pelo Ministério do Trabalho." },
-        { "title": "Treinar, registrar e fiscalizar.", "text": "A empresa deve orientar sobre o uso, registrar a entrega (ficha de EPI) e exigir que o funcionário use. Recusar o uso sem justificativa é falta grave." },
+        { "title": "Treinar, registrar e fiscalizar.", "text": "A empresa deve orientar sobre o uso, registrar a entrega (ficha de EPI) e exigir que o funcionário use. Recusar o uso sem justificativa é ato faltoso e pode levar a punição, inclusive justa causa (CLT, art. 158, parágrafo único, “b”)." },
         { "title": "Uniforme exigido pela empresa é custo dela.", "text": "A empresa pode definir o padrão de vestimenta (CLT, art. 456-A). A lavagem é do funcionário, salvo quando exige processo especial." },
         { "title": "Não é salário.", "text": "Uniformes e equipamentos fornecidos para o trabalho não são salário e não geram encargos (CLT, art. 458, §2º, I)." }
       ],
@@ -406,7 +406,7 @@
         { "title": "Exame admissional.", "text": "Obrigatório antes do início (NR-7). Se já estiver no valor anual de SST acima, não repita aqui." },
         { "title": "Treinamento inicial.", "text": "Integração e os treinamentos de NR obrigatórios para a função." },
         { "title": "Equipamentos.", "text": "Computador, ferramentas, EPIs e uniformes iniciais." },
-        { "title": "Contrato de experiência.", "text": "Pode durar até 90 dias, com uma prorrogação dentro desse prazo (CLT, art. 445). Se terminar no prazo, não há aviso prévio nem multa do FGTS." }
+        { "title": "Contrato de experiência.", "text": "Pode durar até 90 dias (CLT, art. 445, parágrafo único), com uma única prorrogação dentro desse prazo (art. 451). Se terminar no prazo, não há aviso prévio nem multa do FGTS." }
       ],
       "sources": [
         { "id": "clt", "label": "CLT, arts. 443 e 445" },
@@ -420,10 +420,10 @@
       "kind": "steps",
       "items": [
         { "title": "Só no Lucro Real.", "text": "No Simples Nacional, no MEI e no Lucro Presumido, o imposto é calculado sobre a receita, e o custo do funcionário não o reduz. No Lucro Real, o imposto é sobre o lucro, e salários, encargos e benefícios são despesas dedutíveis." },
-        { "title": "Dedução no IRPJ e na CSLL.", "text": "Cada R$ 100 gastos com o funcionário economizam até R$ 34 de imposto: 15% de IRPJ, 10% de adicional (sobre o lucro acima de R$ 20 mil por mês) e 9% de CSLL. Só há economia se a empresa tiver lucro tributável." },
-        { "title": "PAT.", "text": "A alimentação dada pelo Programa de Alimentação do Trabalhador não paga encargos e, para empresas inscritas no PAT, dá um desconto extra no IRPJ: 15% do gasto, reduzido em 10% desde 2026 (13,5%), limitado a uma parte do IRPJ devido. A forma exata de aplicar o corte de 2026 ainda é discutida: confirme com seu contador." },
-        { "title": "Créditos de PIS/COFINS.", "text": "Empresas de limpeza, conservação e manutenção no regime não cumulativo descontam 9,25% sobre vale-transporte, vale-refeição/alimentação e uniformes dos funcionários dessas atividades. A partir de 2027 a CBS substitui o PIS e a COFINS, com regras próprias de crédito." },
-        { "title": "Empresa Cidadã.", "text": "A remuneração dos dias extras de licença-maternidade e paternidade pode ser deduzida do IRPJ." },
+        { "title": "Dedução no IRPJ e na CSLL.", "text": "Cada R$ 100 gastos com o funcionário economizam até R$ 34 de imposto: 15% de IRPJ, 10% de adicional (sobre o lucro acima de R$ 20 mil por mês) e 9% de CSLL. Só há economia se a empresa tiver lucro tributável. As reservas para multa do FGTS, aviso prévio e licenças só são dedutíveis quando pagas: antes disso, a economia é só adiada." },
+        { "title": "PAT.", "text": "Vale-refeição ou alimentação que não é pago em dinheiro já não paga encargos, com ou sem PAT. O PAT serve para o incentivo no IRPJ, que exige Lucro Real, inscrição no programa e benefício fornecido por uma modalidade do PAT (cartão de empresa credenciada, refeitório próprio etc.). Desde 2026 o desconto é de 13,5% do gasto (15% menos o corte de 10% da LC 224/2025), limitado a 3,6% do IRPJ à alíquota de 15%; o adicional de 10% não pode ser reduzido (perguntas e respostas da Receita sobre a LC 224/2025)." },
+        { "title": "Créditos de PIS/COFINS.", "text": "Empresas de limpeza, conservação e manutenção no regime não cumulativo descontam 9,25% sobre vale-transporte, vale-refeição/alimentação e uniformes dos funcionários dessas atividades. EPI exigido por lei também gera crédito para qualquer empresa do regime não cumulativo, como insumo (STJ, Tema 779). A partir de 2027 a CBS substitui o PIS e a COFINS, com crédito sobre vários benefícios para mais empresas; este cálculo ainda não inclui a CBS." },
+        { "title": "Empresa Cidadã.", "text": "A remuneração dos dias extras de licença-maternidade e paternidade pode ser deduzida do IRPJ devido (90% dela desde 2026, pela LC 224/2025). Esse valor não pode ser, ao mesmo tempo, despesa dedutível, e por isso sai da dedução de IRPJ acima. Sem IRPJ a pagar (prejuízo), não há dedução." },
         { "title": "Auxílio-creche.", "text": "O reembolso-creche para filhos de até 5 anos e 11 meses não paga INSS nem FGTS (Lei 14.457/2022)." },
         { "title": "Aprendiz.", "text": "Em qualquer regime, o contrato de aprendiz tem FGTS de 2% em vez de 8% e não gera multa do FGTS nem aviso prévio no fim do prazo." }
       ],
@@ -466,9 +466,9 @@
       "items": [
         { "title": "Frequência de licença-maternidade/adoção.", "text": "Em {{year}}, o AEPS registrou {{maternityAwards|number}} salários-maternidade pagos por empresas, para {{averageContributors|number}} empregados (média mensal, exceto domésticos): {{maternityRate|percent}} ao ano na média geral. Como {{femaleShare|percent}} desses empregados são mulheres, a frequência para uma funcionária é {{femaleRate|percent}} ao ano." },
         { "title": "Frequência de licença-paternidade.", "text": "Não há estatística oficial de licenças-paternidade. Supomos o mesmo número de nascimentos e adoções entre os homens empregados: {{maleRate|percent}} ao ano. Com sexo ainda indefinido, usamos a média geral para as duas licenças." },
-        { "title": "Afastamentos por doença.", "text": "O AEPS registrou {{sicknessAwards|number}} concessões de auxílio por incapacidade temporária ({{sicknessRate|percent}} ao ano por contribuinte). Cada concessão pressupõe que a empresa já pagou os primeiros 15 dias de afastamento. Afastamentos mais curtos, que não chegam ao INSS, não estão nessa estatística." },
-        { "title": "Custo de cobrir a ausência.", "text": "Frequência × dias de licença ÷ {{daysPerYear|number}} × custo mensal de quem cobre a ausência. Na contratação externa, esse custo é o de um temporário com salário, encargos, 13º, férias e os mesmos benefícios. Na cobertura interna, é só o abono informado, com encargos e provisões. Custos de agência e treinamento são cobrados a cada contratação e divididos por 12 meses." },
-        { "title": "Reembolso do INSS.", "text": "A empresa paga o salário-maternidade (e, quando a lei prevê, o salário-paternidade) e o recupera do INSS. Como esse salário já está no custo-base, o valor recuperado aparece como desconto. Os dias extras da Empresa Cidadã são pagos pela empresa e não são reembolsados." }
+        { "title": "Afastamentos por doença.", "text": "O AEPS registrou {{sicknessAwards|number}} concessões urbanas de auxílio por incapacidade temporária ({{sicknessRate|percent}} ao ano por empregado). Para empregados, cada concessão pressupõe que a empresa já pagou os primeiros 15 dias. Como a estatística também inclui contribuintes que não são empregados, a taxa tende a ser um limite superior. Afastamentos curtos, que não chegam ao INSS, não estão nela. Depois do 15º dia o INSS paga o benefício, e o salário que a empresa deixa de pagar compensa a cobertura." },
+        { "title": "Custo de cobrir a ausência.", "text": "Frequência × dias de licença ÷ {{daysPerYear|number}} × custo mensal de quem cobre a ausência. Na contratação externa, esse custo é o de um temporário com salário, encargos, 13º, férias e os mesmos benefícios. Na cobertura interna, é só o abono informado, com encargos e provisões. Custos de agência e treinamento entram só na licença-maternidade (ninguém contrata um temporário por poucos dias de paternidade ou de doença) e são divididos por 12 meses." },
+        { "title": "Reembolso do INSS.", "text": "O salário-maternidade (e, a partir de 2027, o salário-paternidade) é pago pelo INSS: a empresa adianta e compensa nas contribuições, e no MEI o INSS paga direto ao empregado. Como esse salário já está no custo-base, ele aparece como desconto, junto com o INSS patronal, que não incide sobre o salário-maternidade (STF, Tema 72). O FGTS continua devido durante a licença. Os dias extras da Empresa Cidadã são pagos pela empresa e não são reembolsados." }
       ],
       "sources": [
         { "id": "aepsMaternity", "label": "AEPS, salário-maternidade" },
@@ -483,15 +483,15 @@
     }
   ],
   "callouts": [
-    { "id": "meiRules", "tone": "warning", "title": "Regras do MEI", "text": "O MEI pode ter apenas **1 empregado**, que deve receber o salário mínimo ou o piso da categoria. O faturamento anual é limitado a {{meiLimit|money}}. Base legal: [LC nº 123/2006, art. 18-C](source:simples)." },
+    { "id": "meiRules", "tone": "warning", "title": "Regras do MEI", "text": "O MEI pode ter apenas **1 empregado**, que deve receber o salário mínimo ou o piso da categoria. O faturamento anual é limitado a {{meiLimit|money}}. Base legal: [LC nº 123/2006, arts. 18-A, §1º, e 18-C](source:simples)." },
     { "id": "simplesCpp", "tone": "info", "title": "Por que o INSS patronal não aparece?", "text": "Nos Anexos I, II, III e V, a Contribuição Patronal Previdenciária já é paga dentro do DAS, que incide sobre o faturamento. Aqui calculamos apenas o custo que nasce da folha. Base legal: [LC nº 123/2006, art. 13](source:simples)." },
     { "id": "stateFloor", "tone": "info", "title": "Piso estadual: {{law}}", "text": "{{effective}}. Fonte: [{{sourceTitle}}](source:{{source}})" },
     { "id": "stateFloorOutdated", "tone": "warning", "title": "Piso estadual: {{law}}", "text": "{{effective}}. Fonte: [{{sourceTitle}}](source:{{source}}). Algumas faixas estão abaixo do salário mínimo nacional ({{minimumWage|money}}). Nesses casos vale o mínimo nacional." },
-    { "id": "noStateFloor", "tone": "info", "title": "Sem piso estadual", "text": "Este estado não tem lei de piso regional. O mínimo é o salário mínimo nacional de {{minimumWage|money}} ([Decreto 12.797/2025](source:minWage)), a menos que a convenção coletiva da categoria defina um valor maior." },
+    { "id": "noStateFloor", "tone": "info", "title": "Sem piso estadual", "text": "Este estado não tem lei de piso regional. O mínimo é o salário mínimo nacional de {{minimumWage|money}} ([Decreto 12.797/2025](source:minWage)), a menos que lei federal (como a dos engenheiros ou da enfermagem) ou a convenção coletiva da categoria defina um valor maior." },
     { "id": "meiSalaryCap", "tone": "warning", "title": "Atenção, MEI", "text": "O empregado do MEI deve receber no máximo o salário mínimo ou o piso da categoria ({{meiCap|money}})." },
     { "id": "insalubrityHazardOverlap", "tone": "warning", "title": "Os adicionais não se acumulam", "text": "Insalubridade ({{insalubrity|money}}) e periculosidade ({{hazard|money}}) não podem ser pagas juntas: o empregado fica com a mais vantajosa (CLT, art. 193, §2º, e TST, IRR 239-55.2011.5.03.0077). O cálculo considera só **{{kept}}**." },
     { "id": "benefitsNoCharges", "tone": "success", "title": "Benefícios não pagam encargos", "text": "Estes benefícios **não têm natureza salarial**: não pagam INSS nem FGTS e não entram no 13º nem nas férias. Para valorizar o funcionário, cada R$ 1,00 dado como benefício custa R$ 1,00. Dado como salário, custa {{costPerReal|money}}." },
-    { "id": "educationOverLimit", "tone": "warning", "title": "Auxílio-educação acima do limite", "text": "Para ficar livre de INSS, o auxílio-educação deve ser de no máximo {{educationLimit|money}} por mês para este funcionário: o maior valor entre 5% da remuneração e 1,5 salário mínimo (Lei 8.212/1991, art. 28, §9º, “t”). O que passar disso paga INSS patronal, RAT, terceiros e FGTS, e o cálculo já inclui esses encargos." },
+    { "id": "educationOverLimit", "tone": "warning", "title": "Auxílio-educação acima do limite", "text": "Para ficar livre de INSS, o auxílio-educação deve ser de no máximo {{educationLimit|money}} por mês para este funcionário: o maior valor entre 5% da remuneração e 1,5 salário mínimo (Lei 8.212/1991, art. 28, §9º, “t”). O cálculo cobra INSS patronal, RAT, terceiros e FGTS sobre o que passar do limite. Atenção: a Receita Federal entende que, passando do limite, o valor inteiro vira base de INSS, e há decisões nos dois sentidos. Confirme com seu contador." },
     { "id": "benefitsSavings", "tone": "success", "title": "Economia com benefícios", "text": "Os benefícios custam {{benefitsTotal|money}} por mês. O mesmo valor pago como salário custaria {{benefitsAsSalary|money}}, por causa dos encargos e das provisões. São **{{savings|money}} a menos por mês** ({{savingsYear|money}} por ano)." },
     {
       "id": "leaveReserve",
@@ -499,9 +499,9 @@
       "title": "Reserva para licenças e afastamentos: {{amount|money}} por mês",
       "text": "{{coverage}} O método e as fontes estão em “Como a reserva para licenças e afastamentos é calculada”, na etapa Outros custos.",
       "items": [
-        { "requires": ["reimbursement"], "text": "O salário que a empresa adianta durante a licença e recupera do INSS ({{reimbursement|money}} por mês, em média) já estava no custo-base. Por isso aparece como desconto." },
+        { "requires": ["reimbursement"], "text": "O salário da licença pago pelo INSS ({{reimbursement|money}} por mês, em média, já com o INSS patronal que não incide sobre ele) estava no custo-base. Por isso aparece como desconto." },
         { "requires": ["companyCitizen"], "text": "Empresa Cidadã: {{maternityDays}} dias de maternidade/adoção e {{paternityDays}} de paternidade. Os dias extras custam em média {{companyCitizenExtraRemuneration|money}} por mês e são pagos pela empresa." },
-        { "requires": ["potentialIrpjDeduction"], "text": "No Lucro Real, esse valor pode ser deduzido do IRPJ devido (até {{potentialIrpjDeduction|money}} por mês, limitado ao imposto). A dedução não foi abatida, porque o cálculo não apura o IRPJ. Base: [Lei 11.770/2008](source:companyCitizenLaw)." }
+        { "requires": ["potentialIrpjDeduction"], "text": "No Lucro Real, 90% desse valor pode ser deduzido do IRPJ devido (LC 224/2025), se houver imposto a pagar. Veja a economia na tabela de vantagens tributárias. Base: [Lei 11.770/2008](source:companyCitizenLaw)." }
       ]
     },
     {
@@ -520,14 +520,15 @@
       "id": "apprenticeFloor",
       "tone": "info",
       "title": "Salário mínimo do aprendiz: {{floor|money}} por mês",
-      "text": "O aprendiz recebe pelo menos o **salário mínimo por hora** ({{hourly|money}}) multiplicado pelas horas do mês: {{hours}} horas numa jornada de {{weeklyHours}}h semanais. A convenção coletiva pode garantir mais, e nesse caso vale o valor maior. O piso estadual e o piso das funções não se aplicam automaticamente ao aprendiz. Base legal: [CLT, art. 428, §2º](source:apprenticeLaw)."
+      "text": "O aprendiz recebe pelo menos o **salário mínimo por hora** ({{hourly|money}}) multiplicado pelas horas do mês, com o descanso semanal: {{hours|number}} horas numa jornada de {{weeklyHours}}h semanais, considerando o mês de 31 dias, como orienta o Ministério do Trabalho para salário fixo. Vale um valor maior quando a convenção coletiva prevê piso expressamente para aprendizes, ou quando a lei do piso estadual não exclui aprendizes. Fontes: [CLT, art. 428, §2º](source:apprenticeLaw), [Manual da Aprendizagem, pergunta 104](source:apprenticeManual)."
     },
     {
       "id": "apprenticeIssues",
       "tone": "warning",
       "title": "Atenção às regras do aprendiz",
       "items": [
-        { "requires": ["hours"], "text": "A jornada do aprendiz é de no máximo **6 horas por dia** (até 8 horas só para quem já concluiu o ensino fundamental, contando as horas de teoria). {{weeklyHours}}h por semana passa do limite usual de {{maxWeeklyHours}}h. Fonte: [CLT, art. 432](source:apprenticeLaw)." },
+        { "requires": ["hours"], "text": "A jornada do aprendiz é de no máximo **6 horas por dia**, ou 8 horas para quem já concluiu o ensino fundamental, contando as horas de teoria. {{weeklyHours}}h por semana passa até do limite maior ({{maxWithSchooling}}h). Fonte: [CLT, art. 432](source:apprenticeLaw)." },
+        { "requires": ["schooling"], "text": "Acima de {{maxWeeklyHours}}h por semana só é permitido se o aprendiz **já concluiu o ensino fundamental** e as horas de teoria estiverem dentro da jornada (até 8 horas por dia). Fonte: [CLT, art. 432, §1º](source:apprenticeLaw)." },
         { "requires": ["overtime"], "text": "O aprendiz **não pode fazer horas extras** nem compensar jornada (CLT, art. 432). Zere as horas extras informadas." },
         { "requires": ["risk"], "text": "Aprendiz com **menos de 18 anos** não pode trabalhar em atividade insalubre ou perigosa, nem à noite. Nesses postos, a empresa deve contratar aprendizes de 18 a 24 anos (Decreto 9.579/2018, art. 53)." }
       ]
@@ -536,7 +537,7 @@
       "id": "apprenticeTermination",
       "tone": "info",
       "title": "Fim do contrato de aprendiz",
-      "text": "O contrato de aprendizagem tem prazo certo. Quando termina na data combinada, **não há multa de 40% do FGTS nem aviso prévio**, por isso essas reservas não entram no cálculo. Se a empresa encerrar antes do prazo fora dos casos previstos em lei (desempenho insuficiente, falta grave, ausência injustificada à escola ou pedido do aprendiz), passa a dever indenização. Fontes: [CLT, art. 433](source:apprenticeLaw), [Decreto 9.579/2018](source:apprenticeDecree)."
+      "text": "O contrato de aprendizagem tem prazo certo. Quando termina na data combinada, **não há multa de 40% do FGTS nem aviso prévio**, por isso essas reservas não entram no cálculo. O contrato também pode terminar antes, sem multa, por desempenho insuficiente, falta grave, ausência injustificada à escola que cause perda do ano letivo, pedido do aprendiz ou quando ele completa 24 anos. Se terminar antes por outros motivos (como fechamento do estabelecimento ou dispensa sem um desses motivos), a empresa deve a multa de 40% do FGTS e indenização de metade da remuneração até o fim do contrato (CLT, art. 479). Fontes: [CLT, art. 433](source:apprenticeLaw), [Decreto 9.579/2018](source:apprenticeDecree)."
     },
     {
       "id": "apprenticeSavings",
@@ -548,7 +549,7 @@
       "id": "taxOtherRegimes",
       "tone": "info",
       "title": "E as vantagens tributárias no {{regime}}?",
-      "text": "Neste regime, os impostos da empresa são calculados sobre a receita (ou sobre um lucro presumido a partir dela), e não sobre o lucro real. Por isso gastar com o funcionário **não reduz o IRPJ nem a CSLL**, e o PAT não dá incentivo. No Lucro Real, esses gastos seriam dedutíveis: compare os regimes com seu contador."
+      "text": "Neste regime, os impostos da empresa são calculados sobre a receita (ou sobre um lucro presumido a partir dela), e não sobre o lucro real. Por isso gastar com o funcionário **não reduz o IRPJ nem a CSLL**, e o PAT não dá incentivo. No Simples, porém, a folha conta para o Fator R, que pode levar a atividade do Anexo V para o III e reduzir o DAS. No Lucro Real, esses gastos seriam dedutíveis: compare os regimes com seu contador."
     },
     {
       "id": "beforeHiring",
@@ -557,7 +558,7 @@
       "items": [
         { "text": "Confira a **convenção coletiva** da categoria. Ela pode fixar piso, vale-refeição, seguro de vida e reajustes acima do que está aqui ([Sistema Mediador](source:mediador))." },
         { "text": "Confirme com seu contador o CNAE, a alíquota RAT/FAP e o código FPAS da empresa." },
-        { "text": "Esta é uma estimativa educativa e não substitui o cálculo oficial da folha no eSocial." }
+        { "text": "Esta é uma estimativa educativa e não substitui o processamento oficial da folha, informado ao eSocial." }
       ]
     }
   ],
@@ -585,8 +586,9 @@
       "third": "Terceiros / Sistema S ({{rate|percent}})",
       "educationExcess": "Encargos sobre o auxílio-educação acima do limite ({{excess|money}})",
       "thirteenth": "13º salário (1/12 por mês)",
-      "vacation": "Férias (1/12 por mês)",
-      "vacationBonus": "1/3 constitucional de férias",
+      "vacationBonus": "1/3 constitucional de férias (o salário do mês de férias já está no salário mensal)",
+      "terminationVacation": "Reserva para férias proporcionais pagas na rescisão (sem encargos, ÷ {{months|number}} meses)",
+      "vacationCover": "Cobertura do mês de férias por um substituto",
       "accrualFgts": "FGTS sobre 13º e férias",
       "accrualCharges": "Encargos patronais sobre 13º e férias",
       "terminationFine": "Reserva para multa de {{rate|percent}} do FGTS",
@@ -612,6 +614,7 @@
     }
   },
   "labels": {
+    "regimeComparisonNote": "Nem todo regime é uma escolha livre: o **MEI** só pode ter 1 empregado ganhando o salário mínimo ou o piso da categoria, com faturamento de até R$ 81 mil por ano, e o **Anexo IV** do Simples vale só para construção, vigilância, limpeza e conservação e advocacia (LC 123/2006, art. 18, §5º-C). No Simples, a folha também conta para o Fator R, que pode reduzir o DAS.",
     "taxTitle": "Vantagens tributárias (Lucro Real)",
     "taxIntro": "No Lucro Real, o que a empresa gasta com o funcionário reduz os impostos sobre o lucro. Esses valores não foram descontados do custo mensal acima, porque dependem de a empresa ter lucro tributável. Eles mostram quanto o funcionário custa de fato depois dos impostos.",
     "taxColumn": "Vantagem",
@@ -637,10 +640,10 @@
   },
   "method": [
     { "title": "Remuneração", "text": "Salário base, mais insalubridade (sobre o salário mínimo), periculosidade (30% do salário), horas extras e adicional noturno. Extras e adicional noturno habituais geram reflexo no DSR." },
-    { "title": "Encargos", "text": "FGTS de 8% em todos os regimes. Com INSS patronal, RAT × FAP e terceiros, conforme o regime: 3% no MEI, dentro do DAS no Simples (Anexos I, II, III e V), 20% + RAT no Anexo IV, e 20% + RAT + terceiros no Lucro Presumido e no Real." },
-    { "title": "Provisões", "text": "Todo mês a empresa reserva 1/12 de 13º, 1/12 de férias e 1/3 de férias, mais os encargos sobre esses valores. Opcionalmente, reserva também a multa de 40% do FGTS e o aviso prévio indenizado." },
+    { "title": "Encargos", "text": "FGTS de 8% em todos os regimes (2% no contrato de aprendiz). Com INSS patronal, RAT × FAP e terceiros, conforme o regime: 3% no MEI, dentro do DAS no Simples (Anexos I, II, III e V), 20% + RAT no Anexo IV, e 20% + RAT + terceiros no Lucro Presumido e no Real." },
+    { "title": "Provisões", "text": "Todo mês a empresa reserva 1/12 do 13º e o 1/3 de férias, com os encargos. O salário do mês de férias não entra de novo: ele já está entre os 12 salários do ano, e a empresa paga 11 salários + férias com 1/3 + 13º = 13,33 salários por ano. Opcionalmente, reserva a multa do FGTS (40%, ou nenhuma no aprendiz no fim do prazo), as férias pagas na rescisão, o aviso prévio indenizado e a cobertura do mês de férias." },
     { "title": "Benefícios", "text": "Vale-transporte (acima de 6% do salário), alimentação pelo PAT, planos de saúde, seguro, educação e PLR não têm natureza salarial. Não geram encargos nem reflexos." },
     { "title": "Licenças e afastamentos (opcional)", "text": "Estimativa do custo de cobrir licenças-maternidade, paternidade e afastamentos por doença, com frequências oficiais do AEPS, durações legais e o reembolso do INSS. Fontes: [AEPS](source:aepsMaternity), [Lei 8.213/1991](source:sicknessLaw)." }
   ],
-  "footer": "Cálculo CLT é uma ferramenta educativa e não substitui a orientação de um contador ou o cálculo oficial no eSocial. Pisos de convenção coletiva variam por sindicato e município."
+  "footer": "Cálculo CLT é uma ferramenta educativa e não substitui a orientação de um contador nem o processamento oficial da folha, informado ao eSocial. Pisos de convenção coletiva variam por sindicato e município."
 }

@@ -12,7 +12,7 @@ export default function FloorStep({ data, set }) {
   const t = useFormText();
   const state = wageFloors.stateFloor(data.uf);
   const floor = wageFloors.resolve(data);
-  const band = wageFloors.findBand(data.uf, data.bandId);
+  const band = wageFloors.findBand(data.uf, data.bandId, data.weeklyHours);
   const agreementSelected = Boolean(agreements.selection(data));
   const apprentice = contract.isApprentice(data);
 
@@ -22,7 +22,7 @@ export default function FloorStep({ data, set }) {
   const bandOptions = [
     { value: '', label: t.text('band', 'emptyOption') },
     ...(state?.bands ?? []).map(bandOption),
-    ...wageFloors.federalFloors().map(bandOption),
+    ...wageFloors.federalFloors(data.weeklyHours).map(bandOption),
   ];
 
   return (

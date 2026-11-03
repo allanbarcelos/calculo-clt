@@ -10,19 +10,22 @@ export class WageFloorService {
   states() { return this.floors.states(); }
   stateFloor(uf) { return this.floors.stateFloor(uf); }
 
-  federalFloors() {
+  // Floors set by federal law. Floors defined for a reference workweek (nursing: 44h) are
+  // proportional to the contracted hours.
+  federalFloors(weeklyHours) {
     const minimumWage = this.rates.minimumWage();
-    return this.floors.federalFloors().map((f) => ({
-      ...f,
-      value: f.value ?? f.minimumWageMultiple * minimumWage,
-    }));
+    return this.floors.federalFloors().map((f) => {
+      const full = f.value ?? f.minimumWageMultiple * minimumWage;
+      const scale = f.referenceWeeklyHours && weeklyHours ? Math.min(1, weeklyHours / f.referenceWeeklyHours) : 1;
+      return { ...f, value: full * scale, fullValue: full };
+    });
   }
 
-  findBand(uf, bandId) {
+  findBand(uf, bandId, weeklyHours) {
     if (!bandId) return null;
     return (
       this.stateFloor(uf)?.bands.find((b) => b.id === bandId) ??
-      this.federalFloors().find((f) => f.id === bandId) ??
+      this.federalFloors(weeklyHours).find((f) => f.id === bandId) ??
       null
     );
   }
@@ -31,8 +34,9 @@ export class WageFloorService {
     return this.federalFloors().some((f) => f.id === bandId);
   }
 
-  // The collective agreement prevails over the state law (LC 103/2000); otherwise the
-  // state or federal floor applies, never below the national minimum wage.
+  // The collective agreement prevails over the state law (LC 103/2000), but never goes below
+  // a floor set by federal law; otherwise the state or federal floor applies, never below the
+  // national minimum wage.
   resolve(input) {
     const { uf, bandId, hasAgreementFloor, agreementFloor } = input;
     const minimumWage = this.rates.minimumWage();
@@ -43,14 +47,15 @@ export class WageFloorService {
       const typed = input.hasAgreementFloor && input.agreementFloor > value ? input.agreementFloor : 0;
       return typed ? { value: typed, origin: 'agreement', band: null } : { value, origin: 'apprentice', band: null };
     }
+    const band = this.findBand(uf, bandId, input.weeklyHours);
+    const federal = band && this.isFederalBand(bandId) ? band.value : 0;
     const selection = this.agreements?.selection(input);
     if (selection?.role) {
-      return { value: Math.max(minimumWage, selection.role.floor), origin: 'agreementRole', band: null, ...selection };
+      return { value: Math.max(minimumWage, selection.role.floor, federal), origin: 'agreementRole', band: null, ...selection };
     }
     if (hasAgreementFloor && agreementFloor > 0) {
-      return { value: Math.max(minimumWage, agreementFloor), origin: 'agreement', band: null };
+      return { value: Math.max(minimumWage, agreementFloor, federal), origin: 'agreement', band: null };
     }
-    const band = this.findBand(uf, bandId);
     if (band && band.value > minimumWage) return { value: band.value, origin: 'band', band };
     return { value: minimumWage, origin: 'national', band };
   }

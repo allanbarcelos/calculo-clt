@@ -9,17 +9,19 @@ const calc = (patch) => services.calculator.calculate({ ...base, ...patch });
 
 describe('CostCalculator — one minimum wage, termination reserve on', () => {
   it.each([
-    ['mei', 2211.14],
-    ['simples', 2153.05],
-    ['simplesIV', 2579.01],
-    ['presumido', 2691.31],
-    ['real', 2691.31],
+    // Checked against an independent model: 11 salaries + vacation (1 + 1/3) + 13th a year, with
+    // charges, the FGTS fine and half a vacation paid at termination after 1 year.
+    ['mei', 2146.93],
+    ['simples', 2092.9],
+    ['simplesIV', 2489.14],
+    ['presumido', 2593.61],
+    ['real', 2593.61],
   ])('%s costs %d per month', (regime, expected) => {
     expect(calc({ regime }).monthlyTotal).toBe(expected);
   });
 
   it('removes employer INSS from the 13th salary under payroll relief', () => {
-    expect(calc({ regime: 'presumido', payrollRelief: true }).monthlyTotal).toBe(2484.19);
+    expect(calc({ regime: 'presumido', payrollRelief: true }).monthlyTotal).toBe(2399.99);
   });
 });
 
@@ -90,7 +92,8 @@ describe('Leave reserve', () => {
     const result = calc({ regime: 'real', leaveFamilyProfile: 'unknown', companyCitizen: true });
     expect(result.leaveReserve.maternityDays).toBe(180);
     expect(result.leaveReserve.paternityDays).toBe(20);
-    expect(result.leaveReserve.cashFlow.reimbursement).toBeCloseTo(1621 * perEmployee * (120 / stats.daysPerYear), 6);
+    // Lucro Real: the reimbursed pay plus the employer INSS (20%) not due on it (STF, Tema 72).
+    expect(result.leaveReserve.cashFlow.reimbursement).toBeCloseTo(1621 * perEmployee * (120 / stats.daysPerYear) * 1.2, 6);
     expect(result.leaveReserve.cashFlow.potentialIrpjDeduction).toBe(result.leaveReserve.cashFlow.companyCitizenExtraRemuneration);
     expect(calc({ regime: 'simples', leaveFamilyProfile: 'unknown', companyCitizen: true }).leaveReserve.cashFlow.potentialIrpjDeduction).toBe(0);
   });
@@ -102,12 +105,15 @@ describe('Leave reserve', () => {
     expect(calc({ leaveHealthReserve: true, leaveReplacementMode: 'internal' }).leaveReserve.amount).toBe(0);
   });
 
-  it('spreads the per-hire agency cost over 12 months', () => {
+  it('spreads the per-hire agency cost over 12 months, for maternity leave only', () => {
     const cost = 6000;
     const without = calc({ leaveFamilyProfile: 'unknown' }).leaveReserve.amount;
     const withCost = calc({ leaveFamilyProfile: 'unknown', leaveExternalHiringCost: cost }).leaveReserve.amount;
-    expect(withCost - without).toBeCloseTo((2 * perEmployee * cost) / 12, 8);
+    expect(withCost - without).toBeCloseTo((perEmployee * cost) / 12, 8);
+    expect(calc({ leaveFamilyProfile: 'male', leaveExternalHiringCost: cost }).leaveReserve.amount)
+      .toBe(calc({ leaveFamilyProfile: 'male' }).leaveReserve.amount);
   });
+
 
   it('ignores the agency cost under internal coverage', () => {
     const a = calc({ leaveFamilyProfile: 'female', leaveReplacementMode: 'internal', leaveInternalBonusRate: 10 });
@@ -206,8 +212,21 @@ describe('EmployeeDeductionService', () => {
 
 describe('WageFloorService', () => {
   const { wageFloors } = services;
-  it('federal floors in minimum-wage multiples follow the minimum wage', () => {
-    expect(wageFloors.findBand('SP', 'fed-eng-6h').value).toBe(1621 * 6);
+  it('engineering floors are frozen at the 2022 values (STF, ADPFs 53, 149 and 171)', () => {
+    expect(wageFloors.findBand('SP', 'fed-eng-6h').value).toBe(7272);
+  });
+
+  it('nursing floors are proportional to the workweek (STF, ADI 7222)', () => {
+    expect(wageFloors.findBand('SP', 'fed-nurse', 44).value).toBe(4750);
+    expect(wageFloors.findBand('SP', 'fed-nurse', 36).value).toBeCloseTo(4750 * 36 / 44, 6);
+  });
+
+  it('an agreement never goes below a federal-law floor', () => {
+    const db = structuredClone(jsonDatabase);
+    db.collectiveAgreements.agreements.push({ id: 'low-cct', validFrom: '2026-01-01', validTo: '2026-12-31', kind: 'CCT', ufs: ['SP'], name: 'Teste', territory: 'SP', source: 'mediador', sourceKind: 'registry', roles: [{ id: 'enf', label: 'Enfermeiro', floor: 3000, clause: '3ª' }] });
+    const s = createServices(db, '2026-10-30');
+    const input = { ...s.formDefaults.defaults(), uf: 'SP', bandId: 'fed-nurse', weeklyHours: 44, agreementId: 'low-cct', agreementRoleId: 'enf' };
+    expect(s.wageFloors.resolve(input).value).toBe(4750);
   });
 
   it('a state band below the minimum wage falls back to the national minimum', () => {

@@ -16,7 +16,7 @@
       "uf": "SP",
       "validFrom": "2026-06-01",
       "law": "Lei nº 18.471/2026",
-      "effective": "Em vigor desde o 1º dia do mês seguinte à publicação (maio/2026)",
+      "effective": "Em vigor desde 01/06/2026",
       "source": "pisoSP",
       "bands": [
         { "id": "sp-1", "label": "Inciso I", "value": 1874.36, "categories": "Domésticos, cuidadores, faxineiros, trabalhadores agrícolas e florestais, pescadores, contínuos, vendedores, motoboys, cozinheiros, costureiros, pedreiros, pintores, garçons, operadores de telemarketing, trabalhadores de turismo e hotelaria, mecânicos e outros ofícios não especializados ou semiqualificados." },
@@ -82,11 +82,11 @@
     }
   ],
   "federalFloors": [
-    { "id": "fed-eng-6h", "validFrom": "2026-01-01", "label": "Engenheiro, arquiteto, agrônomo, químico ou veterinário — 6h/dia", "minimumWageMultiple": 6, "note": "6 salários mínimos.", "source": "engineersLaw" },
-    { "id": "fed-eng-8h", "validFrom": "2026-01-01", "label": "Engenheiro, arquiteto, agrônomo, químico ou veterinário — 8h/dia", "minimumWageMultiple": 8.5, "note": "6 salários mínimos + 2 horas a mais com acréscimo de 25% (8,5 SM).", "source": "engineersLaw" },
-    { "id": "fed-radiology", "validFrom": "2026-01-01", "label": "Técnico em radiologia", "minimumWageMultiple": 2, "note": "2 salários mínimos, mais 40% de adicional de risco de vida e insalubridade.", "source": "radiologyLaw" },
-    { "id": "fed-nurse", "validFrom": "2026-01-01", "label": "Enfermeiro(a)", "value": 4750, "note": "No setor privado, o STF (ADI 7222) condicionou o piso à negociação coletiva regional. Confira a convenção da sua região.", "source": "nursingLaw" },
-    { "id": "fed-nurse-tech", "validFrom": "2026-01-01", "label": "Técnico(a) de enfermagem", "value": 3325, "note": "70% do piso do enfermeiro. Vale a mesma ressalva do STF.", "source": "nursingLaw" },
-    { "id": "fed-nurse-aux", "validFrom": "2026-01-01", "label": "Auxiliar de enfermagem ou parteira", "value": 2375, "note": "50% do piso do enfermeiro. Vale a mesma ressalva do STF.", "source": "nursingLaw" }
+    { "id": "fed-eng-6h", "validFrom": "2026-01-01", "label": "Engenheiro, arquiteto, agrônomo, químico ou veterinário — 6h/dia", "value": 7272, "note": "6 salários mínimos de 2022 (R$ 7.272,00). O STF (ADPFs 53, 149 e 171) proibiu a correção automática pelo salário mínimo e congelou o piso no valor da data do julgamento; reajustes só por lei ou negociação coletiva.", "source": "engineersLaw" },
+    { "id": "fed-eng-8h", "validFrom": "2026-01-01", "label": "Engenheiro, arquiteto, agrônomo, químico ou veterinário — 8h/dia", "value": 10302, "note": "8,5 salários mínimos de 2022 (R$ 10.302,00): 6 salários + 2 horas a mais com 25%. Valor congelado pelo STF (ADPFs 53, 149 e 171).", "source": "engineersLaw" },
+    { "id": "fed-radiology", "validFrom": "2026-01-01", "label": "Técnico em radiologia", "value": 1090, "note": "O STF (ADPF 151) congelou o piso em 2 salários mínimos de 2011 (R$ 1.090,00), mais o adicional de 40% de risco, hoje abaixo do salário mínimo nacional. Na prática vale o maior entre o salário mínimo, o piso estadual e o piso da convenção; o adicional de 40% continua devido.", "source": "radiologyLaw" },
+    { "id": "fed-nurse", "validFrom": "2026-01-01", "label": "Enfermeiro(a)", "value": 4750, "referenceWeeklyHours": 44, "note": "No setor privado, o STF (ADI 7222) exige negociação coletiva prévia em cada região; sem acordo, vale o valor da Lei 14.434/2022. É a remuneração global para 44h semanais, proporcional em jornadas menores. Confira a convenção da sua região.", "source": "nursingLaw" },
+    { "id": "fed-nurse-tech", "validFrom": "2026-01-01", "label": "Técnico(a) de enfermagem", "value": 3325, "referenceWeeklyHours": 44, "note": "70% do piso do enfermeiro. No setor privado, o STF (ADI 7222) exige negociação coletiva prévia em cada região; sem acordo, vale o valor da Lei 14.434/2022. É a remuneração global para 44h semanais, proporcional em jornadas menores. Confira a convenção da sua região.", "source": "nursingLaw" },
+    { "id": "fed-nurse-aux", "validFrom": "2026-01-01", "label": "Auxiliar de enfermagem ou parteira", "value": 2375, "referenceWeeklyHours": 44, "note": "50% do piso do enfermeiro. No setor privado, o STF (ADI 7222) exige negociação coletiva prévia em cada região; sem acordo, vale o valor da Lei 14.434/2022. É a remuneração global para 44h semanais, proporcional em jornadas menores. Confira a convenção da sua região.", "source": "nursingLaw" }
   ]
 }

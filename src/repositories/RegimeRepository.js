@@ -18,6 +18,8 @@ export class RegimeRepository extends VersionedRepository {
   pisCofinsNonCumulative() { return this.optionalVersion('pisCofinsNonCumulative'); }
   // null when no PAT incentive rule is in force.
   patIncentive() { return this.optionalVersion('patIncentive'); }
+  // LC 224/2025: share of federal tax incentives kept from 2026 (null before).
+  incentiveReduction() { return this.optionalVersion('incentiveReduction'); }
 
   // null once the payroll relief transition is over
   payrollRelief() { return this.optionalVersion('payrollRelief'); }

@@ -83,7 +83,7 @@
   ],
   "fpas": [
     {
-      "validFrom": "2026-04-01",
+      "validFrom": "2026-01-01",
       "default": "515",
       "source": "fpasTable",
       "entities": { "salarioEducacao": "salário-educação", "incra": "INCRA", "senai": "SENAI", "sesi": "SESI", "senac": "SENAC", "sesc": "SESC", "sebrae": "SEBRAE", "dpc": "DPC", "fundoAeroviario": "Fundo Aeroviário", "sest": "SEST", "senat": "SENAT" },
@@ -105,7 +105,10 @@
     { "validFrom": "2026-01-01", "validTo": "2026-12-31", "pis": 0.0165, "cofins": 0.076, "source": "pisCofinsCreditLaw" }
   ],
   "patIncentive": [
-    { "validFrom": "2026-01-01", "deductionRate": 0.15, "reductionFactor": 0.9, "irpjCapShare": 0.04, "source": "patLaw" }
+    { "validFrom": "2026-01-01", "deductionRate": 0.15, "irpjCapShare": 0.04, "source": "patLaw" }
+  ],
+  "incentiveReduction": [
+    { "validFrom": "2026-01-01", "keptShare": 0.9, "source": "lc224" }
   ],
   "simplesRules": [
     { "validFrom": "2026-01-01", "fatorRThreshold": 0.28, "source": "simples" }

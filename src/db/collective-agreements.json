@@ -460,9 +460,9 @@
         { "id": "salario-ingresso", "label": "Salário de ingresso (caixa, atendente, estoquista, recepcionista)", "floor": 1790.26, "clause": "cláusula 3ª" },
         { "id": "motorista", "label": "Motoristas", "floor": 1894.63, "clause": "cláusula 3ª, §1º" },
         { "id": "limpeza", "label": "Faxineiros e serviços de limpeza", "floor": 1735.95, "clause": "cláusula 3ª, §3º" },
-        { "id": "gerente", "label": "Gerente", "floor": 2416.85, "clause": "cláusula 3ª, §4º" },
+        { "id": "gerente", "label": "Gerente (piso de ingresso + 35%)", "floor": 2416.85, "clause": "cláusula 3ª, §4º" },
         { "id": "home-center", "label": "Lojas home-center", "floor": 1826.56, "clause": "cláusula 3ª, §8º" },
-        { "id": "comissionista-garantia", "label": "Comissionista — garantia", "floor": 2237.83, "clause": "cláusula 8ª" },
+        { "id": "comissionista-garantia", "label": "Comissionista — garantia (piso de ingresso + 25%)", "floor": 2237.83, "clause": "cláusula 8ª" },
         { "id": "repis", "label": "REPIS (ME/EPP aderentes)", "floor": 1696.54, "clause": "cláusula 4ª" }
       ],
       "notes": [
@@ -1896,7 +1896,7 @@
         { "id": "analista-sistemas", "label": "Analista de sistemas", "floor": 4315.05, "clause": "cláusula 3ª" },
         { "id": "programador", "label": "Programador", "floor": 2870.96, "clause": "cláusula 3ª" },
         { "id": "suporte", "label": "Operador / suporte técnico (44h)", "floor": 2461.71, "clause": "cláusula 3ª" },
-        { "id": "administrativo", "label": "Administração (auxiliar de escritório)", "floor": 1621.0, "clause": "cláusula 3ª (elevado ao salário mínimo)" }
+        { "id": "administrativo", "label": "Administração (auxiliar de escritório)", "floor": 1363.64, "clause": "cláusula 3ª (abaixo do salário mínimo de 2026, que prevalece)" }
       ],
       "notes": ["Horas extras após as 2 primeiras: 75% (cl. 10ª).", "Auxílio-creche R$ 530,80 (cl. 22ª)."]
     },

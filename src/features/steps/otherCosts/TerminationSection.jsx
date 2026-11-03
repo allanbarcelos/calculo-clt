@@ -25,15 +25,18 @@ export default function TerminationSection({ data, set, result }) {
       )}
 
       <Toggle {...t.field('includeNoticeReserve')} checked={data.includeNoticeReserve} onChange={(v) => set({ includeNoticeReserve: v })} />
-      {data.includeNoticeReserve && (
+      {(data.includeNoticeReserve || data.includeTerminationReserve) && (
         <NumberField
           {...t.field('expectedTenureYears')}
-          hint={t.text('expectedTenureYears', gross > 0 ? 'hintWithValue' : 'hintPending', { ...notice, ...result.notice })}
+          hint={data.includeNoticeReserve
+            ? t.text('expectedTenureYears', gross > 0 ? 'hintWithValue' : 'hintPending', { ...notice, ...result.notice })
+            : t.text('expectedTenureYears', 'hintTermination')}
           value={data.expectedTenureYears}
           max={30}
           onChange={(v) => set({ expectedTenureYears: v })}
         />
       )}
+      <Toggle {...t.field('includeVacationCover')} checked={data.includeVacationCover} onChange={(v) => set({ includeVacationCover: v })} />
       <Explainer id="termination" vars={notice} />
     </>
   );

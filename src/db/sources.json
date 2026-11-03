@@ -4,7 +4,7 @@
       "id": "minWage",
       "title": "Decreto nº 12.797/2025 — salário mínimo de R$ 1.621,00 a partir de 1º/01/2026",
       "short": "Decreto 12.797/2025",
-      "org": "Câmara dos Deputados",
+      "org": "Presidência da República",
       "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm"
     },
     {
@@ -39,7 +39,7 @@
       "id": "clt",
       "title": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
       "short": "CLT",
-      "org": "Câmara dos Deputados",
+      "org": "Presidência da República",
       "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm"
     },
     {
@@ -67,14 +67,14 @@
       "id": "trafficAgentsLaw",
       "title": "Lei nº 14.684/2023 — periculosidade dos agentes de trânsito",
       "short": "Lei 14.684/2023",
-      "org": "Câmara dos Deputados",
+      "org": "Presidência da República",
       "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14684.htm"
     },
     {
       "id": "constitution",
       "title": "Constituição Federal, art. 7º — direitos dos trabalhadores (hora extra de no mínimo 50%, adicional noturno)",
       "short": "Constituição Federal",
-      "org": "Senado Federal",
+      "org": "Presidência da República",
       "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
     },
     {
@@ -261,14 +261,14 @@
     },
     {
       "id": "engineersLaw",
-      "title": "Lei nº 4.950-A/1966 — piso de engenheiros, químicos, arquitetos, agrônomos e veterinários",
+      "title": "Lei nº 4.950-A/1966 — piso de engenheiros, químicos, arquitetos, agrônomos e veterinários — piso congelado pelo STF nas ADPFs 53, 149 e 171 (2022)",
       "short": "Lei 4.950-A/1966",
       "org": "Presidência da República",
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l4950a.htm"
     },
     {
       "id": "radiologyLaw",
-      "title": "Lei nº 7.394/1985 — técnico em radiologia",
+      "title": "Lei nº 7.394/1985 — técnico em radiologia — piso congelado pelo STF na ADPF 151",
       "short": "Lei 7.394/1985",
       "org": "Presidência da República",
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l7394.htm"

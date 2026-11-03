@@ -25,9 +25,19 @@ export class ContractService {
   }
 
   // Apprentices earn at least the hourly minimum wage for the hours worked (CLT art. 428, §2º).
+  // MTE (Manual da Aprendizagem, q. 104): hourly × weekly hours × weeks of the month × 7/6, using
+  // the 31-day month for a fixed salary, which is the most favourable to the apprentice.
+  apprenticeMonthlyHours(weeklyHours) {
+    const { monthDays } = this.apprentice();
+    return (weeklyHours * monthDays) / 6;
+  }
+
+  apprenticeHourly() {
+    return this.rates.minimumWage() / this.apprentice().minimumWageDivisor;
+  }
+
   apprenticeFloor(weeklyHours) {
-    const { minimumWageDivisor } = this.apprentice();
-    return (this.rates.minimumWage() / minimumWageDivisor) * this.rates.workweekDivisor(weeklyHours);
+    return this.apprenticeHourly() * this.apprenticeMonthlyHours(weeklyHours);
   }
 
   // Things the law does not allow for apprentices, to warn the user.
@@ -35,7 +45,8 @@ export class ContractService {
     if (!this.isApprentice(input)) return [];
     const rules = this.apprentice();
     const issues = [];
-    if (input.weeklyHours > rules.maxWeeklyHours) issues.push('hours');
+    if (input.weeklyHours > rules.maxWeeklyHoursWithSchooling) issues.push('hours');
+    else if (input.weeklyHours > rules.maxWeeklyHours) issues.push('schooling');
     if (!rules.overtimeAllowed && (input.overtimeHours > 0 || input.restDayOvertimeHours > 0 || input.nightOvertimeHours > 0)) issues.push('overtime');
     // Under-18 apprentices cannot work in unhealthy, dangerous or night conditions.
     if (input.insalubrity > 0 || input.hazard || input.nightHours > 0) issues.push('risk');

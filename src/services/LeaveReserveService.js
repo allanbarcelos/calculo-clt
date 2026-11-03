@@ -72,11 +72,14 @@ export class LeaveReserveService {
       maternity: share(events.maternity, days.maternity) * factor,
       paternity: share(events.paternity, days.paternity) * factor,
       health: share(sickness, days.sickness) * factor,
-      // Hiring costs are paid per event and spread over 12 months.
-      hiring: ((events.maternity + events.paternity + sickness) * hiringCost) / 12,
-      // Pay the company advances during the leave and recovers from INSS: it is already in the
-      // base salary, so recovering it lowers the yearly cost.
-      reimbursement: share(events.maternity, days.maternityPaid) + share(events.paternity, days.paternityPaid),
+      // Agency/training costs per hire, spread over 12 months. Only for maternity leave: nobody
+      // hires a temporary worker for a few days of paternity or the first 15 days of sickness.
+      hiring: (events.maternity * hiringCost) / 12,
+      // Leave pay is paid by INSS (directly for MEI employees, or advanced by the company and
+      // offset against its contributions). It is already in the base salary, so it lowers the
+      // yearly cost. Employer INSS on salário-maternidade is also not due (STF, Tema 72).
+      reimbursement: share(events.maternity, days.maternityPaid) * (1 + this.provisions.charges.rates(input).inss)
+        + share(events.paternity, days.paternityPaid),
       companyCitizenExtra: share(events.maternity, days.maternityExtra) + share(events.paternity, days.paternityExtra),
       events: { ...events, sickness },
       days,

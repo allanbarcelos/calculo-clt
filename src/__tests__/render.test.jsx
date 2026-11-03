@@ -148,7 +148,7 @@ describe('rendering', () => {
     const page = (id) => render(createElement(step(id), { data: input, set: () => {}, result: out, errors: {} }));
     expect(page('floor')).toContain('Salário mínimo do aprendiz');
     expect(page('pay')).toContain('não pode fazer horas extras');
-    expect(page('pay')).toContain('passa do limite usual de 36h');
+    expect(page('pay')).toContain('passa até do limite maior (40h)');
     expect(page('pay')).toContain('menos de 18 anos');
     expect(page('other')).toContain('Fim do contrato de aprendiz');
     expect(page('company')).toContain('Situação de lucro da empresa');

@@ -83,7 +83,7 @@ export function createServices(database, referenceDate) {
     calculator: costCalculator,
     comparison: new RegimeComparisonService(regimeRepository, costCalculator),
     taxAdvantages: new TaxAdvantageService(regimeRepository, ratesRepository),
-    fatorR: new FatorRService(regimeRepository, ratesRepository),
+    fatorR: new FatorRService(regimeRepository, contractService),
     formDefaults: new FormDefaultsService({ ratesRepository, regimeRepository, wageFloorRepository }),
   };
 }

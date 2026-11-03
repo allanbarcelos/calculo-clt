@@ -8,11 +8,11 @@ const calc = (patch) => services.calculator.calculate({ ...base, ...patch });
 const item = (result, group, id) => result.groups.find((g) => g.id === group).items.find((i) => i.id === id);
 
 describe('Apprentice contract', () => {
-  const apprentice = { contractType: 'apprentice', weeklyHours: 30, salary: 1105.23, includeTerminationReserve: true, includeNoticeReserve: true };
+  const apprentice = { contractType: 'apprentice', weeklyHours: 30, salary: 1142.07, includeTerminationReserve: true, includeNoticeReserve: true };
 
   it('deposits FGTS at 2% on pay and accruals', () => {
     const result = calc(apprentice);
-    expect(item(result, 'charges', 'fgts').amount).toBeCloseTo(1105.23 * 0.02, 2);
+    expect(item(result, 'charges', 'fgts').amount).toBeCloseTo(1142.07 * 0.02, 2);
     expect(item(result, 'charges', 'fgts').params.rate).toBe(0.02);
   });
 
@@ -26,7 +26,8 @@ describe('Apprentice contract', () => {
   it('floor is the hourly minimum wage times the contracted hours', () => {
     const floor = services.wageFloors.resolve({ ...base, ...apprentice });
     expect(floor).toMatchObject({ origin: 'apprentice' });
-    expect(floor.value).toBeCloseTo((1621 / 220) * 150, 6);
+    // MTE: hourly × 30h × 31/7 weeks × 7/6 = 155 hours in the 31-day month.
+    expect(floor.value).toBeCloseTo((1621 / 220) * 155, 6);
   });
 
   it('switching to apprentice sets the 30-hour workweek, and back to the standard 44 hours', () => {
@@ -112,5 +113,34 @@ describe('TaxAdvantageService', () => {
 describe('Apprentice risk warning', () => {
   it('warns when an apprentice works with insalubrity, hazard or at night', () => {
     expect(services.contract.apprenticeIssues({ ...base, contractType: 'apprentice', weeklyHours: 30, hazard: true })).toEqual(['risk']);
+  });
+});
+
+describe('Reference dates', () => {
+  it.each(['2026-01-15', '2026-02-01', '2026-11-02', '2027-03-01', '2029-06-01'])('computes everything on %s', (date) => {
+    const s = createServices(jsonDatabase, date);
+    const input = { ...s.formDefaults.defaults(), salary: 2000, regime: 'real', leaveFamilyProfile: 'unknown', leaveHealthReserve: true, mealEnabled: true, mealValue: 500, patRegistered: true };
+    const result = s.calculator.calculate(input);
+    expect(Number.isFinite(result.monthlyTotal)).toBe(true);
+    expect(Number.isFinite(s.taxAdvantages.compute(input, result).net)).toBe(true);
+  });
+});
+
+describe('Empresa Cidadã in Lucro Real', () => {
+  const run = (bracket) => {
+    const input = { ...base, regime: 'real', leaveFamilyProfile: 'unknown', companyCitizen: true, realProfitBracket: bracket };
+    const result = services.calculator.calculate(input);
+    return { result, tax: services.taxAdvantages.compute(input, result) };
+  };
+
+  it('deducts 90% of the extension pay from IRPJ (LC 224/2025) and removes it from the expense deduction', () => {
+    const { result, tax } = run('surcharge');
+    const extra = result.leaveReserve.cashFlow.companyCitizenExtraRemuneration;
+    expect(tax.items.find((i) => i.id === 'companyCitizenIrpj').amount).toBeCloseTo(extra * 0.9, 6);
+    expect(tax.items.find((i) => i.id === 'incomeTaxDeduction').amount).toBeCloseTo(result.monthlyTotal * 0.34 - extra * 0.25, 6);
+  });
+
+  it('gives nothing without IRPJ to pay', () => {
+    expect(run('loss').tax.items).toEqual([]);
   });
 });

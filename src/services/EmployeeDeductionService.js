@@ -34,6 +34,6 @@ export class EmployeeDeductionService {
 
   familyAllowance(gross, children) {
     const { incomeLimit, perChild } = this.rates.familyAllowance();
-    return gross <= incomeLimit ? children * perChild : 0;
+    return gross > 0 && gross <= incomeLimit ? children * perChild : 0;
   }
 }
