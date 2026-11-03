@@ -1,28 +1,34 @@
 const round = (n) => Math.round(n * 100) / 100;
 
 function group(id, items) {
-  const visible = items.filter((i) => i.amount > 0.004).map((i) => ({ ...i, amount: round(i.amount) }));
+  // Credits (e.g. INSS reimbursements) are negative and stay visible.
+  const visible = items.filter((i) => Math.abs(i.amount) > 0.004).map((i) => ({ ...i, amount: round(i.amount) }));
   return { id, items: visible, total: round(visible.reduce((sum, i) => sum + i.amount, 0)) };
 }
 
 // Orchestrates the specialised services into the full monthly cost of one employee.
 export class CostCalculator {
-  constructor({ ratesRepository, compensationService, employerChargesService, provisionService, benefitService, employeeDeductionService }) {
+  constructor({ ratesRepository, contractService, compensationService, employerChargesService, provisionService, benefitService, employeeDeductionService, leaveReserveService }) {
     this.rates = ratesRepository;
+    this.contract = contractService;
     this.compensation = compensationService;
     this.charges = employerChargesService;
     this.provisions = provisionService;
     this.benefits = benefitService;
     this.deductions = employeeDeductionService;
+    this.leaveReserves = leaveReserveService;
   }
 
   calculate(input) {
     const pay = this.compensation.compute(input);
     const { gross } = pay;
     const rates = this.charges.rates(input);
-    const fgtsRate = this.rates.fgts().monthlyRate;
+    const fgtsRate = this.contract.fgts(input).monthlyRate;
     const provisions = this.provisions.compute(gross, input);
     const benefits = this.benefits.compute(input);
+    const leaveReserve = this.leaveReserves.compute(gross, input);
+    // Education aid above the legal limit becomes part of the contribution base (Lei 8.212, art. 28, §9º, t).
+    const educationExcess = Math.max(0, input.education - this.benefits.educationLimit(gross));
 
     const groups = [
       group('pay', pay.items),
@@ -31,6 +37,7 @@ export class CostCalculator {
         { id: 'inss', amount: gross * rates.inss, params: { rate: rates.inss } },
         { id: 'rat', amount: gross * rates.ratFap, params: { rate: rates.ratFap } },
         { id: 'third', amount: gross * rates.thirdParties, params: { rate: rates.thirdParties } },
+        { id: 'educationExcess', amount: educationExcess * (rates.total + fgtsRate), params: { excess: educationExcess } },
       ]),
       group('accruals', provisions.items),
       group('benefits', benefits.items),
@@ -38,6 +45,7 @@ export class CostCalculator {
         { id: 'sst', amount: input.sstYearly / 12 },
         { id: 'accounting', amount: input.accountingMonthly },
         { id: 'ppe', amount: input.ppeMonthly },
+        ...leaveReserve.items,
       ]),
     ];
 
@@ -62,6 +70,7 @@ export class CostCalculator {
       multiplier: gross > 0 ? monthlyTotal / gross : 0,
       costPerReal,
       notice: { days: provisions.notice.days, total: round(provisions.notice.total), monthly: round(provisions.notice.monthly) },
+      leaveReserve,
       benefitsTotal,
       benefitsAsSalary,
       benefitsSavings: round(benefitsAsSalary - benefitsTotal),

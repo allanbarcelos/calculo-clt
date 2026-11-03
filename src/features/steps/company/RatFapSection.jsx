@@ -3,8 +3,9 @@ import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 
 export default function RatFapSection({ data, set, result }) {
-  const rat = useServices().repositories.regimes.rat();
+  const { repositories } = useServices();
   const t = useFormText();
+  const rat = repositories.regimes.rat();
   return (
     <>
       <div className="grid-2">

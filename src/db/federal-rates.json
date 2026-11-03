@@ -51,16 +51,37 @@
     }
   ],
   "overtime": [
-    { "validFrom": "2026-01-01", "minRate": 50, "restDayRate": 100, "maxDailyHours": 2, "dsrFactor": 0.16666666666666666, "source": "clt" }
+    { "validFrom": "2026-01-01", "minRate": 50, "restDayRate": 100, "maxDailyHours": 2, "source": "clt", "maxDailyNormalHours": 8 }
   ],
   "nightWork": [
     {
       "validFrom": "2026-01-01",
       "default": "urban",
       "types": [
-        { "id": "urban", "label": "Urbano: das 22h às 5h, adicional de 20%, hora noturna de 52min30s", "rate": 0.2, "hourMinutes": 52.5, "source": "clt" },
-        { "id": "ruralCrop", "label": "Rural, lavoura: das 21h às 5h, adicional de 25%", "rate": 0.25, "hourMinutes": 60, "source": "ruralLaw" },
-        { "id": "ruralLivestock", "label": "Rural, pecuária: das 20h às 4h, adicional de 25%", "rate": 0.25, "hourMinutes": 60, "source": "ruralLaw" }
+        {
+          "id": "urban",
+          "label": "Urbano: das 22h às 5h, adicional de 20%, hora noturna de 52min30s",
+          "rate": 0.2,
+          "hourMinutes": 52.5,
+          "source": "clt",
+          "periodHours": 7
+        },
+        {
+          "id": "ruralCrop",
+          "label": "Rural, lavoura: das 21h às 5h, adicional de 25%",
+          "rate": 0.25,
+          "hourMinutes": 60,
+          "source": "ruralLaw",
+          "periodHours": 8
+        },
+        {
+          "id": "ruralLivestock",
+          "label": "Rural, pecuária: das 20h às 4h, adicional de 25%",
+          "rate": 0.25,
+          "hourMinutes": 60,
+          "source": "ruralLaw",
+          "periodHours": 8
+        }
       ]
     }
   ],
@@ -75,5 +96,65 @@
   ],
   "notice": [
     { "validFrom": "2026-01-01", "baseDays": 30, "daysPerYear": 3, "maxDays": 90, "source": "noticeLaw" }
+  ],
+  "nationalHolidays": [
+    {
+      "validFrom": "2024-01-01",
+      "fixed": [
+        { "date": "01-01", "name": "Confraternização Universal" },
+        { "date": "04-21", "name": "Tiradentes" },
+        { "date": "05-01", "name": "Dia do Trabalho" },
+        { "date": "09-07", "name": "Independência do Brasil" },
+        { "date": "10-12", "name": "Nossa Senhora Aparecida" },
+        { "date": "11-02", "name": "Finados" },
+        { "date": "11-15", "name": "Proclamação da República" },
+        { "date": "11-20", "name": "Dia Nacional de Zumbi e da Consciência Negra" },
+        { "date": "12-25", "name": "Natal" }
+      ],
+      "easterBased": [],
+      "source": "holidaysLaw"
+    }
+  ],
+  "leaveStatistics": [
+    {
+      "validFrom": "2026-01-01",
+      "year": 2024,
+      "maternityAwards": 707471,
+      "averageContributors": 46956583,
+      "femaleContributors": 20833965,
+      "sicknessAwards": 3582035,
+      "daysPerYear": 365.25,
+      "source": "aepsMaternity"
+    }
+  ],
+  "maternityLeave": [
+    { "validFrom": "2026-01-01", "days": 120, "companyCitizenExtraDays": 60, "paidBySocialSecurity": true, "source": "companyCitizenLaw" }
+  ],
+  "paternityLeave": [
+    { "validFrom": "2026-01-01", "validTo": "2026-12-31", "days": 5, "companyCitizenExtraDays": 15, "paidBySocialSecurity": false, "source": "paternityLaw" },
+    { "validFrom": "2027-01-01", "validTo": "2027-12-31", "days": 10, "companyCitizenExtraDays": 15, "paidBySocialSecurity": true, "source": "paternityLaw" },
+    { "validFrom": "2028-01-01", "validTo": "2028-12-31", "days": 15, "companyCitizenExtraDays": 15, "paidBySocialSecurity": true, "source": "paternityLaw" },
+    { "validFrom": "2029-01-01", "days": 15, "conditionalDays": 20, "companyCitizenExtraDays": 15, "paidBySocialSecurity": true, "source": "paternityLaw" }
+  ],
+  "sicknessLeave": [
+    { "validFrom": "2026-01-01", "employerDays": 15, "source": "sicknessLaw" }
+  ],
+  "apprentice": [
+    {
+      "validFrom": "2026-01-01",
+      "fgtsRate": 0.02,
+      "minimumWageDivisor": 220,
+      "defaultWeeklyHours": 30,
+      "maxWeeklyHours": 36,
+      "minAge": 14,
+      "maxAge": 24,
+      "maxYears": 2,
+      "overtimeAllowed": false,
+      "terminationFineOnTerm": false,
+      "noticeOnTerm": false,
+      "quotaMin": 0.05,
+      "quotaMax": 0.15,
+      "source": "apprenticeLaw"
+    }
   ]
 }

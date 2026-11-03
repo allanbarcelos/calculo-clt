@@ -13,6 +13,8 @@ export default function AllowancesSection({ data, set }) {
   const insalubrityBase = compensation.insalubrityBase(data);
   const insalubrityField = t.field('insalubrity', { minimumWage });
   const hazardField = t.field('hazard', { rate: hazardPay.rate });
+  const allowances = compensation.allowances(data);
+  const overlap = Boolean(allowances.kept);
 
   return (
     <fieldset className="subsection">
@@ -49,7 +51,16 @@ export default function AllowancesSection({ data, set }) {
         ]}
       />
       <Explainer id="hazard" vars={{ hazardRate: hazardPay.rate }} />
-      {data.hazard && data.insalubrity > 0 && <ContentCallout id="insalubrityHazardOverlap" />}
+      {overlap && (
+        <ContentCallout
+          id="insalubrityHazardOverlap"
+          vars={{
+            insalubrity: (insalubrityBase * data.insalubrity) / 100,
+            hazard: data.salary * hazardPay.rate,
+            kept: repositories.content.label(allowances.kept === 'hazard' ? 'allowanceKeptHazard' : 'allowanceKeptInsalubrity'),
+          }}
+        />
+      )}
     </fieldset>
   );
 }

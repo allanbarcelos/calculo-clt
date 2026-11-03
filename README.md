@@ -32,7 +32,7 @@ src/
 scripts/validate-db.mjs   database validation run before every build
 ```
 
-- **Single responsibility:** `CompensationService` (gross pay), `EmployerChargesService` (INSS, RAT, third parties), `ProvisionService` (13th salary, vacation, FGTS fine, notice), `BenefitService`, `EmployeeDeductionService` (INSS, IRRF, family allowance), `WageFloorService`, `FatorRService`, `RegimeComparisonService`, and `CostCalculator`, which only orchestrates them.
+- **Single responsibility:** `CompensationService` (gross pay, legal monthly limits), `CalendarService` (working days, national holidays, DSR factor), `EmployerChargesService` (INSS, RAT, third parties), `ProvisionService` (13th salary, vacation, FGTS fine, notice), `BenefitService`, `EmployeeDeductionService` (INSS, IRRF, family allowance), `LeaveReserveService` (maternity, paternity and sickness leave), `ContractService` (standard or apprentice contract: FGTS rate, fine, notice, floor), `TaxAdvantageService` (Lucro Real: IRPJ/CSLL deduction, PAT, PIS/COFINS credits), `WageFloorService`, `CollectiveAgreementService`, `FatorRService`, `RegimeComparisonService`, and `CostCalculator`, which only orchestrates them.
 - **Open/closed:** new regimes, wage floors, rates or explanatory texts are added to the database, not to the code.
 - **Liskov:** every repository extends `VersionedRepository` and resolves versions the same way.
 - **Interface segregation:** components receive only the data they use; sections read only their own repository.
@@ -53,7 +53,12 @@ scripts/validate-db.mjs   database validation run before every build
 
 ### Adding a collective agreement
 
-Add an item to `agreements` with `id`, `validFrom`/`validTo`, `kind` (`CCT` or `ACT`), `ufs` (states, or `["*"]` for nationwide), `name`, `territory`, `registration`, `source` (an id in `sources.json`), `roles` (`id`, `label`, `floor`, `clause`) and optional `presets`, `notes`. Presets may sit on the agreement or on a role (the role wins). Allowed preset keys are listed in `presetFields`; each needs a `clause` and a `value` (or `daily` for meal vouchers, converted to monthly with `days` or 22 days). `npm run db:validate` checks all of this.
+Add an item to `agreements` with `id`, `validFrom`/`validTo`, `kind` (`CCT` or `ACT`), `ufs` (states, or `["*"]` for nationwide), `name`, `territory`, `registration`, `source` (an id in `sources.json`), `roles` (`id`, `label`, `floor`, `clause`) and optional `presets`, `notes`.
+
+Every agreement states where its values came from in `sourceKind`: `registry` (the text registered with the Ministry of Labour, or the parties' copy with its registration number), `parties` (signed by the unions, registration not found), `copy` (a third-party reproduction of the registered text) or `summary` (news or a summary, not the text). Set `calculatedFloors: true` when floors were derived from announced raises. Anything other than `registry`, an expired agreement or calculated floors is flagged as soon as the agreement is chosen and again on the result, always with where to get the official text (Sistema Mediador, by registration number or by state/municipality/category, and the signing unions). The site is a reference, not the official source.
+
+Agreements of the same series replace each other: the series is the `id` without the trailing year (`sp-asseio-2025` → `sp-asseio`), or an explicit `series`. When the latest one expires and the next is not in the database yet, it stays listed for `expiredGraceDays`, flagged as expired. Presets may sit on the agreement or on a role (the role wins). Allowed preset keys are listed in `presetFields`; each needs a `clause` and a `value` (or `daily` for meal vouchers, converted to monthly with `days` or 22 days). `npm run db:validate` checks all of this.
+| `health-plans.json` | ANS reference monthly price of employer health plans per state, age band and accommodation (generated, see below) |
 | `meta.json` | site name and last review date |
 
 ### Versioning
@@ -71,5 +76,25 @@ Any item can carry `validFrom` / `validTo` (YYYY-MM-DD, inclusive). The site use
 - **New state floor law:** add an item to `stateFloors` with the same `uf` and a later `validFrom`; set `validTo` on the old one if it expires.
 - **New rule or explanation:** add an explainer or callout to `content.json`. Text supports `**bold**`, `[label](source:id)` and `{{variable}}` / `{{variable|money|percent|number}}`.
 - **New source:** add it to `sources.json` and to a group. `npm run db:validate` fails if any reference points to a missing source.
+
+### Automatic filling
+
+- **FPAS:** picking the code fills the third-party rate and shows its composition (`tax-regimes.json` → `fpas`).
+- **DSR:** computed from the calendar of the reference year (Sundays + national holidays in `nationalHolidays`).
+- **Warnings:** overtime, night and rest-day hours above the legal monthly limits; insalubrity and hazard pay never add up (the larger is kept).
+
+### Apprentice contract and tax advantages
+
+- **Apprentice** (`federal-rates.json` → `apprentice`): FGTS at 2%, no FGTS fine or notice when the contract ends on its term, floor = hourly minimum wage × contracted hours, warnings for overtime and long workweeks.
+- **Lucro Real** (`tax-regimes.json` → `corporateIncomeTax`, `pisCofinsNonCumulative`, `patIncentive`): the result shows, apart from the monthly cost, the IRPJ/CSLL saving on the employee's cost, the PAT incentive, PIS/COFINS credits for cleaning/maintenance companies and the Empresa Cidadã deduction, ending in the net cost. Other regimes get a short explanation of why there is no such saving.
+
+### Health plan reference prices
+
+The benefits step shows, once the employee's age band is chosen, the typical monthly price of an employer health plan (outpatient + hospital) in the state: the beneficiary-weighted median and quartiles of the commercial value (VCM) operators register with ANS. It only suggests a value; the user decides whether to use it. Operators may sell up to 30% above or below the VCM.
+
+To update (ANS publishes June and December):
+
+1. From https://dadosabertos.ans.gov.br/FTP/PDA/ download into one folder: `caracteristicas_produtos_saude_suplementar-008/pda-008-caracteristicas_produtos_saude_suplementar.csv`, `valor_comercial_medio_por_municipio_NTRP-054/pda-054-geografia.csv`, `valor_comercial_medio_por_municipio_NTRP-054/<AAAAMM>.zip` and every `informacoes_consolidadas_de_beneficiarios-024/<AAAAMM>/pda-024-icb-*.zip`; unzip them all there.
+2. Run `node scripts/update-health-plan-prices.mjs <folder> <AAAAMM>` (about 4 minutes; the VCM file has ~90 million rows).
 
 After editing, run `npm run build`: it validates the database, runs the tests and generates the new version of the site in `dist/`.

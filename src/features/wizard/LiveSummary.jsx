@@ -1,7 +1,7 @@
 import { useBreakdownLabels } from '../../hooks/useBreakdownLabels.js';
 import { formatMoney } from '../../lib/format.js';
 
-export default function LiveSummary({ started, result }) {
+export default function LiveSummary({ started, result, onReset }) {
   const { groupTitle } = useBreakdownLabels();
   return (
     <aside className="card live-summary no-print" aria-labelledby="live-title">
@@ -20,6 +20,17 @@ export default function LiveSummary({ started, result }) {
         </>
       ) : (
         <p className="hint">O cálculo começa quando você escolhe uma função com piso definido ou chega à etapa “Salário”.</p>
+      )}
+      {onReset && (
+        <button
+          type="button"
+          className="btn btn--ghost live-summary__reset"
+          onClick={() => {
+            if (window.confirm('Iniciar uma nova simulação? Os dados preenchidos serão apagados.')) onReset();
+          }}
+        >
+          Nova simulação
+        </button>
       )}
     </aside>
   );

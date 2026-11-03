@@ -81,6 +81,32 @@
     { "validFrom": "2026-01-01", "validTo": "2026-12-31", "payrollRate": 0.1, "cprbShare": 0.6, "inssOnThirteenth": false, "source": "payrollRelief" },
     { "validFrom": "2027-01-01", "validTo": "2027-12-31", "payrollRate": 0.15, "cprbShare": 0.4, "inssOnThirteenth": false, "source": "payrollRelief" }
   ],
+  "fpas": [
+    {
+      "validFrom": "2026-04-01",
+      "default": "515",
+      "source": "fpasTable",
+      "entities": { "salarioEducacao": "salário-educação", "incra": "INCRA", "senai": "SENAI", "sesi": "SESI", "senac": "SENAC", "sesc": "SESC", "sebrae": "SEBRAE", "dpc": "DPC", "fundoAeroviario": "Fundo Aeroviário", "sest": "SEST", "senat": "SENAT" },
+      "codes": [
+        { "code": "507", "label": "507 — Indústria, construção, energia, saneamento, telecomunicações", "total": 5.8, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "senai": 1.0, "sesi": 1.5, "sebrae": 0.6 } },
+        { "code": "515", "label": "515 — Comércio, hotelaria, alimentação, saúde e serviços em geral", "total": 5.8, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "senac": 1.0, "sesc": 1.5, "sebrae": 0.6 } },
+        { "code": "540", "label": "540 — Navegação, portos, pesca e dragagem", "total": 5.2, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "dpc": 2.5 } },
+        { "code": "558", "label": "558 — Empresas aeroviárias", "total": 5.2, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "fundoAeroviario": 2.5 } },
+        { "code": "566", "label": "566 — Publicidade, jornalismo, rádio e TV, cultura e esporte", "total": 4.5, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "sesc": 1.5, "sebrae": 0.3 } },
+        { "code": "574", "label": "574 — Estabelecimentos de ensino", "total": 4.5, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "sesc": 1.5, "sebrae": 0.3 } },
+        { "code": "612", "label": "612 — Transporte rodoviário de cargas ou passageiros, locação de veículos", "total": 5.8, "breakdown": { "salarioEducacao": 2.5, "incra": 0.2, "sest": 1.5, "senat": 1.0, "sebrae": 0.6 } }
+      ]
+    }
+  ],
+  "corporateIncomeTax": [
+    { "validFrom": "2026-01-01", "irpj": 0.15, "irpjSurcharge": 0.1, "surchargeMonthlyThreshold": 20000, "csll": 0.09, "source": "irpjLaw" }
+  ],
+  "pisCofinsNonCumulative": [
+    { "validFrom": "2026-01-01", "validTo": "2026-12-31", "pis": 0.0165, "cofins": 0.076, "source": "pisCofinsCreditLaw" }
+  ],
+  "patIncentive": [
+    { "validFrom": "2026-01-01", "deductionRate": 0.15, "reductionFactor": 0.9, "irpjCapShare": 0.04, "source": "patLaw" }
+  ],
   "simplesRules": [
     { "validFrom": "2026-01-01", "fatorRThreshold": 0.28, "source": "simples" }
   ]

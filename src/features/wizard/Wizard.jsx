@@ -23,6 +23,8 @@ export default function Wizard() {
 
   const set = (patch) => setData((d) => ({ ...d, ...patch }));
   const result = useMemo(() => calculator.calculate(data), [calculator, data]);
+  // Nothing to reset while every field still has its initial value.
+  const pristine = Object.keys(defaults).every((key) => data[key] === defaults[key]);
   const floor = wageFloors.resolve(data);
   const salaryError = data.salary < floor.value ? t.text('salary', 'error', { floor: floor.value }) : null;
 
@@ -53,6 +55,7 @@ export default function Wizard() {
 
   const reset = () => {
     setData(defaults);
+    setShowErrors(false);
     setStep(0);
   };
 
@@ -81,7 +84,7 @@ export default function Wizard() {
             onReset={reset}
           />
         </form>
-        {!current.isResult && <LiveSummary started={data.salary > 0} result={result} />}
+        {!current.isResult && <LiveSummary started={data.salary > 0} result={result} onReset={pristine ? null : reset} />}
       </div>
     </section>
   );

@@ -2,8 +2,9 @@ import { ContentCallout, Explainer, NumberField } from '../../../components/ui';
 import { useAgreementNotice } from '../../../hooks/useAgreementNotice.js';
 import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
+import HealthPlanReference from './HealthPlanReference.jsx';
 
-const FIELDS = ['healthPlan', 'dentalPlan', 'lifeInsurance', 'education', 'pension', 'otherBenefits'];
+const FIELDS = ['healthPlan', 'dentalPlan', 'lifeInsurance', 'education', 'childcare', 'pension', 'otherBenefits'];
 
 export default function OtherBenefitsSection({ data, set, result }) {
   const educationLimit = useServices().benefits.educationLimit(result.gross);
@@ -16,6 +17,7 @@ export default function OtherBenefitsSection({ data, set, result }) {
           <NumberField key={key} {...t.field(key)} value={data[key]} onChange={(v) => set({ [key]: v })} notice={noticeFor(key)} />
         ))}
       </div>
+      <HealthPlanReference data={data} set={set} />
       {data.education > educationLimit && <ContentCallout id="educationOverLimit" vars={{ educationLimit }} />}
       <Explainer id="otherBenefits" vars={{ educationLimit }} />
     </>

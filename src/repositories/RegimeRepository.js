@@ -12,6 +12,12 @@ export class RegimeRepository extends VersionedRepository {
   rat() { return this.version('rat'); }
   thirdParties() { return this.version('thirdParties'); }
   simplesRules() { return this.version('simplesRules'); }
+  fpas() { return this.version('fpas'); }
+  corporateIncomeTax() { return this.version('corporateIncomeTax'); }
+  // null after 2026, when CBS replaces PIS/COFINS.
+  pisCofinsNonCumulative() { return this.optionalVersion('pisCofinsNonCumulative'); }
+  // null when no PAT incentive rule is in force.
+  patIncentive() { return this.optionalVersion('patIncentive'); }
 
   // null once the payroll relief transition is over
   payrollRelief() { return this.optionalVersion('payrollRelief'); }

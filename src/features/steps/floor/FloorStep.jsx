@@ -3,25 +3,20 @@ import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 import AgreementSection from './AgreementSection.jsx';
 import BandDetail from './BandDetail.jsx';
+import ContractTypeSection from './ContractTypeSection.jsx';
 import FloorSummary from './FloorSummary.jsx';
 import StateFloorInfo from './StateFloorInfo.jsx';
 
 export default function FloorStep({ data, set }) {
-  const { wageFloors, agreements, formDefaults } = useServices();
+  const { wageFloors, agreements, formDefaults, contract } = useServices();
   const t = useFormText();
   const state = wageFloors.stateFloor(data.uf);
   const floor = wageFloors.resolve(data);
   const band = wageFloors.findBand(data.uf, data.bandId);
   const agreementSelected = Boolean(agreements.selection(data));
+  const apprentice = contract.isApprentice(data);
 
-  // Picking a band or a manual agreement floor fills the salary with that floor and starts
-  // the calculation. Clearing it undoes a salary we filled, but keeps one the user typed.
-  const applyFloor = (patch) => {
-    const next = { ...data, ...patch };
-    const hasDefinedFloor = Boolean(next.bandId) || (next.hasAgreementFloor && next.agreementFloor > 0) || Boolean(agreements.selection(next)?.role);
-    if (hasDefinedFloor) set({ ...patch, salary: wageFloors.resolve(next).value, salaryAuto: true });
-    else set(data.salaryAuto ? { ...patch, salary: 0, salaryAuto: false } : patch);
-  };
+  const applyFloor = (patch) => set(wageFloors.floorPatch(data, patch));
 
   const bandOption = (b) => ({ value: b.id, label: t.text('band', 'option', b) });
   const bandOptions = [
@@ -32,15 +27,11 @@ export default function FloorStep({ data, set }) {
 
   return (
     <>
+      <ContractTypeSection data={data} set={set} />
       <SelectField
         {...t.field('state')}
         value={data.uf}
-        onChange={(uf) => {
-          const patch = { uf, bandId: wageFloors.isFederalBand(data.bandId) ? data.bandId : '' };
-          // An agreement that does not cover the new state is undone.
-          const keepsAgreement = agreements.forState(uf).some((a) => a.id === data.agreementId);
-          applyFloor(keepsAgreement ? patch : { ...agreements.revertPatch(data, formDefaults.defaults()), ...patch });
-        }}
+        onChange={(uf) => set(wageFloors.statePatch(data, uf, formDefaults.defaults()))}
         options={wageFloors.states().map((s) => ({
           value: s.uf,
           label: t.text('state', wageFloors.stateFloor(s.uf) ? 'optionWithFloor' : 'option', s),
@@ -51,9 +42,13 @@ export default function FloorStep({ data, set }) {
 
       {!agreementSelected && (
         <>
-          <StateFloorInfo uf={data.uf} />
-          <SelectField {...t.field('band')} value={data.bandId} onChange={(bandId) => applyFloor({ bandId })} options={bandOptions} />
-          <BandDetail band={band} />
+          {!apprentice && (
+            <>
+              <StateFloorInfo uf={data.uf} />
+              <SelectField {...t.field('band')} value={data.bandId} onChange={(bandId) => applyFloor({ bandId })} options={bandOptions} />
+              <BandDetail band={band} />
+            </>
+          )}
 
           <Toggle {...t.field('hasAgreementFloor')} checked={data.hasAgreementFloor} onChange={(v) => applyFloor({ hasAgreementFloor: v })} />
           {data.hasAgreementFloor && (

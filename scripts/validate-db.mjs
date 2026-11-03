@@ -58,6 +58,8 @@ const agreementIds = new Set();
 for (const a of agreementsDb.agreements) {
   const where = `collective-agreements.json "${a.id}"`;
   for (const key of ['id', 'validFrom', 'validTo', 'kind', 'name', 'territory', 'source']) if (!a[key]) errors.push(`${where}: missing "${key}"`);
+  if (!agreementsDb.sourceKinds.includes(a.sourceKind)) errors.push(`${where}: "sourceKind" must be one of ${agreementsDb.sourceKinds.join(', ')}`);
+  if (a.calculatedFloors !== undefined && typeof a.calculatedFloors !== 'boolean') errors.push(`${where}: "calculatedFloors" must be true or false`);
   if (!['CCT', 'ACT'].includes(a.kind)) errors.push(`${where}: kind must be CCT or ACT`);
   if (!Array.isArray(a.ufs) || a.ufs.length === 0) errors.push(`${where}: "ufs" must list states or "*"`);
   if (agreementIds.has(`${a.id}@${a.validFrom}`)) errors.push(`${where}: duplicated id and validFrom`);
@@ -78,11 +80,51 @@ for (const a of agreementsDb.agreements) {
   }
 }
 
+const fpasCodes = new Set(db['tax-regimes.json'].fpas.flatMap((f) => f.codes.map((c) => c.code)));
+for (const f of db['tax-regimes.json'].fpas) {
+  if (!fpasCodes.has(f.default)) errors.push(`tax-regimes.json fpas: default "${f.default}" is not a listed code`);
+  for (const c of f.codes) {
+    const sum = Object.values(c.breakdown).reduce((acc, v) => acc + v, 0);
+    if (Math.abs(sum - c.total) > 1e-9) errors.push(`tax-regimes.json fpas ${c.code}: breakdown adds up to ${sum}, not ${c.total}`);
+    for (const k of Object.keys(c.breakdown)) if (!f.entities[k]) errors.push(`tax-regimes.json fpas ${c.code}: entity "${k}" has no name`);
+  }
+}
+
+// Every dated rule must cite its source (directly or on each of its entries).
+for (const file of ['federal-rates.json', 'tax-regimes.json', 'wage-floors.json', 'occupational-hazards.json', 'health-plans.json']) {
+  for (const [table, items] of Object.entries(db[file])) {
+    if (!Array.isArray(items)) continue;
+    items.forEach((item, i) => {
+      if (!item || typeof item !== 'object' || !item.validFrom || item.source) return;
+      const children = Object.values(item).filter(Array.isArray).flat();
+      if (!children.length || !children.every((c) => c?.source)) errors.push(`${file} ${table}[${i}]: missing "source"`);
+    });
+  }
+}
+
+// Health plan references: [p25, median, p75, plans, beneficiaries] for every known age band.
+const health = db['health-plans.json'];
+const bandIds = new Set(health.ageBands.map((b) => b.id));
+for (const ref of health.references) {
+  if (!ref.weightsSource || !sourceIds.has(ref.weightsSource)) errors.push(`health-plans.json ${ref.reference}: unknown weightsSource "${ref.weightsSource}"`);
+  if (!ref.values.BR) errors.push(`health-plans.json ${ref.reference}: missing Brazil ("BR") values`);
+  for (const [scope, kinds] of Object.entries(ref.values)) {
+    for (const [kind, bands] of Object.entries(kinds)) {
+      for (const [band, v] of Object.entries(bands)) {
+        const at = `health-plans.json ${ref.reference} ${scope}.${kind}.${band}`;
+        if (!bandIds.has(band)) errors.push(`${at}: unknown age band`);
+        if (!Array.isArray(v) || v.length !== 5 || !(v[0] > 0 && v[0] <= v[1] && v[1] <= v[2] && v[3] > 0 && v[4] > 0)) errors.push(`${at}: expected [p25 <= median <= p75, plans, beneficiaries]`);
+      }
+    }
+  }
+}
+
 const REQUIRED = {
-  'federal-rates.json': ['minimumWage', 'fgts', 'inssEmployee', 'familyAllowance', 'irrf', 'workweek', 'overtime', 'nightWork', 'transportVoucher', 'mealVoucher', 'educationAid', 'notice'],
-  'tax-regimes.json': ['regimes', 'rat', 'thirdParties', 'simplesRules'],
+  'federal-rates.json': ['minimumWage', 'fgts', 'inssEmployee', 'familyAllowance', 'irrf', 'workweek', 'overtime', 'nightWork', 'transportVoucher', 'mealVoucher', 'educationAid', 'notice', 'nationalHolidays', 'leaveStatistics', 'maternityLeave', 'paternityLeave', 'sicknessLeave'],
+  'tax-regimes.json': ['regimes', 'rat', 'thirdParties', 'simplesRules', 'fpas'],
   'occupational-hazards.json': ['insalubrity', 'hazardPay'],
   'wage-floors.json': ['states', 'stateFloors', 'federalFloors'],
+  'health-plans.json': ['ageBands', 'references'],
 };
 for (const [file, keys] of Object.entries(REQUIRED)) {
   for (const key of keys) if (!Array.isArray(db[file]?.[key]) || db[file][key].length === 0) errors.push(`${file}: table "${key}" is missing or empty`);

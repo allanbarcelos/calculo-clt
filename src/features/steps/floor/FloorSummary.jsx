@@ -1,7 +1,7 @@
 import { useFormText } from '../../../hooks/useFormText.js';
 import { formatMoney } from '../../../lib/format.js';
 
-const ORIGIN_KEY = { agreementRole: 'originAgreementRole', agreement: 'originAgreement', band: 'originBand', national: 'originNational' };
+const ORIGIN_KEY = { agreementRole: 'originAgreementRole', agreement: 'originAgreement', band: 'originBand', national: 'originNational', apprentice: 'originApprentice' };
 
 export default function FloorSummary({ floor, salaryAdjusted }) {
   const t = useFormText();

@@ -1,13 +1,15 @@
-import { Explainer, NumberField, RichText, Toggle } from '../../../components/ui';
+import { ContentCallout, Explainer, NumberField, RichText, Toggle } from '../../../components/ui';
 import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 
 export default function TerminationSection({ data, set, result }) {
-  const { provisions, repositories } = useServices();
+  const { provisions, repositories, contract } = useServices();
   const t = useFormText();
-  const fgts = repositories.rates.fgts();
+  const fgts = contract.fgts(data);
   const notice = repositories.rates.notice();
   const { gross } = result;
+
+  if (contract.isApprentice(data)) return <ContentCallout id="apprenticeTermination" />;
 
   return (
     <>
@@ -18,7 +20,7 @@ export default function TerminationSection({ data, set, result }) {
       />
       {gross > 0 && (
         <p className="hint" aria-live="polite">
-          <RichText text={t.raw('includeTerminationReserve', 'note')} vars={{ amount: provisions.terminationFineAfterOneYear(gross) }} />
+          <RichText text={t.raw('includeTerminationReserve', 'note')} vars={{ amount: provisions.terminationFineAfterOneYear(gross, data) }} />
         </p>
       )}
 

@@ -1,4 +1,5 @@
 import { useServices } from '../../hooks/useServices.js';
+import RichText from '../ui/RichText.jsx';
 
 export default function MethodSection() {
   const cards = useServices().repositories.content.method();
@@ -9,7 +10,7 @@ export default function MethodSection() {
         {cards.map((c) => (
           <article key={c.title} className="card">
             <h3>{c.title}</h3>
-            <p>{c.text}</p>
+            <p><RichText text={c.text} /></p>
           </article>
         ))}
       </div>

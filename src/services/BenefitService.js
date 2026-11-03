@@ -29,6 +29,7 @@ export class BenefitService {
         { id: 'dentalPlan', amount: input.dentalPlan },
         { id: 'lifeInsurance', amount: input.lifeInsurance },
         { id: 'education', amount: input.education },
+        { id: 'childcare', amount: input.childcare ?? 0 },
         { id: 'pension', amount: input.pension },
         { id: 'plr', amount: input.plrYearly / 12 },
         { id: 'otherBenefits', amount: input.otherBenefits },

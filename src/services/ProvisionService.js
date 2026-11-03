@@ -5,9 +5,10 @@ const VACATION_BONUS = 1 / 36;
 export const ACCRUAL_FACTOR = THIRTEENTH + VACATION + VACATION_BONUS;
 
 export class ProvisionService {
-  constructor(ratesRepository, employerChargesService) {
+  constructor(ratesRepository, employerChargesService, contractService) {
     this.rates = ratesRepository;
     this.charges = employerChargesService;
+    this.contract = contractService;
   }
 
   // Paid notice (aviso prévio indenizado): days grow with tenure. Charges per item:
@@ -15,8 +16,10 @@ export class ProvisionService {
   // indemnified vacation + 1/3 → neither.
   noticeReserve(input) {
     const rules = this.rates.notice();
-    const fgts = this.rates.fgts();
+    const fgts = this.contract.fgts(input);
     const years = Math.max(0, input.expectedTenureYears);
+    // An apprentice contract ends on its term: there is no notice to provision.
+    if (!this.contract.noticeApplies(input)) return { days: 0, months: Math.max(1, years * 12), totalPerReal: 0, monthlyPerReal: 0 };
     const days = Math.min(rules.maxDays, rules.baseDays + rules.daysPerYear * Math.floor(years));
     const months = Math.max(1, years * 12);
     const fgtsShare = fgts.monthlyRate * (1 + (input.includeTerminationReserve ? fgts.terminationFine : 0));
@@ -31,7 +34,7 @@ export class ProvisionService {
   // What each R$ 1 of salary really costs the company.
   costPerSalaryReal(input) {
     const { total, onThirteenth } = this.charges.rates(input);
-    const fgts = this.rates.fgts();
+    const fgts = this.contract.fgts(input);
     const withAccruals = 1 + ACCRUAL_FACTOR;
     const termination = input.includeTerminationReserve ? fgts.terminationFine * fgts.monthlyRate * withAccruals : 0;
     const employerCharges = (1 + VACATION + VACATION_BONUS) * total + THIRTEENTH * onThirteenth;
@@ -40,7 +43,7 @@ export class ProvisionService {
 
   compute(gross, input) {
     const rates = this.charges.rates(input);
-    const fgts = this.rates.fgts();
+    const fgts = this.contract.fgts(input);
     const thirteenth = gross * THIRTEENTH;
     const vacation = gross * VACATION;
     const vacationBonus = gross * VACATION_BONUS;
@@ -66,8 +69,8 @@ export class ProvisionService {
   }
 
   // FGTS fine owed after one year, for the explanatory text.
-  terminationFineAfterOneYear(gross) {
-    const fgts = this.rates.fgts();
+  terminationFineAfterOneYear(gross, input = {}) {
+    const fgts = this.contract.fgts(input);
     return gross * fgts.monthlyRate * (1 + ACCRUAL_FACTOR) * 12 * fgts.terminationFine;
   }
 }

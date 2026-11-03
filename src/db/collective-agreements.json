@@ -11,10 +11,13 @@
     "dentalPlan": { "format": "money" },
     "lifeInsurance": { "format": "money" },
     "education": { "format": "money" },
+    "childcare": { "format": "money" },
     "pension": { "format": "money" },
     "otherBenefits": { "format": "money" },
     "plrYearly": { "format": "money" }
   },
+  "expiredGraceDays": 365,
+  "sourceKinds": ["registry", "parties", "copy", "summary"],
   "agreements": [
     {
       "id": "sc-asseio-2026",
@@ -29,6 +32,7 @@
       "dataBase": "1º de janeiro",
       "parties": "SEAC-SC (empresas) e FEVASC com 7 sindicatos de trabalhadores",
       "source": "cctAsseioSC2026",
+      "sourceKind": "registry",
       "presets": {
         "weeklyHours": { "value": 44, "clause": "cláusula 32ª, §7º" },
         "mealValue": { "daily": 33.0, "clause": "cláusula 12ª, jornada acima de 180h mensais" },
@@ -36,22 +40,105 @@
         "otherBenefits": { "value": 11.0, "clause": "cláusula 16ª, contribuição para saúde e qualificação" }
       },
       "roles": [
-        { "id": "servente", "label": "Servente / auxiliar de serviços gerais", "floor": 1752.85, "clause": "cláusula 3ª, Q", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, Q, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
+        {
+          "id": "servente",
+          "label": "Servente / auxiliar de serviços gerais",
+          "floor": 1752.85,
+          "clause": "cláusula 3ª, Q",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusulas 3ª, Q, e 9ª" },
+            "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" }
+          }
+        },
         { "id": "copeira", "label": "Copeira", "floor": 1752.85, "clause": "cláusula 3ª, P" },
         { "id": "administrativo", "label": "Pessoal administrativo", "floor": 1910.81, "clause": "cláusula 3ª, A" },
         { "id": "recepcao", "label": "Telefonista, recepcionista, garçom, cozinheiro, agente de estacionamento", "floor": 1857.54, "clause": "cláusula 3ª, H" },
         { "id": "porteiro", "label": "Porteiro de condomínio residencial", "floor": 2496.27, "clause": "cláusula 3ª, L" },
-        { "id": "jardineiro", "label": "Jardineiro de conservação", "floor": 2097.5, "clause": "cláusula 3ª, I", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, I, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
-        { "id": "lider", "label": "Líder de grupo (5 a 15 empregados)", "floor": 1958.75, "clause": "cláusula 3ª, B", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, B, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
-        { "id": "encarregado-1", "label": "Encarregado nível 1 (16 a 35 empregados)", "floor": 2397.34, "clause": "cláusula 3ª, C", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, C, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
-        { "id": "encarregado-2", "label": "Encarregado nível 2 (36 a 100 empregados)", "floor": 2996.44, "clause": "cláusula 3ª, D", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, D, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
-        { "id": "encarregado-3", "label": "Encarregado nível 3 (101 ou mais empregados)", "floor": 3745.54, "clause": "cláusula 3ª, E", "presets": { "insalubrity": { "value": 20, "clause": "cláusulas 3ª, E, e 9ª" }, "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" } } },
-        { "id": "manutencao", "label": "Mecânico, pedreiro, manobrista, marceneiro, montador de móveis, carpinteiro, operador de varredeira", "floor": 1977.73, "clause": "cláusula 3ª, F" },
-        { "id": "eletricista", "label": "Eletricista", "floor": 1977.73, "clause": "cláusula 3ª, G", "presets": { "hazard": { "value": true, "clause": "cláusula 3ª, G (periculosidade de 30%)" } } },
-        { "id": "motoboy", "label": "Motoboy", "floor": 1752.85, "clause": "cláusula 3ª, O", "presets": { "hazard": { "value": true, "clause": "cláusula 3ª, O (periculosidade de 30%)" } } },
+        {
+          "id": "jardineiro",
+          "label": "Jardineiro de conservação",
+          "floor": 2097.5,
+          "clause": "cláusula 3ª, I",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusulas 3ª, I, e 9ª" },
+            "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" }
+          }
+        },
+        {
+          "id": "lider",
+          "label": "Líder de grupo (5 a 15 empregados)",
+          "floor": 1958.75,
+          "clause": "cláusula 3ª, B",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusulas 3ª, B, e 9ª" },
+            "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" }
+          }
+        },
+        {
+          "id": "encarregado-1",
+          "label": "Encarregado nível 1 (16 a 35 empregados)",
+          "floor": 2397.34,
+          "clause": "cláusula 3ª, C",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusulas 3ª, C, e 9ª" },
+            "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" }
+          }
+        },
+        {
+          "id": "encarregado-2",
+          "label": "Encarregado nível 2 (36 a 100 empregados)",
+          "floor": 2996.44,
+          "clause": "cláusula 3ª, D",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusulas 3ª, D, e 9ª" },
+            "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" }
+          }
+        },
+        {
+          "id": "encarregado-3",
+          "label": "Encarregado nível 3 (101 ou mais empregados)",
+          "floor": 3745.54,
+          "clause": "cláusula 3ª, E",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusulas 3ª, E, e 9ª" },
+            "insalubrityBase": { "value": "salary", "clause": "cláusula 9ª" }
+          }
+        },
+        {
+          "id": "manutencao",
+          "label": "Mecânico, pedreiro, manobrista, marceneiro, montador de móveis, carpinteiro, operador de varredeira",
+          "floor": 1977.73,
+          "clause": "cláusula 3ª, F"
+        },
+        {
+          "id": "eletricista",
+          "label": "Eletricista",
+          "floor": 1977.73,
+          "clause": "cláusula 3ª, G",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 3ª, G (periculosidade de 30%)" }
+          }
+        },
+        {
+          "id": "motoboy",
+          "label": "Motoboy",
+          "floor": 1752.85,
+          "clause": "cláusula 3ª, O",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 3ª, O (periculosidade de 30%)" }
+          }
+        },
         { "id": "digitador", "label": "Digitador", "floor": 1981.22, "clause": "cláusula 3ª, K" },
         { "id": "lavadeiro", "label": "Lavadeiro", "floor": 1797.87, "clause": "cláusula 3ª, M" },
-        { "id": "dedetizacao", "label": "Agente de dedetização", "floor": 1849.97, "clause": "cláusula 3ª, R", "presets": { "insalubrity": { "value": 40, "clause": "cláusula 3ª, R (sobre o salário mínimo nacional)" } } }
+        {
+          "id": "dedetizacao",
+          "label": "Agente de dedetização",
+          "floor": 1849.97,
+          "clause": "cláusula 3ª, R",
+          "presets": {
+            "insalubrity": { "value": 40, "clause": "cláusula 3ª, R (sobre o salário mínimo nacional)" }
+          }
+        }
       ],
       "notes": [
         "Vale-alimentação por dia trabalhado: R$ 33,00 para jornada acima de 180h mensais ou 12x36, R$ 27,12 de 121h a 180h e R$ 20,63 até 120h (cláusula 12ª).",
@@ -75,6 +162,7 @@
       "dataBase": "1º de janeiro",
       "parties": "SEACES (empresas) e SINDILIMPE-ES (empregados)",
       "source": "cctAsseioES2026",
+      "sourceKind": "registry",
       "presets": {
         "weeklyHours": { "value": 44, "clause": "cláusula 3ª, §4º" },
         "overtimeRate": { "value": 60, "clause": "cláusula 8ª, 2 primeiras horas" },
@@ -86,8 +174,24 @@
       },
       "roles": [
         { "id": "asg", "label": "Auxiliar de serviços gerais (convencional)", "floor": 1682.7, "clause": "cláusula 64ª, tabela I" },
-        { "id": "asg-banheirista", "label": "Auxiliar de serviços gerais banheirista", "floor": 1682.7, "clause": "cláusula 64ª, tabela I", "presets": { "insalubrity": { "value": 40, "clause": "cláusula 10ª (sobre o salário mínimo)" } } },
-        { "id": "asg-predial", "label": "Auxiliar de serviços gerais de limpeza predial", "floor": 1682.7, "clause": "cláusula 64ª, tabela I", "presets": { "insalubrity": { "value": 20, "clause": "cláusula 10ª (sobre o salário mínimo)" } } },
+        {
+          "id": "asg-banheirista",
+          "label": "Auxiliar de serviços gerais banheirista",
+          "floor": 1682.7,
+          "clause": "cláusula 64ª, tabela I",
+          "presets": {
+            "insalubrity": { "value": 40, "clause": "cláusula 10ª (sobre o salário mínimo)" }
+          }
+        },
+        {
+          "id": "asg-predial",
+          "label": "Auxiliar de serviços gerais de limpeza predial",
+          "floor": 1682.7,
+          "clause": "cláusula 64ª, tabela I",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "cláusula 10ª (sobre o salário mínimo)" }
+          }
+        },
         { "id": "copeira", "label": "Copeira", "floor": 1682.7, "clause": "cláusula 64ª, tabela I" },
         { "id": "encarregado", "label": "Encarregado", "floor": 2614.57, "clause": "cláusula 64ª, tabela I" },
         { "id": "supervisor", "label": "Supervisor", "floor": 2607.45, "clause": "cláusula 64ª, tabela I" }
@@ -100,6 +204,1885 @@
         "Os valores são da área geral. A área industrial tem pisos e regras próprias (tabela II).",
         "Dois uniformes por ano, sem custo para o empregado (cláusula 38ª)."
       ]
+    },
+    {
+      "id": "sp-comercio-capital-2025",
+      "validFrom": "2025-09-01",
+      "validTo": "2026-08-31",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Comércio varejista/lojista — São Paulo (capital) 2025/2026",
+      "category": "Comerciários do comércio varejista e lojista",
+      "territory": "Município de São Paulo",
+      "dataBase": "1º de setembro",
+      "parties": "Sindicato dos Comerciários de São Paulo e Sindilojas-SP",
+      "source": "cct-sp-comercio-capital-2025",
+      "sourceKind": "parties",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 4ª" },
+        "overtimeRate": { "value": 60, "clause": "cláusula 18ª" }
+      },
+      "roles": [
+        {
+          "id": "office-boy-faxineiro-empacotador",
+          "label": "Office-boy, faxineiro, copeiro e empacotador (empresas com mais de 20 empregados)",
+          "floor": 1690,
+          "clause": "cláusula 4ª, a"
+        },
+        { "id": "empregados-em-geral", "label": "Empregados em geral (empresas com mais de 20 empregados)", "floor": 2120, "clause": "cláusula 4ª, b" },
+        { "id": "comissionista-garantia", "label": "Comissionista puro — garantia mínima (mais de 20 empregados)", "floor": 2536, "clause": "cláusula 5ª" },
+        {
+          "id": "repis-office-boy",
+          "label": "REPIS (até 20 empregados) — office-boy, faxineiro, copeiro, empacotador",
+          "floor": 1580,
+          "clause": "cláusula 9ª, a"
+        },
+        { "id": "repis-demais", "label": "REPIS (até 20 empregados) — demais empregados", "floor": 1977, "clause": "cláusula 9ª, b" },
+        { "id": "repis-comissionista", "label": "REPIS (até 20 empregados) — garantia do comissionista", "floor": 2372, "clause": "cláusula 9ª, c" }
+      ],
+      "notes": [
+        "Quebra de caixa: R$ 99,00/mês (cl. 15ª).",
+        "Plano de Assistência e Cuidado Pessoal: R$ 16,00/empregado/mês, obrigatório para optantes do REPIS (cl. 60ª).",
+        "Domingos e feriados: refeição ou indenização de R$ 24,00 por dia."
+      ]
+    },
+    {
+      "id": "rj-comercio-capital-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "Comércio varejista/lojista — Rio de Janeiro (capital) 2026/2027",
+      "category": "Empregados no comércio e categoria lojista do comércio varejista",
+      "territory": "Município do Rio de Janeiro",
+      "dataBase": "1º de maio",
+      "parties": "SECRJ e SindilojasRio",
+      "source": "cct-rj-comercio-capital-2026",
+      "sourceKind": "parties",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 32ª" },
+        "otherBenefits": { "value": 22, "clause": "cláusula 22ª (Benefício Social Familiar)" }
+      },
+      "roles": [
+        { "id": "empregados-em-geral", "label": "Empregados com salário fixo", "floor": 1825, "clause": "cláusula 3ª" },
+        { "id": "comissionista-garantia", "label": "Comissionistas puros e mistos — garantia", "floor": 1996, "clause": "cláusula 4ª" },
+        { "id": "experiencia-90-dias", "label": "Período de experiência (90 dias)", "floor": 1725, "clause": "cláusula 5ª" }
+      ],
+      "notes": [
+        "Quebra de caixa: R$ 77,00/mês (cl. 21ª).",
+        "Ajuda de custo para comissionistas: R$ 39,00/mês (cl. 17ª).",
+        "Auxílio-creche: R$ 274,00 (até 50 empregados) ou R$ 303,00 (cl. 20ª)."
+      ]
+    },
+    {
+      "id": "mg-comercio-bh-2026",
+      "validFrom": "2026-03-01",
+      "validTo": "2028-02-29",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Comércio lojista — Belo Horizonte e região 2026/2028",
+      "category": "Comerciários do comércio lojista",
+      "territory": "BH, Caeté, Confins, Lagoa Santa, Nova Lima, Pedro Leopoldo, Raposos, Ribeirão das Neves, Rio Acima, Sabará, São José da Lapa e Vespasiano",
+      "dataBase": "1º de março",
+      "parties": "SECBHR e Sindilojas-BH",
+      "source": "cct-mg-comercio-bh-2026",
+      "sourceKind": "parties",
+      "presets": {
+        "overtimeRate": { "value": 70, "clause": "cláusula 13ª" }
+      },
+      "roles": [
+        {
+          "id": "office-boy-servicos-gerais",
+          "label": "Office-boy, copeiro, faxineiro, servente, empacotador, entregador, vigia",
+          "floor": 1850,
+          "clause": "cláusula 3ª, a"
+        },
+        { "id": "vendedor-balconista", "label": "Vendedores e balconistas", "floor": 1900, "clause": "cláusula 3ª, b" },
+        { "id": "comissionista-garantia", "label": "Comissionista — garantia mínima", "floor": 1980, "clause": "cláusula 4ª" }
+      ],
+      "notes": [
+        "Quebra de caixa: R$ 190,46/mês (cl. 12ª).",
+        "Feriados: hora extra de 100% + R$ 70,00 (cl. 34ª).",
+        "Valores reajustados em 01/03/2027 pelo índice do salário mínimo (cl. 1ª e 3ª)."
+      ]
+    },
+    {
+      "id": "pr-comercio-curitiba-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Comércio lojista — Curitiba e região metropolitana 2026/2027",
+      "category": "Empregados no comércio lojista",
+      "territory": "Curitiba e 11 municípios da região metropolitana (cláusula 2ª)",
+      "registration": "PR002431/2026",
+      "dataBase": "1º de maio",
+      "parties": "SINDICOM Curitiba e Sindilojas Curitiba",
+      "source": "cct-pr-comercio-curitiba-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 65, "clause": "cláusula 35ª, §1º (até 20h por mês)" },
+        "mealValue": { "daily": 17, "clause": "cláusula 12ª" },
+        "mealDiscountPct": { "value": 20, "clause": "cláusula 12ª, §5º" }
+      },
+      "roles": [
+        { "id": "empregados-em-geral", "label": "Salário normativo (após 90 dias)", "floor": 2182, "clause": "cláusula 3ª, a" },
+        { "id": "comissionista-garantia", "label": "Comissionistas — garantia mínima (após 90 dias)", "floor": 2182, "clause": "cláusula 3ª, b" },
+        { "id": "primeiros-90-dias", "label": "Primeiros 90 dias", "floor": 1832, "clause": "cláusula 3ª, c" }
+      ],
+      "notes": [
+        "Horas extras acima de 20h por mês: 85% (cl. 35ª, §1º).",
+        "Domingos e feriados: 100% + vale-refeição de R$ 26,00; feriado tem abono de R$ 90,00 (cl. 19ª e 36ª)."
+      ]
+    },
+    {
+      "id": "rs-comercio-poa-2025",
+      "validFrom": "2025-11-01",
+      "validTo": "2026-10-31",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "Comércio lojista — Porto Alegre 2025/2026",
+      "category": "Empregados no comércio lojista e varejistas correlatos",
+      "territory": "Porto Alegre",
+      "dataBase": "1º de novembro",
+      "parties": "Sindec Porto Alegre e Sindilojas Porto Alegre",
+      "source": "cct-rs-comercio-poa-2025",
+      "sourceKind": "registry",
+      "roles": [
+        { "id": "demais-empregados", "label": "Demais empregados", "floor": 1926, "clause": "cláusula 3ª, b" },
+        { "id": "comissionista", "label": "Salário misto ou só comissões — garantia", "floor": 2067, "clause": "cláusula 3ª, a" }
+      ],
+      "notes": [
+        "Hora extra: 50% nas 2 primeiras e 100% nas seguintes (cl. 18ª).",
+        "Quebra de caixa: 10% do salário (cl. 20ª).",
+        "Quinquênio: 3% a cada 5 anos (cl. 19ª)."
+      ]
+    },
+    {
+      "id": "ba-comercio-salvador-2026",
+      "validFrom": "2026-03-01",
+      "validTo": "2027-02-28",
+      "kind": "CCT",
+      "ufs": ["BA"],
+      "name": "Comércio lojista — Salvador 2026/2027",
+      "category": "Empregados no comércio varejista em lojas",
+      "territory": "Município de Salvador",
+      "dataBase": "1º de março",
+      "parties": "Sindicato dos Comerciários de Salvador e Sindilojas-BA",
+      "source": "cct-ba-comercio-salvador-2026",
+      "sourceKind": "parties",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 6ª" },
+        "overtimeRate": { "value": 70, "clause": "cláusula 6ª, §1º (2 primeiras horas)" },
+        "mealValue": { "daily": 25, "clause": "cláusula 8ª (jornada a partir de 6h)" },
+        "mealDiscountPct": { "value": 20, "clause": "cláusula 8ª" },
+        "otherBenefits": { "value": 25, "clause": "cláusula 19ª (Benefício Social Familiar)" }
+      },
+      "roles": [
+        { "id": "empregados-em-geral", "label": "Todos os empregados", "floor": 1820, "clause": "cláusula 4ª" },
+        { "id": "comissionista-garantia", "label": "Comissionistas — remuneração mínima", "floor": 1820, "clause": "cláusula 5ª" }
+      ],
+      "notes": ["Quebra de caixa: 10% do salário (cl. 12ª).", "Triênio: 3% a cada 3 anos (cl. 11ª).", "Feriados: 100% + bonificação de R$ 120,00 (cl. 7ª)."]
+    },
+    {
+      "id": "pe-comercio-recife-2026",
+      "validFrom": "2026-07-01",
+      "validTo": "2027-06-30",
+      "kind": "CCT",
+      "ufs": ["PE"],
+      "name": "Comércio lojista — Recife 2026/2027",
+      "category": "Empregados no comércio lojista de bens e serviços",
+      "territory": "Recife",
+      "registration": "PE000804/2026",
+      "dataBase": "1º de julho",
+      "parties": "Sindicato dos Empregados no Comércio do Recife e Sindilojas Recife",
+      "source": "cct-pe-comercio-recife-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "cláusula 18ª" },
+        "otherBenefits": { "value": 265.5, "clause": "cláusulas 21ª (ajuda-alimentação de R$ 245,00) e 24ª (plano de assistência de R$ 20,50)" }
+      },
+      "roles": [
+        { "id": "salario-normativo", "label": "Salário normativo", "floor": 1832, "clause": "cláusula 3ª" },
+        { "id": "admissional-120-dias", "label": "Admissional — primeiros 120 dias", "floor": 1680, "clause": "cláusula 4ª" }
+      ],
+      "notes": [
+        "Admissional sobe para R$ 1.745,00 em 01/01/2027 (cl. 4ª).",
+        "Quebra de caixa: 10% do salário admissional (cl. 17ª).",
+        "Abono único em set/2026: R$ 92,00 no piso ou 4,90% acima dele (cl. 25ª)."
+      ]
+    },
+    {
+      "id": "ce-comercio-fortaleza-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["CE"],
+      "name": "Comércio varejista e lojista — Fortaleza 2026",
+      "category": "Empregados em estabelecimentos comerciais varejistas, atacadistas e intermediários",
+      "territory": "Fortaleza",
+      "registration": "CE000111/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "Sindicato dos Comerciários de Fortaleza e Sindilojas Fortaleza",
+      "source": "cct-ce-comercio-fortaleza-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 70, "clause": "cláusula 12ª da CCT CE000038/2025" },
+        "mealValue": { "daily": 14.1, "clause": "cláusula 5ª do termo aditivo (jornada acima de 5h)" },
+        "mealDiscountPct": { "value": 6.25, "clause": "cláusula 5ª do termo aditivo" }
+      },
+      "roles": [
+        { "id": "piso-ate-10", "label": "Empresas com até 10 empregados (após o 3º mês)", "floor": 1701, "clause": "cláusula 3ª, A" },
+        { "id": "piso-mais-10", "label": "Empresas com mais de 10 empregados (após o 3º mês)", "floor": 1772, "clause": "cláusula 3ª, B" }
+      ],
+      "notes": ["Quebra de caixa: 10% do salário (cl. 11ª da CCT).", "Comissionista: garantia igual ao piso após o 3º mês (cl. 15ª da CCT)."]
+    },
+    {
+      "id": "df-comercio-varejista-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["DF"],
+      "name": "Comércio varejista — Distrito Federal 2026/2027",
+      "category": "Empregados no comércio varejista",
+      "territory": "Distrito Federal",
+      "registration": "DF000475/2026",
+      "dataBase": "1º de maio",
+      "parties": "Sindicom-DF e Sindivarejista-DF",
+      "source": "cct-df-comercio-varejista-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "cláusula 11ª" },
+        "mealValue": { "daily": 35.31, "clause": "cláusula 13ª, c (empresa não associada, mais de 5 empregados)" },
+        "mealDiscountPct": { "value": 10, "clause": "cláusula 13ª" }
+      },
+      "roles": [
+        { "id": "salario-ingresso", "label": "Salário de ingresso (caixa, atendente, estoquista, recepcionista)", "floor": 1790.26, "clause": "cláusula 3ª" },
+        { "id": "motorista", "label": "Motoristas", "floor": 1894.63, "clause": "cláusula 3ª, §1º" },
+        { "id": "limpeza", "label": "Faxineiros e serviços de limpeza", "floor": 1735.95, "clause": "cláusula 3ª, §3º" },
+        { "id": "gerente", "label": "Gerente", "floor": 2416.85, "clause": "cláusula 3ª, §4º" },
+        { "id": "home-center", "label": "Lojas home-center", "floor": 1826.56, "clause": "cláusula 3ª, §8º" },
+        { "id": "comissionista-garantia", "label": "Comissionista — garantia", "floor": 2237.83, "clause": "cláusula 8ª" },
+        { "id": "repis", "label": "REPIS (ME/EPP aderentes)", "floor": 1696.54, "clause": "cláusula 4ª" }
+      ],
+      "notes": [
+        "Vale-refeição: R$ 23,81/dia em associadas com mais de 15 empregados ou R$ 30,00 para sindicalizados nelas (cl. 13ª).",
+        "Quebra de caixa: 15% do salário, se a empresa desconta diferenças (cl. 10ª).",
+        "Domingos e feriados: +50%, mínimo R$ 92,65, mais vale-refeição de R$ 30,00 (cl. 32ª e 33ª)."
+      ]
+    },
+    {
+      "id": "go-comercio-varejista-2026",
+      "validFrom": "2026-04-01",
+      "validTo": "2027-03-31",
+      "kind": "CCT",
+      "ufs": ["GO"],
+      "name": "Comércio varejista — Goiás 2026/2027 (termo aditivo)",
+      "category": "Empregados no comércio varejista",
+      "territory": "Estado de Goiás; piso de vendedor próprio em Goiânia e Aparecida de Goiânia",
+      "dataBase": "1º de abril",
+      "parties": "SECEG e Sindilojas-GO",
+      "source": "cct-go-comercio-varejista-2026",
+      "sourceKind": "parties",
+      "roles": [
+        { "id": "empregados-em-geral", "label": "Empregados em geral (exceto vendedores)", "floor": 1722.25, "clause": "cláusula 3ª do termo aditivo" },
+        {
+          "id": "vendedor-goiania",
+          "label": "Vendedores em Goiânia e Aparecida — mínimo com comissões e DSR",
+          "floor": 1863,
+          "clause": "cláusula 3ª, §2º do termo aditivo"
+        }
+      ],
+      "notes": ["Gratificação de caixa: R$ 228,84/mês (cl. 7ª do aditivo).", "Hora extra e demais cláusulas da CCT principal não foram conferidas."]
+    },
+    {
+      "id": "sp-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Asseio e Conservação — São Paulo (capital) 2026",
+      "category": "Empregados em empresas de asseio, conservação, limpeza, portaria, recepção e copa terceirizadas",
+      "territory": "São Paulo/SP (município)",
+      "registration": "SP003552/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SEAC-SP × SIEMACO-SP",
+      "source": "cct-sp-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 3ª (pisos p/ 44h semanais/220h mensais)" },
+        "mealValue": { "daily": 21.8, "clause": "Cl. 15ª Tíquete refeição R$ 21,80/dia trabalhado" },
+        "mealDiscountPct": { "value": 6.7, "clause": "Cl. 15ª desconto até R$ 1,46/dia (≈6,7%)" },
+        "healthPlan": { "value": 37.09, "clause": "Cl. 18ª Sistema de proteção social (assist. médica+odonto ambulatorial) R$ 37,09/empregado" },
+        "otherBenefits": { "value": 483.66, "clause": "Cl. 14ª Cesta Básica I R$ 151,91 + Cl. 16ª Cesta Básica II R$ 315,00 + Cl. 23ª Benefício Social Sindical R$ 16,75" },
+        "plrYearly": { "value": 356.39, "clause": "Cl. 13ª PPR 2026 R$ 356,39 (2 × R$ 178,19)" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / Auxiliar de limpeza (piso mínimo)", "floor": 1837.4, "clause": "Cl. 3ª" },
+        {
+          "id": "agente-higienizacao",
+          "label": "Agente de higienização (banheiros públicos/grande circulação)",
+          "floor": 1837.4,
+          "clause": "Cl. 3ª",
+          "presets": {
+            "insalubrity": { "value": 40, "clause": "Cl. 10ª item 4" },
+            "insalubrityBase": { "value": "minimumWage", "clause": "Cl. 10ª item 4" }
+          }
+        },
+        { "id": "copeira", "label": "Copeira", "floor": 1850.07, "clause": "Cl. 3ª" },
+        { "id": "recepcionista", "label": "Recepcionista", "floor": 1995.25, "clause": "Cl. 3ª" },
+        { "id": "limpador-vidro", "label": "Limpador de vidro", "floor": 2014.1, "clause": "Cl. 3ª" },
+        { "id": "porteiro", "label": "Porteiro / Controlador de acesso / Fiscal de piso", "floor": 2162.6, "clause": "Cl. 3ª" },
+        { "id": "lider", "label": "Líder (até 10 empregados)", "floor": 2003.9, "clause": "Cl. 3ª" },
+        { "id": "encarregado", "label": "Encarregado (11+ empregados)", "floor": 2404.68, "clause": "Cl. 3ª" }
+      ],
+      "notes": [
+        "Insalubridade sobre SM federal: 20% limpeza hospitalar/clínicas; 40% isolamento/UTI/centro cirúrgico (Cl. 10ª)",
+        "Cesta Básica II R$ 315 só p/ pisos até R$ 2.720,86; cai p/ R$ 240/140 com 1/2 dias de atestado (Cl. 16ª)",
+        "Auxílio-creche 30% do SM por filho até 24 meses (CNPJ com 30+ empregadas) (Cl. 19ª)",
+        "CCT vale 2026–2027; cláusulas econômicas 12 meses (renegociação jan/2027)"
+      ]
+    },
+    {
+      "id": "rj-asseio-2026",
+      "validFrom": "2026-03-01",
+      "validTo": "2027-02-28",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "Asseio e Conservação — Rio de Janeiro (município) 2026",
+      "category": "Empregados em empresas de asseio e conservação",
+      "territory": "Rio de Janeiro/RJ (município)",
+      "registration": "RJ000911/2026",
+      "dataBase": "1º de março",
+      "parties": "SEAC-RJ × Sindicato dos Empregados de Empresas de Asseio e Conservação (SIEMACO-RIO)",
+      "source": "cct-rj-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "Cl. 16ª (100% domingos/feriados)" },
+        "mealValue": { "daily": 27.0, "days": 23, "clause": "Cl. 21ª Auxílio alimentação R$ 27,00/dia trabalhado (CCT estima 23 dias = R$ 621)" },
+        "mealDiscountPct": { "value": 10, "clause": "Cl. 21ª desconto 10%" },
+        "otherBenefits": { "value": 22.7, "clause": "Cl. 27ª Benefício Social Familiar R$ 22,70/trabalhador" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / Faxineira / Limpador", "floor": 1851.9, "clause": "Cl. 3ª" },
+        { "id": "copeira", "label": "Copeira", "floor": 1851.9, "clause": "Cl. 3ª §1º" },
+        { "id": "recepcionista", "label": "Recepcionista", "floor": 1966.52, "clause": "Cl. 3ª §1º" },
+        { "id": "porteiro", "label": "Porteiro / Vigia terceirizado / Zelador", "floor": 2051.95, "clause": "Cl. 3ª §1º" },
+        { "id": "encarregado", "label": "Encarregado", "floor": 2312.75, "clause": "Cl. 3ª §1º" },
+        { "id": "supervisor", "label": "Supervisor", "floor": 4727.39, "clause": "Cl. 3ª §1º" },
+        {
+          "id": "limpador-vidro",
+          "label": "Limpador de vidro (andaime > 2,5 m)",
+          "floor": 1851.9,
+          "clause": "Cl. 3ª §1º e §4º",
+          "presets": {
+            "hazard": { "value": true, "clause": "Cl. 3ª §4º periculosidade só em andaime > 2,5 m" }
+          }
+        }
+      ],
+      "notes": [
+        "Adicional noturno 20% (22h–5h) (Cl. 17ª)",
+        "Gratificação encarregados sobre piso servente: 25% (16–30 subord.), 30% (31–60), 40% (61+); líder de turma 15% (Cl. 13ª/14ª)",
+        "Insalubridade 20% hospitais / 40% isolamento, lixeiras e banheiros públicos (Cl. 18ª)",
+        "Planos médico R$ 54,06 e odonto R$ 17,50 são descontados do empregado (Cl. 24ª/25ª), sem custo patronal"
+      ]
+    },
+    {
+      "id": "mg-bh-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Asseio e Conservação — Belo Horizonte 2026",
+      "category": "Empregados em empresas de prestação de serviços de asseio, conservação, portaria, copa e recepção",
+      "territory": "Belo Horizonte/MG",
+      "registration": "MG004404/2025",
+      "dataBase": "1º de janeiro",
+      "parties": "SEAC-MG × SINDEAC",
+      "source": "cct-mg-bh-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "Cl. 9ª (100% repouso/feriado)" },
+        "mealValue": { "daily": 31.34, "clause": "Cl. 13ª Ticket alimentação/refeição R$ 31,34/dia (jornada ≥190h/mês ou 12x36)" },
+        "mealDiscountPct": { "value": 20, "clause": "Cl. 13ª §3º até 20%" },
+        "healthPlan": { "value": 103.09, "clause": "Cl. 16ª PAF (médico+odonto+exames) R$ 103,09/empregado ao SINDEAC" },
+        "otherBenefits": { "value": 200.0, "clause": "Cl. 14ª Cartão cesta básica R$ 200,00 (perde com falta)" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / Faxineiro (piso mínimo)", "floor": 1772.8, "clause": "Cl. 3ª itens 1/27/58" },
+        { "id": "copeira", "label": "Copeira(o)", "floor": 1772.8, "clause": "Cl. 3ª item 21" },
+        { "id": "limpador-vidro", "label": "Limpador de vidros", "floor": 1941.39, "clause": "Cl. 3ª item 38" },
+        { "id": "porteiro", "label": "Porteiro", "floor": 2294.91, "clause": "Cl. 3ª item 55" },
+        { "id": "controlador-acesso", "label": "Controlador de acesso ou de piso", "floor": 2294.91, "clause": "Cl. 3ª item 20" },
+        { "id": "encarregado", "label": "Encarregado", "floor": 2648.04, "clause": "Cl. 3ª item 26" },
+        { "id": "recepcionista", "label": "Recepcionista (44h)", "floor": 3043.29, "clause": "Cl. 3ª item 56" },
+        { "id": "supervisor", "label": "Supervisor", "floor": 3438.63, "clause": "Cl. 3ª item 61" }
+      ],
+      "notes": [
+        "Adicional noturno 39% com hora de 60 min (Cl. 10ª)",
+        "Insalubridade 40% s/ SM p/ limpeza de banheiros públicos/grande circulação (Cl. 12ª)",
+        "Seguro de vida obrigatório: cobertura mín. R$ 20.327,11 (prêmio não fixado) (Cl. 19ª)",
+        "Acúmulo de função +12%; RMBH (sem BH) tem CCT própria MG000135/2026 com mesmos pisos e PAF R$ 83,04"
+      ]
+    },
+    {
+      "id": "pr-asseio-2026",
+      "validFrom": "2026-02-01",
+      "validTo": "2027-01-31",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Asseio e Conservação — Paraná 2026",
+      "category": "Empregados em empresas de asseio e conservação (inclui SIEMACO Curitiba)",
+      "territory": "Paraná (estadual)",
+      "registration": "PR000063/2026",
+      "dataBase": "1º de fevereiro",
+      "parties": "SEAC-PR × FEACONSPAR, SIEMACO Curitiba e demais sindicatos laborais",
+      "source": "cct-pr-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "Cl. 10ª (2 primeiras horas 50%, demais 100%)" },
+        "mealValue": { "daily": 30.0, "days": 30, "clause": "Cl. 13ª Vale-alimentação R$ 900,00/mês (R$ 30/dia p/ desconto de falta)" },
+        "mealDiscountPct": { "value": 20, "clause": "Cl. 13ª §1º até 20% (10% a partir de 02/2027 p/ assíduos)" },
+        "healthPlan": { "value": 94.5, "clause": "Cl. 16ª Benefício assistência médica R$ 94,50/empregado" },
+        "otherBenefits": { "value": 31.0, "clause": "Cl. 17ª Benefício Social Familiar R$ 31,00/empregado" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / Auxiliar de serviços gerais", "floor": 1900.0, "clause": "Cl. 3ª item 01" },
+        { "id": "copeira", "label": "Copeira", "floor": 1961.0, "clause": "Cl. 3ª item 02" },
+        { "id": "porteiro", "label": "Porteiro", "floor": 2415.0, "clause": "Cl. 3ª item 09" },
+        { "id": "encarregado", "label": "Encarregado (3–10 subordinados)", "floor": 2191.0, "clause": "Cl. 3ª item 03a" },
+        { "id": "encarregado-11-20", "label": "Encarregado (11–20 subordinados)", "floor": 2279.0, "clause": "Cl. 3ª item 03b" },
+        { "id": "encarregado-20-mais", "label": "Encarregado (20+ subordinados)", "floor": 2404.0, "clause": "Cl. 3ª item 03c" },
+        { "id": "supervisor", "label": "Supervisor", "floor": 3023.0, "clause": "Cl. 3ª item 04" }
+      ],
+      "notes": [
+        "Adicional de risco porteiro R$ 86/mês (R$ 43 SDF e controladores/vigias) (Cl. 11ª)",
+        "Servente+copa R$ 2.031 (piso + R$ 131); servente em hospital +R$ 62 (Cl. 3ª 02.01)",
+        "Insalubridade calculada s/ SM nacional; VA R$ 900 não devido onde o posto fornece refeição",
+        "CCT 2026–2028; pisos reajustados em 01/02/2027 por INPC+1%"
+      ]
+    },
+    {
+      "id": "rs-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "Asseio e Conservação — Rio Grande do Sul 2026",
+      "category": "Empregados em empresas de asseio e conservação",
+      "territory": "RS (lista de municípios, inclui Porto Alegre)",
+      "registration": "RS000041/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SINDASSEIO-RS × SEEAC/RS",
+      "source": "cct-rs-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 4ª (220h/44h semanais)" },
+        "overtimeRate": { "value": 50, "clause": "Cl. 16ª (1ª e 2ª horas)" },
+        "mealValue": { "daily": 27.15, "clause": "Cl. 20ª Auxílio-alimentação R$ 27,15/dia (jornada > 6h)" },
+        "mealDiscountPct": { "value": 19, "clause": "Cl. 20ª até 19%" },
+        "otherBenefits": { "value": 105.52, "clause": "Cl. 19ª Prêmio assiduidade mín. R$ 80 (jornada > 6h) + Cl. 31ª Benefício Social Familiar R$ 25,52" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Faxineiro / Auxiliar de limpeza / Servente", "floor": 1765.86, "clause": "Cl. 3ª" },
+        { "id": "copeira", "label": "Copeiro", "floor": 1765.86, "clause": "Cl. 3ª" },
+        { "id": "recepcionista", "label": "Recepcionista", "floor": 1996.44, "clause": "Cl. 3ª" },
+        { "id": "porteiro", "label": "Porteiro", "floor": 2126.25, "clause": "Cl. 3ª" },
+        { "id": "zelador", "label": "Zelador", "floor": 2151.89, "clause": "Cl. 3ª" },
+        { "id": "limpador-alpinista", "label": "Limpador alpinista", "floor": 2243.81, "clause": "Cl. 3ª" },
+        {
+          "id": "higienizador-banheiros",
+          "label": "Limpeza de banheiros públicos/hospitais/UPAs",
+          "floor": 1765.86,
+          "clause": "Cl. 3ª",
+          "presets": {
+            "insalubrity": { "value": 40, "clause": "Cl. 17ª a" },
+            "insalubrityBase": { "value": "salary", "clause": "Cl. 17ª a" }
+          }
+        }
+      ],
+      "notes": [
+        "Insalubridade calculada sobre o salário normativo da função, não sobre o SM (Cl. 17ª)",
+        "Prêmio assiduidade R$ 80 (>6h/dia) ou R$ 40 (≤6h) só com 100% de assiduidade (Cl. 19ª)",
+        "Auxílio-lanche p/ jornadas ≤ 6h (mín. ~R$ 13) (Cl. 21ª)",
+        "CCT não tem piso de encarregado/supervisor"
+      ]
+    },
+    {
+      "id": "pe-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["PE"],
+      "name": "Asseio e Conservação — Pernambuco (Recife/Zona da Mata/Agreste) 2026",
+      "category": "Trabalhadores em empresas de asseio e conservação, limpeza urbana e locação de mão de obra",
+      "territory": "PE (lista de municípios, inclui Recife; Sertão tem CCT PE000056/2026)",
+      "registration": "PE000054/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SEAC-PE × STEALMOAIC (Sindicato Intermunicipal dos Trabalhadores em Asseio e Conservação)",
+      "source": "cct-pe-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "mealValue": { "daily": 16.0, "clause": "Cl. 14ª Vale refeição/alimentação R$ 16,00/dia trabalhado" },
+        "healthPlan": { "value": 83.93, "clause": "Cl. 18ª Cobertura Social (médico ambulatorial+odonto) R$ 83,93/trabalhador" },
+        "otherBenefits": { "value": 151.7, "clause": "Cl. 16ª Cesta básica (assiduidade) R$ 151,70" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / ASG (piso da categoria)", "floor": 1632.45, "clause": "Cl. 3ª" },
+        { "id": "porteiro", "label": "Porteiro / Auxiliar de portaria / Vigia", "floor": 1749.64, "clause": "Cl. 3ª §2º" },
+        { "id": "recepcionista", "label": "Recepcionista / Auxiliar administrativo", "floor": 1749.64, "clause": "Cl. 3ª §2º" }
+      ],
+      "notes": [
+        "Cesta perde 25% com 1 falta e 50% com 2 (Cl. 16ª)",
+        "Insalubridade 40% p/ banheiros com 5+ vasos (grande circulação) e maqueiros (Cl. 10ª/11ª)",
+        "Orientador de tráfego I R$ 1.805,96; II R$ 2.624,36 + 30% periculosidade se moto (Cl. 5ª/12ª)",
+        "CCT não traz piso de encarregado; copeira segue piso da categoria"
+      ]
+    },
+    {
+      "id": "df-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["DF"],
+      "name": "Asseio e Conservação — Distrito Federal 2026",
+      "category": "Empregados em empresas de asseio, conservação, trabalho temporário e serviços terceirizáveis",
+      "territory": "Distrito Federal",
+      "registration": "DF000042/2025 + Termo Aditivo DF000026/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SEAC-DF × SINDISERVIÇOS-DF",
+      "source": "cct-df-asseio-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "CCT DF000042/2025 Cl. 40ª" },
+        "overtimeRate": { "value": 50, "clause": "CCT DF000042/2025 Cl. 40ª §2º" },
+        "mealValue": { "daily": 46.38, "clause": "TA Cl. 6ª Auxílio alimentação R$ 46,38/dia trabalhado, sem ônus ao trabalhador" },
+        "mealDiscountPct": { "value": 0, "clause": "TA Cl. 6ª sem ônus para o trabalhador" },
+        "healthPlan": { "value": 209.4, "clause": "TA Cl. 5ª a) Plano ambulatorial R$ 209,40/trabalhador (repasse ao SINDISERVIÇOS)" },
+        "dentalPlan": { "value": 14.28, "clause": "TA Cl. 5ª b) Auxílio odontológico R$ 14,28" },
+        "lifeInsurance": { "value": 3.78, "clause": "TA Cl. 5ª c) Seguro de vida + assistência funeral R$ 3,78" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente / Auxiliar de serviços gerais", "floor": 1862.09, "clause": "TA Cl. 3ª" },
+        { "id": "copeira", "label": "Copeira", "floor": 1862.09, "clause": "TA Cl. 3ª" },
+        {
+          "id": "agente-higienizacao",
+          "label": "Agente de higienização de banheiros",
+          "floor": 1862.09,
+          "clause": "TA Cl. 3ª",
+          "presets": {
+            "insalubrity": { "value": 40, "clause": "CCT Cl. 13ª I (grande circulação; 20% em locais com controle de acesso)" }
+          }
+        },
+        { "id": "agente-portaria", "label": "Agente de portaria / Fiscal de piso", "floor": 2029.22, "clause": "TA Cl. 3ª" },
+        { "id": "recepcionista", "label": "Recepcionista", "floor": 2749.17, "clause": "TA Cl. 3ª" },
+        { "id": "lider", "label": "Auxiliar de encarregado / Líder de equipe", "floor": 2749.17, "clause": "TA Cl. 3ª" },
+        { "id": "encarregado", "label": "Encarregado de limpeza", "floor": 3542.52, "clause": "TA Cl. 3ª" },
+        { "id": "supervisor", "label": "Supervisor", "floor": 3542.54, "clause": "TA Cl. 3ª" }
+      ],
+      "notes": [
+        "Insalubridade banheiros: 40% grande circulação; 20% uso coletivo c/ controle de acesso ou hospitais (CCT Cl. 13ª)",
+        "Jauzeiro em balancim +30% periculosidade (CCT Cl. 15ª)",
+        "Contribuição de custeio patronal R$ 16/empregado (ano) (TA Cl. 9ª)",
+        "Reajuste 2026: 6,79% até R$ 2.999,99; 4,70% acima"
+      ]
+    },
+    {
+      "id": "go-asseio-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2027-12-31",
+      "kind": "CCT",
+      "ufs": ["GO"],
+      "name": "Asseio e Conservação (limpeza ambiental) — Goiás 2026",
+      "category": "Empregados de empresas de asseio, conservação e limpeza ambiental",
+      "territory": "Goiás (estadual)",
+      "registration": "GO001031/2025",
+      "dataBase": "1º de janeiro",
+      "parties": "SEAC-Goiás × SEACONS",
+      "source": "cct-go-asseio-2026",
+      "sourceKind": "registry",
+      "calculatedFloors": true,
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 3ª (piso p/ até 44h semanais)" },
+        "overtimeRate": { "value": 50, "clause": "Cl. 9ª" },
+        "mealValue": { "daily": 26.0, "clause": "Cl. 13ª Auxílio alimentação R$ 26,00/dia trabalhado" },
+        "mealDiscountPct": { "value": 11, "clause": "Cl. 13ª desconto 11%" }
+      },
+      "roles": [
+        {
+          "id": "servente",
+          "label": "Auxiliar de limpeza / ASG / Faxineiro",
+          "floor": 1711.0,
+          "clause": "cláusula 3ª, §1º (calculado)",
+          "presets": {
+            "insalubrity": { "value": 20, "clause": "Cl. 10ª (grau médio automático p/ limpeza)" },
+            "insalubrityBase": { "value": "minimumWage", "clause": "Cl. 10ª (grau médio automático p/ limpeza)" }
+          }
+        }
+      ],
+      "notes": [
+        "Piso do servente calculado pelo reajuste de 6,834% da convenção sobre o piso de 2025; a tabela oficial (CDPS) não foi localizada.",
+        "Pisos por função publicados só na Certidão de Demonstração de Pisos Salariais (CDPS) SEAC/SEACONS — reajuste 6,834% s/ pisos de 2025",
+        "Limpeza hospitalar: insalubridade 40% s/ SM (Cl. 10ª)",
+        "Porteiro/recepcionista bilíngue +50% sobre o piso (Cl. 3ª)",
+        "Custeio IAFAS R$ 16 + INPC/2025 por trabalhador; seguro de vida: empregado paga até R$ 4, empresa o restante (Cl. 17ª/18ª)"
+      ]
+    },
+    {
+      "id": "sp-vigilancia-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2027-12-31",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Vigilância Privada — São Paulo 2026/2027",
+      "category": "Segurança privada patrimonial, pessoal, cursos de formação e monitoramento eletrônico",
+      "territory": "Estado de São Paulo (sindicatos de base e FETRAVESP); exclui escolta armada",
+      "registration": "SP000195/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SESVESP, FETRAVESP, SEEVISSP e demais sindicatos profissionais do estado",
+      "source": "cct-sp-vigilancia-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 40ª" },
+        "overtimeRate": { "value": 60, "clause": "cláusula 12ª" },
+        "mealValue": { "daily": 42.0, "clause": "cláusula 17ª" },
+        "mealDiscountPct": { "value": 18, "clause": "cláusula 17ª, §3º" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante",
+          "floor": 2271.74,
+          "clause": "cláusula 3ª, §1º, grupo A, I",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 15ª e NR-16" }
+          }
+        },
+        {
+          "id": "inspetor-seguranca",
+          "label": "Inspetor de segurança",
+          "floor": 3287.45,
+          "clause": "cláusula 3ª, grupo C",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 15ª" }
+          }
+        },
+        {
+          "id": "supervisor-seguranca",
+          "label": "Supervisor de segurança",
+          "floor": 3969.05,
+          "clause": "cláusula 3ª, grupo C",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 15ª" }
+          }
+        },
+        { "id": "administrativo", "label": "Empregados administrativos", "floor": 1703.91, "clause": "cláusula 3ª, grupo C" }
+      ],
+      "notes": [
+        "Gratificações sobre o piso do vigilante: líder 12%; segurança pessoal, condutor, brigadista e balanceiro 10%; operador de monitoramento ou drone 11,77% (cl. 3ª, §1º).",
+        "Assistência médica obrigatória paga pela empresa, sem valor fixo; desconto do empregado até 5% do piso, máx. R$ 135,90 (cl. 20ª). Informe o custo no campo de plano de saúde.",
+        "Seguro de vida de 26 a 52 vezes piso + periculosidade, sem prêmio fixado (cl. 22ª)."
+      ]
+    },
+    {
+      "id": "rj-vigilancia-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "Vigilância Privada — Rio de Janeiro (capital) 2026",
+      "category": "Vigilantes e empregados em empresas de segurança, vigilância e transporte de valores",
+      "territory": "Município do Rio de Janeiro",
+      "registration": "RJ001160/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SINDESP-RJ e SINDVIG",
+      "source": "cct-rj-vigilancia-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 45ª, §11" },
+        "mealValue": { "daily": 40.0, "clause": "cláusula 8ª (por plantão de até 12h)" },
+        "mealDiscountPct": { "value": 20, "clause": "cláusula 8ª, §4º" },
+        "otherBenefits": { "value": 51.46, "clause": "cláusulas 10ª (auxílio familiar R$ 32,93) e 6ª (VA fixo R$ 18,53)" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante",
+          "floor": 2034.15,
+          "clause": "cláusula 4ª, §1º, I",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 7ª, §2º" }
+          }
+        },
+        {
+          "id": "vigilante-motorista",
+          "label": "Vigilante motorista ou motociclista",
+          "floor": 2440.99,
+          "clause": "cláusula 4ª, §1º, II",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 7ª, §2º" }
+          }
+        },
+        {
+          "id": "seguranca-pessoal",
+          "label": "Segurança pessoal privada",
+          "floor": 2440.99,
+          "clause": "cláusula 4ª, §1º, V",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 7ª, §2º" }
+          }
+        },
+        {
+          "id": "fiscal-posto",
+          "label": "Fiscal ou supervisor de posto",
+          "floor": 2253.32,
+          "clause": "cláusula 4ª, §1º, VII",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 7ª, §2º" }
+          }
+        },
+        {
+          "id": "supervisor-area",
+          "label": "Supervisor de área",
+          "floor": 3052.8,
+          "clause": "cláusula 4ª, §1º, VI",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 7ª, §2º" }
+          }
+        },
+        { "id": "administrativo", "label": "Serviços administrativos", "floor": 1713.08, "clause": "cláusula 4ª, §1º, X" }
+      ],
+      "notes": [
+        "Seguro de vida: 33 vezes o piso (morte natural em serviço), 70 vezes (acidente em serviço) (cl. 11ª).",
+        "Gratificação transitória de 20% para vigilante motorista e segurança pessoal (cl. 4ª, §2º)."
+      ]
+    },
+    {
+      "id": "mg-vigilancia-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Vigilância Privada — Minas Gerais 2026",
+      "category": "Empregados de empresas de segurança e vigilância",
+      "territory": "Municípios listados de MG, inclusive Belo Horizonte",
+      "registration": "MG000731/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SINDESP-MG e Sindicato dos Vigilantes de MG",
+      "source": "cct-mg-vigilancia-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 40ª, §1º" },
+        "overtimeRate": { "value": 60, "clause": "cláusula 13ª" },
+        "mealValue": { "daily": 31.29, "clause": "cláusula 17ª" },
+        "mealDiscountPct": { "value": 10, "clause": "cláusula 17ª, §5º" },
+        "healthPlan": { "value": 156.95, "clause": "cláusula 19ª" },
+        "dentalPlan": { "value": 21.17, "clause": "cláusula 20ª, §1º" },
+        "otherBenefits": { "value": 210.57, "clause": "cláusula 16ª (cartão cesta básica, sem falta injustificada)" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante (armado ou desarmado)",
+          "floor": 2524.9,
+          "clause": "cláusula 3ª, §1º",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 15ª e NR-16" }
+          }
+        },
+        {
+          "id": "vigilante-escolta-armada",
+          "label": "Vigilante de escolta armada",
+          "floor": 3156.12,
+          "clause": "cláusula 3ª, §6º",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 15ª" }
+          }
+        },
+        { "id": "administrativo", "label": "Pessoal administrativo", "floor": 2241.01, "clause": "cláusula 3ª, §1º" },
+        { "id": "servente", "label": "Faxina, office boy e servente", "floor": 1621.0, "clause": "cláusula 3ª, §1º" }
+      ],
+      "notes": ["Segurança pessoal: +30% do piso nas horas na função (cl. 3ª, §7º).", "Seguro de vida de 65 vezes o piso do vigilante (cl. 21ª)."]
+    },
+    {
+      "id": "pr-vigilancia-2026",
+      "validFrom": "2026-02-01",
+      "validTo": "2028-01-31",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Vigilância Privada — Paraná 2026/2028",
+      "category": "Empregados em empresas de segurança e vigilância",
+      "territory": "Estado do Paraná",
+      "registration": "PR000251/2026",
+      "dataBase": "1º de fevereiro",
+      "parties": "SINDESP-PR, FETRAVISPP e sindicatos de vigilantes do PR",
+      "source": "cct-pr-vigilancia-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 37ª" },
+        "mealValue": { "daily": 56.0, "clause": "cláusula 13ª, c" },
+        "mealDiscountPct": { "value": 20, "clause": "cláusula 13ª, b" },
+        "healthPlan": { "value": 128.92, "clause": "cláusula 16ª" },
+        "otherBenefits": { "value": 10.0, "clause": "cláusula 32ª (fundo de formação, R$ 20 por bimestre)" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante",
+          "floor": 2536.0,
+          "clause": "cláusula 3ª, 03.1",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 3ª, §1º" }
+          }
+        },
+        {
+          "id": "vigilante-tatico",
+          "label": "Vigilante tático",
+          "floor": 2536.0,
+          "clause": "cláusula 3ª, 03.2",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 3ª, §1º" }
+          }
+        },
+        {
+          "id": "seguranca-pessoal",
+          "label": "Segurança pessoal (+30% de gratificação)",
+          "floor": 2536.0,
+          "clause": "cláusula 3ª, 03.5",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 3ª, §1º" }
+          }
+        },
+        {
+          "id": "vigilante-lider",
+          "label": "Vigilante líder ou operador de drone (+10%)",
+          "floor": 2536.0,
+          "clause": "cláusula 3ª, 03.7",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 3ª, §1º" }
+          }
+        },
+        { "id": "supervisor", "label": "Supervisor", "floor": 2926.0, "clause": "cláusula 3ª, 03.6" },
+        { "id": "auxiliar-escritorio", "label": "Auxiliar de escritório", "floor": 1650.0, "clause": "cláusula 3ª, 03.8" }
+      ],
+      "notes": [
+        "Gratificação de função: segurança pessoal e supervisor +30%, líder +10% (cl. 3ª).",
+        "Vale-alimentação também nas férias (cl. 14ª); auxílio-creche R$ 407 por filho (cl. 19ª).",
+        "Pisos reajustados em 01/02/2027 por INPC + 1% (cl. 3ª, §6º)."
+      ]
+    },
+    {
+      "id": "rs-vigilancia-2026",
+      "validFrom": "2026-02-01",
+      "validTo": "2027-01-31",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "Vigilância Privada — Rio Grande do Sul 2026/2027",
+      "category": "Empregados de empresas de segurança e vigilância",
+      "territory": "Porto Alegre, região metropolitana e demais municípios listados",
+      "registration": "RS000776/2026",
+      "dataBase": "1º de fevereiro",
+      "parties": "SINDESP-RS e Sindivigilantes do Sul",
+      "source": "cct-rs-vigilancia-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 6ª" },
+        "overtimeRate": { "value": 50, "clause": "cláusula 7ª" },
+        "mealValue": { "daily": 33.0, "clause": "cláusula 15ª, §5º (jornada de 6h ou mais)" },
+        "mealDiscountPct": { "value": 20, "clause": "cláusula 15ª, §3º" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante",
+          "floor": 2211.0,
+          "clause": "cláusula 6ª, 15",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 13ª" }
+          }
+        },
+        {
+          "id": "vigilante-seguranca-pessoal",
+          "label": "Vigilante de segurança pessoal, escolta, orgânico, eventos ou condutor",
+          "floor": 2653.2,
+          "clause": "cláusula 6ª, 16 a 20",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 13ª" }
+          }
+        },
+        { "id": "asp-porteiro", "label": "ASP, porteiro ou vigia", "floor": 1751.2, "clause": "cláusula 6ª, 7 a 9" },
+        { "id": "agente-monitoramento", "label": "Agente de monitoramento ou operador de vídeo", "floor": 1938.2, "clause": "cláusula 6ª, 13" },
+        { "id": "auxiliar-administrativo", "label": "Auxiliar administrativo", "floor": 1744.6, "clause": "cláusula 6ª, 2" }
+      ],
+      "notes": ["Prêmio assiduidade de R$ 80,00/mês, indenizatório, com a escala cumprida (cl. 14ª).", "Adicional de troca de uniforme de R$ 1,67 por dia (cl. 7ª)."]
+    },
+    {
+      "id": "df-vigilancia-2025",
+      "validFrom": "2025-01-01",
+      "validTo": "2025-12-31",
+      "kind": "CCT",
+      "ufs": ["DF"],
+      "name": "Vigilância Privada — Distrito Federal 2025",
+      "category": "Empregados de empresas de segurança e vigilância",
+      "territory": "Distrito Federal",
+      "registration": "DF000685/2025",
+      "dataBase": "1º de janeiro",
+      "parties": "SINDESP-DF e SINDESV-DF",
+      "source": "cct-df-vigilancia-2025",
+      "sourceKind": "registry",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "cláusula 9ª" },
+        "mealValue": { "daily": 49.63, "clause": "cláusula 12ª (jornada de 6h ou mais)" },
+        "mealDiscountPct": { "value": 2, "clause": "cláusula 12ª, §2º" },
+        "healthPlan": { "value": 171.87, "clause": "cláusula 14ª" },
+        "dentalPlan": { "value": 10.08, "clause": "cláusula 16ª" },
+        "lifeInsurance": { "value": 19.9, "clause": "cláusula 15ª" },
+        "otherBenefits": { "value": 20.3, "clause": "cláusulas 16ª e 17ª (fundos social e de invalidez)" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante",
+          "floor": 2859.58,
+          "clause": "cláusula 4ª",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 4ª" }
+          }
+        },
+        {
+          "id": "seguranca-pessoal",
+          "label": "Segurança pessoal privada",
+          "floor": 4992.2,
+          "clause": "cláusula 4ª, d",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 4ª" }
+          }
+        },
+        {
+          "id": "fiscal",
+          "label": "Fiscal de vigilantes",
+          "floor": 3430.0,
+          "clause": "cláusula 4ª, e",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusula 4ª" }
+          }
+        }
+      ],
+      "notes": [
+        "A CCT 2026 não foi assinada até jun/2026; acordos coletivos de várias empresas aplicaram 4,26% retroativo a jan/2026.",
+        "Vigilante motorizado: +10% sobre o piso (cl. 4ª, g)."
+      ]
+    },
+    {
+      "id": "ba-vigilancia-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["BA"],
+      "name": "Vigilância Privada — Bahia 2026",
+      "category": "Empregados de empresas de segurança e vigilância",
+      "territory": "Bahia (Salvador e RMS, Feira de Santana, Itabuna e demais municípios listados); exclui o Extremo Sul",
+      "dataBase": "1º de janeiro",
+      "parties": "SINDESP-BA e sindicatos de vigilantes da BA (acordo homologado no DC TRT-5 0001052-60.2026.5.05.0000)",
+      "source": "cct-ba-vigilancia-2026",
+      "sourceKind": "parties",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 55ª, §1º" },
+        "overtimeRate": { "value": 50, "clause": "cláusula 9ª" },
+        "mealValue": { "daily": 18.06, "clause": "cláusula 22ª, §1º" },
+        "mealDiscountPct": { "value": 15, "clause": "cláusula 22ª" },
+        "healthPlan": { "value": 214.0, "clause": "cláusula 74ª, §§4º e 7º (2/3 do mínimo de R$ 321,00)" }
+      },
+      "roles": [
+        {
+          "id": "vigilante",
+          "label": "Vigilante",
+          "floor": 1700.0,
+          "clause": "cláusula 3ª, §1º (desde 01/07/2026)",
+          "presets": {
+            "hazard": { "value": true, "clause": "cláusulas 4ª e 13ª" }
+          }
+        }
+      ],
+      "notes": [
+        "Gratificações sobre o piso: supervisor 50%, fiscal/inspetor 35%, motorista 30%, líder/brigadista 10% (cl. 14ª e 15ª).",
+        "Prêmio Boa Permanência de 25% do piso, condicionado à assiduidade (cl. 8ª).",
+        "Prêmio de trabalho noturno R$ 57,21/mês (cl. 4ª)."
+      ]
+    },
+    {
+      "id": "sp-hospitalidade-capital-2025-2027",
+      "validFrom": "2025-07-01",
+      "validTo": "2027-06-30",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "CCT 2025/2027 Bares e Restaurantes – SINTHORESP x SINDRESBAR (valores da Nota Conjunta jul/2026)",
+      "category": "Empregados em bares, restaurantes e alimentação preparada (exceto fast-food na capital)",
+      "territory": "São Paulo capital e 21 municípios da região",
+      "dataBase": "1º de julho",
+      "parties": "SINTHORESP x SINDRESBAR",
+      "source": "cct-sp-hospitalidade-capital-2025-2027",
+      "sourceKind": "parties",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 39 (8h diárias / 44h semanais)" },
+        "overtimeRate": { "value": 100, "clause": "Cl. 12 a) – piso normal; 70% piso diferenciado, 50% piso especial (empresas cadastradas)" },
+        "mealValue": { "daily": 53.21, "clause": "Cl. 21 (Nota jul/2026) – tíquete só se refeição não for fornecida in natura; R$ 36,91 p/ empresas cadastradas" },
+        "lifeInsurance": { "value": 12.95, "clause": "Cl. 71 (Nota jul/2026) – prêmio mínimo sugerido por empregado, 100% empregador" }
+      },
+      "roles": [
+        {
+          "id": "empregado-geral-piso-normal",
+          "label": "Empregados em geral – piso normal (empresa não cadastrada)",
+          "floor": 2511.5,
+          "clause": "Cl. 5ª I (Nota jul/2026)"
+        },
+        {
+          "id": "empregado-geral-piso-diferenciado",
+          "label": "Empregados em geral – piso diferenciado (empresa cadastrada)",
+          "floor": 2160.16,
+          "clause": "Cl. 5ª I (Nota jul/2026)",
+          "presets": {
+            "overtimeRate": { "value": 70, "clause": "cl. 12ª, piso diferenciado" }
+          }
+        },
+        {
+          "id": "empregado-geral-piso-especial",
+          "label": "Empregados em geral – piso especial (empresa cadastrada)",
+          "floor": 1882.11,
+          "clause": "Cl. 5ª I (Nota jul/2026)",
+          "presets": {
+            "overtimeRate": { "value": 50, "clause": "cl. 12ª, piso especial" }
+          }
+        },
+        { "id": "cargo-confianca-piso-normal", "label": "Cargo de confiança – demais empresas", "floor": 5021.63, "clause": "Cl. 5ª II (Nota jul/2026)" }
+      ],
+      "notes": [
+        "Piso não é por função: depende do enquadramento da empresa (normal/diferenciado/especial via cadastro de contrapartidas)",
+        "Gorjeta: retenção 33% (Lucro Presumido/Real) ou 20% (Simples); estimativa espontânea 40% do piso (salão) / 20% (cozinha)",
+        "Não cadastradas até 15/01/2027: +2% real a partir de fev/2027",
+        "Uniforme R$ 130,15/mês e quebra de caixa R$ 161,34 (não cadastradas)"
+      ]
+    },
+    {
+      "id": "rj-hotelaria-capital-2025-2026",
+      "validFrom": "2025-10-01",
+      "validTo": "2026-09-30",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "CCT 2025/2026 Hotéis e Meios de Hospedagem do Município do RJ – STCHMRJ x SINDHOTÉIS-RJ",
+      "category": "Trabalhadores no comércio hoteleiro e similares (hotéis/meios de hospedagem)",
+      "territory": "Município do Rio de Janeiro",
+      "registration": "RJ003109/2025",
+      "dataBase": "1º de outubro",
+      "parties": "Sindicato dos Trabalhadores no Comércio Hoteleiro e Similares do Município do RJ (STCHMRJ) x Sindicato de Hotéis e Meios de Hospedagem do Município do RJ (SindHotéis-RJ)",
+      "source": "cct-rj-hotelaria-capital-2025-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 12" },
+        "overtimeRate": { "value": 50, "clause": "Cl. 22" },
+        "healthPlan": {
+          "value": 36.93,
+          "clause": "Cl. 42 – Benefício Social Sindical (Saúde), obrigatório p/ empresas sem plano de saúde (R$ 28,49 opcional p/ quem tem plano)"
+        }
+      },
+      "roles": [
+        {
+          "id": "empregado-geral-com-taxa-servico",
+          "label": "Empregados – hotéis que cobram taxa de serviço (garantido R$ 1.693,32 c/ taxa)",
+          "floor": 1451.05,
+          "clause": "Cl. 3 §4º"
+        },
+        { "id": "empregado-geral-sem-taxa-servico", "label": "Empregados – hotéis que não cobram taxa de serviço", "floor": 1560.47, "clause": "Cl. 3 §5º" },
+        { "id": "sommelier", "label": "Sommelier", "floor": 6008.96, "clause": "Cl. 3 §8º" }
+      ],
+      "notes": [
+        "Vencida em 30/09/2026; CCT 2026/2027 não localizada (há TA RJ000971/2026 ao instrumento 2025/2026)",
+        "Pisos abaixo do salário mínimo nacional 2026 (R$ 1.621) – prevalece o mínimo legal/piso estadual RJ",
+        "Desconto alimentação no local: até 25% do SM (4 refeições)",
+        "Quebra de caixa 10% do piso; trabalho em 29/07 com adicional de 100%"
+      ]
+    },
+    {
+      "id": "mg-hospitalidade-bh-2026-2027",
+      "validFrom": "2026-01-01",
+      "validTo": "2027-12-31",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "CCT 2026/2027 Hotéis, Bares e Restaurantes de Belo Horizonte – SECHS-BH x SINDIHBARES",
+      "category": "Empregados no comércio hoteleiro e similares (hotéis, bares, restaurantes)",
+      "territory": "Belo Horizonte",
+      "dataBase": "1º de janeiro",
+      "parties": "Sindicato dos Empregados em Comércio Hoteleiro e Similares de BH (SECHS-BH) x Sindicato de Hotéis, Restaurantes, Bares e Similares de BH (SINDIHBARES)",
+      "source": "cct-mg-hospitalidade-bh-2026-2027",
+      "sourceKind": "summary",
+      "presets": {
+        "overtimeRate": { "value": 70, "clause": "Horas extras (resumo JusFood; CCT assinada 27/01/2026)" },
+        "healthPlan": { "value": 32.0, "clause": "Convênio médico obrigatório (dispensado se a empresa já tem plano); coparticipação R$ 14,90/consulta" },
+        "dentalPlan": { "value": 23.0, "clause": "Plano odontológico obrigatório, 100% empregador" },
+        "lifeInsurance": { "value": 7.0, "clause": "Seguro de vida em grupo obrigatório" }
+      },
+      "roles": [
+        { "id": "empregado-geral", "label": "Piso geral da categoria", "floor": 1697.0, "clause": "Cl. 3ª a) (2026)" },
+        { "id": "garcom", "label": "Garçom", "floor": 1738.0, "clause": "Cl. 3ª b) (2026)" },
+        { "id": "cozinheiro", "label": "Cozinheiro", "floor": 1738.0, "clause": "Cl. 3ª b) (2026)" },
+        {
+          "id": "pizzaiolo-churrasqueiro-maitre-governanta",
+          "label": "Pizzaiolo, churrasqueiro, maître, governanta, salgadeira, doceira",
+          "floor": 1738.0,
+          "clause": "Cl. 3ª b) (2026)"
+        }
+      ],
+      "notes": [
+        "Adicional noturno 40%",
+        "Taxa de serviço: retenção até 20% (Simples) ou 33% (Presumido/Real)",
+        "Pisos 2027 a definir em termo aditivo",
+        "Valores idênticos ao instrumento MG000869/2026 (FETHEMG x SINDIHBARES, interior), que é registrado"
+      ]
+    },
+    {
+      "id": "pr-hospitalidade-curitiba-2026-2027",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "CCT 2026/2027 Hotelaria e Gastronomia de Curitiba e Região – SINDOTEL-CTBA",
+      "category": "Trabalhadores em hotéis, restaurantes, bares, lanchonetes e similares",
+      "territory": "Curitiba e região metropolitana (38 municípios)",
+      "registration": "PR002184/2026",
+      "dataBase": "1º de maio",
+      "parties": "Sindicato dos Trabalhadores no Comércio Hoteleiro, Meios de Hospedagem e Gastronomia de Curitiba e Região x Sindicato de Hotéis, Restaurantes, Bares e Similares de Curitiba (SINDOTEL-CTBA)",
+      "source": "cct-pr-hospitalidade-curitiba-2026-2027",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 60, "clause": "Cl. 15" },
+        "mealValue": { "daily": 19.4, "clause": "Cl. 19 §2 – 1% do piso por dia, só se não houver refeição no local nem VR" },
+        "otherBenefits": { "value": 200.72, "clause": "Cl. 18 vale-alimentação R$ 160,00/mês + Cl. 23 Benefício Social Familiar R$ 40,72/mês" }
+      },
+      "roles": [
+        { "id": "empregado-geral", "label": "Piso da categoria (inclusive aprendiz)", "floor": 1939.69, "clause": "Cl. 3" }
+      ],
+      "notes": ["Reajuste 6,11% acima do piso", "Adicional de qualificação 2% do salário-base por 12 meses (curso)", "Gratificação de 1 piso na aposentadoria (5+ anos)"]
+    },
+    {
+      "id": "rs-hospitalidade-poa-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "CCT 2026 Bares, Restaurantes e Similares de Porto Alegre – SECHS-POA x SINDHA",
+      "category": "Empregados em bares, restaurantes e similares",
+      "territory": "Porto Alegre e 8 municípios",
+      "registration": "RS002661/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "Sindicato dos Empregados no Comércio Hoteleiro e Similares de Porto Alegre x Sindicato de Hotéis, Restaurantes, Bares e Similares de Porto Alegre (SINDHA)",
+      "source": "cct-rs-hospitalidade-poa-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "Cl. 6 (50% nas 2 primeiras; 75% acima de 2h/dia)" }
+      },
+      "roles": [
+        { "id": "empregado-ingresso", "label": "Salário de ingresso (experiência até 90 dias)", "floor": 1850.0, "clause": "Cl. 3" },
+        { "id": "empregado-geral", "label": "Salário normativo após experiência", "floor": 1930.0, "clause": "Cl. 3" }
+      ],
+      "notes": [
+        "Quinquênio 3% do salário a cada 5 anos",
+        "Gorjeta espontânea: estimativa 10% do salário p/ encargos ou adicional 2% do normativo (cl. 12)",
+        "Hotéis de POA têm CCT própria (RS002790/2026, Sindicato de Hotéis de POA)"
+      ]
+    },
+    {
+      "id": "df-hospitalidade-2026-2028",
+      "validFrom": "2026-05-01",
+      "validTo": "2028-04-30",
+      "kind": "CCT",
+      "ufs": ["DF"],
+      "name": "CCT 2026/2028 Hotéis, Restaurantes, Bares e Similares de Brasília – SECHOSC-DF x SINDHOBAR",
+      "category": "Empregados em hotéis, restaurantes, bares, lanchonetes, pizzarias e similares",
+      "territory": "Distrito Federal",
+      "registration": "DF000380/2026",
+      "dataBase": "1º de maio",
+      "parties": "SECHOSC-DF x SINDHOBAR-DF",
+      "source": "cct-df-hospitalidade-2026-2028",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 9" },
+        "overtimeRate": { "value": 50, "clause": "Cl. 23 (50% até a 10ª hora; 70% nas subsequentes)" },
+        "mealValue": { "daily": 35.0, "clause": "Cl. 6 §3 – só p/ empresas sem restaurante; com restaurante, refeição in natura com cobrança máx. R$ 2,00/mês" },
+        "lifeInsurance": { "value": 8.9, "clause": "Cl. 14" },
+        "otherBenefits": { "value": 33.9, "clause": "Cl. 43 – Auxílio Plano de Assistência e Cuidado Pessoal" }
+      },
+      "roles": [
+        { "id": "empregado-geral", "label": "Piso da categoria (220h)", "floor": 1750.68, "clause": "Cl. 3 §1º" }
+      ],
+      "notes": [
+        "Prêmio de produtividade 5% do salário/mês (perde com falta injustificada) – cl. 3 §4º",
+        "REPIS: piso -5% p/ ME/EPP associadas (novas contratações) – cl. 42",
+        "Piso 2027/2028 = salário mínimo nacional + 8%"
+      ]
+    },
+    {
+      "id": "sp-condominios-capital-2026-2027",
+      "validFrom": "2026-10-01",
+      "validTo": "2027-09-30",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "CCT 2026/2027 Empregados em Edifícios e Condomínios de São Paulo – SINDIFÍCIOS x SINDICOND",
+      "category": "Zeladores, porteiros, cabineiros, vigias, faxineiros, serventes e outros em condomínios",
+      "territory": "São Paulo capital",
+      "registration": "SP009344/2026",
+      "dataBase": "1º de outubro",
+      "parties": "Sind. Emp. de Edif. SP (SINDIFÍCIOS) x Sindicato dos Condomínios de Prédios e Edifícios Com., Ind., Res. e Mistos Intermunicipal do Est. SP (SINDICOND)",
+      "source": "cct-sp-condominios-capital-2026-2027",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 53" },
+        "overtimeRate": { "value": 50, "clause": "Cl. 14" },
+        "mealValue": { "daily": 19.69, "clause": "Cl. 24 – vale-refeição por dia trabalhado" },
+        "healthPlan": { "value": 48.0, "clause": "Cl. 26 – BAPS (dispensado se houver plano de saúde superior)" },
+        "otherBenefits": { "value": 646.28, "clause": "Cl. 23 auxílio-alimentação R$ 607,28/mês + Cl. 28 benefício social R$ 39,00/mês" }
+      },
+      "roles": [
+        { "id": "gerente-condominial", "label": "Gerente condominial", "floor": 4576.2, "clause": "Cl. 4" },
+        { "id": "gerente-predial", "label": "Gerente predial", "floor": 3247.28, "clause": "Cl. 4" },
+        { "id": "zelador", "label": "Zelador", "floor": 2319.47, "clause": "Cl. 4" },
+        { "id": "porteiro", "label": "Porteiro", "floor": 2221.86, "clause": "Cl. 4" },
+        { "id": "vigia", "label": "Vigia", "floor": 2221.86, "clause": "Cl. 4" },
+        { "id": "folguista", "label": "Folguista", "floor": 2221.86, "clause": "Cl. 4" },
+        { "id": "recepcionista-controlador-acesso", "label": "Recepcionista / controlador de acesso / operador de CFTV", "floor": 2221.86, "clause": "Cl. 4" },
+        { "id": "garagista-manobrista", "label": "Garagista / manobrista", "floor": 2221.86, "clause": "Cl. 4" },
+        { "id": "cabineiro", "label": "Cabineiro / ascensorista", "floor": 2221.86, "clause": "Cl. 4" },
+        { "id": "faxineiro", "label": "Faxineiro e demais empregados", "floor": 2124.26, "clause": "Cl. 4" }
+      ],
+      "notes": [
+        "Acúmulo de função: adicional 20% (cl. 19)",
+        "Recebimento de encomendas: adicional 5% (cl. 20)",
+        "Adicional por tempo de serviço 5% por biênio, máx. 3 biênios (cl. 17)",
+        "Adicional noturno 20% (cl. 15)"
+      ]
+    },
+    {
+      "id": "rj-condominios-capital-2026-2027",
+      "validFrom": "2026-04-01",
+      "validTo": "2027-03-31",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "CCT 2026/2027 Empregados de Edifícios e Condomínios – SEEMRJ x SECOVI Rio",
+      "category": "Empregados de edifícios residenciais, comerciais, mistos, condomínios e similares",
+      "territory": "Rio de Janeiro e 18 municípios",
+      "registration": "RJ001193/2026",
+      "dataBase": "1º de abril",
+      "parties": "Sindicato dos Empregados de Edifícios Residenciais, Comerciais, Mistos e Condomínios (SEEMRJ) x SECOVI Rio",
+      "source": "cct-rj-condominios-capital-2026-2027",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 60, "clause": "Cl. 14" },
+        "otherBenefits": { "value": 33.33, "clause": "Cl. 25 – Auxílio Plano de Assistência e Cuidado Pessoal (a partir de jul/2026)" }
+      },
+      "roles": [
+        { "id": "porteiro", "label": "Porteiro / porteiro noturno", "floor": 2050.71, "clause": "Cl. 3 a)" },
+        { "id": "vigia", "label": "Vigia", "floor": 2050.71, "clause": "Cl. 3 a)" },
+        { "id": "zelador", "label": "Zelador", "floor": 2050.71, "clause": "Cl. 3 a)" },
+        { "id": "guardiao-piscina", "label": "Guardião de piscina", "floor": 2005.0, "clause": "Cl. 3 b)" },
+        { "id": "faxineiro", "label": "Servente / faxineiro e demais", "floor": 1791.49, "clause": "Cl. 3 c)" },
+        { "id": "administrativo", "label": "Setor administrativo (condomínios, shoppings, apart-hotéis)", "floor": 2036.58, "clause": "Cl. 3 d)" }
+      ],
+      "notes": [
+        "Manuseio de lixo: adicional 20% do piso de servente (cl. 19)",
+        "Quinquênio 5% por 5 anos, teto 20% (cl. 17)",
+        "Adicional de chefia 30% (cl. 13)",
+        "Seguro de vida obrigatório (capital 25x SM) sem prêmio fixado (cl. 23)"
+      ]
+    },
+    {
+      "id": "mg-condominios-bh-2026-2027",
+      "validFrom": "2026-09-01",
+      "validTo": "2027-08-31",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "CCT 2026/2027 Empregados em Edifícios e Condomínios da RMBH – SINDEAC x SINDICON-MG",
+      "category": "Zeladores, porteiros, vigias, faxineiros, ascensoristas, garagistas e administrativos de condomínios",
+      "territory": "Belo Horizonte e região metropolitana (32 municípios)",
+      "registration": "MG002991/2026",
+      "dataBase": "1º de setembro",
+      "parties": "SINDEAC-MG x Sindicato dos Condomínios Comerciais, Residenciais e Mistos de MG (SINDICON-MG)",
+      "source": "cct-mg-condominios-bh-2026-2027",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 70, "clause": "Cl. 9 (70% nas 2 primeiras; 100% nas subsequentes)" },
+        "otherBenefits": { "value": 493.65, "clause": "Cl. 16 I-B ticket alimentação R$ 379,49/mês (jornada ≥180h) + Cl. 18 PAF R$ 114,16/mês" }
+      },
+      "roles": [
+        { "id": "faxineiro", "label": "Faxineira / servente / office boy / copeiro (piso mínimo)", "floor": 1931.84, "clause": "Cl. 3" },
+        { "id": "cabineiro", "label": "Ascensorista", "floor": 1937.88, "clause": "Cl. 3" },
+        { "id": "garagista", "label": "Garagista", "floor": 1968.14, "clause": "Cl. 3" },
+        { "id": "manobrista", "label": "Manobrista", "floor": 2231.62, "clause": "Cl. 3" },
+        { "id": "porteiro", "label": "Porteiro / vigia / controlador de acesso / controlador de piso", "floor": 2340.68, "clause": "Cl. 3" },
+        { "id": "zelador", "label": "Zelador ou encarregado", "floor": 2906.8, "clause": "Cl. 3" }
+      ],
+      "notes": [
+        "Adicional noturno 30% (cl. 14)",
+        "Abono por tempo de serviço 5% a partir do 36º mês (cl. 13)",
+        "Seguro de vida obrigatório, morte R$ 16.000 – prêmio não fixado (cl. 15)",
+        "Reajuste 7,7% (até R$ 7.500) / 7% acima"
+      ]
+    },
+    {
+      "id": "pr-condominios-curitiba-2026-2027",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "CCT 2026/2027 Empregados em Edifícios de Curitiba e Região – SINDICON x SECOVI-PR",
+      "category": "Empregados em edifícios residenciais e comerciais",
+      "territory": "Curitiba e 15 municípios da RMC",
+      "registration": "PR001790/2026",
+      "dataBase": "1º de maio",
+      "parties": "Sindicato dos Empregados em Edifícios Residenciais e Comerciais (SINDICON) x SECOVI-PR",
+      "source": "cct-pr-condominios-curitiba-2026-2027",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 3 (44h ou 12x36)" },
+        "otherBenefits": { "value": 750.0, "clause": "Cl. 12 – cesta básica/cartão alimentação R$ 750,00/mês (admitidos desde 23/01/2024)" }
+      },
+      "roles": [
+        { "id": "faxineiro", "label": "Faxineiro / servente / outras funções", "floor": 2100.0, "clause": "Cl. 3 a)" },
+        { "id": "porteiro", "label": "Porteiro / vigia / garagista", "floor": 2123.0, "clause": "Cl. 3 b)" },
+        { "id": "zelador", "label": "Zelador", "floor": 2390.0, "clause": "Cl. 3 c)" },
+        { "id": "fiscal-piso", "label": "Fiscal de pisos (shoppings/condomínios comerciais)", "floor": 2290.0, "clause": "Cl. 3 d)" },
+        { "id": "auxiliar-administrativo", "label": "Auxiliar administrativo", "floor": 2100.0, "clause": "Cl. 3 e)" },
+        { "id": "cabineiro", "label": "Ascensorista (36h semanais)", "floor": 1910.0, "clause": "Cl. 3 f)" },
+        { "id": "folguista", "label": "Porteiro/vigia folguista (36h semanais)", "floor": 1737.0, "clause": "Cl. 3 g)" }
+      ],
+      "notes": [
+        "SECOVIMED: 2,4% da folha bruta (mín. 2,4% sobre 2 pisos de porteiro) – cl. 57",
+        "Anuênio 1% por ano (cl. 10)",
+        "Adicional noturno 25% (30% na 12x36)",
+        "Seguro de vida obrigatório, capital R$ 80.000, 100% empregador – prêmio não fixado (cl. 14)"
+      ]
+    },
+    {
+      "id": "rs-condominios-poa-2025-2026",
+      "validFrom": "2025-03-01",
+      "validTo": "2026-02-28",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "CCT 2025/2026 Trabalhadores em Edifícios e Condomínios – SINDEF-RS x SECOVI-RS",
+      "category": "Trabalhadores em edifícios, condomínios, shoppings e flats",
+      "territory": "Porto Alegre e 35 municípios",
+      "registration": "RS002612/2025",
+      "dataBase": "1º de março",
+      "parties": "SINDEF/RS x SECOVI/RS",
+      "source": "cct-rs-condominios-poa-2025-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 60, "clause": "Cl. 34" }
+      },
+      "roles": [
+        { "id": "zelador", "label": "Zelador (após experiência)", "floor": 1885.03, "clause": "Cl. 3 b)" },
+        { "id": "porteiro", "label": "Porteiro / vigia / ascensorista (após experiência)", "floor": 1814.67, "clause": "Cl. 3 d)" },
+        { "id": "faxineiro", "label": "Demais empregados", "floor": 1786.54, "clause": "Cl. 3 e)" }
+      ],
+      "notes": [
+        "Vencida em 28/02/2026; CCT 2026/2027 não localizada",
+        "Saúde (POA): SECOVIMED 2,5% da folha bruta, mín. R$ 175,32/condomínio (cl. 57)",
+        "Triênio 3% + 1% por ano a partir do 4º ano (cl. 14)",
+        "Seguro de vida obrigatório, capital R$ 41.379,07 – prêmio não fixado (cl. 30)"
+      ]
+    },
+    {
+      "id": "df-condominios-comerciais-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-12-31",
+      "kind": "CCT",
+      "ufs": ["DF"],
+      "name": "CCT 2026 Trabalhadores em Condomínios Comerciais do DF – SEICON-DF x SINDICONDOMÍNIO-DF",
+      "category": "Trabalhadores em condomínios comerciais",
+      "territory": "Distrito Federal",
+      "registration": "DF000112/2026",
+      "dataBase": "1º de janeiro",
+      "parties": "SEICON-DF x SINDICONDOMÍNIO-DF",
+      "source": "cct-df-condominios-comerciais-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "Cl. 39 (220h/mês; cabineiro e telefonista 180h)" },
+        "overtimeRate": { "value": 50, "clause": "Cl. 9 (50% nas 2 primeiras; 55% nas demais)" },
+        "mealValue": { "daily": 49.0, "clause": "Cl. 14 – VA/VR por dia trabalhado" },
+        "mealDiscountPct": { "value": 15, "clause": "Cl. 14 §1º (10% p/ filiados)" },
+        "lifeInsurance": { "value": 15.0, "clause": "Cl. 17 – prêmio até R$ 19,65, com até 23,67% descontável do empregado" }
+      },
+      "roles": [
+        { "id": "faxineiro", "label": "Faxineiro / servente de limpeza", "floor": 1748.59, "clause": "Cl. 3 (3º grupo)" },
+        { "id": "folguista", "label": "Serviços gerais / ferista / folguista", "floor": 1853.29, "clause": "Cl. 3 (4º grupo)" },
+        { "id": "porteiro", "label": "Porteiro (diurno/noturno)", "floor": 2203.09, "clause": "Cl. 3 (6º grupo)" },
+        { "id": "garagista", "label": "Garagista", "floor": 2203.09, "clause": "Cl. 3 (7º grupo)" },
+        { "id": "zelador", "label": "Zelador", "floor": 2203.09, "clause": "Cl. 3 (8º grupo)" },
+        { "id": "vigia", "label": "Vigia", "floor": 2203.09, "clause": "Cl. 3 (18º grupo)" },
+        { "id": "recepcionista", "label": "Recepcionista", "floor": 2138.37, "clause": "Cl. 3 (10º grupo)" },
+        { "id": "cabineiro", "label": "Cabineiro / ascensorista (180h)", "floor": 2138.37, "clause": "Cl. 3 (11º grupo)" },
+        { "id": "vigilante-condominial", "label": "Vigilante condominial", "floor": 3147.3, "clause": "Cl. 3 (19º grupo)" },
+        { "id": "encarregado", "label": "Encarregado", "floor": 2808.04, "clause": "Cl. 3 (23º grupo)" }
+      ],
+      "notes": [
+        "Insalubridade convencionada 15% do SM (lixo, caixa de gordura, garagem >4h) até laudo – cl. 13",
+        "Adicional noturno 30% (cl. 12)",
+        "Residenciais horizontais têm CCT própria DF000135/2026 (porteiro R$ 2.011,14; faxineiro R$ 1.782,95)",
+        "Plano odontológico e ambulatorial facultativos (cl. 18 e 59)"
+      ]
+    },
+    {
+      "id": "sp-construcao-capital-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Construção Civil — São Paulo (capital) 2026/2027",
+      "category": "Trabalhadores nas indústrias da construção civil",
+      "territory": "São Paulo capital (base Sintracon-SP)",
+      "dataBase": "1º de maio",
+      "parties": "Sintracon-SP e SindusCon-SP",
+      "source": "cct-sp-construcao-capital-2026",
+      "sourceKind": "summary",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "pisos para 220h mensais" },
+        "overtimeRate": { "value": 60, "clause": "horas extras de segunda a sábado" },
+        "mealValue": { "daily": 33.44, "clause": "tíquete-refeição mínimo" },
+        "otherBenefits": { "value": 509.98, "clause": "vale-supermercado (cesta) mensal" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente (não qualificado)", "floor": 2302.75, "clause": "pisos 2026 (R$ 10,47/h)" },
+        { "id": "meio-oficial", "label": "Meio-oficial", "floor": 2552.37, "clause": "pisos 2026 (R$ 11,60/h)" },
+        { "id": "oficial", "label": "Oficial / pedreiro (qualificado)", "floor": 2801.98, "clause": "pisos 2026 (R$ 12,74/h)" }
+      ],
+      "notes": ["Domingos e feriados: 100%.", "Montador de formas metálicas R$ 2.900,00; montagem industrial R$ 3.356,80."]
+    },
+    {
+      "id": "mg-construcao-bh-2025",
+      "validFrom": "2025-11-01",
+      "validTo": "2026-10-31",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Construção Civil — Belo Horizonte 2025/2026",
+      "category": "Trabalhadores nas indústrias da construção",
+      "territory": "Belo Horizonte e 6 municípios",
+      "registration": "MG002201/2026",
+      "dataBase": "1º de novembro",
+      "parties": "STIC-BH e SINDUSCON-MG",
+      "source": "cct-mg-construcao-bh-2025",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 80, "clause": "cláusula 15ª" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Auxiliar (servente)", "floor": 1766.0, "clause": "cláusula 3ª" },
+        { "id": "meio-oficial", "label": "Assistente (meio-oficial)", "floor": 1986.6, "clause": "cláusula 3ª" },
+        { "id": "oficial", "label": "Oficial", "floor": 2631.2, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Cesta básica in natura para salário até 5 SM, desconto de 10% (cl. 23ª).", "Abonos de R$ 450/550/700 (cl. 22ª)."]
+    },
+    {
+      "id": "pr-construcao-curitiba-2026",
+      "validFrom": "2026-06-01",
+      "validTo": "2027-05-31",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Construção Civil — Paraná (Sinduscon-PR) 2026/2027",
+      "category": "Trabalhadores nas indústrias da construção civil",
+      "territory": "Curitiba e região e bases da Fetraconspar",
+      "registration": "PR002045/2026",
+      "dataBase": "1º de junho",
+      "parties": "Fetraconspar, Sintracon Curitiba e SINDUSCON-PR",
+      "source": "cct-pr-construcao-curitiba-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 12ª, §17" },
+        "otherBenefits": { "value": 901.5, "clause": "cláusula 12ª (vale-compras pago pelo empregador)" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente", "floor": 2217.6, "clause": "cláusula 3ª" },
+        { "id": "meio-oficial", "label": "Meio profissional", "floor": 2402.4, "clause": "cláusula 3ª" },
+        { "id": "oficial", "label": "Profissional (oficial, pedreiro)", "floor": 3137.2, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Seconci-PR: 1% da folha bruta (cl. 15ª).", "Café da manhã ou tíquete de R$ 9,00/dia (cl. 13ª).", "Adicional de 5% com certificado SENAI (cl. 11ª)."]
+    },
+    {
+      "id": "rj-construcao-capital-2025",
+      "validFrom": "2025-03-01",
+      "validTo": "2026-02-28",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "Construção Civil — Rio de Janeiro (capital), pisos 2025",
+      "category": "Trabalhadores nas indústrias da construção civil",
+      "territory": "Município do Rio de Janeiro",
+      "registration": "RJ002486/2025",
+      "dataBase": "1º de março",
+      "parties": "Sintraconst-Rio e SINDUSCON-RIO",
+      "source": "cct-rj-construcao-capital-2025",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 34ª" },
+        "overtimeRate": { "value": 50, "clause": "cláusula 35ª (sábado 70%, domingo e feriado 100%)" },
+        "mealValue": { "daily": 31.65, "clause": "cláusula 12ª" },
+        "mealDiscountPct": { "value": 1, "clause": "cláusula 12ª, §1º" },
+        "otherBenefits": { "value": 325.0, "clause": "cláusula 9ª (prêmio Martelão)" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Servente de obra", "floor": 2120.8, "clause": "cláusula 3ª" },
+        { "id": "meio-oficial", "label": "Meio-oficial de obra", "floor": 2235.2, "clause": "cláusula 3ª" },
+        { "id": "oficial", "label": "Pedreiro (profissionais grupo 2)", "floor": 2934.8, "clause": "cláusula 3ª" }
+      ],
+      "notes": [
+        "A convenção vale até 28/02/2027, mas os valores econômicos acima valeram até 28/02/2026; o aditivo de 2026 não foi localizado.",
+        "Café da manhã gratuito obrigatório (cl. 11ª)."
+      ]
+    },
+    {
+      "id": "rs-construcao-poa-2026",
+      "validFrom": "2026-06-01",
+      "validTo": "2027-05-31",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "Construção Civil — Porto Alegre 2026/2027",
+      "category": "Trabalhadores nas indústrias da construção civil",
+      "territory": "Porto Alegre e 23 municípios",
+      "registration": "RS002380/2026",
+      "dataBase": "1º de junho",
+      "parties": "STICC Porto Alegre e SINDUSCON-RS",
+      "source": "cct-rs-construcao-poa-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusulas 41ª e 42ª" },
+        "overtimeRate": { "value": 50, "clause": "cláusula 48ª" },
+        "otherBenefits": { "value": 425.0, "clause": "cláusula 10ª (cartão VA por assiduidade, empresas com mais de 10 empregados)" }
+      },
+      "roles": [
+        { "id": "servente", "label": "Auxiliar de produção / servente", "floor": 1955.8, "clause": "cláusula 3ª" },
+        { "id": "meio-oficial", "label": "Meio-oficial", "floor": 2107.6, "clause": "cláusula 3ª" },
+        { "id": "oficial", "label": "Oficial", "floor": 2488.2, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Seguro de vida com capital de R$ 29.242 (cl. 12ª).", "Auxílio-educação de R$ 321 (cl. 11ª)."]
+    },
+    {
+      "id": "sp-ti-2026",
+      "validFrom": "2026-01-01",
+      "validTo": "2027-12-31",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Tecnologia da Informação — São Paulo 2026/2027",
+      "category": "Empregados em empresas de processamento de dados e TI",
+      "territory": "Estado de São Paulo (base do Sindpd)",
+      "dataBase": "1º de janeiro",
+      "parties": "SINDPD-SP e SEPROSP",
+      "source": "cct-sp-ti-2026",
+      "sourceKind": "summary",
+      "presets": {
+        "weeklyHours": { "value": 40, "clause": "jornada de 40h" },
+        "overtimeRate": { "value": 75, "clause": "2 primeiras horas (100% nas demais)" },
+        "mealValue": { "daily": 32, "days": 22, "clause": "vale-refeição mínimo de 2026" },
+        "mealDiscountPct": { "value": 0, "clause": "sem desconto no valor mínimo" }
+      },
+      "roles": [
+        { "id": "administrativo", "label": "Administrativo", "floor": 1800.0, "clause": "pisos 2026" },
+        { "id": "digitador", "label": "Digitador", "floor": 2250.0, "clause": "pisos 2026" },
+        { "id": "tecnico-suporte", "label": "Técnico de informática / suporte / help desk", "floor": 2500.0, "clause": "pisos 2026" }
+      ],
+      "notes": ["Não há piso para programador ou analista.", "Auxílio-creche R$ 720 (até 2 anos) / R$ 630 (até 6 anos)."]
+    },
+    {
+      "id": "rj-ti-2026",
+      "validFrom": "2026-09-01",
+      "validTo": "2027-08-31",
+      "kind": "CCT",
+      "ufs": ["RJ"],
+      "name": "Tecnologia da Informação — Rio de Janeiro 2026/2027 (termo aditivo)",
+      "category": "Empregados em empresas de processamento de dados",
+      "territory": "Estado do Rio de Janeiro",
+      "dataBase": "1º de setembro",
+      "parties": "SINDPD-RJ e TI Rio",
+      "source": "cct-rj-ti-2026",
+      "sourceKind": "parties",
+      "presets": {
+        "mealValue": { "daily": 36.4, "days": 22, "clause": "cláusula 5ª (jornada de 8h)" },
+        "otherBenefits": { "value": 311.76, "clause": "cláusula 8ª (benefícios indiretos, jornada de 8h)" }
+      },
+      "roles": [
+        { "id": "administrativo", "label": "Apoio / administrativo", "floor": 1770.0, "clause": "cláusula 3ª, I" },
+        { "id": "digitador", "label": "Digitador / operador", "floor": 1875.35, "clause": "cláusula 3ª, II" },
+        { "id": "tecnico-suporte", "label": "Técnico de informática (suporte)", "floor": 2051.14, "clause": "cláusula 3ª, III" },
+        { "id": "analista-programador", "label": "Programador / analista (superior completo em TI)", "floor": 3132.87, "clause": "cláusula 3ª, V" }
+      ],
+      "notes": ["1º emprego: 90% dos pisos III e IV no primeiro ano.", "Jornada de 6h: vale-refeição de R$ 26,31 (cl. 5ª)."]
+    },
+    {
+      "id": "mg-ti-2025",
+      "validFrom": "2025-09-01",
+      "validTo": "2026-08-31",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Tecnologia da Informação — Minas Gerais, pisos 2025/2026",
+      "category": "Empregados em empresas de processamento de dados e informática",
+      "territory": "Minas Gerais (852 municípios)",
+      "registration": "MG004156/2025",
+      "dataBase": "1º de setembro",
+      "parties": "SINDADOS-MG e SINDINFOR-MG",
+      "source": "cct-mg-ti-2025",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 75, "clause": "cláusula 7ª" },
+        "mealValue": { "daily": 31.43, "clause": "cláusula 10ª, §2º (cidades com 100 mil habitantes ou mais)" },
+        "mealDiscountPct": { "value": 0, "clause": "cláusula 10ª, §6º (salário até R$ 3.483,79)" }
+      },
+      "roles": [
+        {
+          "id": "profissional-informatica",
+          "label": "Profissional de informática (programador, analista, suporte)",
+          "floor": 2215.97,
+          "clause": "cláusula 3ª, a.1"
+        },
+        { "id": "administrativo", "label": "Administrativo / serviços gerais", "floor": 1689.38, "clause": "cláusula 3ª, B" }
+      ],
+      "notes": [
+        "A convenção vale até 31/08/2027, mas as cláusulas econômicas valeram até 31/08/2026; o aditivo não foi localizado.",
+        "Cidades com menos de 100 mil habitantes: piso de R$ 2.089,31 e VR de R$ 28,69."
+      ]
+    },
+    {
+      "id": "pr-ti-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Tecnologia da Informação — Paraná 2026/2027 (termo aditivo)",
+      "category": "Empregados em empresas de processamento de dados",
+      "territory": "Estado do Paraná",
+      "registration": "PR002676/2026",
+      "dataBase": "1º de maio",
+      "parties": "SINDPD-PR e sindicato das empresas de informática do PR",
+      "source": "cct-pr-ti-2026",
+      "sourceKind": "registry",
+      "presets": {
+        "weeklyHours": { "value": 40, "clause": "cláusula 4ª, tabela B" },
+        "mealValue": { "daily": 30, "clause": "cláusula 5ª, §1º (jornada de 8h)" },
+        "mealDiscountPct": { "value": 0, "clause": "cláusula 5ª, §1º" }
+      },
+      "roles": [
+        { "id": "programador-junior", "label": "Programador júnior", "floor": 2720.0, "clause": "cláusula 4ª, tabela B" },
+        { "id": "programador-pleno", "label": "Programador pleno", "floor": 3675.0, "clause": "cláusula 4ª, tabela B" },
+        { "id": "analista-sistemas-junior", "label": "Analista de sistemas júnior", "floor": 4610.0, "clause": "cláusula 4ª, tabela B" },
+        { "id": "analista-suporte-junior", "label": "Analista de suporte júnior", "floor": 2310.0, "clause": "cláusula 4ª, tabela B" },
+        { "id": "tecnico-help-desk", "label": "Técnico de informática júnior / help desk", "floor": 2573.0, "clause": "cláusula 4ª, tabela B" },
+        { "id": "auxiliar-administrativo", "label": "Auxiliar administrativo I", "floor": 2137.0, "clause": "cláusula 4ª, tabela B" }
+      ],
+      "notes": ["Analista de sistemas pleno R$ 4.914; sênior R$ 5.875.", "Jornada de 6h (30h semanais) tem pisos próprios (tabela A)."]
+    },
+    {
+      "id": "rs-ti-2025",
+      "validFrom": "2025-11-01",
+      "validTo": "2026-10-31",
+      "kind": "CCT",
+      "ufs": ["RS"],
+      "name": "Processamento de Dados — Rio Grande do Sul 2025/2026",
+      "category": "Empregados em empresas de processamento de dados",
+      "territory": "Estado do Rio Grande do Sul",
+      "registration": "RS000815/2026",
+      "dataBase": "1º de novembro",
+      "parties": "SINDPPD-RS e SEPRORGS",
+      "source": "cct-rs-ti-2025",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 3ª" },
+        "mealValue": { "daily": 37.0, "clause": "cláusula 14ª (jornada de 8h)" }
+      },
+      "roles": [
+        { "id": "analista-sistemas", "label": "Analista de sistemas", "floor": 4315.05, "clause": "cláusula 3ª" },
+        { "id": "programador", "label": "Programador", "floor": 2870.96, "clause": "cláusula 3ª" },
+        { "id": "suporte", "label": "Operador / suporte técnico (44h)", "floor": 2461.71, "clause": "cláusula 3ª" },
+        { "id": "administrativo", "label": "Administração (auxiliar de escritório)", "floor": 1621.0, "clause": "cláusula 3ª (elevado ao salário mínimo)" }
+      ],
+      "notes": ["Horas extras após as 2 primeiras: 75% (cl. 10ª).", "Auxílio-creche R$ 530,80 (cl. 22ª)."]
+    },
+    {
+      "id": "sc-ti-2025",
+      "validFrom": "2025-08-01",
+      "validTo": "2026-07-31",
+      "kind": "CCT",
+      "ufs": ["SC"],
+      "name": "Tecnologia da Informação — Santa Catarina (estadual) 2025/2026",
+      "category": "Empregados em empresas de processamento de dados, TI e software",
+      "territory": "Santa Catarina, exceto Grande Florianópolis e região de Joinville",
+      "dataBase": "1º de agosto",
+      "parties": "SINDPD-SC e SEPROSC",
+      "source": "cct-sc-ti-2025",
+      "sourceKind": "parties",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 16ª" },
+        "overtimeRate": { "value": 70, "clause": "cláusula 7ª" },
+        "mealValue": { "daily": 31.0, "clause": "cláusula 11ª (jornada de 8h)" },
+        "mealDiscountPct": { "value": 0, "clause": "cláusula 11ª, §1º" }
+      },
+      "roles": [
+        { "id": "analista-sistemas", "label": "Analista de sistemas", "floor": 4410.0, "clause": "cláusula 3ª, a" },
+        { "id": "programador", "label": "Programador", "floor": 3560.0, "clause": "cláusula 3ª, c" },
+        { "id": "tecnico-suporte", "label": "Nível técnico / supervisor", "floor": 3115.0, "clause": "cláusula 3ª, d" },
+        { "id": "auxiliar-administrativo", "label": "Auxiliar administrativo / apoio ao usuário", "floor": 2000.0, "clause": "cláusula 3ª, e" }
+      ],
+      "notes": ["Não vale na Grande Florianópolis nem na região de Joinville, que têm convenções próprias.", "1º emprego: 75% dos pisos por 360 dias."]
+    },
+    {
+      "id": "sp-contabil-capital-2025",
+      "validFrom": "2025-08-01",
+      "validTo": "2026-07-31",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Serviços Contábeis — São Paulo 2025/2026",
+      "category": "Empregados em empresas de serviços contábeis, assessoramento e perícias",
+      "territory": "São Paulo e 3 municípios",
+      "dataBase": "1º de agosto",
+      "parties": "SEAAC-SP e SESCON-SP",
+      "source": "cct-sp-contabil-capital-2025",
+      "sourceKind": "parties",
+      "presets": {
+        "overtimeRate": { "value": 60, "clause": "cláusula 10.1" },
+        "mealValue": { "daily": 31.0, "clause": "cláusula 13" },
+        "mealDiscountPct": { "value": 0, "clause": "cláusula 13.9" }
+      },
+      "roles": [
+        { "id": "auxiliar-contabil", "label": "Demais funções (auxiliar contábil, assistente)", "floor": 2100.0, "clause": "cláusula 4.2" },
+        { "id": "recepcionista-office", "label": "Office boy, recepcionista, serviços gerais", "floor": 1980.0, "clause": "cláusula 4.1" }
+      ],
+      "notes": ["Abono especial de R$ 315,50 (cl. 8).", "Seguro de vida mínimo de R$ 21.901,50; empregado paga até 50% (cl. 18)."]
+    },
+    {
+      "id": "mg-contabil-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Serviços Contábeis e Assessoramento — Minas Gerais 2026/2027",
+      "category": "Trabalhadores em empresas de consultoria, assessoramento, perícias e serviços contábeis",
+      "territory": "Minas Gerais (852 municípios)",
+      "registration": "MG002311/2026",
+      "dataBase": "1º de maio",
+      "parties": "SINTAPPI-MG e SESCON-MG",
+      "source": "cct-mg-contabil-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 90, "clause": "cláusula 8ª" },
+        "mealValue": { "daily": 27.0, "clause": "cláusula 11ª (jornada acima de 6h)" }
+      },
+      "roles": [
+        { "id": "auxiliar-contabil", "label": "Demais funções (auxiliar contábil, assistente)", "floor": 1790.22, "clause": "cláusula 3ª" },
+        { "id": "mensageiro-copeiro", "label": "Mensageiro, copeiro, faxineiro (após experiência)", "floor": 1755.12, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Home office: ajuda de custo de R$ 70 (integral) ou R$ 50 (híbrido).", "Seguro de vida mínimo de R$ 16.040 (cl. 15ª)."]
+    },
+    {
+      "id": "pr-contabil-2026",
+      "validFrom": "2026-06-01",
+      "validTo": "2027-05-31",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Serviços Contábeis — Paraná 2026/2027",
+      "category": "Trabalhadores em empresas de serviços contábeis, assessoramento e perícias",
+      "territory": "Estado do Paraná",
+      "registration": "PR001464/2026",
+      "dataBase": "1º de junho",
+      "parties": "SINDASPP e SESCAP-PR",
+      "source": "cct-pr-contabil-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "weeklyHours": { "value": 44, "clause": "cláusula 3ª" },
+        "mealValue": { "daily": 35.0, "clause": "cláusula 7ª, I (Curitiba; outras cidades de R$ 23 a R$ 31)" }
+      },
+      "roles": [
+        { "id": "auxiliar-contabil", "label": "Auxiliar de escritório, DP, escrita fiscal", "floor": 1986.71, "clause": "cláusula 3ª" },
+        { "id": "assistente", "label": "Demais cargos", "floor": 2182.34, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Contabilistas com CRC têm convenção própria (SICONTIBA PR001700/2026).", "Adicional de 2% a cada 5 anos."]
+    },
+    {
+      "id": "sp-transporte-cargas-capital-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["SP"],
+      "name": "Transporte Rodoviário de Cargas — São Paulo 2026/2027",
+      "category": "Trabalhadores em empresas de transporte rodoviário de cargas",
+      "territory": "São Paulo e Itapecerica da Serra",
+      "dataBase": "1º de maio",
+      "parties": "Sindicargas-SP e SETCESP",
+      "source": "cct-sp-transporte-cargas-capital-2026",
+      "sourceKind": "summary",
+      "calculatedFloors": true,
+      "presets": {
+        "otherBenefits": { "value": 197.5, "clause": "cesta básica / VA a partir de ago/2026" },
+        "plrYearly": { "value": 1600, "clause": "PLR de 2 parcelas de R$ 800" }
+      },
+      "roles": [
+        { "id": "motorista-bitrem", "label": "Motorista de bitrem / 7 eixos ou mais", "floor": 3732.81, "clause": "pisos de maio/2026 (calculados)" },
+        { "id": "motorista-carreta", "label": "Motorista de carreta", "floor": 3245.96, "clause": "pisos de maio/2026 (calculados)" },
+        { "id": "motorista-truck", "label": "Motorista de truck", "floor": 2956.92, "clause": "pisos de maio/2026 (calculados)" },
+        { "id": "ajudante", "label": "Ajudante", "floor": 2108.03, "clause": "pisos de maio/2026 (calculados)" }
+      ],
+      "notes": [
+        "Pisos calculados pelos reajustes anunciados (7% em 2025 e 5% em 2026) sobre os pisos registrados de 2024 (SP005817/2024); conferem com a tabela do SETCESP para Guarulhos.",
+        "Diárias: almoço/jantar R$ 39,20; pernoite R$ 56,00."
+      ]
+    },
+    {
+      "id": "mg-transporte-cargas-rmbh-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["MG"],
+      "name": "Transporte Rodoviário de Cargas — região metropolitana de BH 2026/2027",
+      "category": "Trabalhadores em empresas de transporte rodoviário de cargas",
+      "territory": "8 municípios da região metropolitana de BH (não inclui a capital)",
+      "registration": "MG002048/2026",
+      "dataBase": "1º de maio",
+      "parties": "Sindicato dos trabalhadores em transporte de cargas da RMBH e SETCEMG",
+      "source": "cct-mg-transporte-cargas-rmbh-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "cláusula 10ª" },
+        "mealValue": { "daily": 32.0, "clause": "cláusula 13ª" },
+        "healthPlan": { "value": 290.0, "clause": "cláusula 16ª (por empregado aderente)" },
+        "dentalPlan": { "value": 15.9, "clause": "cláusula 18ª" },
+        "plrYearly": { "value": 341.25, "clause": "cláusula 12ª (PPR 2026)" }
+      },
+      "roles": [
+        { "id": "motorista-carreta", "label": "Motorista de carreta", "floor": 3048.97, "clause": "cláusula 3ª" },
+        { "id": "motorista-truck", "label": "Motorista de veículo não articulado acima de 9 t", "floor": 2357.21, "clause": "cláusula 3ª" },
+        { "id": "motorista-leve", "label": "Demais motoristas", "floor": 2075.34, "clause": "cláusula 3ª" },
+        { "id": "ajudante", "label": "Ajudante", "floor": 1806.97, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Diária de viagem de R$ 100.", "Seguro de vida de 10 vezes o piso do carreteiro (cl. 19ª)."]
+    },
+    {
+      "id": "pr-transporte-cargas-curitiba-2026",
+      "validFrom": "2026-05-01",
+      "validTo": "2027-04-30",
+      "kind": "CCT",
+      "ufs": ["PR"],
+      "name": "Transporte Rodoviário de Cargas — Curitiba e região 2026/2027",
+      "category": "Motoristas e ajudantes de caminhões de cargas",
+      "territory": "Curitiba e região (31 municípios)",
+      "registration": "PR001774/2026",
+      "dataBase": "1º de maio",
+      "parties": "SINTRACARP e SETCEPAR",
+      "source": "cct-pr-transporte-cargas-curitiba-2026",
+      "sourceKind": "copy",
+      "presets": {
+        "overtimeRate": { "value": 50, "clause": "cláusula 15ª" },
+        "mealValue": { "daily": 33.0, "clause": "cláusula 19ª" },
+        "mealDiscountPct": { "value": 20, "clause": "cláusula 19ª" }
+      },
+      "roles": [
+        { "id": "motorista-carreta", "label": "Motorista carreteiro", "floor": 3350.0, "clause": "cláusula 3ª" },
+        { "id": "motorista-truck", "label": "Motorista de truck", "floor": 2658.5, "clause": "cláusula 3ª" },
+        { "id": "motorista-leve", "label": "Demais motoristas", "floor": 2476.5, "clause": "cláusula 3ª" },
+        { "id": "ajudante", "label": "Ajudante de motorista", "floor": 2057.0, "clause": "cláusula 3ª" }
+      ],
+      "notes": ["Convênio médico obrigatório, com participação do empregado de até 30% (cl. 22ª).", "Bitrem +10% e rodotrem +15% sobre o piso do carreteiro."]
     }
   ]
 }

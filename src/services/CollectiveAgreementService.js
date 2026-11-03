@@ -7,6 +7,16 @@ export class CollectiveAgreementService {
   }
 
   forState(uf) { return this.agreements.forState(uf); }
+
+  // Why an agreement's values must be checked against the official text before use.
+  warnings(agreement) {
+    if (!agreement) return null;
+    const expired = Boolean(agreement.expired);
+    const unofficial = agreement.sourceKind !== 'registry';
+    const calculated = Boolean(agreement.calculatedFloors);
+    return { expired, unofficial, calculated, any: expired || unofficial || calculated };
+  }
+
   get(id) { return this.agreements.get(id); }
 
   role(agreementId, roleId) {
@@ -41,11 +51,12 @@ export class CollectiveAgreementService {
   }
 
   // Form patch for a chosen agreement/role: salary at the role floor plus every preset.
-  applyPatch(agreementId, roleId) {
+  // Apprentices keep their own floor (hourly minimum wage), so keepSalary skips the role floor.
+  applyPatch(agreementId, roleId, { keepSalary = false } = {}) {
     const role = this.role(agreementId, roleId);
     const presets = this.presets(agreementId, roleId);
     const patch = { agreementId, agreementRoleId: roleId ?? '' };
-    if (role) {
+    if (role && !keepSalary) {
       patch.salary = Math.max(this.rates.minimumWage(), role.floor);
       patch.salaryAuto = true;
     }

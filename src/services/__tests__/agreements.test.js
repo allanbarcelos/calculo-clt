@@ -53,8 +53,24 @@ describe('Real agreements in the database', () => {
     });
   });
 
-  it('agreements expire with their validity', () => {
-    expect(createServices(jsonDatabase, '2027-01-01').agreements.forState('SC')).toEqual([]);
+  it('keeps an expired agreement, flagged, until the grace period ends', () => {
+    const asseio = (date) => createServices(jsonDatabase, date).agreements.forState('SC').filter((a) => a.id.startsWith('sc-asseio'));
+    expect(asseio('2027-01-01').map((a) => [a.id, a.expired])).toEqual([['sc-asseio-2026', true]]);
+    expect(asseio('2028-01-02')).toEqual([]);
+  });
+
+  it('the newest agreement of a series replaces the previous one', () => {
+    const db = structuredClone(jsonDatabase);
+    const previous = db.collectiveAgreements.agreements.find((a) => a.id === 'sc-asseio-2026');
+    db.collectiveAgreements.agreements.push({ ...previous, id: 'sc-asseio-2027', validFrom: '2027-01-01', validTo: '2027-12-31' });
+    const list = createServices(db, '2027-02-01').agreements.forState('SC').filter((a) => a.id.startsWith('sc-asseio'));
+    expect(list.map((a) => [a.id, a.expired])).toEqual([['sc-asseio-2027', false]]);
+  });
+
+  it('changing the state undoes an agreement that does not cover it', () => {
+    const data = { ...base, uf: 'SC', ...real.agreements.applyPatch('sc-asseio-2026', 'servente') };
+    const patch = real.wageFloors.statePatch(data, 'PR', base);
+    expect(patch).toMatchObject({ uf: 'PR', agreementId: '', agreementRoleId: '', salary: 0, salaryAuto: false });
   });
 });
 

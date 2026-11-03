@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
   "siteName": "Cálculo CLT",
-  "lastReview": "2026-10-30",
+  "lastReview": "2026-11-02",
   "notes": "Every list item may carry validFrom/validTo (YYYY-MM-DD). The site picks the version in force on the reference date. Add a new item with a later validFrom to publish a new rule; set validTo to retire one."
 }

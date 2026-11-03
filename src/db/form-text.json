@@ -14,9 +14,18 @@
     "transport": "Vale-transporte (obrigatório quando o funcionário pede)",
     "meal": "Vale-refeição ou vale-alimentação",
     "otherBenefits": "Outros benefícios sem encargos (valor mensal pago pela empresa)",
-    "operationalCosts": "Custos operacionais por funcionário"
+    "operationalCosts": "Custos operacionais por funcionário",
+    "leaveReserve": "Licenças e afastamentos (opcional)"
   },
   "fields": {
+    "contractType": {
+      "label": "Tipo de contratação",
+      "hint": "O contrato de aprendiz tem encargos menores e regras próprias de salário e jornada.",
+      "optionStandard": "Empregado com contrato CLT padrão",
+      "descStandard": "FGTS de 8%, multa de 40% do FGTS na demissão sem justa causa e aviso prévio.",
+      "optionApprentice": "Jovem aprendiz",
+      "descApprentice": "De {{minAge}} anos até completar {{maxAge}} (sem limite para pessoa com deficiência), matriculado em curso de aprendizagem. FGTS de {{fgtsRate|percent}}, jornada de até 6h por dia e contrato de até {{maxYears}} anos."
+    },
     "regime": {
       "label": "Qual é o regime tributário da empresa?",
       "hint": "Ele define quanto a empresa paga de INSS sobre a folha. Se ainda não abriu a empresa, compare os regimes no resultado final."
@@ -33,6 +42,27 @@
     "fap": {
       "label": "FAP (Fator Acidentário de Prevenção)",
       "hint": "Entre {{min|number}} e {{max|number}}. Empresa nova usa {{default|number}}."
+    },
+    "realProfitBracket": {
+      "label": "Situação de lucro da empresa",
+      "hint": "No Lucro Real, salários, encargos e benefícios são despesas que reduzem o IRPJ e a CSLL. Quanto a empresa economiza depende da faixa de lucro tributável.",
+      "optionSurcharge": "Lucro acima de R$ 20 mil por mês: economia de {{rate|percent}} do custo (IRPJ 15% + adicional 10% + CSLL 9%)",
+      "optionBasic": "Lucro de até R$ 20 mil por mês: economia de {{rate|percent}} do custo (IRPJ 15% + CSLL 9%)",
+      "optionLoss": "Prejuízo fiscal no ano: sem economia imediata"
+    },
+    "patRegistered": {
+      "label": "A empresa está inscrita no PAT (Programa de Alimentação do Trabalhador)",
+      "hint": "A inscrição é feita no site do Ministério do Trabalho. Com ela, o vale-refeição/alimentação dá um desconto extra direto no IRPJ."
+    },
+    "cleaningServicesCompany": {
+      "label": "A empresa presta serviços de limpeza, conservação ou manutenção",
+      "hint": "Essas empresas descontam créditos de PIS/COFINS de {{rate|percent}} sobre vale-transporte, vale-refeição/alimentação e uniformes dados aos funcionários dessas atividades. Vale até dezembro de 2026; a partir de 2027 a CBS substitui o PIS e a COFINS."
+    },
+    "fpas": {
+      "label": "Código FPAS (define as contribuições a terceiros)",
+      "hint": "O FPAS segue a atividade principal da empresa. Ele aparece na folha e no eSocial; confirme com seu contador.",
+      "custom": "Outro código / informar o percentual",
+      "breakdown": "Total de {{total|number}}%: {{parts}}."
     },
     "thirdParties": {
       "label": "Contribuições a terceiros (Sistema S, salário-educação, INCRA)",
@@ -60,6 +90,9 @@
       "hint": "Convenções cadastradas para este estado e as de abrangência nacional. Ao escolher a convenção e a função, o formulário é preenchido com os valores dela. Você pode alterar qualquer campo.",
       "emptyOption": "Nenhuma / minha convenção não está na lista",
       "option": "{{name}} — {{territory}}",
+      "expiredOption": "⚠ {{name}} (vencida em {{validTo}})",
+      "warningOption": "⚠ {{name}} — {{territory}} (confira no texto oficial)",
+      "expired": "Esta convenção venceu em {{validTo}} e a seguinte ainda não está cadastrada aqui. Os pisos mostrados podem já ter sido reajustados: confira no Sistema Mediador ou com o sindicato.",
       "noneForState": "Ainda não há convenções cadastradas para este estado. Informe o piso da sua convenção abaixo, se houver."
     },
     "agreementRole": {
@@ -69,15 +102,24 @@
       "option": "{{label}} — {{floor|money}}"
     },
     "agreementDetail": {
-      "registration": "Registro no MTE: {{registration}}",
       "validity": "Vigência: {{validFrom}} a {{validTo}}",
       "territory": "Abrangência: {{territory}}",
       "parties": "Partes: {{parties}}",
-      "appliedNote": "Os campos preenchidos pela convenção mostram o aviso “previsto na convenção” e continuam editáveis."
+      "appliedNote": "Os campos preenchidos pela convenção mostram o aviso “previsto na convenção” e continuam editáveis.",
+      "disclaimer": "Este site ajuda a estimar o custo, mas não é a fonte oficial. O que vale é o texto registrado da convenção: confira pisos e benefícios nele antes de contratar.",
+      "sourceRegistry": "Fonte: texto registrado no Ministério do Trabalho{{registrationText}}.",
+      "sourceParties": "Fonte: documento assinado e publicado pelos sindicatos. Não localizamos o registro dele no Ministério do Trabalho.",
+      "sourceCopy": "Fonte não oficial: cópia do texto registrado publicada por um site particular, não pelo Ministério do Trabalho.",
+      "sourceSummary": "Fonte não oficial: os valores vêm de notícia ou resumo publicado pelos sindicatos, não do texto da convenção.",
+      "calculatedFloors": "Parte dos pisos foi calculada por nós a partir dos reajustes anunciados e não está escrita em nenhum documento.",
+      "registrationText": " (registro {{registration}})",
+      "officialWithRegistration": "Onde obter o texto oficial: no [Sistema Mediador do Ministério do Trabalho](source:mediador), pesquise o registro **{{registration}}**. Os sindicatos que assinaram também fornecem o texto: {{parties}}.",
+      "officialWithoutRegistration": "Onde obter o texto oficial: no [Sistema Mediador do Ministério do Trabalho](source:mediador), pesquise as convenções de **{{uf}}** pelo município e pela categoria ({{category}}). Os sindicatos que assinaram também fornecem o texto: {{parties}}."
     },
     "agreementNotice": {
       "match": "Previsto na {{kind}} ({{clause}}): {{value}}.",
       "differs": "A {{kind}} prevê {{value}} ({{clause}}). Você informou outro valor.",
+      "checkOfficial": "Confira no texto oficial: esta convenção está com aviso.",
       "dailyValue": "{{daily|money}} por dia ({{monthly|money}} no mês)",
       "hoursValue": "{{hours}} horas semanais",
       "yes": "sim",
@@ -99,6 +141,7 @@
       "title": "Salário mínimo legal para este funcionário",
       "adjusted": "O salário do cálculo foi ajustado para este valor.",
       "originAgreement": "Origem: convenção coletiva informada.",
+      "originApprentice": "Origem: salário mínimo por hora do aprendiz × horas contratadas.",
       "originAgreementRole": "Origem: {{agreement}} — {{role}}.",
       "originBand": "Origem: {{band}}.",
       "originNational": "Origem: salário mínimo nacional."
@@ -133,7 +176,8 @@
     "overtimeHours": {
       "label": "Horas extras em dias úteis (por mês)",
       "hint": "No máximo {{maxDailyHours}}h por dia (CLT, art. 59). Não conte as horas compensadas em banco de horas.",
-      "suffix": "h"
+      "suffix": "h",
+      "overLimit": "Acima do limite legal de cerca de {{max|number}}h por mês ({{maxDailyHours}}h por dia × {{days|number}} dias úteis), somando as extras diurnas e noturnas. Confira o número ou a compensação em banco de horas."
     },
     "overtimeRate": {
       "label": "Adicional da hora extra",
@@ -143,7 +187,8 @@
     "restDayOvertimeHours": {
       "label": "Horas trabalhadas em domingos e feriados sem folga compensatória (por mês)",
       "hint": "Pagas com {{rate}}% a mais: {{hourValue|money}} por hora (Lei 605/1949, art. 9º).",
-      "suffix": "h"
+      "suffix": "h",
+      "overLimit": "O mês tem em média {{days|number}} domingos e feriados. Mais de {{max|number}}h por mês significa trabalhar quase todos eles além do limite diário. Confira o número."
     },
     "nightType": {
       "label": "Tipo de trabalho noturno"
@@ -151,6 +196,7 @@
     "nightHours": {
       "label": "Horas de relógio trabalhadas no período noturno (por mês)",
       "suffix": "h",
+      "overLimit": "O período noturno tem {{period}}h por dia. Em {{days|number}} dias úteis, o máximo seria {{max|number}}h por mês. Confira o número.",
       "hintReduced": "Informe as horas do relógio. A hora noturna tem {{minutes|number}} minutos, então cada hora de relógio vale {{factor|number}} hora noturna. Adicional: {{premium|money}} por hora de relógio. Só as horas da jornada normal. As horas extras feitas à noite vão no campo abaixo.",
       "hintRegular": "Neste tipo de trabalho a hora noturna tem 60 minutos. Adicional: {{premium|money}} por hora. Só as horas da jornada normal. As horas extras feitas à noite vão no campo abaixo."
     },
@@ -193,9 +239,33 @@
       "suffix": "%"
     },
     "healthPlan": { "label": "Plano de saúde", "hint": "CLT, art. 458, §2º, IV", "prefix": "R$" },
+    "employeeAgeBand": {
+      "label": "Faixa etária do funcionário",
+      "hint": "Usada só para mostrar a referência de preço do plano de saúde.",
+      "emptyOption": "Escolha para ver a referência"
+    },
+    "healthPlanAccommodation": {
+      "label": "Acomodação do plano",
+      "optionWard": "Enfermaria (quarto coletivo)",
+      "optionPrivate": "Apartamento (quarto individual)"
+    },
+    "healthPlanReference": {
+      "title": "Referência de preço do plano de saúde (ANS)",
+      "summary": "Valor típico em {{scope}}: **{{median|money}} por mês** para uma pessoa de {{band}}, em plano empresarial com cobertura ambulatorial e hospitalar e {{accommodation}}.",
+      "range": "Metade dos beneficiários está em planos com valor de referência entre **{{low|money}}** e **{{high|money}}**.",
+      "national": "Média nacional (mediana do Brasil): {{median|money}}.",
+      "smallSample": "Poucos beneficiários de planos empresariais neste estado ({{beneficiaries|number}}). Compare com o valor do Brasil.",
+      "noState": "Não há dados suficientes para {{uf}}. Mostramos a referência do Brasil.",
+      "caveat": "É o valor comercial que cada operadora registra na ANS, ponderado pelo número de beneficiários de cada plano (dados de {{reference}}). O preço negociado pode ficar até {{range|percent}} acima ou abaixo desse valor, e muda com a operadora, a rede credenciada e o número de vidas. Não inclui dependentes nem coparticipação. Peça cotações antes de decidir.",
+      "useButton": "Usar {{value|money}} no campo plano de saúde",
+      "brazil": "Brasil",
+      "accommodationWard": "enfermaria",
+      "accommodationPrivate": "apartamento"
+    },
     "dentalPlan": { "label": "Plano odontológico", "prefix": "R$" },
     "lifeInsurance": { "label": "Seguro de vida", "hint": "Algumas convenções tornam obrigatório.", "prefix": "R$" },
     "education": { "label": "Auxílio-educação", "hint": "CLT, art. 458, §2º, II", "prefix": "R$" },
+    "childcare": { "label": "Auxílio-creche (reembolso)", "hint": "Reembolso comprovado de creche ou babá de filhos de até 5 anos e 11 meses, oferecido a todos que tenham filhos nessa idade. Não paga INSS nem FGTS e não é renda tributável do empregado (Lei 14.457/2022).", "prefix": "R$" },
     "pension": { "label": "Previdência privada", "hint": "Precisa ser oferecida a todos os empregados.", "prefix": "R$" },
     "otherBenefits": { "label": "Outros (home office, auxílio-creche etc.)", "prefix": "R$" },
     "plrYearly": {
@@ -222,6 +292,45 @@
     "sstYearly": { "label": "Exames ocupacionais e programas de SST (por ano)", "hint": "Exames admissional, periódico e demissional, PCMSO e PGR (NR-7 e NR-1).", "prefix": "R$" },
     "accountingMonthly": { "label": "Contabilidade / processamento da folha (por mês)", "hint": "Valor que o contador cobra a mais por funcionário.", "prefix": "R$" },
     "ppeMonthly": { "label": "Uniformes e EPIs (por mês)", "hint": "A empresa deve fornecer EPIs de graça (CLT, art. 166).", "prefix": "R$" },
-    "hiringOneTime": { "label": "Custo único de contratação", "hint": "Anúncio, recrutamento, treinamento inicial. Aparece separado do custo mensal.", "prefix": "R$" }
+    "hiringOneTime": { "label": "Custo único de contratação", "hint": "Anúncio, recrutamento, treinamento inicial. Aparece separado do custo mensal.", "prefix": "R$" },
+    "leaveReserveEnabled": {
+      "label": "Incluir reserva para licenças e afastamentos",
+      "hint": "Estima o custo de manter a operação enquanto o funcionário está de licença-maternidade, paternidade ou afastado por doença. Os percentuais são calculados com estatísticas oficiais; não é preciso digitar nenhuma taxa."
+    },
+    "leaveFamilyProfile": {
+      "label": "Licença-maternidade ou paternidade",
+      "hint": "Se a vaga ainda não tem ocupante definido, use a média nacional.",
+      "optionNone": "Não incluir",
+      "optionFemale": "Funcionária — maternidade/adoção de {{days}} dias ({{rate|percent}} do salário)",
+      "optionMale": "Funcionário — paternidade de {{days}} dias ({{rate|percent}} do salário)",
+      "optionUnknown": "Ainda não sei — média nacional ({{rate|percent}} do salário)"
+    },
+    "leaveHealthReserve": {
+      "label": "Incluir afastamentos por doença ({{rate|percent}} do salário)",
+      "hint": "A empresa paga os primeiros {{days}} dias de cada afastamento (Lei 8.213/1991, art. 60)."
+    },
+    "leaveReplacementMode": {
+      "label": "Como será feita a cobertura das atividades?",
+      "optionExternal": "Contratação externa de substituto",
+      "optionInternal": "Movimentação interna de funcionário"
+    },
+    "leaveInternalBonusRate": {
+      "label": "Abono temporário para quem assumir as atividades (% do salário)",
+      "hint": "Informe o percentual adicional previsto pela empresa ou convenção. A estimativa considera encargos e provisões sobre esse abono, mas não inclui nova contratação, treinamento ou benefícios de um substituto.",
+      "suffix": "%"
+    },
+    "leaveExternalHiringCost": {
+      "label": "Agência, recrutamento, admissão e treinamento (por contratação)",
+      "hint": "Informe o custo pago a cada contratação temporária. A calculadora distribui esse valor pela frequência estimada de afastamentos; não informe um custo mensal.",
+      "prefix": "R$"
+    },
+    "companyCitizen": {
+      "label": "A empresa aderiu ao Programa Empresa Cidadã?",
+      "hint": "Amplia a licença considerada: mais 60 dias para maternidade/adoção e mais 15 dias para paternidade. O possível incentivo fiscal não é abatido do total, pois depende do IRPJ devido."
+    },
+    "paternity20DaysConfirmed": {
+      "label": "Confirmar que a condição fiscal para 20 dias de licença-paternidade foi cumprida",
+      "hint": "A lei condiciona os 20 dias ao cumprimento da meta fiscal. Sem a confirmação, usamos {{days}} dias."
+    }
   }
 }

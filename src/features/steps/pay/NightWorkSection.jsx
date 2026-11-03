@@ -3,12 +3,17 @@ import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 
 export default function NightWorkSection({ data, set, result }) {
-  const rates = useServices().repositories.rates;
+  const { repositories, compensation } = useServices();
+  const { rates } = repositories;
   const t = useFormText();
   const night = rates.nightWorkType(data.nightType);
   const factor = 60 / night.hourMinutes;
   const { hourly } = result;
   const nightHoursField = t.field('nightHours');
+  const limits = compensation.limits(data);
+  const nightOver = data.nightHours > limits.night
+    ? { differs: true, text: t.text('nightHours', 'overLimit', { period: night.periodHours, days: limits.monthlyWorkingDays, max: limits.night }) }
+    : null;
 
   return (
     <>
@@ -27,6 +32,7 @@ export default function NightWorkSection({ data, set, result }) {
         })}
         value={data.nightHours}
         onChange={(v) => set({ nightHours: v })}
+        notice={nightOver}
       />
       <NumberField
         {...t.field('nightOvertimeHours', {

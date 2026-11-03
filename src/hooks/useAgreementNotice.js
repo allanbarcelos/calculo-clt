@@ -20,15 +20,19 @@ export function useAgreementNotice(data) {
     return `${String(preset.value).replace('.', ',')}%`;
   };
 
+  // Values from an agreement with warnings (expired, unofficial source, calculated) always ask
+  // the user to check the official text.
+  const check = selection && agreements.warnings(selection.agreement).any ? ` ${t.text('agreementNotice', 'checkOfficial')}` : '';
   const build = (preset, current) => {
     const differs = current !== preset.value;
-    return { differs, text: t.text('agreementNotice', differs ? 'differs' : 'match', { kind, clause: preset.clause, value: describe(preset) }) };
+    const text = t.text('agreementNotice', differs ? 'differs' : 'match', { kind, clause: preset.clause, value: describe(preset) });
+    return { differs: differs || Boolean(check), text: text + check };
   };
 
   return function noticeFor(field) {
     if (!selection) return null;
     if (field === 'salary') {
-      if (!selection.role) return null;
+      if (!selection.role || data.contractType === 'apprentice') return null;
       const floor = wageFloors.resolve(data).value;
       return build({ value: floor, format: 'money', clause: selection.role.clause }, data.salary < floor ? data.salary : floor);
     }

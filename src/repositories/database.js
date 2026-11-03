@@ -4,6 +4,7 @@ import collectiveAgreements from '../db/collective-agreements.json';
 import content from '../db/content.json';
 import federalRates from '../db/federal-rates.json';
 import formText from '../db/form-text.json';
+import healthPlans from '../db/health-plans.json';
 import meta from '../db/meta.json';
 import occupationalHazards from '../db/occupational-hazards.json';
 import sources from '../db/sources.json';
@@ -20,4 +21,5 @@ export const jsonDatabase = {
   content,
   formText,
   collectiveAgreements,
+  healthPlans,
 };
