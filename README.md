@@ -32,7 +32,7 @@ src/
 scripts/validate-db.mjs   database validation run before every build
 ```
 
-- **Single responsibility:** `CompensationService` (gross pay, legal monthly limits), `CalendarService` (working days, national holidays, DSR factor), `EmployerChargesService` (INSS, RAT, third parties), `ProvisionService` (13th salary, vacation, FGTS fine, notice), `BenefitService`, `EmployeeDeductionService` (INSS, IRRF, family allowance), `LeaveReserveService` (maternity, paternity and sickness leave), `ContractService` (standard or apprentice contract: FGTS rate, fine, notice, floor), `TaxAdvantageService` (Lucro Real: IRPJ/CSLL deduction, PAT, PIS/COFINS credits), `WageFloorService`, `CollectiveAgreementService`, `FatorRService`, `RegimeComparisonService`, `FormStateService` (brings form data saved in an earlier visit in line with the current database: wrong types, replaced agreements, floors that changed), and `CostCalculator`, which only orchestrates them.
+- **Single responsibility:** `CompensationService` (gross pay, legal monthly limits), `CalendarService` (working days, national holidays, DSR factor), `EmployerChargesService` (INSS, RAT, third parties), `ProvisionService` (13th salary, vacation, FGTS fine, notice), `BenefitService`, `EmployeeDeductionService` (INSS, IRRF, family allowance), `LeaveReserveService` (maternity, paternity and sickness leave), `ContractService` (standard or apprentice contract: FGTS rate, fine, notice, floor), `TaxAdvantageService` (Lucro Real: IRPJ/CSLL deduction, PAT, PIS/COFINS credits), `WageFloorService`, `CollectiveAgreementService`, `FatorRService`, `RegimeComparisonService`, `DayWorkerService` (diarista: daily rates and transport, no payroll), `FormStateService` (brings form data saved in an earlier visit in line with the current database: wrong types, replaced agreements, floors that changed), and `CostCalculator`, which only orchestrates them.
 - **Open/closed:** new regimes, wage floors, rates or explanatory texts are added to the database, not to the code.
 - **Liskov:** every repository extends `VersionedRepository` and resolves versions the same way.
 - **Interface segregation:** components receive only the data they use; sections read only their own repository.
@@ -82,6 +82,13 @@ Any item can carry `validFrom` / `validTo` (YYYY-MM-DD, inclusive). The site use
 - **FPAS:** picking the code fills the third-party rate and shows its composition (`tax-regimes.json` → `fpas`).
 - **DSR:** computed from the calendar of the reference year (Sundays + national holidays in `nationalHolidays`).
 - **Warnings:** overtime, night and rest-day hours above the legal monthly limits; insalubrity and hazard pay never add up (the larger is kept).
+
+### Hiring as a person: domestic employee and day worker
+
+The `domestic` regime (`tax-regimes.json`, `kind: "household"`) is a person hiring for their home (LC 150/2015, eSocial Doméstico):
+
+- **Domestic employee** (more than 2 days a week): 8% employer INSS, 0.8% accident insurance (`accidentInsuranceRate`, instead of RAT × FAP), 8% FGTS plus 3.2% compensation (`fgtsCompensationRate`) instead of the 40% fine; no third parties, payroll relief, PLR or food discount; INSS pays sickness from the first day (`sicknessEmployerDays: 0`); no Empresa Cidadã. Choosing it selects the state band for domestic workers (`domesticBand` in `wage-floors.json`) and hides collective agreements and federal profession floors. Only household regimes are compared among themselves.
+- **Day worker** (`contractType: "dayWorker"`, up to `dayWorker.maxDaysPerWeek` days a week in `federal-rates.json`): no employment bond and no floor; the cost is daily rate × days per week × 52 ÷ 12, plus transport. The benefits and accruals steps are hidden (`hiddenFor` in `steps.js`), and more than 2 days a week shows the employment-bond warning.
 
 ### Apprentice contract and tax advantages
 

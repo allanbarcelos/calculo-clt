@@ -1,6 +1,27 @@
 {
   "sources": [
     {
+      "id": "domesticLaw",
+      "title": "Lei Complementar nº 150/2015 — contrato de trabalho doméstico (diarista até 2 dias por semana, FGTS, indenização compensatória de 3,2%, descontos proibidos)",
+      "short": "LC 150/2015",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm"
+    },
+    {
+      "id": "esocialDomestic",
+      "title": "eSocial — empregador doméstico: cadastro, folha e guia DAE",
+      "short": "eSocial Doméstico",
+      "org": "Governo Federal",
+      "url": "https://www.gov.br/esocial/pt-br/empregador-domestico"
+    },
+    {
+      "id": "domesticSickness",
+      "title": "Decreto nº 3.048/1999, art. 72 — auxílio por incapacidade temporária do empregado doméstico a contar do início da incapacidade",
+      "short": "Decreto 3.048/1999, art. 72",
+      "org": "Presidência da República",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm"
+    },
+    {
       "id": "minWage",
       "title": "Decreto nº 12.797/2025 — salário mínimo de R$ 1.621,00 a partir de 1º/01/2026",
       "short": "Decreto 12.797/2025",
@@ -1028,6 +1049,14 @@
         "cct-sp-transporte-cargas-capital-2026",
         "cct-mg-transporte-cargas-rmbh-2026",
         "cct-pr-transporte-cargas-curitiba-2026"
+      ]
+    },
+    {
+      "title": "Trabalho doméstico",
+      "ids": [
+        "domesticLaw",
+        "esocialDomestic",
+        "domesticSickness"
       ]
     }
   ]

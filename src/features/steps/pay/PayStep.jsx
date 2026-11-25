@@ -2,6 +2,7 @@ import { ContentCallout, SourcesInline } from '../../../components/ui';
 import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 import AllowancesSection from './AllowancesSection.jsx';
+import DayWorkerSection from './DayWorkerSection.jsx';
 import EmployeeDataSection from './EmployeeDataSection.jsx';
 import NightWorkSection from './NightWorkSection.jsx';
 import OvertimeSection from './OvertimeSection.jsx';
@@ -10,6 +11,7 @@ import SalarySection from './SalarySection.jsx';
 export default function PayStep(props) {
   const t = useFormText();
   const { contract } = useServices();
+  if (contract.isDayWorker(props.data)) return <DayWorkerSection {...props} />;
   const issues = contract.apprenticeIssues(props.data);
   const rules = contract.apprentice();
   const issueVars = { weeklyHours: props.data.weeklyHours, maxWeeklyHours: rules.maxWeeklyHours, maxWithSchooling: rules.maxWeeklyHoursWithSchooling, hours: issues.includes('hours'), schooling: issues.includes('schooling'), overtime: issues.includes('overtime'), risk: issues.includes('risk') };
@@ -24,7 +26,7 @@ export default function PayStep(props) {
         <NightWorkSection {...props} />
       </fieldset>
       <EmployeeDataSection {...props} />
-      <SourcesInline sources={[{ id: 'clt' }]} />
+      <SourcesInline sources={[{ id: contract.isHousehold(props.data) ? 'domesticLaw' : 'clt' }]} />
     </>
   );
 }

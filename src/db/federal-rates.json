@@ -158,5 +158,8 @@
       "quotaMax": 0.15,
       "source": "apprenticeManual"
     }
+  ],
+  "dayWorker": [
+    { "validFrom": "2026-01-01", "maxDaysPerWeek": 2, "defaultDaysPerWeek": 1, "weeksPerYear": 52, "source": "domesticLaw" }
   ]
 }

@@ -16,10 +16,10 @@ export default function LiveSummary({ started, result, onReset }) {
               <li key={g.id}><span>{groupTitle(g.id)}</span><strong>{formatMoney(g.total)}</strong></li>
             ))}
           </ul>
-          <p className="hint">Cada R$ 1,00 de salário custa <strong>{formatMoney(result.costPerReal)}</strong> para a empresa.</p>
+          {!result.dayWorker && <p className="hint">Cada R$ 1,00 de salário custa <strong>{formatMoney(result.costPerReal)}</strong> para quem contrata.</p>}
         </>
       ) : (
-        <p className="hint">O cálculo começa quando você escolhe uma função com piso definido ou chega à etapa “Salário”.</p>
+        <p className="hint">O cálculo começa quando você escolhe uma função com piso definido ou chega à etapa “Salário” (para diarista, quando informa a diária).</p>
       )}
       {onReset && (
         <button

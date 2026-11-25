@@ -10,15 +10,20 @@ export default function TerminationSection({ data, set, result }) {
   const { gross } = result;
 
   if (contract.isApprentice(data)) return <ContentCallout id="apprenticeTermination" />;
+  const household = contract.isHousehold(data);
+  const terminationField = household
+    ? { label: t.text('includeTerminationReserve', 'labelDomestic'), hint: t.text('includeTerminationReserve', 'hintDomestic') }
+    : t.field('includeTerminationReserve', { fine: fgts.terminationFine });
 
   return (
     <>
       <Toggle
-        {...t.field('includeTerminationReserve', { fine: fgts.terminationFine })}
+        {...terminationField}
         checked={data.includeTerminationReserve}
         onChange={(v) => set({ includeTerminationReserve: v })}
       />
-      {gross > 0 && (
+      {household && <ContentCallout id="domesticTermination" />}
+      {gross > 0 && !household && (
         <p className="hint" aria-live="polite">
           <RichText text={t.raw('includeTerminationReserve', 'note')} vars={{ amount: provisions.terminationFineAfterOneYear(gross, data) }} />
         </p>

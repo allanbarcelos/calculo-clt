@@ -73,6 +73,9 @@ export class FormDefaultsService {
       companyCitizen: false,
       paternity20DaysConfirmed: false,
       hiringOneTime: 0,
+      dayRate: 0,
+      dayWorkerDaysPerWeek: this.rates.dayWorker().defaultDaysPerWeek,
+      dayWorkerTransport: 0,
     };
   }
 }

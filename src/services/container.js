@@ -14,6 +14,7 @@ import { CollectiveAgreementService } from './CollectiveAgreementService.js';
 import { CompensationService } from './CompensationService.js';
 import { ContractService } from './ContractService.js';
 import { CostCalculator } from './CostCalculator.js';
+import { DayWorkerService } from './DayWorkerService.js';
 import { EmployeeDeductionService } from './EmployeeDeductionService.js';
 import { EmployerChargesService } from './EmployerChargesService.js';
 import { FatorRService } from './FatorRService.js';
@@ -41,11 +42,12 @@ export function createServices(database, referenceDate) {
   const employerChargesService = new EmployerChargesService(regimeRepository);
   const calendarService = new CalendarService(ratesRepository, referenceDate);
   const compensationService = new CompensationService(ratesRepository, hazardRepository, calendarService);
-  const contractService = new ContractService(ratesRepository);
+  const contractService = new ContractService(ratesRepository, regimeRepository);
   const provisionService = new ProvisionService(ratesRepository, employerChargesService, contractService);
-  const benefitService = new BenefitService(ratesRepository);
+  const benefitService = new BenefitService(ratesRepository, regimeRepository);
   const employeeDeductionService = new EmployeeDeductionService(ratesRepository);
-  const leaveReserveService = new LeaveReserveService(ratesRepository, provisionService, benefitService);
+  const leaveReserveService = new LeaveReserveService(ratesRepository, provisionService, benefitService, regimeRepository);
+  const dayWorkerService = new DayWorkerService(ratesRepository);
   const costCalculator = new CostCalculator({
     ratesRepository,
     contractService,
@@ -55,6 +57,7 @@ export function createServices(database, referenceDate) {
     benefitService,
     employeeDeductionService,
     leaveReserveService,
+    dayWorkerService,
   });
 
   const wageFloorService = new WageFloorService(wageFloorRepository, ratesRepository, collectiveAgreementService, contractService);
@@ -85,6 +88,7 @@ export function createServices(database, referenceDate) {
     deductions: employeeDeductionService,
     leaveReserve: leaveReserveService,
     calculator: costCalculator,
+    dayWorker: dayWorkerService,
     comparison: new RegimeComparisonService(regimeRepository, costCalculator),
     taxAdvantages: new TaxAdvantageService(regimeRepository, ratesRepository),
     fatorR: new FatorRService(regimeRepository, contractService),

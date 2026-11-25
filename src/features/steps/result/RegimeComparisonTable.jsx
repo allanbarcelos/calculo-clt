@@ -6,6 +6,8 @@ export default function RegimeComparisonTable({ data }) {
   const { comparison: comparisonService, repositories, wageFloors } = useServices();
   const comparison = comparisonService.compare(data, { floor: wageFloors.resolve(data).value });
   const cheapest = Math.min(...comparison.filter((c) => c.eligible).map((c) => c.monthlyTotal));
+  // A household has nothing to compare with: company regimes are not an option for it.
+  if (comparison.length < 2) return null;
 
   return (
     <section aria-labelledby="compare-title">

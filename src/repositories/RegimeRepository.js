@@ -3,6 +3,17 @@ import { VersionedRepository } from './VersionedRepository.js';
 export class RegimeRepository extends VersionedRepository {
   list() { return this.collection('regimes'); }
 
+  // 'company' (CNPJ) or 'household' (a person hiring for their home).
+  kindOf(regime) { return regime?.kind ?? 'company'; }
+
+  isHousehold(id) { return this.kindOf(this.get(id)) === 'household'; }
+
+  // Regimes of the same kind as id: company regimes compare among themselves.
+  sameKind(id) {
+    const kind = this.kindOf(this.get(id));
+    return this.list().filter((r) => this.kindOf(r) === kind);
+  }
+
   get(id) {
     const regimes = this.list();
     return regimes.find((r) => r.id === id) ?? regimes.find((r) => r.id === this.section.defaultRegime) ?? regimes[0];

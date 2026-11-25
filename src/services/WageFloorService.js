@@ -30,6 +30,12 @@ export class WageFloorService {
     );
   }
 
+  // State band that covers domestic workers, when the state has a floor law.
+  domesticBand(uf) {
+    const state = this.stateFloor(uf);
+    return state?.bands.find((b) => b.id === state.domesticBand) ?? null;
+  }
+
   isFederalBand(bandId) {
     return this.federalFloors().some((f) => f.id === bandId);
   }
@@ -40,6 +46,8 @@ export class WageFloorService {
   resolve(input) {
     const { uf, bandId, hasAgreementFloor, agreementFloor } = input;
     const minimumWage = this.rates.minimumWage();
+    // A day worker is not an employee: there is no wage floor for the daily rate.
+    if (this.contract?.isDayWorker(input)) return { value: 0, origin: 'dayWorker', band: null };
     // Apprentices: hourly minimum wage × contracted hours, unless an agreement floor typed by the
     // user is higher (CLT art. 428, §2º: "salvo condição mais favorável").
     if (this.contract?.isApprentice(input)) {
@@ -76,8 +84,25 @@ export class WageFloorService {
   // Changing the state keeps federal floors, drops state bands and undoes an agreement that
   // does not cover the new state.
   statePatch(data, uf, defaults) {
-    const patch = { uf, bandId: this.isFederalBand(data.bandId) ? data.bandId : '' };
+    const household = this.contract?.isHousehold(data);
+    const bandId = household ? (this.domesticBand(uf)?.id ?? '') : (this.isFederalBand(data.bandId) ? data.bandId : '');
+    const patch = { uf, bandId };
     const keepsAgreement = this.agreements.forState(uf).some((a) => a.id === data.agreementId);
     return this.floorPatch(data, keepsAgreement ? patch : { ...this.agreements.revertPatch(data, defaults), ...patch });
+  }
+
+  // Changing the employer: a household drops collective agreements (they cover companies) and
+  // starts at the state band for domestic workers; back to a company, that band is dropped.
+  regimePatch(data, regime, defaults) {
+    const patch = this.contract.regimePatch(data, regime);
+    const next = { ...data, ...patch };
+    const wasHousehold = this.contract.isHousehold(data);
+    if (this.contract.isHousehold(next) && !wasHousehold) {
+      Object.assign(patch, this.agreements.revertPatch(data, defaults), { bandId: this.domesticBand(data.uf)?.id ?? '' });
+    } else if (!this.contract.isHousehold(next) && wasHousehold && data.bandId === this.domesticBand(data.uf)?.id) {
+      patch.bandId = '';
+    }
+    if (wasHousehold === this.contract.isHousehold(next)) return { ...patch };
+    return this.floorPatch(data, patch);
   }
 }

@@ -1,5 +1,6 @@
-import { Explainer, NumberField, SelectField, Toggle } from '../../../components/ui';
+import { ContentCallout, Explainer, NumberField, SelectField, Toggle } from '../../../components/ui';
 import { useFormText } from '../../../hooks/useFormText.js';
+import { useServices } from '../../../hooks/useServices.js';
 
 const OPTION_KEYS = { none: 'optionNone', female: 'optionFemale', male: 'optionMale', unknown: 'optionUnknown' };
 
@@ -7,6 +8,7 @@ const OPTION_KEYS = { none: 'optionNone', female: 'optionFemale', male: 'optionM
 // by LeaveReserveService from official statistics; the user only picks the scenario.
 export default function LeaveReserveSection({ data, set, result }) {
   const t = useFormText();
+  const household = useServices().contract.isHousehold(data);
   const leave = result.leaveReserve;
   const { options } = leave;
   const internal = data.leaveReplacementMode === 'internal';
@@ -34,12 +36,14 @@ export default function LeaveReserveSection({ data, set, result }) {
             options={familyOptions}
             onChange={(v) => set({ leaveFamilyProfile: v })}
           />
-          <Toggle
-            {...t.field('leaveHealthReserve', { rate: options.health, days: leave.sicknessDays })}
-            checked={leave.includesHealth}
-            onChange={(v) => set({ leaveHealthReserve: v })}
-          />
-          {leave.includesFamily && (
+          {household ? <ContentCallout id="domesticSickness" /> : (
+            <Toggle
+              {...t.field('leaveHealthReserve', { rate: options.health, days: leave.sicknessDays })}
+              checked={leave.includesHealth}
+              onChange={(v) => set({ leaveHealthReserve: v })}
+            />
+          )}
+          {leave.includesFamily && !household && (
             <Toggle {...t.field('companyCitizen')} checked={data.companyCitizen} onChange={(v) => set({ companyCitizen: v })} />
           )}
           {leave.includesFamily && leave.paternityConditional && leave.profile !== 'female' && (

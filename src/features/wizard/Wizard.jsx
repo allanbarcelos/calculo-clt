@@ -5,17 +5,20 @@ import { useServices } from '../../hooks/useServices.js';
 import LiveSummary from './LiveSummary.jsx';
 import StepNav from './StepNav.jsx';
 import Stepper from './Stepper.jsx';
-import { STEPS } from './steps.js';
+import { STEPS, visibleSteps } from './steps.js';
 
 const STORAGE_KEY = 'custo-claro:v3';
+// The steps before the salary step are never hidden, so its index is the same in every list.
 const START_INDEX = STEPS.findIndex((s) => s.startsCalculation);
 
 export default function Wizard() {
-  const { calculator, formDefaults, formState, wageFloors } = useServices();
+  const services = useServices();
+  const { calculator, contract, formDefaults, formState, wageFloors } = services;
   const t = useFormText();
-  const steps = STEPS.map((s) => ({ ...s, ...t.step(s.id) }));
   const defaults = useMemo(() => formDefaults.defaults(), [formDefaults]);
   const [data, setData] = usePersistentState(STORAGE_KEY, defaults, (stored) => formState.restore(stored));
+  const steps = visibleSteps(data, services).map((s) => ({ ...s, ...t.step(s.id) }));
+  const started = contract.isDayWorker(data) ? data.dayRate > 0 : data.salary > 0;
   const [step, setStep] = useState(0);
   const [showErrors, setShowErrors] = useState(false);
   const headingRef = useRef(null);
@@ -59,7 +62,7 @@ export default function Wizard() {
     setStep(0);
   };
 
-  const current = steps[step];
+  const current = steps[Math.min(step, steps.length - 1)];
   const { Component } = current;
   const errors = showErrors && current.startsCalculation && salaryError ? { salary: salaryError } : {};
 
@@ -67,9 +70,9 @@ export default function Wizard() {
     <section id="calculadora" className="container calculator" aria-labelledby="step-heading">
       <Stepper steps={steps} current={step} onSelect={goTo} />
       <div className={`calculator__body${current.isResult ? ' calculator__body--full' : ''}`}>
-        <form className="card step" noValidate onSubmit={(e) => { e.preventDefault(); goTo(Math.min(step + 1, STEPS.length - 1)); }}>
+        <form className="card step" noValidate onSubmit={(e) => { e.preventDefault(); goTo(Math.min(step + 1, steps.length - 1)); }}>
           <header className="step__header">
-            <p className="step__count">Etapa {step + 1} de {STEPS.length}</p>
+            <p className="step__count">Etapa {step + 1} de {steps.length}</p>
             <h2 id="step-heading" ref={headingRef} tabIndex={-1}>{current.heading}</h2>
             <p className="step__intro">{current.intro}</p>
           </header>
@@ -78,13 +81,13 @@ export default function Wizard() {
           </div>
           <StepNav
             canGoBack={step > 0}
-            isLast={step === STEPS.length - 1}
-            isBeforeLast={step === STEPS.length - 2}
+            isLast={step === steps.length - 1}
+            isBeforeLast={step === steps.length - 2}
             onBack={() => goTo(step - 1)}
             onReset={reset}
           />
         </form>
-        {!current.isResult && <LiveSummary started={data.salary > 0} result={result} onReset={pristine ? null : reset} />}
+        {!current.isResult && <LiveSummary started={started} result={result} onReset={pristine ? null : reset} />}
       </div>
     </section>
   );

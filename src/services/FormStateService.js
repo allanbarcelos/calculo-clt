@@ -38,6 +38,8 @@ export class FormStateService {
   restore(stored) {
     const defaults = this.formDefaults.defaults();
     let data = this.sanitize(stored, defaults);
+    // A contract type the employer does not offer (e.g. apprentice for a household).
+    if (!this.contract.types(data).includes(data.contractType)) data = { ...data, ...this.contract.switchPatch(data, 'standard') };
     data = { ...data, ...this.agreementPatch(data, defaults) };
     if (data.bandId && !this.wageFloors.findBand(data.uf, data.bandId, data.weeklyHours)) data.bandId = '';
     if (data.salaryAuto && data.salary > 0) data.salary = this.wageFloors.resolve(data).value;

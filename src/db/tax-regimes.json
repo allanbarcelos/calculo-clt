@@ -67,6 +67,25 @@
       "usesThirdParties": true,
       "allowsPayrollRelief": true,
       "source": "employerInss"
+    },
+    {
+      "id": "domestic",
+      "validFrom": "2026-01-01",
+      "kind": "household",
+      "label": "Pessoa física: empregador doméstico",
+      "short": "Doméstico",
+      "description": "Para contratar em casa: empregada doméstica, babá, cuidador, caseiro, motorista, jardineiro ou diarista. A guia do eSocial Doméstico (DAE) tem 8% de INSS patronal, 0,8% de seguro contra acidentes, 8% de FGTS e 3,2% de indenização compensatória.",
+      "employerInssRate": 0.08,
+      "accidentInsuranceRate": 0.008,
+      "usesRatFap": false,
+      "usesThirdParties": false,
+      "allowsPayrollRelief": false,
+      "fgtsCompensationRate": 0.032,
+      "sicknessEmployerDays": 0,
+      "allowsFoodDiscount": false,
+      "allowsPlr": false,
+      "callout": "domesticRules",
+      "source": "domesticLaw"
     }
   ],
   "defaultRegime": "simples",

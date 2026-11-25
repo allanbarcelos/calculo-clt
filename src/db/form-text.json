@@ -1,6 +1,6 @@
 {
   "steps": {
-    "company": { "title": "Empresa", "heading": "Sua empresa", "intro": "O regime tributário muda os encargos sobre a folha." },
+    "company": { "title": "Contratante", "heading": "Quem vai contratar", "intro": "Empresa ou pessoa física: o regime tributário, ou a contratação doméstica, muda os encargos sobre a folha." },
     "floor": { "title": "Local e piso", "heading": "Onde e em que função", "intro": "Descubra o menor salário que a lei permite pagar." },
     "pay": { "title": "Salário", "heading": "Salário e jornada", "intro": "Remuneração, adicionais e horas extras habituais." },
     "benefits": { "title": "Benefícios", "heading": "Benefícios", "intro": "Valorize o funcionário sem pagar encargos." },
@@ -24,11 +24,15 @@
       "optionStandard": "Empregado com contrato CLT padrão",
       "descStandard": "FGTS de 8%, multa de 40% do FGTS na demissão sem justa causa e aviso prévio.",
       "optionApprentice": "Jovem aprendiz",
-      "descApprentice": "De {{minAge}} anos até completar {{maxAge}} (sem limite para pessoa com deficiência), matriculado em curso de aprendizagem. FGTS de {{fgtsRate|percent}}, jornada de até 6h por dia e contrato de até {{maxYears}} anos."
+      "descApprentice": "De {{minAge}} anos até completar {{maxAge}} (sem limite para pessoa com deficiência), matriculado em curso de aprendizagem. FGTS de {{fgtsRate|percent}}, jornada de até 6h por dia e contrato de até {{maxYears}} anos.",
+      "optionDomestic": "Empregado doméstico (mais de 2 dias por semana)",
+      "descDomestic": "Carteira assinada no eSocial Doméstico: 13º, férias, FGTS de 8% + 3,2% de indenização compensatória e aviso prévio.",
+      "optionDayWorker": "Diarista (até 2 dias por semana)",
+      "descDayWorker": "Sem vínculo de emprego: você paga as diárias combinadas, sem encargos nem provisões."
     },
     "regime": {
-      "label": "Qual é o regime tributário da empresa?",
-      "hint": "Ele define quanto a empresa paga de INSS sobre a folha. Se ainda não abriu a empresa, compare os regimes no resultado final."
+      "label": "Quem contrata: qual é o regime da empresa, ou é uma pessoa física?",
+      "hint": "O regime define quanto se paga de INSS sobre a folha. Se ainda não abriu a empresa, compare os regimes no resultado final. Para contratar alguém para trabalhar na sua casa, escolha a última opção."
     },
     "chargesSummary": {
       "note": "Encargos patronais sobre a folha neste regime: **{{total|percent}}** (INSS {{inss|percent}} + RAT × FAP {{ratFap|percent}}), além do FGTS.",
@@ -145,6 +149,21 @@
       "originAgreementRole": "Origem: {{agreement}} — {{role}}.",
       "originBand": "Origem: {{band}}.",
       "originNational": "Origem: salário mínimo nacional."
+    },
+    "dayRate": {
+      "label": "Valor da diária",
+      "hint": "Não há piso legal para a diária. Para comparar: o piso do doméstico no seu estado equivale a {{daily|money}} por dia de trabalho (piso ÷ {{days|number}} dias), mas o empregado ainda recebe 13º, férias e FGTS.",
+      "prefix": "R$"
+    },
+    "dayWorkerDaysPerWeek": {
+      "label": "Dias por semana",
+      "hint": "Até {{max|number}} dias por semana na mesma casa é diarista, sem vínculo.",
+      "suffix": "dias"
+    },
+    "dayWorkerTransport": {
+      "label": "Transporte por dia (se você paga)",
+      "hint": "Ida e volta. Para a diarista não há vale-transporte obrigatório: vale o que for combinado.",
+      "prefix": "R$"
     },
     "salary": {
       "label": "Salário base mensal (em carteira)",
@@ -277,7 +296,9 @@
     "includeTerminationReserve": {
       "label": "Reservar todo mês para a rescisão: multa de {{fine|percent}} do FGTS e férias proporcionais",
       "hint": "Em uma demissão sem justa causa, a empresa deposita {{fine|percent}} de todo o FGTS do contrato e paga as férias ainda não tiradas: as proporcionais do período em curso e, se o contrato acabar logo depois de completar um período, as férias desse período inteiro (supondo que cada férias seja tirada no meio do prazo de concessão). O 1/3 já está nas provisões mensais; aqui entra só o valor das férias, sem FGTS nem INSS. Reservar aos poucos evita surpresas.",
-      "note": "Para esta remuneração, depois de 1 ano de contrato a multa seria de cerca de **{{amount|money}}**."
+      "note": "Para esta remuneração, depois de 1 ano de contrato a multa seria de cerca de **{{amount|money}}**.",
+      "labelDomestic": "Reservar todo mês para as férias não tiradas pagas na rescisão",
+      "hintDomestic": "Na rescisão, o empregador paga as férias ainda não tiradas (sem FGTS nem INSS). A multa do FGTS não existe para o doméstico: os 3,2% de indenização compensatória já estão nos encargos mensais."
     },
     "includeVacationCover": {
       "label": "Incluir o custo de alguém cobrir as férias",

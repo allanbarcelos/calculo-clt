@@ -13,7 +13,7 @@
   "defaultState": "SP",
   "stateFloors": [
     {
-      "uf": "SP",
+      "uf": "SP", "domesticBand": "sp-1",
       "validFrom": "2026-06-01",
       "law": "Lei nº 18.471/2026",
       "effective": "Em vigor desde 01/06/2026",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "uf": "PR",
+      "uf": "PR", "domesticBand": "pr-2",
       "validFrom": "2026-01-01",
       "validTo": "2026-12-31",
       "law": "Resolução CETER nº 632/2026 e Decreto nº 13.182/2026",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "uf": "SC",
+      "uf": "SC", "domesticBand": "sc-1",
       "validFrom": "2026-01-01",
       "law": "Lei Complementar nº 895/2026",
       "effective": "Efeitos a partir de 01/01/2026",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "uf": "RS",
+      "uf": "RS", "domesticBand": "rs-1",
       "validFrom": "2026-05-21",
       "law": "Lei nº 16.514/2026",
       "effective": "Desde a publicação no DOE em 21/05/2026 (data-base 1º de maio)",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "uf": "RJ",
+      "uf": "RJ", "domesticBand": "rj-1",
       "validFrom": "2019-01-01",
       "law": "Lei nº 8.315/2019",
       "effective": "Último reajuste publicado (2019). Não encontramos lei mais recente em fonte oficial",

@@ -11,6 +11,20 @@ import TaxAdvantagesSection from './TaxAdvantagesSection.jsx';
 
 export default function ResultStep({ data, result }) {
   const groups = result.groups.filter((g) => g.total > 0);
+  const day = result.dayWorker;
+  if (day) {
+    return (
+      <div className="result">
+        <ResultHero data={data} result={result} />
+        {day.bond && <ContentCallout id="dayWorkerBond" vars={{ daysPerWeek: day.daysPerWeek }} />}
+        <BreakdownTable groups={groups} total={result.monthlyTotal} />
+        <ContentCallout id="dayWorkerResult" vars={{ daysPerMonth: day.daysPerMonth, daysPerWeek: day.daysPerWeek }} />
+        <div className="actions no-print">
+          <button type="button" className="btn btn--ghost" onClick={() => window.print()}>Imprimir ou salvar em PDF</button>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="result">
       <ResultHero data={data} result={result} />

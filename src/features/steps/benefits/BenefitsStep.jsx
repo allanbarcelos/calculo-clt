@@ -1,5 +1,6 @@
 import { ContentCallout } from '../../../components/ui';
 import { useFormText } from '../../../hooks/useFormText.js';
+import { useServices } from '../../../hooks/useServices.js';
 import MealSection from './MealSection.jsx';
 import OtherBenefitsSection from './OtherBenefitsSection.jsx';
 import PlrSection from './PlrSection.jsx';
@@ -7,6 +8,7 @@ import TransportSection from './TransportSection.jsx';
 
 export default function BenefitsStep(props) {
   const t = useFormText();
+  const { benefits } = useServices();
   return (
     <>
       <ContentCallout id="benefitsNoCharges" vars={{ costPerReal: props.result.costPerReal }} />
@@ -15,7 +17,7 @@ export default function BenefitsStep(props) {
       <fieldset className="subsection">
         <legend>{t.section('otherBenefits')}</legend>
         <OtherBenefitsSection {...props} />
-        <PlrSection {...props} />
+        {benefits.allowsPlr(props.data) && <PlrSection {...props} />}
       </fieldset>
     </>
   );

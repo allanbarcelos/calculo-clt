@@ -1,10 +1,13 @@
-import { Explainer, NumberField, RichText, Toggle } from '../../../components/ui';
+import { ContentCallout, Explainer, NumberField, RichText, Toggle } from '../../../components/ui';
 import { useAgreementNotice } from '../../../hooks/useAgreementNotice.js';
 import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 
 export default function MealSection({ data, set, result }) {
-  const { maxEmployeeSharePct } = useServices().repositories.rates.mealVoucher();
+  const { repositories, benefits } = useServices();
+  const { maxEmployeeSharePct } = repositories.rates.mealVoucher();
+  const discount = benefits.allowsFoodDiscount(data);
+  const discountPct = discount ? data.mealDiscountPct : 0;
   const t = useFormText();
   const noticeFor = useAgreementNotice(data);
 
@@ -15,26 +18,27 @@ export default function MealSection({ data, set, result }) {
       {data.mealEnabled && (
         <div className="grid-2">
           <NumberField {...t.field('mealValue')} value={data.mealValue} onChange={(v) => set({ mealValue: v })} notice={noticeFor('mealValue')} />
-          <NumberField
+          {discount && <NumberField
             {...t.field('mealDiscountPct', { max: maxEmployeeSharePct })}
             max={maxEmployeeSharePct}
             value={data.mealDiscountPct}
             onChange={(v) => set({ mealDiscountPct: v })}
             notice={noticeFor('mealDiscountPct')}
-          />
+          />}
         </div>
       )}
+      {data.mealEnabled && !discount && <ContentCallout id="domesticFood" />}
       <p className="hint"><RichText text={t.text('mealValue', 'cashNote')} /></p>
       {data.mealEnabled && data.mealValue > 0 && (
         <p className="hint" aria-live="polite">
           {t.text('mealValue', 'costNote', {
-            companyCost: data.mealValue * (1 - data.mealDiscountPct / 100),
+            companyCost: data.mealValue * (1 - discountPct / 100),
             value: data.mealValue,
             asSalary: data.mealValue * result.costPerReal,
           })}
         </p>
       )}
-      <Explainer id="meal" vars={{ maxShare: maxEmployeeSharePct }} />
+      {discount && <Explainer id="meal" vars={{ maxShare: maxEmployeeSharePct }} />}
     </fieldset>
   );
 }

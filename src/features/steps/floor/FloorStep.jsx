@@ -15,6 +15,8 @@ export default function FloorStep({ data, set }) {
   const band = wageFloors.findBand(data.uf, data.bandId, data.weeklyHours);
   const agreementSelected = Boolean(agreements.selection(data));
   const apprentice = contract.isApprentice(data);
+  const household = contract.isHousehold(data);
+  const dayWorker = contract.isDayWorker(data);
 
   const applyFloor = (patch) => set(wageFloors.floorPatch(data, patch));
 
@@ -22,7 +24,8 @@ export default function FloorStep({ data, set }) {
   const bandOptions = [
     { value: '', label: t.text('band', 'emptyOption') },
     ...(state?.bands ?? []).map(bandOption),
-    ...wageFloors.federalFloors(data.weeklyHours).map(bandOption),
+    // Floors set by federal law are for professions hired by companies.
+    ...(household ? [] : wageFloors.federalFloors(data.weeklyHours).map(bandOption)),
   ];
 
   return (
@@ -38,27 +41,31 @@ export default function FloorStep({ data, set }) {
         }))}
       />
 
-      <AgreementSection data={data} set={set} />
-
-      {!agreementSelected && (
+      {!dayWorker && (
         <>
-          {!apprentice && (
+          {!household && <AgreementSection data={data} set={set} />}
+
+          {!agreementSelected && (
             <>
-              <StateFloorInfo uf={data.uf} />
-              <SelectField {...t.field('band')} value={data.bandId} onChange={(bandId) => applyFloor({ bandId })} options={bandOptions} />
-              <BandDetail band={band} />
+              {!apprentice && (
+                <>
+                  <StateFloorInfo uf={data.uf} />
+                  <SelectField {...t.field('band')} value={data.bandId} onChange={(bandId) => applyFloor({ bandId })} options={bandOptions} />
+                  <BandDetail band={band} />
+                </>
+              )}
+
+              <Toggle {...t.field('hasAgreementFloor')} checked={data.hasAgreementFloor} onChange={(v) => applyFloor({ hasAgreementFloor: v })} />
+              {data.hasAgreementFloor && (
+                <NumberField {...t.field('agreementFloor')} value={data.agreementFloor} onChange={(v) => applyFloor({ agreementFloor: v })} />
+              )}
+              <SourcesInline prefix={t.text('agreementFloor', 'sourcesPrefix')} sources={[{ id: 'mediador' }, { id: 'statePisosLaw' }]} />
             </>
           )}
 
-          <Toggle {...t.field('hasAgreementFloor')} checked={data.hasAgreementFloor} onChange={(v) => applyFloor({ hasAgreementFloor: v })} />
-          {data.hasAgreementFloor && (
-            <NumberField {...t.field('agreementFloor')} value={data.agreementFloor} onChange={(v) => applyFloor({ agreementFloor: v })} />
-          )}
-          <SourcesInline prefix={t.text('agreementFloor', 'sourcesPrefix')} sources={[{ id: 'mediador' }, { id: 'statePisosLaw' }]} />
+          <FloorSummary floor={floor} salaryAdjusted={data.salary > 0 && data.salaryAuto} />
         </>
       )}
-
-      <FloorSummary floor={floor} salaryAdjusted={data.salary > 0 && data.salaryAuto} />
     </>
   );
 }

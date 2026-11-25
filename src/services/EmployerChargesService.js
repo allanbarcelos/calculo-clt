@@ -13,11 +13,12 @@ export class EmployerChargesService {
     const relief = input.payrollRelief && this.payrollReliefAvailable(regime.id) ? this.regimes.payrollRelief() : null;
 
     const inss = relief ? relief.payrollRate : regime.employerInssRate;
-    const ratFap = regime.usesRatFap ? (input.rat / 100) * input.fap : 0;
+    // Domestic employers pay a fixed accident insurance rate instead of RAT × FAP.
+    const ratFap = regime.usesRatFap ? (input.rat / 100) * input.fap : (regime.accidentInsuranceRate ?? 0);
     const thirdParties = regime.usesThirdParties ? input.thirdParties / 100 : 0;
     const total = inss + ratFap + thirdParties;
     const onThirteenth = relief && !relief.inssOnThirteenth ? total - inss : total;
 
-    return { inss, ratFap, thirdParties, total, onThirteenth, relief };
+    return { inss, ratFap, thirdParties, total, onThirteenth, relief, fixedAccidentRate: !regime.usesRatFap && Boolean(regime.accidentInsuranceRate) };
   }
 }

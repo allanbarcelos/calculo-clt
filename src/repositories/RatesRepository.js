@@ -19,6 +19,7 @@ export class RatesRepository extends VersionedRepository {
   paternityLeave() { return this.version('paternityLeave'); }
   sicknessLeave() { return this.version('sicknessLeave'); }
   apprentice() { return this.version('apprentice'); }
+  dayWorker() { return this.version('dayWorker'); }
 
   nightWorkType(id) {
     const { types } = this.nightWork();

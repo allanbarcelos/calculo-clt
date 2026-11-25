@@ -3,7 +3,7 @@ import { useFormText } from '../../../hooks/useFormText.js';
 import { useServices } from '../../../hooks/useServices.js';
 
 export default function RegimeSection({ data, set, result }) {
-  const { repositories, fatorR } = useServices();
+  const { repositories, fatorR, wageFloors, formDefaults } = useServices();
   const t = useFormText();
   const regimes = repositories.regimes.list();
   const regime = repositories.regimes.get(data.regime);
@@ -26,11 +26,11 @@ export default function RegimeSection({ data, set, result }) {
         hint={hint}
         name="regime"
         value={data.regime}
-        onChange={(v) => set({ regime: v })}
+        onChange={(v) => set(wageFloors.regimePatch(data, v, formDefaults.defaults()))}
         options={regimes.map((r) => ({ value: r.id, label: r.label, description: r.description }))}
       />
       {regime.callout && <ContentCallout id={regime.callout} vars={vars} />}
-      <Explainer id="regimes" vars={vars} />
+      {repositories.regimes.kindOf(regime) !== 'household' && <Explainer id="regimes" vars={vars} />}
     </>
   );
 }

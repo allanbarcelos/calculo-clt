@@ -11,7 +11,7 @@ export default function Hero() {
         </p>
         <h1>Quanto custa, de verdade, contratar um funcionário CLT?</h1>
         <p className="lead">
-          Responda a algumas perguntas e veja o investimento mensal e anual: salário, encargos, 13º, férias, FGTS, benefícios e pisos salariais do seu estado. Todos os números vêm de fontes oficiais do governo.
+          Responda a algumas perguntas e veja o investimento mensal e anual: salário, encargos, 13º, férias, FGTS, benefícios e pisos salariais do seu estado. Vale para empresas e para pessoas físicas que contratam em casa (empregada doméstica, babá, cuidador, caseiro ou diarista). Todos os números vêm de fontes oficiais do governo.
         </p>
       </div>
     </section>

@@ -3,8 +3,9 @@
 export const FAMILY_PROFILES = ['female', 'male', 'unknown'];
 
 export class LeaveReserveService {
-  constructor(ratesRepository, provisionService, benefitService) {
+  constructor(ratesRepository, provisionService, benefitService, regimeRepository) {
     this.rates = ratesRepository;
+    this.regimes = regimeRepository;
     this.provisions = provisionService;
     this.benefits = benefitService;
   }
@@ -32,7 +33,10 @@ export class LeaveReserveService {
     const maternity = this.rates.maternityLeave();
     const paternity = this.rates.paternityLeave();
     const paternityBase = paternity.conditionalDays && input.paternity20DaysConfirmed ? paternity.conditionalDays : paternity.days;
-    const extra = (rule) => (input.companyCitizen ? rule.companyCitizenExtraDays : 0);
+    const regime = this.regimes?.get(input.regime);
+    // Empresa Cidadã is for companies; households cannot join it.
+    const household = this.regimes?.kindOf(regime) === 'household';
+    const extra = (rule) => (input.companyCitizen && !household ? rule.companyCitizenExtraDays : 0);
     return {
       maternityPaid: maternity.paidBySocialSecurity ? maternity.days : 0,
       maternity: maternity.days + extra(maternity),
@@ -41,7 +45,8 @@ export class LeaveReserveService {
       paternity: paternityBase + extra(paternity),
       paternityExtra: extra(paternity),
       paternityConditional: Boolean(paternity.conditionalDays),
-      sickness: this.rates.sicknessLeave().employerDays,
+      // Domestic employees get the benefit from the first day: the employer pays none.
+      sickness: regime?.sicknessEmployerDays ?? this.rates.sicknessLeave().employerDays,
     };
   }
 
@@ -135,7 +140,7 @@ export class LeaveReserveService {
       paternityDays: a.days.paternity,
       sicknessDays: a.days.sickness,
       paternityConditional: a.days.paternityConditional,
-      companyCitizen: Boolean(input.companyCitizen) && profile !== 'none',
+      companyCitizen: a.days.maternityExtra + a.days.paternityExtra > 0 && profile !== 'none',
       events: a.events,
       statistics: this.statistics(),
       // Net rate of each choice, for the option labels.
