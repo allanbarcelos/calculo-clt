@@ -11,9 +11,9 @@ const THIRTEENTH = 1 / 12;
 const VACATION = 1 / 12;
 const VACATION_BONUS = 1 / 36;
 export const ACCRUAL_FACTOR = THIRTEENTH + VACATION_BONUS;
-// On average a contract ends halfway through a vacation-earning period: half a vacation + 1/3
-// is paid out, with no FGTS and no INSS (TST OJ 195 SDI-1; Lei 8.212/1991, art. 28, §9º, "d").
-const VACATION_PAID_AT_TERMINATION = 0.5 * (1 + 1 / 3);
+// Each vacation is assumed to be taken halfway through its 12-month granting period
+// (CLT art. 134), i.e. 6 months after it is earned.
+const VACATION_TAKEN_AFTER_MONTHS = 6;
 
 export class ProvisionService {
   constructor(ratesRepository, employerChargesService, contractService) {
@@ -22,8 +22,25 @@ export class ProvisionService {
     this.contract = contractService;
   }
 
+  // Expected tenure in years. An empty or zero field (e.g. while typing) means the default year.
+  tenureYears(input) {
+    const years = Number(input.expectedTenureYears);
+    return Number.isFinite(years) && years > 0 ? years : 1;
+  }
+
   tenureMonths(input) {
-    return Math.max(1, Math.max(0, input.expectedTenureYears ?? 1) * 12);
+    return Math.max(1, this.tenureYears(input) * 12);
+  }
+
+  // Vacation still owed when the contract ends, in salaries: the proportional twelfths of the
+  // period in progress (a fraction of 15 days or more counts as a month, CLT art. 146) plus the
+  // last complete period when it has not been taken yet.
+  unusedVacation(input) {
+    const months = this.tenureMonths(input);
+    const complete = Math.floor(months / 12 + 1e-9);
+    const remainder = months - complete * 12;
+    const pending = complete >= 1 && remainder < VACATION_TAKEN_AFTER_MONTHS ? 1 : 0;
+    return pending + Math.round(remainder) / 12;
   }
 
   // Paid notice (aviso prévio indenizado): days grow with tenure. Charges per item:
@@ -32,23 +49,32 @@ export class ProvisionService {
   noticeReserve(input) {
     const rules = this.rates.notice();
     const fgts = this.contract.fgts(input);
-    const years = Math.max(0, input.expectedTenureYears);
+    const years = this.tenureYears(input);
+    const months = this.tenureMonths(input);
     // An apprentice contract ends on its term: there is no notice to provision.
-    if (!this.contract.noticeApplies(input)) return { days: 0, months: Math.max(1, years * 12), totalPerReal: 0, monthlyPerReal: 0 };
+    if (!this.contract.noticeApplies(input)) return { days: 0, months, totalPerReal: 0, monthlyPerReal: 0 };
     const days = Math.min(rules.maxDays, rules.baseDays + rules.daysPerYear * Math.floor(years));
-    const months = Math.max(1, years * 12);
     const fgtsShare = fgts.monthlyRate * (1 + (input.includeTerminationReserve ? fgts.terminationFine : 0));
     const noticeMonths = days / 30;
+    // 13th and vacation count twelfths: a fraction of 15 days or more is a full month.
+    const twelfths = Math.floor(days / 30) + (days % 30 >= 15 ? 1 : 0);
     const totalPerReal =
       noticeMonths * (1 + fgtsShare) +
-      noticeMonths * THIRTEENTH * (1 + fgtsShare + this.charges.rates(input).onThirteenth) +
-      noticeMonths * (VACATION + VACATION_BONUS);
+      twelfths * THIRTEENTH * (1 + fgtsShare + this.charges.rates(input).onThirteenth) +
+      twelfths * (VACATION + VACATION_BONUS);
     return { days, months, totalPerReal, monthlyPerReal: input.includeNoticeReserve ? totalPerReal / months : 0 };
   }
 
-  // Proportional vacation + 1/3 paid out at the end of the contract, spread over the tenure.
+  // Vacation paid out at the end of the contract, spread over the tenure. Only the vacation pay
+  // itself is new cost: its 1/3 is already accrued every month. Paid out, neither has FGTS or
+  // INSS (TST OJ 195 SDI-1; Lei 8.212/1991, art. 28, §9º, "d"), so the charges accrued on that
+  // 1/3 come off.
   terminationVacationPerReal(input) {
-    return input.includeTerminationReserve ? VACATION_PAID_AT_TERMINATION / this.tenureMonths(input) : 0;
+    if (!input.includeTerminationReserve) return 0;
+    const owed = this.unusedVacation(input);
+    const fgts = this.contract.fgts(input);
+    const chargesOnBonus = fgts.monthlyRate * (1 + fgts.terminationFine) + this.charges.rates(input).total;
+    return (owed - (owed / 3) * chargesOnBonus) / this.tenureMonths(input);
   }
 
   // Someone covering the employee during the vacation month: one month of a standard
@@ -90,16 +116,17 @@ export class ProvisionService {
         { id: 'accrualFgts', amount: accrualFgts },
         { id: 'accrualCharges', amount: accrualCharges },
         { id: 'terminationFine', amount: terminationFine, params: { rate: fgts.terminationFine } },
-        { id: 'terminationVacation', amount: gross * this.terminationVacationPerReal(input), params: { months: this.tenureMonths(input) } },
+        { id: 'terminationVacation', amount: gross * this.terminationVacationPerReal(input), params: { months: this.tenureMonths(input), owed: this.unusedVacation(input) } },
         { id: 'notice', amount: noticeMonthly, params: { days: notice.days } },
         { id: 'vacationCover', amount: gross * this.vacationCoverPerReal(input) },
       ],
     };
   }
 
-  // FGTS fine owed after one year (13,33 salaries of deposits), for the explanatory text.
+  // FGTS fine owed after one year, for the explanatory text: 12 salaries + 13th of deposits
+  // (the first vacation and its 1/3 are only paid in the following year).
   terminationFineAfterOneYear(gross, input = {}) {
     const fgts = this.contract.fgts(input);
-    return gross * fgts.monthlyRate * (1 + ACCRUAL_FACTOR) * 12 * fgts.terminationFine;
+    return gross * fgts.monthlyRate * (12 + 1) * fgts.terminationFine;
   }
 }

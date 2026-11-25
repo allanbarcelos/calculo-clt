@@ -14,7 +14,8 @@ export class EmployeeDeductionService {
       total += (Math.min(base, upTo) - previous) * rate;
       previous = upTo;
     }
-    return total;
+    // Round half up to the cent; the epsilon absorbs binary error (1621 × 7,5% = 121,575 → 121,58).
+    return Math.round(total * 100 + 1e-6) / 100;
   }
 
   irrf(gross, inss, dependents) {

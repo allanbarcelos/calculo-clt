@@ -48,9 +48,13 @@ export class TaxAdvantageService {
     const benefits = result.groups.find((g) => g.id === 'benefits')?.items ?? [];
     const other = result.groups.find((g) => g.id === 'other')?.items ?? [];
     const pisCofins = this.pisCofinsRate();
-    const creditBase = input.cleaningServicesCompany && pisCofins
-      ? ['transport', 'meal'].reduce((s, id) => s + (benefits.find((i) => i.id === id)?.amount ?? 0), 0) + (other.find((i) => i.id === 'ppe')?.amount ?? 0)
+    // PPE is an input for any non-cumulative company (STJ Tema 779; Parecer Normativo Cosit 5/2018).
+    // Transport and meal vouchers only for cleaning/maintenance companies (Lei 10.637, art. 3º, X).
+    const ppe = pisCofins ? (other.find((i) => i.id === 'ppe')?.amount ?? 0) : 0;
+    const vouchers = input.cleaningServicesCompany && pisCofins
+      ? ['transport', 'meal'].reduce((s, id) => s + (benefits.find((i) => i.id === id)?.amount ?? 0), 0)
       : 0;
+    const creditBase = ppe + vouchers;
     const pat = this.pat({ ...input, realProfitBracket: bracket }, result);
     const credit = creditBase * (pisCofins ?? 0);
     // Empresa Cidadã: the extension pay is deducted from IRPJ itself (cut by LC 224/2025), so it

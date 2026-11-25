@@ -154,3 +154,34 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`Database OK: ${Object.keys(db).length} files, ${sourceIds.size} sources.`);
+
+// Freshness report (does not fail the build): rules whose latest version has ended or ends
+// within WARN_DAYS, so they can be renewed before the site falls back to stale values.
+const WARN_DAYS = 60;
+const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
+const horizon = new Date(Date.parse(today) + WARN_DAYS * 86_400_000).toISOString().slice(0, 10);
+const seriesOf = (a) => a.series ?? a.id.replace(/-\d{4}(-\d{4})?$/, '');
+const latestBy = (items, keyOf) => {
+  const latest = new Map();
+  for (const item of items) {
+    const key = keyOf(item);
+    const current = latest.get(key);
+    if (!current || (item.validFrom ?? '') > (current.validFrom ?? '')) latest.set(key, item);
+  }
+  return [...latest.entries()];
+};
+const stale = [];
+const check = (label, item) => {
+  if (!item.validTo || item.validTo > horizon) return;
+  stale.push(`${label}: ${item.validTo < today ? 'ended' : 'ends'} ${item.validTo}`);
+};
+for (const [key, a] of latestBy(db['collective-agreements.json'].agreements, seriesOf)) check(`agreement ${key} (${a.id})`, a);
+for (const [uf, f] of latestBy(db['wage-floors.json'].stateFloors, (f) => f.uf)) check(`state floor ${uf}`, f);
+for (const file of ['federal-rates.json', 'tax-regimes.json']) {
+  for (const [table, versions] of Object.entries(db[file])) {
+    if (!Array.isArray(versions) || !versions.every((v) => v && typeof v === 'object' && !v.id && 'validFrom' in v)) continue;
+    const [[, latest]] = latestBy(versions, () => table);
+    check(`${file} ${table}`, latest);
+  }
+}
+if (stale.length) console.warn(`To renew (${stale.length}), as of ${today}:\n- ${stale.sort().join('\n- ')}`);

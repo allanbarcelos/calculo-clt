@@ -88,7 +88,10 @@ describe('TaxAdvantageService', () => {
     const credit = services.taxAdvantages.compute(input, result).items.find((i) => i.id === 'pisCofinsCredit');
     const creditBase = item(result, 'benefits', 'transport').amount + item(result, 'benefits', 'meal').amount + 40;
     expect(credit.amount).toBeCloseTo(creditBase * 0.0925, 6);
-    expect(tax({ ...patch, cleaningServicesCompany: false }).items.some((i) => i.id === 'pisCofinsCredit')).toBe(false);
+    // Other companies: credit on PPE only (STJ Tema 779), not on vouchers.
+    const other = tax({ ...patch, cleaningServicesCompany: false }).items.find((i) => i.id === 'pisCofinsCredit');
+    expect(other.amount).toBeCloseTo(40 * 0.0925, 6);
+    expect(tax({ ...patch, cleaningServicesCompany: false, ppeMonthly: 0 }).items.some((i) => i.id === 'pisCofinsCredit')).toBe(false);
   });
 
   it('PAT: 15% of the meal benefit off the IRPJ, cut by 10% in 2026 (13.5%), only when registered', () => {

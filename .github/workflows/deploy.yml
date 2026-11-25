@@ -30,6 +30,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run lint
+
       - uses: actions/configure-pages@v5
         id: pages
 

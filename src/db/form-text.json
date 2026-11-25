@@ -276,7 +276,7 @@
     },
     "includeTerminationReserve": {
       "label": "Reservar todo mês para a rescisão: multa de {{fine|percent}} do FGTS e férias proporcionais",
-      "hint": "Em uma demissão sem justa causa, a empresa deposita {{fine|percent}} de todo o FGTS do contrato e paga as férias proporcionais (com 1/3) ainda não tiradas, estimadas em meio período. Reservar aos poucos evita surpresas.",
+      "hint": "Em uma demissão sem justa causa, a empresa deposita {{fine|percent}} de todo o FGTS do contrato e paga as férias ainda não tiradas: as proporcionais do período em curso e, se o contrato acabar logo depois de completar um período, as férias desse período inteiro (supondo que cada férias seja tirada no meio do prazo de concessão). O 1/3 já está nas provisões mensais; aqui entra só o valor das férias, sem FGTS nem INSS. Reservar aos poucos evita surpresas.",
       "note": "Para esta remuneração, depois de 1 ano de contrato a multa seria de cerca de **{{amount|money}}**."
     },
     "includeVacationCover": {
@@ -289,14 +289,14 @@
     },
     "expectedTenureYears": {
       "label": "Por quanto tempo você espera manter este funcionário?",
-      "hintTermination": "Usado para distribuir as férias proporcionais pagas na rescisão pelo tempo de contrato.",
+      "hintTermination": "Define quantas férias ficam por tirar na rescisão e distribui esse valor pelo tempo de contrato. Campo vazio ou zero conta como 1 ano.",
       "suffix": "anos",
       "hintWithValue": "O aviso seria de {{days}} dias ({{baseDays}} + {{daysPerYear}} por ano completo, até {{maxDays}}). Valor estimado de {{total|money}}: salário do aviso e 13º com FGTS, INSS patronal sobre o 13º e férias indenizadas (sem encargos). Distribuído pelo tempo de contrato, a reserva é de {{monthly|money}} por mês.",
       "hintPending": "O aviso seria de {{days}} dias ({{baseDays}} + {{daysPerYear}} por ano completo, até {{maxDays}}). O valor aparece quando o salário for definido."
     },
     "sstYearly": { "label": "Exames ocupacionais e programas de SST (por ano)", "hint": "Exames admissional, periódico e demissional, PCMSO e PGR ([NR-7](source:nr7) e [NR-1](source:nrList)).", "prefix": "R$" },
     "accountingMonthly": { "label": "Contabilidade / processamento da folha (por mês)", "hint": "Valor que o contador cobra a mais por funcionário.", "prefix": "R$" },
-    "ppeMonthly": { "label": "Uniformes e EPIs (por mês)", "hint": "A empresa deve fornecer EPIs de graça ([CLT, art. 166](source:clt), e [NR-6](source:nr6)).", "prefix": "R$" },
+    "ppeMonthly": { "label": "Uniformes e EPIs (por mês)", "hint": "A empresa deve fornecer EPIs de graça ([CLT, art. 166](source:clt), e [NR-6](source:nr6)). No Lucro Real, o valor conta como crédito de PIS/COFINS: EPIs para qualquer empresa, uniformes só para limpeza, conservação e manutenção.", "prefix": "R$" },
     "hiringOneTime": { "label": "Custo único de contratação", "hint": "Anúncio, recrutamento, treinamento inicial. Aparece separado do custo mensal.", "prefix": "R$" },
     "leaveReserveEnabled": {
       "label": "Incluir reserva para licenças e afastamentos",

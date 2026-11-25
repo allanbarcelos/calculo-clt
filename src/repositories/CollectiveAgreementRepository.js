@@ -38,5 +38,20 @@ export class CollectiveAgreementRepository extends VersionedRepository {
     return this.available().find((a) => a.id === id) ?? null;
   }
 
+  // The agreement as registered, even if a newer one of its series replaced it (to undo the
+  // values it filled in).
+  record(id) {
+    if (!id) return null;
+    return this.section.agreements.find((a) => a.id === id) ?? null;
+  }
+
+  // The agreement now offered in the same series as id (itself, or the one that replaced it).
+  current(id) {
+    const record = this.record(id);
+    if (!record) return null;
+    const series = seriesOf(record);
+    return this.available().find((a) => seriesOf(a) === series) ?? null;
+  }
+
   presetField(key) { return this.section.presetFields[key] ?? null; }
 }

@@ -10,29 +10,66 @@ const calc = (patch) => services.calculator.calculate({ ...base, ...patch });
 describe('CostCalculator — one minimum wage, termination reserve on', () => {
   it.each([
     // Checked against an independent model: 11 salaries + vacation (1 + 1/3) + 13th a year, with
-    // charges, the FGTS fine and half a vacation paid at termination after 1 year.
-    ['mei', 2146.93],
-    ['simples', 2092.9],
-    ['simplesIV', 2489.14],
-    ['presumido', 2593.61],
-    ['real', 2593.61],
+    // charges and the FGTS fine. After exactly 1 year the first vacation was never taken: it is
+    // paid at termination with no charges, and the charges accrued on its 1/3 are not due.
+    ['mei', 2185.56],
+    ['simples', 2132.88],
+    ['simplesIV', 2519.21],
+    ['presumido', 2621.07],
+    ['real', 2621.07],
   ])('%s costs %d per month', (regime, expected) => {
     expect(calc({ regime }).monthlyTotal).toBe(expected);
   });
 
   it('removes employer INSS from the 13th salary under payroll relief', () => {
-    expect(calc({ regime: 'presumido', payrollRelief: true }).monthlyTotal).toBe(2399.99);
+    expect(calc({ regime: 'presumido', payrollRelief: true }).monthlyTotal).toBe(2431.96);
   });
 });
 
 describe('Notice reserve', () => {
   it('Simples, 1 year: 33 days', () => {
     const { notice } = calc({ includeNoticeReserve: true, expectedTenureYears: 1 });
-    expect(notice).toEqual({ days: 33, total: 2346.16, monthly: 195.51 });
+    // 33 days of notice pay; 13th and vacation count 1 twelfth (3 extra days are under 15).
+    expect(notice).toEqual({ days: 33, total: 2313.13, monthly: 192.76 });
   });
 
   it('Presumido adds employer INSS on the notice 13th salary', () => {
-    expect(calc({ regime: 'presumido', includeNoticeReserve: true, expectedTenureYears: 1 }).notice.total).toBe(2387.47);
+    expect(calc({ regime: 'presumido', includeNoticeReserve: true, expectedTenureYears: 1 }).notice.total).toBe(2350.68);
+  });
+});
+
+describe('Termination reserve', () => {
+  const { provisions } = services;
+  const owed = (years) => provisions.unusedVacation({ expectedTenureYears: years });
+
+  it('owes the whole last period right after it is earned, only the proportional part later', () => {
+    expect(owed(1)).toBe(1);
+    expect(owed(3)).toBe(1);
+    expect(owed(1.5)).toBe(0.5);
+    expect(owed(0.25)).toBe(0.25);
+  });
+
+  it('pays the unused vacation without its 1/3 (already accrued) and takes back the charges on that 1/3', () => {
+    const input = { ...base, regime: 'simples', expectedTenureYears: 1 };
+    expect(provisions.terminationVacationPerReal(input)).toBeCloseTo((1 - (0.08 * 1.4) / 3) / 12, 12);
+  });
+
+  it('treats an empty or zero tenure (field being typed) as the default year', () => {
+    const oneYear = calc({ includeNoticeReserve: true, expectedTenureYears: 1 }).monthlyTotal;
+    expect(calc({ includeNoticeReserve: true, expectedTenureYears: 0 }).monthlyTotal).toBe(oneYear);
+    expect(calc({ includeNoticeReserve: true, expectedTenureYears: undefined }).monthlyTotal).toBe(oneYear);
+  });
+
+  it('FGTS fine after one year is on 12 salaries + 13th (no vacation taken yet)', () => {
+    expect(provisions.terminationFineAfterOneYear(3000, {})).toBeCloseTo(3000 * 0.08 * 13 * 0.4, 6);
+  });
+
+  it('accrues exactly what costPerSalaryReal says', () => {
+    for (const regime of ['simples', 'presumido']) {
+      const r = calc({ regime, salary: 3000, includeNoticeReserve: true, expectedTenureYears: 2.5 });
+      const payroll = r.groups.filter((g) => ['pay', 'charges', 'accruals'].includes(g.id)).reduce((s, g) => s + g.total, 0);
+      expect(payroll).toBeCloseTo(r.costPerReal * 3000, 1);
+    }
   });
 });
 
@@ -59,7 +96,8 @@ describe('Leave reserve', () => {
     const result = calc({ leaveFamilyProfile: 'female' });
     const rate = perEmployee / femaleShare;
     const coverage = 1621 * rate * (120 / stats.daysPerYear) * temporaryFactor(base);
-    const reimbursement = 1621 * rate * (120 / stats.daysPerYear);
+    // Simples: no employer INSS; INSS also pays the 13th share of the leave months.
+    const reimbursement = 1621 * rate * (120 / stats.daysPerYear) * (1 + 1 / 12);
 
     expect(item(result, 'leaveMaternityCoverage').amount).toBeCloseTo(coverage, 2);
     expect(item(result, 'leaveReimbursement').amount).toBeCloseTo(-reimbursement, 2);
@@ -77,7 +115,7 @@ describe('Leave reserve', () => {
   it('averages both leaves over the whole workforce when the sex is unknown', () => {
     const result = calc({ leaveFamilyProfile: 'unknown' });
     const coverage = 1621 * perEmployee * ((120 + 5) / stats.daysPerYear) * temporaryFactor(base);
-    const reimbursement = 1621 * perEmployee * (120 / stats.daysPerYear);
+    const reimbursement = 1621 * perEmployee * (120 / stats.daysPerYear) * (1 + 1 / 12);
     expect(result.leaveReserve.amount).toBeCloseTo(coverage - reimbursement, 6);
   });
 
@@ -92,8 +130,9 @@ describe('Leave reserve', () => {
     const result = calc({ regime: 'real', leaveFamilyProfile: 'unknown', companyCitizen: true });
     expect(result.leaveReserve.maternityDays).toBe(180);
     expect(result.leaveReserve.paternityDays).toBe(20);
-    // Lucro Real: the reimbursed pay plus the employer INSS (20%) not due on it (STF, Tema 72).
-    expect(result.leaveReserve.cashFlow.reimbursement).toBeCloseTo(1621 * perEmployee * (120 / stats.daysPerYear) * 1.2, 6);
+    // Lucro Real: the reimbursed pay and its 13th share, plus the employer INSS (20%) not due on
+    // them (STF, Tema 72).
+    expect(result.leaveReserve.cashFlow.reimbursement).toBeCloseTo(1621 * perEmployee * (120 / stats.daysPerYear) * 1.2 * (1 + 1 / 12), 6);
     expect(result.leaveReserve.cashFlow.potentialIrpjDeduction).toBe(result.leaveReserve.cashFlow.companyCitizenExtraRemuneration);
     expect(calc({ regime: 'simples', leaveFamilyProfile: 'unknown', companyCitizen: true }).leaveReserve.cashFlow.potentialIrpjDeduction).toBe(0);
   });
@@ -197,7 +236,7 @@ describe('CalendarService', () => {
 describe('EmployeeDeductionService', () => {
   const { deductions } = services;
   it('progressive INSS', () => {
-    expect(deductions.inss(1621)).toBeCloseTo(121.575, 2);
+    expect(deductions.inss(1621)).toBe(121.58);
     expect(deductions.inss(3000)).toBeCloseTo(248.6, 1);
   });
 

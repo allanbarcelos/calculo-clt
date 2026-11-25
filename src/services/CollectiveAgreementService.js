@@ -19,8 +19,15 @@ export class CollectiveAgreementService {
 
   get(id) { return this.agreements.get(id); }
 
+  // The agreement now offered in the same series (the newer one when it was replaced).
+  current(id) { return this.agreements.current(id); }
+
+  // Available agreement, or the registered record of one that was replaced, so the values it
+  // filled in can still be undone.
+  find(id) { return this.get(id) ?? this.agreements.record(id); }
+
   role(agreementId, roleId) {
-    return this.get(agreementId)?.roles.find((r) => r.id === roleId) ?? null;
+    return this.find(agreementId)?.roles.find((r) => r.id === roleId) ?? null;
   }
 
   // Selected agreement + role, only if both still exist and cover the state.
@@ -33,7 +40,7 @@ export class CollectiveAgreementService {
 
   // { field: { value, clause, format } } — agreement-wide values overridden by the role's own.
   presets(agreementId, roleId) {
-    const agreement = this.get(agreementId);
+    const agreement = this.find(agreementId);
     if (!agreement) return {};
     const role = this.role(agreementId, roleId);
     const merged = { ...agreement.presets, ...role?.presets };

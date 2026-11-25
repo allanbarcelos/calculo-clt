@@ -57,6 +57,14 @@ export class LeaveReserveService {
     return temporary + benefits / gross;
   }
 
+  // What INSS gives back per R$ 1 of maternity pay: the pay, its 13th-salary share and the
+  // employer INSS (art. 22, I) not due on either.
+  maternityReimbursementPerReal(input) {
+    const { inss, ratFap, thirdParties, onThirteenth } = this.provisions.charges.rates(input);
+    const inssOnThirteenth = onThirteenth - ratFap - thirdParties;
+    return 1 + inss + (1 + inssOnThirteenth) / 12;
+  }
+
   // Monthly amounts for a given family profile and health choice.
   amounts(gross, input, profile, includesHealth) {
     const { daysPerYear } = this.rates.leaveStatistics();
@@ -77,8 +85,9 @@ export class LeaveReserveService {
       hiring: (events.maternity * hiringCost) / 12,
       // Leave pay is paid by INSS (directly for MEI employees, or advanced by the company and
       // offset against its contributions). It is already in the base salary, so it lowers the
-      // yearly cost. Employer INSS on salário-maternidade is also not due (STF, Tema 72).
-      reimbursement: share(events.maternity, days.maternityPaid) * (1 + this.provisions.charges.rates(input).inss)
+      // yearly cost. Employer INSS on salário-maternidade is also not due (STF, Tema 72). INSS
+      // also pays the 13th salary for the leave months (Decreto 3.048/1999, art. 120).
+      reimbursement: share(events.maternity, days.maternityPaid) * this.maternityReimbursementPerReal(input)
         + share(events.paternity, days.paternityPaid),
       companyCitizenExtra: share(events.maternity, days.maternityExtra) + share(events.paternity, days.paternityExtra),
       events: { ...events, sickness },

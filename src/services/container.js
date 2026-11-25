@@ -18,6 +18,7 @@ import { EmployeeDeductionService } from './EmployeeDeductionService.js';
 import { EmployerChargesService } from './EmployerChargesService.js';
 import { FatorRService } from './FatorRService.js';
 import { FormDefaultsService } from './FormDefaultsService.js';
+import { FormStateService } from './FormStateService.js';
 import { HealthPlanReferenceService } from './HealthPlanReferenceService.js';
 import { LeaveReserveService } from './LeaveReserveService.js';
 import { ProvisionService } from './ProvisionService.js';
@@ -56,6 +57,9 @@ export function createServices(database, referenceDate) {
     leaveReserveService,
   });
 
+  const wageFloorService = new WageFloorService(wageFloorRepository, ratesRepository, collectiveAgreementService, contractService);
+  const formDefaultsService = new FormDefaultsService({ ratesRepository, regimeRepository, wageFloorRepository });
+
   return {
     meta: database.meta,
     referenceDate,
@@ -70,7 +74,7 @@ export function createServices(database, referenceDate) {
       agreements: agreementRepository,
     },
     agreements: collectiveAgreementService,
-    wageFloors: new WageFloorService(wageFloorRepository, ratesRepository, collectiveAgreementService, contractService),
+    wageFloors: wageFloorService,
     charges: employerChargesService,
     calendar: calendarService,
     contract: contractService,
@@ -84,6 +88,7 @@ export function createServices(database, referenceDate) {
     comparison: new RegimeComparisonService(regimeRepository, costCalculator),
     taxAdvantages: new TaxAdvantageService(regimeRepository, ratesRepository),
     fatorR: new FatorRService(regimeRepository, contractService),
-    formDefaults: new FormDefaultsService({ ratesRepository, regimeRepository, wageFloorRepository }),
+    formDefaults: formDefaultsService,
+    formState: new FormStateService({ formDefaultsService, wageFloorService, collectiveAgreementService, contractService }),
   };
 }

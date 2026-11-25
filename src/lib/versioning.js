@@ -1,10 +1,6 @@
 // Every database item may carry validFrom / validTo (YYYY-MM-DD, inclusive).
 // These helpers select what is in force on a reference date.
 
-export function toIsoDate(date) {
-  return date.toISOString().slice(0, 10);
-}
-
 export function isActive(item, isoDate) {
   if (item.validFrom && item.validFrom > isoDate) return false;
   if (item.validTo && item.validTo < isoDate) return false;

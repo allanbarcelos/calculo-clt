@@ -1,18 +1,11 @@
 import { useId, useState } from 'react';
 import FieldNotice from './FieldNotice.jsx';
 import RichText from './RichText.jsx';
+import { parseInput } from '../../lib/parseNumber.js';
 
 function formatInput(n) {
   if (!n) return '0';
   return String(n).replace('.', ',');
-}
-
-// Accepts "1.874,36" (pt-BR) and "1874.36"
-function parseInput(text) {
-  const cleaned = String(text).replace(/[^\d,.-]/g, '');
-  const normalized = cleaned.includes(',') ? cleaned.replace(/\./g, '').replace(',', '.') : cleaned;
-  const n = parseFloat(normalized);
-  return Number.isFinite(n) ? n : 0;
 }
 
 export default function NumberField({ label, value, onChange, hint, error, notice, prefix, suffix, min = 0, max, id }) {
@@ -46,7 +39,11 @@ export default function NumberField({ label, value, onChange, hint, error, notic
             setText(e.target.value);
             let n = parseInput(e.target.value);
             if (max !== undefined) n = Math.min(n, max);
-            onChange(Math.max(min, n));
+            n = Math.max(min, n);
+            // The value came from this field: keep what the user is typing (e.g. an empty field
+            // that is clamped to min) and only reformat on blur.
+            setLastValue(n);
+            onChange(n);
           }}
           onBlur={() => setText(formatInput(value))}
         />

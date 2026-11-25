@@ -14,7 +14,7 @@ npm run build        # validates the database, runs the tests, then builds dist/
 
 Behind a corporate proxy, set `NODE_OPTIONS=--use-system-ca` before `npm install`.
 
-Preview the rules in force on another date with `?data=YYYY-MM-DD` (e.g. `http://localhost:5173/?data=2027-01-01`).
+Preview the rules in force on another date with `?data=YYYY-MM-DD` (e.g. `http://localhost:5173/?data=2027-01-01`). Without it, the site uses today's date in Brazil (America/Sao_Paulo). An invalid date, or one before the database starts, falls back to today.
 
 ## Architecture
 
@@ -32,7 +32,7 @@ src/
 scripts/validate-db.mjs   database validation run before every build
 ```
 
-- **Single responsibility:** `CompensationService` (gross pay, legal monthly limits), `CalendarService` (working days, national holidays, DSR factor), `EmployerChargesService` (INSS, RAT, third parties), `ProvisionService` (13th salary, vacation, FGTS fine, notice), `BenefitService`, `EmployeeDeductionService` (INSS, IRRF, family allowance), `LeaveReserveService` (maternity, paternity and sickness leave), `ContractService` (standard or apprentice contract: FGTS rate, fine, notice, floor), `TaxAdvantageService` (Lucro Real: IRPJ/CSLL deduction, PAT, PIS/COFINS credits), `WageFloorService`, `CollectiveAgreementService`, `FatorRService`, `RegimeComparisonService`, and `CostCalculator`, which only orchestrates them.
+- **Single responsibility:** `CompensationService` (gross pay, legal monthly limits), `CalendarService` (working days, national holidays, DSR factor), `EmployerChargesService` (INSS, RAT, third parties), `ProvisionService` (13th salary, vacation, FGTS fine, notice), `BenefitService`, `EmployeeDeductionService` (INSS, IRRF, family allowance), `LeaveReserveService` (maternity, paternity and sickness leave), `ContractService` (standard or apprentice contract: FGTS rate, fine, notice, floor), `TaxAdvantageService` (Lucro Real: IRPJ/CSLL deduction, PAT, PIS/COFINS credits), `WageFloorService`, `CollectiveAgreementService`, `FatorRService`, `RegimeComparisonService`, `FormStateService` (brings form data saved in an earlier visit in line with the current database: wrong types, replaced agreements, floors that changed), and `CostCalculator`, which only orchestrates them.
 - **Open/closed:** new regimes, wage floors, rates or explanatory texts are added to the database, not to the code.
 - **Liskov:** every repository extends `VersionedRepository` and resolves versions the same way.
 - **Interface segregation:** components receive only the data they use; sections read only their own repository.
@@ -98,3 +98,7 @@ To update (ANS publishes June and December):
 2. Run `node scripts/update-health-plan-prices.mjs <folder> <AAAAMM>` (about 4 minutes; the VCM file has ~90 million rows).
 
 After editing, run `npm run build`: it validates the database, runs the tests and generates the new version of the site in `dist/`.
+
+`npm run db:validate` also lists, without failing, every agreement, state floor or rate table whose latest version has ended or ends in the next 60 days, so it can be renewed in time.
+
+Pull requests and branches other than `main` run lint, database validation, tests and build (`.github/workflows/ci.yml`); `main` is deployed to GitHub Pages (`deploy.yml`).

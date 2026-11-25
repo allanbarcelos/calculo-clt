@@ -11,11 +11,11 @@ const STORAGE_KEY = 'custo-claro:v3';
 const START_INDEX = STEPS.findIndex((s) => s.startsCalculation);
 
 export default function Wizard() {
-  const { calculator, formDefaults, wageFloors } = useServices();
+  const { calculator, formDefaults, formState, wageFloors } = useServices();
   const t = useFormText();
   const steps = STEPS.map((s) => ({ ...s, ...t.step(s.id) }));
   const defaults = useMemo(() => formDefaults.defaults(), [formDefaults]);
-  const [data, setData] = usePersistentState(STORAGE_KEY, defaults);
+  const [data, setData] = usePersistentState(STORAGE_KEY, defaults, (stored) => formState.restore(stored));
   const [step, setStep] = useState(0);
   const [showErrors, setShowErrors] = useState(false);
   const headingRef = useRef(null);

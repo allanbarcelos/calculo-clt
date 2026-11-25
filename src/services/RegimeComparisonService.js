@@ -5,10 +5,21 @@ export class RegimeComparisonService {
     this.calculator = costCalculator;
   }
 
-  compare(input) {
+  // Payroll relief only counts when the user's own regime can use it and they chose it; a value
+  // left on from another regime would otherwise make Presumido/Real look cheaper. A regime the
+  // employee cannot be hired under (MEI above the floor) gets no figures.
+  compare(input, { floor } = {}) {
+    const relief = Boolean(input.payrollRelief) && Boolean(this.regimes.get(input.regime)?.allowsPayrollRelief);
     return this.regimes.list().map((regime) => {
-      const result = this.calculator.calculate({ ...input, regime: regime.id });
-      return { id: regime.id, label: regime.short, monthlyTotal: result.monthlyTotal, yearlyTotal: result.yearlyTotal };
+      const eligible = !(regime.salaryCappedAtFloor && floor !== undefined && input.salary > floor);
+      const result = this.calculator.calculate({ ...input, regime: regime.id, payrollRelief: relief });
+      return {
+        id: regime.id,
+        label: regime.short,
+        eligible,
+        monthlyTotal: eligible ? result.monthlyTotal : null,
+        yearlyTotal: eligible ? result.yearlyTotal : null,
+      };
     });
   }
 }
